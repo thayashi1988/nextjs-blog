@@ -4,6 +4,7 @@ import utilStyles from '../styles/utils.module.css'
 import { getSortedPostsData } from '../lib/posts'
 import Link from 'next/link'
 import Date from '../components/date'
+import "tailwindcss/tailwind.css";
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData()
@@ -29,13 +30,18 @@ export default function Home({ allPostsData }) {
           <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
         </p>
       </section>
+      <section>
+      <ul>
+        <li><Link href="/test/test"><a className="text-blue-500">テストページへ</a></Link></li>
+      </ul>
+      </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
               <Link href={`/posts/${id}`}>
-                <a>{title}</a>
+                <a className="text-blue-500">{title}</a>
               </Link>
               <br />
               <small className={utilStyles.lightText}>
