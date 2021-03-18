@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Layout from "../../components/layout";
 import { NextLink } from "../../components/link/Link";
-import { NextImg } from "../../components/img/img";
+import { NextImg } from "../../components/img/Img";
 import { Btn } from "../../components/button/Btn";
 
 // clickイベント
