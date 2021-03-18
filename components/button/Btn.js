@@ -7,7 +7,7 @@ export function Btn(props) {
         <a
           className={`outline-none inline-block bg-blue-500 hover:bg-blue-700 hover:no-underline text-white font-bold py-2 px-4 rounded shadow-md ${props.class}`}
         >
-          {props.text}
+          {props.children}
         </a>
       </Link>
     );
@@ -17,7 +17,7 @@ export function Btn(props) {
         className={`outline-none bg-pink-500 hover:bg-pink-700 hover:no-underline text-white font-bold py-2 px-4 rounded shadow-md ${props.class}`}
         onClick={props.click}
       >
-        {props.text}
+        {props.children}
       </button>
     );
   }

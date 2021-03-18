@@ -48,15 +48,14 @@ export default function test() {
 
       <ul className="sm:flex text-center block items-center justify-evenly mt-5">
         <li className="mb-2 sm:mb-0">
-          <Btn link={true} href="/" class="w-full" text="TOPへ遷移するボタン" />
+          <Btn link={true} href="/" class="w-full">
+            TOPへ遷移するボタン
+          </Btn>
         </li>
         <li className="mb-2 sm:mb-0">
-          <Btn
-            link={false}
-            class="w-full"
-            text="イベント発生するボタン"
-            click={handleClick}
-          />
+          <Btn link={false} class="w-full" click={handleClick}>
+            イベント発生するボタン
+          </Btn>
         </li>
       </ul>
 
