@@ -1,6 +1,6 @@
-import Image from 'next/image'
+import Image from "next/image";
 
-export default function NextImg(props) {
+export function NextImg(props) {
   return (
     <figure className={props.class}>
       <Image
@@ -10,5 +10,5 @@ export default function NextImg(props) {
         quality={props.quality}
       />
     </figure>
-  )
+  );
 }

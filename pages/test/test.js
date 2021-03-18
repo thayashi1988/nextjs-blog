@@ -1,34 +1,33 @@
-import Head from 'next/head'
-import Layout from '../../components/layout'
-import NextLink from '../../components/link/Link'
-import NextImg from '../../components/img/img'
-import Btn from '../../components/button/Btn'
-
+import Head from "next/head";
+import Layout from "../../components/layout";
+import { NextLink } from "../../components/link/Link";
+import { NextImg } from "../../components/img/img";
+import { Btn } from "../../components/button/Btn";
 
 // clickイベント
 function handleClick(e) {
   e.preventDefault();
-  alert('クリックイベントのアラート')
-  console.log('The link was clicked.');
+  alert("クリックイベントのアラート");
+  console.log("The link was clicked.");
 }
 
 // 繰り返し処理
 const listItems = [
   {
-    href: '/',
-    text: 'TOPへ戻る'
+    href: "/",
+    text: "TOPへ戻る",
   },
   {
-    href: '/',
-    text: 'クリックイベント'
-  }
-]
+    href: "/",
+    text: "クリックイベント",
+  },
+];
 
 // 条件処理
 function Greeting(props) {
   const isLoggedIn = props.isLoggedIn;
   if (isLoggedIn) {
-    return <p className="mt-5">aaaaaaaaaaaaaaa</p>  ;
+    return <p className="mt-5">aaaaaaaaaaaaaaa</p>;
   }
   return <p className="mt-5">nnnnnnnnnnnnn</p>;
 }
@@ -52,7 +51,12 @@ export default function test() {
           <Btn link={true} href="/" class="w-full" text="TOPへ遷移するボタン" />
         </li>
         <li className="mb-2 sm:mb-0">
-          <Btn link={false} class="w-full" text="イベント発生するボタン" click={handleClick} />
+          <Btn
+            link={false}
+            class="w-full"
+            text="イベント発生するボタン"
+            click={handleClick}
+          />
         </li>
       </ul>
 
@@ -66,6 +70,5 @@ export default function test() {
         ))}
       </ul>
     </Layout>
-  )
+  );
 }
-
