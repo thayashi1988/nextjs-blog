@@ -1,25 +1,25 @@
-import Head from "next/head";
-import Layout from "../../components/layout";
-import { NextLink } from "../../components/link/Link";
-import { NextImg } from "../../components/img/Img";
-import { Btn } from "../../components/button/Btn";
+import Head from 'next/head';
+import Layout from '../../components/layout';
+import { NextLink } from '../../components/link/Link';
+import { NextImg } from '../../components/img/Img';
+import { Btn } from '../../components/button/Btn';
 
 // clickイベント
 function handleClick(e) {
   e.preventDefault();
-  alert("クリックイベントのアラート");
-  console.log("The link was clicked.");
+  alert('クリックイベントのアラート');
+  console.log('The link was clicked.');
 }
 
 // 繰り返し処理
 const listItems = [
   {
-    href: "/",
-    text: "TOPへ戻る",
+    href: '/',
+    text: 'TOPへ戻る',
   },
   {
-    href: "/",
-    text: "クリックイベント",
+    href: '/',
+    text: 'クリックイベント',
   },
 ];
 
@@ -48,7 +48,15 @@ export default function test() {
 
       <ul className="sm:flex text-center block items-center justify-evenly mt-5">
         <li className="mb-2 sm:mb-0">
-          <Btn link={true} href="/" class="w-full">
+          <Btn
+            link
+            href="/"
+            class="w-full"
+            number={1111}
+            array={['aaa', 111, 'bbb', 222]}
+            obj={{ aaa: 'aaaa', bbb: 'bbb' }}
+            bool
+            boolean={false}>
             TOPへ遷移するボタン
           </Btn>
         </li>
