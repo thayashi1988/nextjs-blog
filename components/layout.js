@@ -1,12 +1,12 @@
-import Head from "next/head";
-import Link from "next/link";
-import { Header } from "./Header";
-import { Footer } from "./Footer";
-import styles from "./layout.module.css";
-import utilStyles from "../styles/utils.module.css";
+import Head from 'next/head';
+import Link from 'next/link';
+import { Header } from './Header';
+import { Footer } from './Footer';
+import styles from './layout.module.css';
+import utilStyles from '../styles/utils.module.css';
 
-const name = "じぃのNext.jsアプリ";
-export const siteTitle = "Next.js Sample Website";
+const name = 'じぃのNext.jsアプリ';
+export const siteTitle = 'Next.js Sample Website';
 
 export default function Layout({ children, home }) {
   return (

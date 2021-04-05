@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 export function Btn(props) {
-  console.log('Btnコンポーネントのprops確認:', props);
+  // console.log('Btnコンポーネントのprops確認:', props);
   if (props.link) {
     return (
       <Link href={props.href}>

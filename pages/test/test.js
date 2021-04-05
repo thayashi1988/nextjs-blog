@@ -31,12 +31,13 @@ function Greeting(props) {
   }
   return <p className="mt-5">nnnnnnnnnnnnn</p>;
 }
+const pageTitle = 'Next.jsのテストページ';
 
 export default function test() {
   return (
     <Layout>
       <Head>
-        <title>Next.jsのテストページ</title>
+        <title>{pageTitle}</title>
       </Head>
       <NextImg
         class="text-center"

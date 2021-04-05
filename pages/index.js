@@ -1,9 +1,9 @@
-import Head from "next/head";
-import Link from "next/link";
-import Layout, { siteTitle } from "../components/layout";
-import Date from "../components/date";
-import { getSortedPostsData } from "../lib/posts";
-import utilStyles from "../styles/utils.module.css";
+import Head from 'next/head';
+import Link from 'next/link';
+import Layout, { siteTitle } from '../components/layout';
+import Date from '../components/date';
+import { getSortedPostsData } from '../lib/posts';
+import utilStyles from '../styles/utils.module.css';
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -14,7 +14,7 @@ export async function getStaticProps() {
   };
 }
 
-const name = "じぃのNext.jsアプリ";
+const name = 'じぃのNext.jsアプリ';
 
 export default function Home({ allPostsData }) {
   return (
@@ -25,7 +25,7 @@ export default function Home({ allPostsData }) {
       <section className={utilStyles.headingMd}>
         <p>{name}</p>
         <p>
-          (This is a sample website - you’ll be building a site like this on{" "}
+          (This is a sample website - you’ll be building a site like this on{' '}
           <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
         </p>
       </section>
@@ -34,6 +34,11 @@ export default function Home({ allPostsData }) {
           <li>
             <Link href="/test/test">
               <a className="text-blue-500">テストページへ</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/weather/weather">
+              <a className="text-blue-500">天気予報ページへ</a>
             </Link>
           </li>
         </ul>
