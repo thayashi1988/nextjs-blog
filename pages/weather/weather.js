@@ -57,10 +57,10 @@ export default function weather() {
   const fetchWeather = async (areaName) => {
     try {
       // state初期化
-      setCity('')
-      setTempMax('')
-      setTelop('')
-      setRainArrayJoin('')
+      setCity('');
+      setTempMax('');
+      setTelop('');
+      setRainArrayJoin('');
       const res = await fetch(`${apiUrl}${areaName}`);
       const jsonData = await res.json();
       console.log('jsonData:', jsonData);
@@ -71,17 +71,16 @@ export default function weather() {
       setTelop(jsonData.forecasts[0].telop);
 
       // 降水確率処理
-      const rain = jsonData.forecasts[0].chanceOfRain
-      const rainArray = []
-      rainArray.push(`00~06時：${rain.T00_06}<br>`)
-      rainArray.push(`06~12時：${rain.T06_12}<br>`)
-      rainArray.push(`12~18時：${rain.T12_18}<br>`)
-      rainArray.push(`18~24時：${rain.T18_24}<br>`)
+      const rain = jsonData.forecasts[0].chanceOfRain;
+      const rainArray = [];
+      rainArray.push(`00~06時：${rain.T00_06}<br>`);
+      rainArray.push(`06~12時：${rain.T06_12}<br>`);
+      rainArray.push(`12~18時：${rain.T12_18}<br>`);
+      rainArray.push(`18~24時：${rain.T18_24}<br>`);
 
       // 降水確率配列を文字列にしてstateにセット
-      const test = rainArray.join('')
+      const test = rainArray.join('');
       setRainArrayJoin(test);
-
     } catch (error) {
       //該当地域がなければアラート
       alert('該当するエリアがデータにありません。');
@@ -118,12 +117,14 @@ export default function weather() {
 
             <div className={calsses.weather_box}>
               <div className={calsses.temp}>{tempMax}°c</div>
-              <div className={calsses.rain}>降水確率
-                <div className={calsses.rainlist} dangerouslySetInnerHTML={{__html: rainArrrayJoin}}></div>
+              <div className={calsses.rain}>
+                降水確率
+                <div
+                  className={calsses.rainlist}
+                  dangerouslySetInnerHTML={{ __html: rainArrrayJoin }}></div>
               </div>
               <div className={calsses.weather}>{telop}</div>
             </div>
-
           </div>
         </div>
       </div>
