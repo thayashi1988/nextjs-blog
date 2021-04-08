@@ -1,9 +1,12 @@
+import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import Layout, { siteTitle } from '../components/layout';
 import Date from '../components/date';
+import { Btn } from '../components/button/Btn';
+import Layout, { siteTitle } from '../components/layout';
 import { getSortedPostsData } from '../lib/posts';
 import utilStyles from '../styles/utils.module.css';
+import 'tailwindcss/tailwind.css';
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -16,7 +19,7 @@ export async function getStaticProps() {
 
 const name = 'じぃのNext.jsアプリ';
 
-export default function Home({ allPostsData }) {
+export default function Home({ allPostsData, props }) {
   return (
     <Layout home>
       <Head>
@@ -30,21 +33,29 @@ export default function Home({ allPostsData }) {
         </p>
       </section>
       <section>
-        <ul>
-          <li>
-            <Link href="/test/test">
-              <a className="text-blue-500">テストページへ</a>
-            </Link>
+        <h2 className="text-blue-600 font-bold text-4xl mt-8 mb-5">
+          勉強ページ
+        </h2>
+        <ul className="flex space-x-4">
+          <li className="flex-initial">
+            <Btn link href="/test/test">
+              テストページへ
+            </Btn>
           </li>
-          <li>
-            <Link href="/weather/weather">
-              <a className="text-blue-500">天気予報ページへ</a>
-            </Link>
+          <li className="flex-initial">
+            <Btn link href="/weather/weather">
+              天気予報ページへ
+            </Btn>
+          </li>
+          <li className="flex-initial">
+            <Btn link href="/database/database">
+              firbaseからの読み込みページへ
+            </Btn>
           </li>
         </ul>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>Blog</h2>
+        <h2 className="text-blue-600 font-bold text-4xl mt-8 mb-5">Blog</h2>
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
