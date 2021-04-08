@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Head from 'next/head';
 import Layout from '../../components/layout';
 import { Btn } from '../../components/button/Btn';
@@ -121,7 +121,8 @@ export default function weather() {
                 降水確率
                 <div
                   className={calsses.rainlist}
-                  dangerouslySetInnerHTML={{ __html: rainArrrayJoin }}></div>
+                  dangerouslySetInnerHTML={{ __html: rainArrrayJoin }}
+                ></div>
               </div>
               <div className={calsses.weather}>{telop}</div>
             </div>

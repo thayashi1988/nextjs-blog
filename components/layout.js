@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { Header } from './Header';
 import { Footer } from './Footer';
+import { Btn } from '../components/button/Btn';
 import styles from './layout.module.css';
 import utilStyles from '../styles/utils.module.css';
 
@@ -63,6 +64,9 @@ export default function Layout({ children, home }) {
             <Link href="/">
               <a>← Back to home</a>
             </Link>
+            <Btn link href="/">
+              TOPへ戻る
+            </Btn>
           </div>
         )}
       </div>
