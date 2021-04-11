@@ -19,6 +19,29 @@ export async function getStaticProps() {
 
 const name = 'じぃのNext.jsアプリ';
 
+const LINKS = [
+  {
+    href: '/test/test',
+    linktxt: 'テストページへ',
+  },
+  {
+    href: '/weather/weather',
+    linktxt: '天気予報ページへ',
+  },
+  {
+    href: '/database/database',
+    linktxt: 'firebase読み込み',
+  },
+  {
+    href: '/login/login',
+    linktxt: 'Googleログイン',
+  },
+  {
+    href: '/signin',
+    linktxt: 'チャットアプリへ',
+  },
+];
+
 export default function Home({ allPostsData, props }) {
   return (
     <Layout home>
@@ -36,22 +59,16 @@ export default function Home({ allPostsData, props }) {
         <h2 className="text-blue-600 font-bold text-4xl mt-8 mb-5">
           勉強ページ
         </h2>
-        <ul className="flex space-x-4">
-          <li className="flex-initial">
-            <Btn link href="/test/test">
-              テストページへ
-            </Btn>
-          </li>
-          <li className="flex-initial">
-            <Btn link href="/weather/weather">
-              天気予報ページへ
-            </Btn>
-          </li>
-          <li className="flex-initial">
-            <Btn link href="/database/database">
-              firbaseからの読み込みページへ
-            </Btn>
-          </li>
+        <ul className="flex flex-wrap justify-start">
+          {LINKS.map((link) => {
+            return (
+              <li key={link.href} className="flex-initial p-2 w-3/12">
+                <Btn link href={link.href} class="w-full text-center">
+                  {link.linktxt}
+                </Btn>
+              </li>
+            );
+          })}
         </ul>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>

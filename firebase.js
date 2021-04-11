@@ -1,5 +1,5 @@
 import firebaseTest from 'firebase';
-import 'firebase/app';
+import firebaseApp from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 if (!firebaseTest.apps.length) {
@@ -13,5 +13,9 @@ if (!firebaseTest.apps.length) {
     appId: process.env.FIREBASE_APP_ID,
   });
 }
+// firestore databaseで必要
 export const db = firebaseTest.firestore();
+// Email認証で必要
 export const auth = firebaseTest.auth();
+// Google認証で必要
+export const fbApp = firebaseApp;
