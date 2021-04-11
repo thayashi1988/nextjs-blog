@@ -73,7 +73,9 @@ export default function test() {
       <ul className="mt-5">
         {listItems.map(({ href, text }) => (
           <li className="mt-2" key={text}>
-            <NextLink href={href} text={text} class="text-blue-500" />
+            <NextLink href={href} class="text-blue-500">
+              {text}
+            </NextLink>
           </li>
         ))}
       </ul>

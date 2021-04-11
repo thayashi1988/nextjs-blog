@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+
+// components
 import Head from 'next/head';
-import Layout from '../../components/layout';
 import Link from 'next/link';
+import Layout from '../../components/layout';
 
 // @material-ui
 import Button from '@material-ui/core/Button';
@@ -43,26 +46,58 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
+  // ルーター
+  const router = useRouter();
+
   // materialUiのcss？
   const classes = useStyles();
-  console.log('classes:', classes);
 
+  // ユーザーネーム
   const [name, setName] = useState('');
+
   // ボタン活性化
   const [disabled, setdisabled] = useState(true);
+
   // 入力テキスト
   const [string, setString] = useState('');
-
-  //入力テキスト取得
-  const inputFunc = (e) => {
-    setString(e.target.value);
-  };
 
   //ボタン活性化
   useEffect(() => {
     const disabled = string === '' ? true : false;
     setdisabled(disabled);
   }, [string]);
+
+  //入力テキスト取得
+  const inputFunc = (e) => {
+    setString(e.target.value);
+  };
+
+  //キーダウン取得
+  const keydownFunc = (e) => {
+    const pressdKey = e.key;
+    setName(string);
+
+    if (pressdKey === 'Enter') {
+      setName(string);
+      e.preventDefault();
+    }
+  };
+
+  //日本語入力処理
+  const compositionFunc = () => {
+    // console.log('name:', name);
+  };
+
+  //ボタンクリックアクション
+  const clickFunc = () => {
+    setName(string);
+    // console.log('string:', string);
+    // console.log('name:', name);
+    router.push({
+      pathname: './signin/chat',
+      query: { userName: name },
+    });
+  };
 
   return (
     <Layout>
@@ -86,14 +121,17 @@ export default function SignIn() {
               name="name"
               autoFocus
               onChange={inputFunc}
+              onKeyDown={keydownFunc}
+              onCompositionStart={compositionFunc}
             />
             <Button
-              type="submit"
+              type="button"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
-              disabled={disabled}>
+              disabled={disabled}
+              onClick={clickFunc}>
               はじめる
             </Button>
           </form>
