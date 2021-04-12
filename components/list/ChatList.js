@@ -9,13 +9,7 @@ import { messagesRef } from '../../firebase';
 
 // @material-ui
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  List,
-  ListItemText,
-  ListItemAvatar,
-  Avatar,
-  Typography,
-} from '@material-ui/core/';
+import { List } from '@material-ui/core/';
 
 //material-uiのstyle
 const useStyles = makeStyles({
