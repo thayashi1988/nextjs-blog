@@ -27,7 +27,7 @@ export const fbApp = firebaseApp;
 
 // relatimedatabaseで必要
 const RTDB = firebaseTest.database();
-const messagesRef = RTDB.ref('messages');
+export const messagesRef = RTDB.ref('messages');
 // console.log('messagesRef:', messagesRef);
 
 export const pushMessage = ({ name, text }) => {

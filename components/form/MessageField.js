@@ -9,7 +9,6 @@ import { TextField } from '@material-ui/core';
 
 export function MessageField({ inputEl, userName, setInputText, inputText }) {
   const [isComposed, setIsComposed] = useState(false);
-  console.log('inputText:', inputText);
 
   //入力テキストを取得
   const changeText = (e) => {
