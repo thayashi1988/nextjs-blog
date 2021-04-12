@@ -1,6 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/styles';
 class MyDocument extends Document {
+  //material-uiのクラス名動的変更でコンソールエラーがでるのを防ぐ
   static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheets();
     const originalRenderPage = ctx.renderPage;
