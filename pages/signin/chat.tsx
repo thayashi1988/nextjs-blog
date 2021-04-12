@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 // components
 import Head from 'next/head';
 import Layout from '../../components/layout';
-import { NextLink } from '../../components/link/Link';
+import { Btn } from '../../components/button/Btn';
 import { ChatList } from '../../components/list/ChatList';
 import { ChatListInput } from '../../components/list/ChatListInput';
 
@@ -24,6 +24,9 @@ const useStyles = makeStyles({
 export default function Chat(): JSX.Element {
   const router = useRouter();
   const name = router.query.userName;
+  if (name === '') {
+    router.push('/signin');
+  }
 
   const classes = useStyles();
 
@@ -39,10 +42,15 @@ export default function Chat(): JSX.Element {
           avatar="4f83492f4b7fc4c920e857b364eb3bd2"
         />
       </div>
-      <NextLink href="/signin" class="text-sm text-blue-500 underline">
-        {/* {router.query.userName} */}
-        前のページに戻る
-      </NextLink>
+      <div className="text-center">
+        <Btn
+          link
+          href="/signin"
+          class="text-sm text-center max-w-sm mx-auto bg-purple-600 hover:bg-purple-800">
+          {/* {router.query.userName} */}
+          前のページに戻る
+        </Btn>
+      </div>
     </Layout>
   );
 }
