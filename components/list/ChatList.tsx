@@ -1,4 +1,5 @@
 // react
+import type { VFC } from 'react';
 import React, { useState, useEffect } from 'react';
 
 // components
@@ -20,7 +21,7 @@ const useStyles = makeStyles({
   },
 });
 
-export function ChatList() {
+export const ChatList: VFC = () => {
   const [messages, setMessages] = useState([]);
   const classes = useStyles();
 
@@ -36,7 +37,7 @@ export function ChatList() {
         const newMessages = entries.map((entry) => {
           // const key = entry[0];
           // const datas = entry[1]
-          const [key, datas] = entry;
+          const [key, datas]: any = entry;
           return { key: key, ...datas };
         });
         console.log('newMessages:', newMessages);
@@ -61,4 +62,4 @@ export function ChatList() {
       })}
     </List>
   );
-}
+};

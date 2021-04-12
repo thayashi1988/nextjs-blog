@@ -1,6 +1,15 @@
+import type { VFC } from 'react';
 import Image from 'next/image';
 
-export function NextImg(props) {
+type PROPS = {
+  class?: string;
+  src: string;
+  width?: string;
+  height?: string;
+  quality?: string;
+};
+
+export const NextImg: VFC<PROPS> = (props) => {
   return (
     <figure className={props.class}>
       <Image
@@ -11,4 +20,4 @@ export function NextImg(props) {
       />
     </figure>
   );
-}
+};

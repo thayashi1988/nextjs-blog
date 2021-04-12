@@ -1,7 +1,8 @@
+import type { VFC } from "react";
 import Link from "next/link";
 import "tailwindcss/tailwind.css";
 
-export function Header() {
+export const Header: VFC = () => {
   return (
     <header className="bg-blue-300">
       <div className="max-w-4xl mx-auto p-4">

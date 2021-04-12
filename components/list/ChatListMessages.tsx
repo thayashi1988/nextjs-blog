@@ -1,4 +1,5 @@
 // react
+import type { VFC } from 'react';
 import React, { useEffect, useRef } from 'react';
 
 // components
@@ -21,7 +22,13 @@ const useStyles = makeStyles({
   },
 });
 
-export function ChatListMessages({ isLastItem, name, text }) {
+type ARG = {
+  isLastItem: boolean;
+  name: string;
+  text: string;
+};
+
+export const ChatListMessages: VFC<ARG> = ({ isLastItem, name, text }) => {
   const classes = useStyles();
   const ref = useRef(null);
   const avatarPath = GravatarPath(name);
@@ -51,4 +58,4 @@ export function ChatListMessages({ isLastItem, name, text }) {
       />
     </ListItem>
   );
-}
+};

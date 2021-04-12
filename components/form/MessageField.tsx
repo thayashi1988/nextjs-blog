@@ -1,4 +1,5 @@
 // react
+import type { VFC } from 'react';
 import React, { useState } from 'react';
 
 // firebase
@@ -7,7 +8,19 @@ import { pushMessage } from '../../firebase';
 // @material-ui
 import { TextField } from '@material-ui/core';
 
-export function MessageField({ inputEl, userName, setInputText, inputText }) {
+type ARG = {
+  inputEl: React.MutableRefObject<HTMLInputElement>;
+  userName: string | string[];
+  setInputText: React.Dispatch<string>;
+  inputText: string;
+};
+
+export const MessageField: VFC<ARG> = ({
+  inputEl,
+  userName,
+  setInputText,
+  inputText,
+}) => {
   const [isComposed, setIsComposed] = useState(false);
 
   //入力テキストを取得
@@ -43,4 +56,4 @@ export function MessageField({ inputEl, userName, setInputText, inputText }) {
       value={inputText}
     />
   );
-}
+};

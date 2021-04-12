@@ -1,5 +1,6 @@
 // react
-import React, { useState } from 'react';
+import type { VFC } from 'react';
+import React from 'react';
 
 // firebase
 import { pushMessage } from '../../firebase';
@@ -8,12 +9,19 @@ import { pushMessage } from '../../firebase';
 import { IconButton } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 
-export function MessageSubmitButton({
+type ARG = {
+  inputEl: React.MutableRefObject<HTMLInputElement>;
+  userName: string | string[];
+  setInputText: React.Dispatch<string>;
+  inputText: string;
+};
+
+export const MessageSubmitButton: VFC<ARG> = ({
   inputEl,
   userName,
   setInputText,
   inputText,
-}) {
+}) => {
   const sendFirebase = () => {
     pushMessage({ name: userName, text: inputText });
     setInputText('');
@@ -24,4 +32,4 @@ export function MessageSubmitButton({
       <SendIcon color={inputText === '' ? 'disabled' : 'primary'} />
     </IconButton>
   );
-}
+};

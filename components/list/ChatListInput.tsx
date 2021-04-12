@@ -1,4 +1,5 @@
 // react
+import type { VFC } from 'react';
 import React, { useState, useRef } from 'react';
 
 // components
@@ -17,9 +18,14 @@ const useStyles = makeStyles({
   },
 });
 
-export function ChatListInput(props) {
+type PROPS = {
+  avatar: string;
+  userName: string | string[];
+};
+
+export const ChatListInput: VFC<PROPS> = (props) => {
   const inputEl = useRef(null);
-  const [inputText, setInputText] = useState('');
+  const [inputText, setInputText] = useState<string>('');
   const classes = useStyles();
   const avatarPath = GravatarPath(props.avatar);
 
@@ -52,4 +58,4 @@ export function ChatListInput(props) {
       </Grid>
     </div>
   );
-}
+};

@@ -1,13 +1,13 @@
 import Head from 'next/head';
-import Link from 'next/link';
+import { NextLink } from './link/Link';
 import { Header } from './Header';
 import { Footer } from './Footer';
-import { Btn } from '../components/button/Btn';
+import { Btn } from './button/Btn';
 import styles from './layout.module.css';
 import utilStyles from '../styles/utils.module.css';
 
-const name = 'じぃのNext.jsアプリ';
-export const siteTitle = 'Next.js Sample Website';
+const name: string = 'じぃのNext.jsアプリ';
+export const siteTitle: string = 'Next.js Sample Website';
 
 export default function Layout({ children, home }) {
   return (
@@ -41,19 +41,15 @@ export default function Layout({ children, home }) {
             </>
           ) : (
             <>
-              <Link href="/">
-                <a>
-                  <img
-                    src="/images/profile.jpg"
-                    className={`${styles.headerImage} ${utilStyles.borderCircle}`}
-                    alt={name}
-                  />
-                </a>
-              </Link>
+              <NextLink href="/">
+                <img
+                  src="/images/profile.jpg"
+                  className={`${styles.headerImage} ${utilStyles.borderCircle}`}
+                  alt={name}
+                />
+              </NextLink>
               <h2 className={utilStyles.headingLg}>
-                <Link href="/">
-                  <a className={utilStyles.colorInherit}>{name}</a>
-                </Link>
+                <NextLink href="/">{name}</NextLink>
               </h2>
             </>
           )}
@@ -61,9 +57,6 @@ export default function Layout({ children, home }) {
         <main className="mt-5">{children}</main>
         {!home && (
           <div className={styles.backToHome}>
-            <Link href="/">
-              <a>← Back to home</a>
-            </Link>
             <Btn link href="/">
               TOPへ戻る
             </Btn>
