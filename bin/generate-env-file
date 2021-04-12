@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+const fs = require('fs');
+const firebaseSetteings = require('../.firebase-config');
+
+const ENV = `
+FIREBASE_APIKEY = '${firebaseSetteings.apiKey}'
+FIREBASE_DOMAIN = '${firebaseSetteings.authDomain}'
+FIREBASE_DATABASE = '${firebaseSetteings.databaseURL}'
+FIREBASE_PROJECT_ID = '${firebaseSetteings.projectId}'
+FIREBASE_STORAGE_BUCKET = '${firebaseSetteings.storageBucket}'
+FIREBASE_SENDER_ID = '${firebaseSetteings.messagingSenderId}'
+FIREBASE_APP_ID = '${firebaseSetteings.appId}'
+`;
+
+const TRIM_ENV = ENV.trim();
+const envFileName = '.env.test';
+
+try {
+  fs.writeFileSync(envFileName, TRIM_ENV);
+  console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+} catch (error) {
+  console.log('error:', error);
+}
