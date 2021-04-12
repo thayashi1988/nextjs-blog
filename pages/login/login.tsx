@@ -4,7 +4,7 @@ import Layout from '../../components/layout';
 import { Btn } from '../../components/button/Btn';
 import { fbApp, auth } from '../../firebase';
 
-export default function login(props) {
+export default function login(): JSX.Element {
   const [user, setUser] = useState(null);
   const [isNull, setIsNull] = useState();
 
@@ -15,7 +15,7 @@ export default function login(props) {
     //   setIsNull(user);
     //   console.log('user:', user);
     // });
-    const authProcess = auth.onAuthStateChanged((user) => {
+    const authProcess = auth.onAuthStateChanged((user: any) => {
       setUser(user);
       setIsNull(user);
       console.log('isNull:', isNull);
@@ -25,13 +25,13 @@ export default function login(props) {
 
   // ログイン機能
   // firebase/appからのメソッドが必要（fbApp）
-  const login = () => {
+  const login = (): void => {
     const provider = new fbApp.auth.GoogleAuthProvider();
     auth.signInWithRedirect(provider);
   };
 
   // ログアウト機能
-  const logout = () => {
+  const logout = (): void => {
     auth.signOut();
   };
 
@@ -57,7 +57,7 @@ export default function login(props) {
   };
 
   return (
-    <Layout>
+    <Layout home={false}>
       <Head>
         <title>firebaseでのGoogle認証</title>
       </Head>

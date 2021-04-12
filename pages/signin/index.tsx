@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 // components
 import Head from 'next/head';
-import Link from 'next/link';
+import { NextLink } from '../../components/link/Link';
 import Layout from '../../components/layout';
 
 // @material-ui
@@ -16,15 +16,15 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 
-function Copyright() {
+const Copyright = () => {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link href="/">チャットアプリ</Link> {new Date().getFullYear()}
+      <NextLink href="/">チャットアプリ</NextLink> {new Date().getFullYear()}
       {'.'}
     </Typography>
   );
-}
+};
 
 //material-uiのstyle
 const useStyles = makeStyles((theme) => ({
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function SignIn(): JSX.Element {
   // ルーター
   const router = useRouter();
 
@@ -64,18 +64,18 @@ export default function SignIn() {
   const [string, setString] = useState('');
 
   //ボタン活性化
-  useEffect(() => {
+  useEffect((): void => {
     const disabled = string === '' ? true : false;
     setdisabled(disabled);
   }, [string]);
 
   //入力テキスト取得
-  const inputFunc = (e) => {
+  const inputFunc = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setString(e.target.value);
   };
 
   //キーダウン取得
-  const keydownFunc = (e) => {
+  const keydownFunc = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     const pressdKey = e.key;
     setName(string);
 
@@ -86,12 +86,12 @@ export default function SignIn() {
   };
 
   //日本語入力処理
-  const compositionFunc = () => {
+  const compositionFunc = (): void => {
     // console.log('name:', name);
   };
 
   //ボタンクリックアクション
-  const clickFunc = () => {
+  const clickFunc = (): void => {
     setName(string);
     router.push({
       pathname: './signin/chat',
@@ -100,7 +100,7 @@ export default function SignIn() {
   };
 
   return (
-    <Layout>
+    <Layout home={false}>
       <Head>
         <title>firebaseでのチャットアプリ</title>
       </Head>

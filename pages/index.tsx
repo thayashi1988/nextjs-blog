@@ -17,28 +17,33 @@ export async function getStaticProps() {
   };
 }
 
-const name = 'じぃのNext.jsアプリ';
+const name: string = 'じぃのNext.jsアプリ';
 
-const LINKS = [
+type Links = {
+  href: string;
+  linkTxt: string;
+}
+
+const LINKITEMS: Links[] = [
   {
     href: '/test/test',
-    linktxt: 'テストページへ',
+    linkTxt: 'テストページへ',
   },
   {
     href: '/weather/weather',
-    linktxt: '天気予報ページへ',
+    linkTxt: '天気予報ページへ',
   },
   {
     href: '/database/database',
-    linktxt: 'firebase読み込み',
+    linkTxt: 'firebase読み込み',
   },
   {
     href: '/login/login',
-    linktxt: 'Googleログイン',
+    linkTxt: 'Googleログイン',
   },
   {
     href: '/signin',
-    linktxt: 'チャットアプリへ',
+    linkTxt: 'チャットアプリへ',
   },
 ];
 
@@ -60,11 +65,11 @@ export default function Home({ allPostsData, props }) {
           勉強ページ
         </h2>
         <ul className="flex flex-wrap justify-start">
-          {LINKS.map((link) => {
+          {LINKITEMS.map((link) => {
             return (
               <li key={link.href} className="flex-initial p-2 w-3/12">
                 <Btn link href={link.href} class="w-full text-center">
-                  {link.linktxt}
+                  {link.linkTxt}
                 </Btn>
               </li>
             );

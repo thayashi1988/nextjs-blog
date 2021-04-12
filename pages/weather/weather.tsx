@@ -1,21 +1,21 @@
+import type { NextPage } from 'next';
 import { useState } from 'react';
-import Head from 'next/head';
 import Layout from '../../components/layout';
+import Head from 'next/head';
 import { Btn } from '../../components/button/Btn';
 import calsses from '../../styles/weather.module.css';
 
-let val = '';
-const apiUrl = 'https://weather.tsukumijima.net/api/forecast?city=';
+let val: string = '';
+const apiUrl: string = 'https://weather.tsukumijima.net/api/forecast?city=';
 
-export default function weather() {
+export const Weather: NextPage = () => {
   const [city, setCity] = useState('');
   const [tempMax, setTempMax] = useState('');
   const [telop, setTelop] = useState('');
-  // const [rainArrray, setRainArrray] = useState([]);
   const [rainArrrayJoin, setRainArrayJoin] = useState('');
 
   //当日の日付取得関数
-  function dateBuilder() {
+  const dateBuilder = () => {
     let d = new Date();
     let months = [
       '1月',
@@ -37,24 +37,21 @@ export default function weather() {
     let month = months[d.getMonth()];
     let year = d.getFullYear();
     return `${year}年 ${month} ${date}日 ${day}`;
-  }
-
-  const inputData = (e) => {
-    val = e.target.value;
-    // console.log('val:', val);
   };
 
-  const weatherCheck = (e) => {
+  const inputData = (e: React.ChangeEvent<HTMLInputElement>) => {
+    val = e.target.value;
+  };
+
+  const weatherCheck = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const pressKey = e.key;
-    // const self = e.currentTarget
-    // console.log('self:', self);
     if (pressKey === 'Enter') {
       fetchWeather(val);
       dateBuilder();
     }
   };
 
-  const fetchWeather = async (areaName) => {
+  const fetchWeather = async (areaName: string) => {
     try {
       // state初期化
       setCity('');
@@ -89,7 +86,7 @@ export default function weather() {
   };
 
   return (
-    <Layout>
+    <Layout home={false}>
       <Head>
         <title>天気予報ページ</title>
       </Head>
@@ -104,9 +101,7 @@ export default function weather() {
               className={calsses.search_bar}
               placeholder="地域を入力..."
             />
-            <Btn link={false} click={weatherCheck}>
-              チェック
-            </Btn>
+            <Btn link={false}>チェック</Btn>
           </div>
 
           <div className={calsses.weather_wrap}>
@@ -121,8 +116,7 @@ export default function weather() {
                 降水確率
                 <div
                   className={calsses.rainlist}
-                  dangerouslySetInnerHTML={{ __html: rainArrrayJoin }}
-                ></div>
+                  dangerouslySetInnerHTML={{ __html: rainArrrayJoin }}></div>
               </div>
               <div className={calsses.weather}>{telop}</div>
             </div>
@@ -131,4 +125,5 @@ export default function weather() {
       </div>
     </Layout>
   );
-}
+};
+export default Weather;

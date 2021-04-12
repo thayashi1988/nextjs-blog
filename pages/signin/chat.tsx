@@ -21,14 +21,14 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Chat() {
+export default function Chat(): JSX.Element {
   const router = useRouter();
   const name = router.query.userName;
 
   const classes = useStyles();
 
   return (
-    <Layout>
+    <Layout home={false}>
       <Head>
         <title>firebaseでのチャットアプリ</title>
       </Head>
@@ -40,7 +40,8 @@ export default function Chat() {
         />
       </div>
       <NextLink href="/signin" class="text-sm text-blue-500 underline">
-        <strong>{router.query.userName}</strong>一個前に戻る
+        {/* {router.query.userName} */}
+        前のページに戻る
       </NextLink>
     </Layout>
   );

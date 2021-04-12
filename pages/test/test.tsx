@@ -4,15 +4,14 @@ import { NextLink } from '../../components/link/Link';
 import { NextImg } from '../../components/img/Img';
 import { Btn } from '../../components/button/Btn';
 
-// clickイベント
-function handleClick(e) {
-  e.preventDefault();
-  alert('クリックイベントのアラート');
-  console.log('The link was clicked.');
-}
+// 型定義
+type ListItems = {
+  href: string;
+  text: string;
+};
 
 // 繰り返し処理
-const listItems = [
+const LISTITEMS: ListItems[] = [
   {
     href: '/',
     text: 'TOPへ戻る',
@@ -23,19 +22,25 @@ const listItems = [
   },
 ];
 
+// clickイベント
+function handleClick(e: any): void {
+  e.preventDefault();
+  alert('クリックイベントのアラート');
+}
+
 // 条件処理
 function Greeting(props) {
-  const isLoggedIn = props.isLoggedIn;
+  const isLoggedIn: Boolean = props.isLoggedIn;
   if (isLoggedIn) {
     return <p className="mt-5">aaaaaaaaaaaaaaa</p>;
   }
   return <p className="mt-5">nnnnnnnnnnnnn</p>;
 }
-const pageTitle = 'Next.jsのテストページ';
+const pageTitle: string = 'Next.jsのテストページ';
 
-export default function test() {
+export default function test(): JSX.Element {
   return (
-    <Layout>
+    <Layout home={false}>
       <Head>
         <title>{pageTitle}</title>
       </Head>
@@ -53,11 +58,12 @@ export default function test() {
             link
             href="/"
             class="w-full"
-            number={1111}
-            array={['aaa', 111, 'bbb', 222]}
-            obj={{ aaa: 'aaaa', bbb: 'bbb' }}
-            bool
-            boolean={false}>
+            // number={1111}
+            // array={['aaa', 111, 'bbb', 222]}
+            // obj={{ aaa: 'aaaa', bbb: 'bbb' }}
+            // bool
+            // boolean={false}
+          >
             TOPへ遷移するボタン
           </Btn>
         </li>
@@ -71,7 +77,7 @@ export default function test() {
       <Greeting isLoggedIn={true} />
 
       <ul className="mt-5">
-        {listItems.map(({ href, text }) => (
+        {LISTITEMS.map(({ href, text }) => (
           <li className="mt-2" key={text}>
             <NextLink href={href} class="text-blue-500">
               {text}

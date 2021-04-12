@@ -4,7 +4,11 @@ import Layout from '../../components/layout';
 import FirebaseItems from '../../components/firebase/FirebaseItems';
 import { db } from '../../firebase';
 
-export default function dataBase(props) {
+// interface IntrinsicAttributes {
+//   key?: string;
+// }
+
+export default function dataBase(): JSX.Element {
   const [tasks, setTasks] = useState([{ id: '', title: '' }]);
   const [isfetch, setIsfetch] = useState(false);
   const [input, setInput] = useState('');
@@ -32,7 +36,7 @@ export default function dataBase(props) {
   };
 
   // 条件処理
-  function Loading() {
+  const Loading: any = () => {
     if (!isfetch) {
       return (
         <div className="border border-gray-100 shadow rounded-md p-4 w-full">
@@ -59,12 +63,12 @@ export default function dataBase(props) {
         })}
       </ul>
     );
-  }
+  };
   console.log('tasks:', tasks);
   console.log('isfetch:', isfetch);
 
   return (
-    <Layout>
+    <Layout home={false}>
       <Head>
         <title>firebaseのデータベース読み込み</title>
       </Head>
