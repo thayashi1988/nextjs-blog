@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Layout from '../../components/layout';
+import { Btn } from '../../components/button/Btn';
 import FirebaseItems from '../../components/firebase/FirebaseItems';
 import { db } from '../../firebase';
 
@@ -64,7 +65,6 @@ export default function dataBase(): JSX.Element {
       </ul>
     );
   };
-  console.log('tasks:', tasks);
   console.log('isfetch:', isfetch);
 
   return (
