@@ -31,7 +31,7 @@ export function ChatListInput(props) {
         </Grid>
         <Grid item xs={10}>
           <MessageField
-            inputEl={props.inputEl}
+            inputEl={inputEl}
             userName={props.userName}
             setInputText={setInputText}
             inputText={inputText}
@@ -39,6 +39,7 @@ export function ChatListInput(props) {
         </Grid>
         <Grid item xs={1}>
           <MessageSubmitButton
+            inputEl={inputEl}
             userName={props.userName}
             setInputText={setInputText}
             inputText={inputText}
