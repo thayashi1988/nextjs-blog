@@ -50,13 +50,19 @@ export function ChatList() {
       });
   }, []);
 
+  const messagesLen = messages.length;
+
   return (
     <List className={classes.root}>
-      {messages.map(({ key, name, text }) => {
+      {messages.map(({ key, name, text }, index) => {
+        const isLastItem = messagesLen === index + 1;
         return (
-          <ChatListMessages key={key} name={name} text={text}>
-            item
-          </ChatListMessages>
+          <ChatListMessages
+            key={key}
+            name={name}
+            text={text}
+            isLastItem={isLastItem}
+          />
         );
       })}
     </List>

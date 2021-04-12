@@ -1,5 +1,5 @@
 // react
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 // components
 import { GravatarPath } from '../img/Gravatar';
@@ -15,22 +15,25 @@ import {
 } from '@material-ui/core';
 
 //material-uiのstyle
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    backgroundColor: theme.palette.background.paper,
-  },
+const useStyles = makeStyles({
   inline: {
     display: 'inline',
   },
-}));
+});
 
-export function ChatListMessages({ name, text }) {
+export function ChatListMessages({ isLastItem, name, text }) {
   const classes = useStyles();
+  const ref = useRef(null);
   const avatarPath = GravatarPath(name);
 
+  useEffect(() => {
+    if (isLastItem) {
+      ref.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [isLastItem]);
+
   return (
-    <ListItem divider>
+    <ListItem ref={ref} divider>
       <ListItemAvatar>
         <Avatar alt="" src={avatarPath} />
       </ListItemAvatar>

@@ -27,7 +27,10 @@ export function ChatListInput(props) {
     <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xs={2}>
-          <span className="text-xs">ようそこ！{props.userName}さん</span>
+          <span className="text-xs">
+            ようそこ！<span className="text-blue-500">{props.userName}</span>
+            さん
+          </span>
           <Avatar className="m-auto my-0" src={avatarPath} />
         </Grid>
         <Grid item xs={9}>
