@@ -1,3 +1,4 @@
+// react
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
@@ -25,6 +26,7 @@ function Copyright() {
   );
 }
 
+//material-uiのstyle
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -91,11 +93,9 @@ export default function SignIn() {
   //ボタンクリックアクション
   const clickFunc = () => {
     setName(string);
-    // console.log('string:', string);
-    // console.log('name:', name);
     router.push({
       pathname: './signin/chat',
-      query: { userName: name },
+      query: { userName: name }, //入力したユーザーネームを渡す
     });
   };
 

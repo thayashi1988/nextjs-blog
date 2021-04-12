@@ -1,7 +1,9 @@
+// react
 import React from 'react';
 // @material-ui
 import { makeStyles } from '@material-ui/core/styles';
 
+//material-uiのstyle
 const useStyles = makeStyles({
   root: {
     gridRow: 1,

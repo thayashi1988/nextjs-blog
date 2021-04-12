@@ -1,21 +1,23 @@
+// react
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
 
+// firebase
 import { pushMessage } from '../../firebase';
 
 // @material-ui
 import { TextField } from '@material-ui/core';
 
-export function MessageField({ name, setText, text }) {
+export function MessageField({ inputEl, userName, setInputText, inputText }) {
   const [isComposed, setIsComposed] = useState(false);
-  const router = useRouter();
+  console.log('inputText:', inputText);
 
-  const inputText = (e) => {
+  //入力テキストを取得
+  const changeText = (e) => {
     const targetText = e.target.value;
-    if (targetText === '') return;
-    setText(targetText);
+    setInputText(targetText);
   };
 
+  //Enterキーでのfirebaseへの送信制御
   const keydownText = (e) => {
     if (isComposed) return;
 
@@ -24,22 +26,22 @@ export function MessageField({ name, setText, text }) {
 
     const pressKey = e.key;
     if (pressKey === 'Enter') {
-      pushMessage({ name: router.query.userName, text: targetKeydownText });
-      setText('');
+      pushMessage({ name: userName, text: inputText });
+      setInputText('');
       e.preventDefault();
-      console.log('firebaseへプッシュ');
     }
   };
 
-  // console.log('text:', text);
   return (
     <TextField
-      onChange={inputText}
+      autoFocus
+      inputRef={inputEl}
+      onChange={changeText}
       onKeyDown={keydownText}
       onCompositionStart={() => setIsComposed(true)}
       onCompositionEnd={() => setIsComposed(false)}
       fullWidth={true}
-      value={text}
+      value={inputText}
     />
   );
 }

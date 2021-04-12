@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+// react
+import React, { useState, useRef } from 'react';
+
+// components
 import { GravatarPath } from '../img/Gravatar';
 import { MessageField } from '../form/MessageField';
+import { MessageSubmitButton } from '../button/MessageSubmitButton';
 
 // @material-ui
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Avatar } from '@material-ui/core';
 
+//material-uiのstyle
 const useStyles = makeStyles({
   root: {
     gridRow: 2,
@@ -13,7 +18,8 @@ const useStyles = makeStyles({
 });
 
 export function ChatListInput(props) {
-  const [text, setText] = useState('');
+  const inputEl = useRef(null);
+  const [inputText, setInputText] = useState('');
   const classes = useStyles();
   const avatarPath = GravatarPath(props.avatar);
 
@@ -24,10 +30,19 @@ export function ChatListInput(props) {
           <Avatar src={avatarPath} />
         </Grid>
         <Grid item xs={10}>
-          <MessageField name={props.userName} setText={setText} text={text} />
+          <MessageField
+            inputEl={props.inputEl}
+            userName={props.userName}
+            setInputText={setInputText}
+            inputText={inputText}
+          />
         </Grid>
         <Grid item xs={1}>
-          ボタン
+          <MessageSubmitButton
+            userName={props.userName}
+            setInputText={setInputText}
+            inputText={inputText}
+          />
         </Grid>
       </Grid>
     </div>
