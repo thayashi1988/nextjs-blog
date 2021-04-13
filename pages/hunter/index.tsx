@@ -4,7 +4,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Layout from '../../components/layout';
 
-import classes from './hunter.module.css';
+// import classes from './hunter.module.css';
 import { TextInput } from '../../components/form/TextInput';
 import { HunterList } from '../../components/list/HunterList';
 
@@ -37,14 +37,16 @@ export const Index: NextPage<ARG> = () => {
   //計算式の格納
   let calcTotal = parseFloat(heightInputText) / 1820;
   let boxNum = parseFloat(heightInputText) / 1820;
-  let boxHeight = (1820 / parseFloat(heightInputText)) * 100;
-  let DivisionValue = 0;
+  let boxHeight: any = (1820 / parseFloat(heightInputText)) * 100;
+  let DivisionValue: any = 0;
   let postionTop = 100 / repeate;
 
   if ((parseFloat(heightInputText) % 1820) / 2 === 0) {
     DivisionValue = 910;
   } else {
     DivisionValue = (parseFloat(heightInputText) % 1820) / 2;
+    // boxHeight = ((DivisionValue / 1820) * 100) / 2;
+    // DivisionValue = (parseFloat(heightInputText) % 1820) / 2;
   }
 
   //入力テキストの割り算
@@ -72,11 +74,11 @@ export const Index: NextPage<ARG> = () => {
   // styles
   const styles = {
     width: '100%',
-    height: `${boxHeight}%`,
-    // height: `${(1820 / parseFloat(heightInputText)) * 100}%`,
+    height: `${parseFloat(boxHeight)}%`,
+    // height: `${parseFloat(boxHeight) + ((DivisionValue / 1820) * 100) / 2}%`,
     backgroundColor: 'rgba(0,0,0,.2)',
-    borderRight: '1px solid rgba(59, 130, 246, 1)',
-    borderTop: '1px solid rgba(59, 130, 246, 1)',
+    border: '1px solid rgba(59, 130, 246, 1)',
+    // borderTop: '2px solid rgba(59, 130, 246, 1)',
   };
 
   // 計算後のボックス生成
@@ -84,7 +86,7 @@ export const Index: NextPage<ARG> = () => {
     const isShow: Boolean = props.isShow;
     if (isShow) {
       useEffect(() => {
-        console.log('boxNum:', (boxNum % 2) * 100);
+        // console.log('boxNum:', (boxNum % 2) * 100);
         setRepate(boxNum);
 
         // setRepate(parseFloat(heightInputText) / 1820);
@@ -94,32 +96,34 @@ export const Index: NextPage<ARG> = () => {
       for (let i = 0; i < repeate; i++) {
         createElem.push(i);
       }
+      console.log(createElem.length);
 
       let test = '';
-      if (true) {
-        test = `<span class="block text-center w-full" style="height: ${
-          100 - boxHeight
-        }%">${DivisionValue * 2}mm</span>`;
-      }
-
       return createElem.map((i) => {
+        // console.log('i', i + 1);
         if (i % 2 === 0) {
+          console.log('aaaaaaaaaaaaaaaaaaaaaaaaaa');
+        }
+        if (1 + (i % 2) !== 0 && i === createElem.length - 1) {
+          test = `<span class="block text-center w-full" style="height: ${
+            ((DivisionValue * 2) / 1820) * 100
+          }%">黒線まで${DivisionValue * 2}mm</span>`;
           return (
             <HunterList
               key={i}
-              class="flex items-center justify-center text-xs"
-              style={styles}></HunterList>
-          );
-        } else {
-          return (
-            <HunterList
-              key={i}
-              class="flex items-start justify-center text-xs"
+              class="flex items-start justify-center text-white text-xs"
               style={styles}
               innerHTML={{ __html: test }}>
               {/* <span>{DivisionValue * 2}mm</span> */}
               {/* {(parseFloat(heightInputText) % 1820) / 2}の板 */}
             </HunterList>
+          );
+        } else {
+          return (
+            <HunterList
+              key={i}
+              class="flex items-center justify-center text-xs"
+              style={styles}></HunterList>
           );
         }
       });
@@ -129,16 +133,21 @@ export const Index: NextPage<ARG> = () => {
   };
 
   let divisionRemainderStyles: any = '';
+  // console.log('repeate:', repeate);
+
+  //1820で割り切れるかの判定
   if (DivisionValue !== 910) {
-    divisionRemainderStyles = (100 - boxHeight) / 2;
+    // divisionRemainderStyles = (100 - boxHeight) / 2;
+    divisionRemainderStyles = ((DivisionValue / 1820) * 100) / 2;
   } else {
     divisionRemainderStyles = 100 / repeate / 2;
   }
+  // console.log('divisionRemainderStyles:', divisionRemainderStyles);
 
   //余りがある場合の処理
   const DivisionRemainder = (props) => {
     const isShow: Boolean = props.isShow;
-    console.log('divisionRemainderStyles:', divisionRemainderStyles);
+    // console.log('divisionRemainderStyles:', divisionRemainderStyles);
     if (isShow) {
       return (
         <>
@@ -173,15 +182,15 @@ export const Index: NextPage<ARG> = () => {
       <Head>
         <title>ハンターハンター</title>
       </Head>
-      <section className={classes.section}>
-        <div className={classes.box}>
-          <div className="h-full">
+      <section className="pb-20 mb-28 overflow-hidden">
+        <div className="relative flex h-80 border-2 border-solid border-gray-500">
+          <div className="h-full w-3/12">
             <ShowBord isShow={calcFlag} />
             {/* {parseFloat(heightInputText) % 1820}mm */}
             {/* <DivisionRemainder isShow={calcFlag} /> */}
           </div>
           <div
-            className="h-full absolute left-1/4"
+            className="h-full w-3/12 absolute left-1/4"
             style={{
               // top: `${100 / repeate / 2}%`,
               top: `${divisionRemainderStyles}%`,
@@ -189,12 +198,12 @@ export const Index: NextPage<ARG> = () => {
             <ShowBord isShow={calcFlag} />
             <DivisionRemainder isShow={calcFlag} />
           </div>
-          <div className="h-full absolute top-0 left-2/4" style={{}}>
+          <div className="h-full w-3/12 absolute top-0 left-2/4" style={{}}>
             <ShowBord isShow={calcFlag} />
             {/* <DivisionRemainder isShow={calcFlag} /> */}
           </div>
           <div
-            className="h-full absolute left-3/4"
+            className="h-full w-3/12 absolute left-3/4"
             style={{
               top: `${divisionRemainderStyles}%`,
             }}>
