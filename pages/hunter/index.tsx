@@ -4,7 +4,6 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Layout from '../../components/layout';
 
-// import classes from './hunter.module.css';
 import { TextInput } from '../../components/form/TextInput';
 import { HunterList } from '../../components/list/HunterList';
 
@@ -15,16 +14,17 @@ type ARG = {
 export const Index: NextPage<ARG> = () => {
   const box = useRef<HTMLDivElement | null>(null);
 
-  //幅と高さのテキストボックス
+  // 幅と高さを入力するテキストボックス
   const [widthInputText, setWidthInputText] = useState('');
   const [heightInputText, setHeightInputText] = useState('');
 
-  //計算後の値格納と計算フラグ
+  // 計算後の値格納と計算結果を出すフラグ
   const [calcFlag, setCalcFlag] = useState(false);
   const [calcFinish, setCalcFinish] = useState<any>();
 
-  //???
+  // 高さと1820を割って1820ボックスの個数をカウント
   const [repeate, setRepate] = useState<any>('');
+  const [test, setTest] = useState<any>('');
 
   //入力テキストを取得
   const widthTextGet = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,17 +36,18 @@ export const Index: NextPage<ARG> = () => {
 
   //計算式の格納
   let calcTotal = parseFloat(heightInputText) / 1820;
-  let boxNum = parseFloat(heightInputText) / 1820;
-  let boxHeight: any = (1820 / parseFloat(heightInputText)) * 100;
-  let DivisionValue: any = 0;
-  let postionTop = 100 / repeate;
+  let boxNum = parseFloat(heightInputText) / 1820; // ボックスの個数
+  let hunterListBoxHeight: any = (1820 / parseFloat(heightInputText)) * 100; // ボックスの高さ
+  let DivisionRemainderValue: any = 0; // 割ったあまりの数字
+  let DivisionByTwoValue: any = 0; // 割ったあまりをさらに割る2数字
+  let divisionRemainderBoxHeight: any = ''; // 各ボックスの高さを格納
 
+  // 高さを1820で割って余りが0かの判定
   if ((parseFloat(heightInputText) % 1820) / 2 === 0) {
-    DivisionValue = 910;
+    DivisionRemainderValue = 910;
   } else {
-    DivisionValue = (parseFloat(heightInputText) % 1820) / 2;
-    // boxHeight = ((DivisionValue / 1820) * 100) / 2;
-    // DivisionValue = (parseFloat(heightInputText) % 1820) / 2;
+    DivisionRemainderValue = parseFloat(heightInputText) % 1820;
+    DivisionByTwoValue = DivisionRemainderValue / 2;
   }
 
   //入力テキストの割り算
@@ -56,12 +57,7 @@ export const Index: NextPage<ARG> = () => {
       useEffect(() => {
         setCalcFlag(true);
         setCalcFinish(calcTotal);
-        // setCalcFinish(parseFloat(heightInputText) / 1820);
-        // setCalcFinish(1820 / parseFloat(heightInputText));
       }, []);
-      // if (1820 % parseFloat(calcFinish) === 0) {
-      //   console.log('1820 % calcFinish:', 1820 % parseFloat(calcFinish));
-      // }
       return <p>1820で高さを割ると・・・答え：{calcFinish}</p>;
     } else {
       useEffect(() => {
@@ -72,13 +68,8 @@ export const Index: NextPage<ARG> = () => {
   };
 
   // styles
-  const styles = {
-    width: '100%',
-    height: `${parseFloat(boxHeight)}%`,
-    // height: `${parseFloat(boxHeight) + ((DivisionValue / 1820) * 100) / 2}%`,
-    backgroundColor: 'rgba(0,0,0,.2)',
-    border: '1px solid rgba(59, 130, 246, 1)',
-    // borderTop: '2px solid rgba(59, 130, 246, 1)',
+  let styles: any = {
+    height: `${parseFloat(hunterListBoxHeight)}%`,
   };
 
   // 計算後のボックス生成
@@ -86,43 +77,42 @@ export const Index: NextPage<ARG> = () => {
     const isShow: Boolean = props.isShow;
     if (isShow) {
       useEffect(() => {
-        // console.log('boxNum:', (boxNum % 2) * 100);
         setRepate(boxNum);
-
-        // setRepate(parseFloat(heightInputText) / 1820);
       }, []);
 
       const createElem: any = [];
       for (let i = 0; i < repeate; i++) {
         createElem.push(i);
       }
-      console.log(createElem.length);
 
-      let test = '';
+      let elem = '';
+      let atat = '';
       return createElem.map((i) => {
         // console.log('i', i + 1);
-        if (i % 2 === 0) {
-          console.log('aaaaaaaaaaaaaaaaaaaaaaaaaa');
+        if (i % 2 !== 0) {
+          atat = `${
+            parseFloat(hunterListBoxHeight) +
+            ((DivisionRemainderValue / 1820) * 100) / 2
+          }%`;
+        } else {
+          atat = `${parseFloat(hunterListBoxHeight)}%`;
         }
         if (1 + (i % 2) !== 0 && i === createElem.length - 1) {
-          test = `<span class="block text-center w-full" style="height: ${
-            ((DivisionValue * 2) / 1820) * 100
-          }%">黒線まで${DivisionValue * 2}mm</span>`;
+          elem = `<span class="block text-center text-black w-full" style="height: ${
+            (DivisionRemainderValue / 1820) * 100
+          }%">黒線まで${DivisionRemainderValue}mm</span>`;
           return (
             <HunterList
               key={i}
-              class="flex items-start justify-center text-white text-xs"
+              class="w-full flex items-start justify-center text-white text-xs border border-solid border-blue-600 bg-gray-300 bg-opacity-60"
               style={styles}
-              innerHTML={{ __html: test }}>
-              {/* <span>{DivisionValue * 2}mm</span> */}
-              {/* {(parseFloat(heightInputText) % 1820) / 2}の板 */}
-            </HunterList>
+              innerHTML={{ __html: elem }}></HunterList>
           );
         } else {
           return (
             <HunterList
               key={i}
-              class="flex items-center justify-center text-xs"
+              class="w-full flex items-start justify-center text-white text-xs border border-solid border-blue-600 bg-gray-300 bg-opacity-60"
               style={styles}></HunterList>
           );
         }
@@ -132,43 +122,34 @@ export const Index: NextPage<ARG> = () => {
     }
   };
 
-  let divisionRemainderStyles: any = '';
-  // console.log('repeate:', repeate);
-
   //1820で割り切れるかの判定
-  if (DivisionValue !== 910) {
-    // divisionRemainderStyles = (100 - boxHeight) / 2;
-    divisionRemainderStyles = ((DivisionValue / 1820) * 100) / 2;
+  if (DivisionRemainderValue !== 910) {
+    divisionRemainderBoxHeight = ((DivisionRemainderValue / 1820) * 100) / 2;
   } else {
-    divisionRemainderStyles = 100 / repeate / 2;
+    divisionRemainderBoxHeight = 100 / repeate / 2;
   }
-  // console.log('divisionRemainderStyles:', divisionRemainderStyles);
 
   //余りがある場合の処理
   const DivisionRemainder = (props) => {
     const isShow: Boolean = props.isShow;
-    // console.log('divisionRemainderStyles:', divisionRemainderStyles);
     if (isShow) {
       return (
         <>
           <span
             className="bg-white flex items-center justify-center absolute text-xs text-center w-full"
             style={{
-              height: `${divisionRemainderStyles}%`,
-              // height: `${100 / repeate / 2}%`,
-              top: `-${divisionRemainderStyles}%`,
-              // top: `-${100 / repeate / 2}%`,
+              height: `${divisionRemainderBoxHeight}%`,
+              top: `-${divisionRemainderBoxHeight}%`,
             }}>
-            ここは{DivisionValue}mm
+            ここは{DivisionByTwoValue}mm
           </span>
           <span
             className="bg-white flex items-center justify-center absolute text-xs text-center w-full"
             style={{
-              height: `${divisionRemainderStyles}%`,
-              // height: `${100 / repeate / 2}%`,
-              bottom: `${divisionRemainderStyles}%`,
+              height: `${divisionRemainderBoxHeight}%`,
+              bottom: `${divisionRemainderBoxHeight}%`,
             }}>
-            ここは{DivisionValue}mm
+            ここは{DivisionByTwoValue}mm
           </span>
         </>
       );
@@ -186,26 +167,22 @@ export const Index: NextPage<ARG> = () => {
         <div className="relative flex h-80 border-2 border-solid border-gray-500">
           <div className="h-full w-3/12">
             <ShowBord isShow={calcFlag} />
-            {/* {parseFloat(heightInputText) % 1820}mm */}
-            {/* <DivisionRemainder isShow={calcFlag} /> */}
           </div>
           <div
             className="h-full w-3/12 absolute left-1/4"
             style={{
-              // top: `${100 / repeate / 2}%`,
-              top: `${divisionRemainderStyles}%`,
+              top: `${divisionRemainderBoxHeight}%`,
             }}>
             <ShowBord isShow={calcFlag} />
             <DivisionRemainder isShow={calcFlag} />
           </div>
-          <div className="h-full w-3/12 absolute top-0 left-2/4" style={{}}>
+          <div className="h-full w-3/12 absolute top-0 left-2/4">
             <ShowBord isShow={calcFlag} />
-            {/* <DivisionRemainder isShow={calcFlag} /> */}
           </div>
           <div
             className="h-full w-3/12 absolute left-3/4"
             style={{
-              top: `${divisionRemainderStyles}%`,
+              top: `${divisionRemainderBoxHeight}%`,
             }}>
             <ShowBord isShow={calcFlag} />
             <DivisionRemainder isShow={calcFlag} />
