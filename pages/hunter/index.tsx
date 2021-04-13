@@ -78,6 +78,7 @@ export const Index: NextPage<ARG> = () => {
   // 計算後のボックス生成
   const ShowBord = (props) => {
     const isShow: Boolean = props.isShow;
+    const isTextHidden: Boolean = props.isTextHidden;
     if (isShow) {
       useEffect(() => {
         setRepate(boxNum);
@@ -103,6 +104,14 @@ export const Index: NextPage<ARG> = () => {
 
       return createElem.map((i, index) => {
         // if (i % 2 === 0 && i === createElem.length - 1) {
+        if (isTextHidden) {
+          return (
+            <HunterList
+              key={i}
+              class="w-full flex items-start justify-center text-white text-xs border border-solid border-blue-600 bg-gray-300 bg-opacity-60"
+              style={styles}></HunterList>
+          );
+        }
         if (i === createElem.length - 1) {
           return (
             <HunterList
@@ -182,7 +191,7 @@ export const Index: NextPage<ARG> = () => {
             style={{
               top: `${divisionRemainderBoxHeight}%`,
             }}>
-            <ShowBord isShow={calcFlag} />
+            <ShowBord isShow={calcFlag} isTextHidden={true} />
             <DivisionRemainder isShow={calcFlag} />
           </div>
           <div className="h-full w-3/12 absolute top-0 left-2/4">
@@ -193,7 +202,7 @@ export const Index: NextPage<ARG> = () => {
             style={{
               top: `${divisionRemainderBoxHeight}%`,
             }}>
-            <ShowBord isShow={calcFlag} />
+            <ShowBord isShow={calcFlag} isTextHidden={true} />
             <DivisionRemainder isShow={calcFlag} />
           </div>
         </div>
