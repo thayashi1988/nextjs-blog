@@ -40,15 +40,18 @@ export const Index: NextPage<ARG> = () => {
   let hunterListBoxHeight: any = (1820 / parseFloat(heightInputText)) * 100; // ボックスの高さ
   let DivisionRemainderValue: any = 0; // 割ったあまりの数字
   let DivisionByTwoValue: any = 0; // 割ったあまりをさらに割る2数字
+  let DivisionJust: any = ''; // 割ったあまりをさらに割る2数字
   let divisionRemainderBoxHeight: any = ''; // 各ボックスの高さを格納
 
   // 高さを1820で割って余りが0かの判定
   if ((parseFloat(heightInputText) % 1820) / 2 === 0) {
     DivisionRemainderValue = 910;
+    DivisionByTwoValue = 910;
   } else {
     DivisionRemainderValue = parseFloat(heightInputText) % 1820;
     DivisionByTwoValue = DivisionRemainderValue / 2;
   }
+  // console.log('DivisionRemainderValue:', DivisionRemainderValue);
 
   //入力テキストの割り算
   const Calc = (props) => {
@@ -78,6 +81,7 @@ export const Index: NextPage<ARG> = () => {
     if (isShow) {
       useEffect(() => {
         setRepate(boxNum);
+        console.log('repeate:', parseInt(repeate));
       }, []);
 
       const createElem: any = [];
@@ -86,21 +90,20 @@ export const Index: NextPage<ARG> = () => {
       }
 
       let elem = '';
-      let atat = '';
-      return createElem.map((i) => {
-        // console.log('i', i + 1);
-        if (i % 2 !== 0) {
-          atat = `${
-            parseFloat(hunterListBoxHeight) +
-            ((DivisionRemainderValue / 1820) * 100) / 2
-          }%`;
-        } else {
-          atat = `${parseFloat(hunterListBoxHeight)}%`;
-        }
-        if (1 + (i % 2) !== 0 && i === createElem.length - 1) {
-          elem = `<span class="block text-center text-black w-full" style="height: ${
-            (DivisionRemainderValue / 1820) * 100
-          }%">黒線まで${DivisionRemainderValue}mm</span>`;
+      if (DivisionRemainderValue % 910 === 0) {
+        DivisionJust = '1820mmピッタリ';
+        elem = `<span class="block text-center text-black w-full" style="height: ${
+          (DivisionRemainderValue / 1820) * 100
+        }%">${DivisionJust}</span>`;
+      } else {
+        elem = `<span class="block text-center text-black w-full" style="height: ${
+          (DivisionRemainderValue / 1820) * 100
+        }%">埋められるのは${DivisionRemainderValue}mm</span>`;
+      }
+
+      return createElem.map((i, index) => {
+        // if (i % 2 === 0 && i === createElem.length - 1) {
+        if (i === createElem.length - 1) {
           return (
             <HunterList
               key={i}
@@ -125,9 +128,15 @@ export const Index: NextPage<ARG> = () => {
   //1820で割り切れるかの判定
   if (DivisionRemainderValue !== 910) {
     divisionRemainderBoxHeight = ((DivisionRemainderValue / 1820) * 100) / 2;
+    if (repeate >= 2) {
+      divisionRemainderBoxHeight =
+        ((DivisionRemainderValue / 1820) * 100) / 2 / 2 / 2;
+    }
   } else {
     divisionRemainderBoxHeight = 100 / repeate / 2;
   }
+  console.log('DivisionRemainderValue:', DivisionRemainderValue);
+  console.log('divisionRemainderBoxHeight:', divisionRemainderBoxHeight);
 
   //余りがある場合の処理
   const DivisionRemainder = (props) => {
@@ -136,7 +145,7 @@ export const Index: NextPage<ARG> = () => {
       return (
         <>
           <span
-            className="bg-white flex items-center justify-center absolute text-xs text-center w-full"
+            className="bg-white bg-blue-300 flex items-center justify-center absolute text-xs text-center w-full"
             style={{
               height: `${divisionRemainderBoxHeight}%`,
               top: `-${divisionRemainderBoxHeight}%`,
@@ -144,7 +153,7 @@ export const Index: NextPage<ARG> = () => {
             ここは{DivisionByTwoValue}mm
           </span>
           <span
-            className="bg-white flex items-center justify-center absolute text-xs text-center w-full"
+            className="bg-white bg-blue-300 flex items-center justify-center absolute text-xs text-center w-full"
             style={{
               height: `${divisionRemainderBoxHeight}%`,
               bottom: `${divisionRemainderBoxHeight}%`,
