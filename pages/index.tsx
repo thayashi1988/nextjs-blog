@@ -22,7 +22,7 @@ const name: string = 'じぃのNext.jsアプリ';
 type Links = {
   href: string;
   linkTxt: string;
-}
+};
 
 const LINKITEMS: Links[] = [
   {
@@ -44,6 +44,10 @@ const LINKITEMS: Links[] = [
   {
     href: '/signin',
     linkTxt: 'チャットアプリへ',
+  },
+  {
+    href: '/hunter',
+    linkTxt: 'ハンターハンターへ',
   },
 ];
 
