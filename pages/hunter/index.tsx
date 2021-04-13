@@ -60,7 +60,7 @@ export const Index: NextPage<ARG> = () => {
       // if (1820 % parseFloat(calcFinish) === 0) {
       //   console.log('1820 % calcFinish:', 1820 % parseFloat(calcFinish));
       // }
-      return <p>1820で高さを割ると・・・答え：{calcFinish}mm</p>;
+      return <p>1820で高さを割ると・・・答え：{calcFinish}</p>;
     } else {
       useEffect(() => {
         setCalcFlag(false);
@@ -97,7 +97,9 @@ export const Index: NextPage<ARG> = () => {
 
       let test = '';
       if (true) {
-        test = `<span>${DivisionValue * 2}mm</span>`;
+        test = `<span class="block text-center w-full" style="height: ${
+          100 - boxHeight
+        }%">${DivisionValue * 2}mm</span>`;
       }
 
       return createElem.map((i) => {
@@ -141,7 +143,7 @@ export const Index: NextPage<ARG> = () => {
       return (
         <>
           <span
-            className="flex items-center justify-center absolute text-xs text-center w-full"
+            className="bg-white flex items-center justify-center absolute text-xs text-center w-full"
             style={{
               height: `${divisionRemainderStyles}%`,
               // height: `${100 / repeate / 2}%`,
@@ -151,7 +153,7 @@ export const Index: NextPage<ARG> = () => {
             ここは{DivisionValue}mm
           </span>
           <span
-            className="flex items-center justify-center absolute text-xs text-center w-full"
+            className="bg-white flex items-center justify-center absolute text-xs text-center w-full"
             style={{
               height: `${divisionRemainderStyles}%`,
               // height: `${100 / repeate / 2}%`,

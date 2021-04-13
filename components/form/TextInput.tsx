@@ -16,6 +16,7 @@ type PROPS = {
 export const TextInput: VFC<PROPS> = (props) => {
   return (
     <TextField
+      type="number"
       onChange={props.onChange}
       onKeyPress={props.onKeyPress}
       label={props.label}
