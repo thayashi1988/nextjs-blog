@@ -1,6 +1,6 @@
 // react
 import type { DOMAttributes, VFC } from 'react';
-import React, { useState } from 'react';
+import React from 'react';
 
 // @material-ui
 import { TextField } from '@material-ui/core';
@@ -8,9 +8,9 @@ import { TextField } from '@material-ui/core';
 type PROPS = {
   label: string;
   variant: 'standard' | 'filled' | 'outlined';
-  onChange: any;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
   value: string;
-  onKeyPress?: any;
+  onKeyPress?: React.KeyboardEventHandler<HTMLInputElement>;
 };
 
 export const TextInput: VFC<PROPS> = (props) => {

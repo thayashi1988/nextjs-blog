@@ -1,9 +1,6 @@
 // react
 import type { DOMAttributes, VFC } from 'react';
-import React, { useState } from 'react';
-
-// @material-ui
-// import { List } from '@material-ui/core/';
+import React from 'react';
 
 type PROPS = {
   style?: object;

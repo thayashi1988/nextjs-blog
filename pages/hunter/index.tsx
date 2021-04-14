@@ -1,19 +1,25 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import type { NextPage } from 'next';
 
 import Head from 'next/head';
 import Layout from '../../components/layout';
 
-import { TextInput } from '../../components/form/TextInput';
-import { HunterList } from '../../components/list/HunterList';
+import { TextInput } from '../../components/hunter/HunterTextInput';
+import { HunterList } from '../../components/hunter/HunterList';
+import { HunterListWrap } from '../../components/hunter/HunterListWrap';
+import { HunterWidthResult } from '../../components/hunter/HunterWidthResult';
+import { HunterBothResult } from '../../components/hunter/HunterBothResult';
+import { HunterEvenRows } from '../../components/hunter/HunterEvenRows';
 
-import { Grid } from '@material-ui/core';
+// interface VARIABLE{
+//   widthInputText: number;
+//   heightInputText: number;
+//   grayBoxNum: number;
+//   hunterListBoxHeight: any;
+//   divisionRemainderHeightValue: string | number;
+// };
 
-type ARG = {
-  widthInputText: string | number;
-};
-
-export const Index: NextPage<ARG> = () => {
+export const Index: NextPage = () => {
   const pra: any = useRef(null);
   // console.log(pra.current.innerHTML);
 
@@ -30,18 +36,10 @@ export const Index: NextPage<ARG> = () => {
   //   pra.current.style.left = x - width / 2 + 'px';
   // };
 
+  //////// useState  ////////
   // 幅と高さを入力するテキストボックス
-  const [widthInputText, setWidthInputText] = useState('');
-  const [heightInputText, setHeightInputText] = useState('');
-
-  // 計算後の値格納と計算結果を出すフラグ
-  const [calcFlag, setCalcFlag] = useState(false);
-  const [calcHeightFinish, setCalcFinish] = useState<any>();
-  const [calcWidthFinish, setCalcWidthFinish] = useState<any>();
-
-  // 高さと1820を割って1820ボックスの個数をカウント
-  const [repeate, setRepate] = useState<any>('');
-  const [test, setTest] = useState<any>('');
+  const [widthInputText, setWidthInputText] = useState<string>('');
+  const [heightInputText, setHeightInputText] = useState<string>('');
 
   //入力テキストを取得
   const widthTextGet = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,74 +49,28 @@ export const Index: NextPage<ARG> = () => {
     setHeightInputText(e.target.value);
   };
 
-  //計算式の格納
-  let calcHeightTotal = parseFloat(heightInputText) / 1820;
-  let calcWidthTotal = parseFloat(widthInputText) / 303;
-  let boxNum = parseFloat(heightInputText) / 1820; // ボックスの個数
-  let hunterListBoxHeight: any = (1820 / parseFloat(heightInputText)) * 100; // HunterListのボックスの高さ
-  let DivisionRemainderValueHeight = parseFloat(heightInputText) % 1820; // 高さにあまりがあるか
-  let DivisionRemainderValue: any = 0; // 割ったあまりの数字
-  let DivisionByTwoValue: any = 0; // 割ったあまりをさらに割る2した数字
-  let divisionRemainderBoxHeightPosition: any = 0;
-  let DivisionJust: any = ''; // 割ったあまりが0の場合に入れるテキスト変数
-  let divisionRemainderBoxHeight: any = ''; // 各グレーボックスの高さを格納
+  // 各変数
+  const grayBoxNum: number = parseFloat(heightInputText) / 1820; // ボックスの個数
+  const hunterListBoxHeight: any = (1820 / parseFloat(heightInputText)) * 100; // HunterListのボックスの高さ
+  const divisionRemainderHeight: number = parseFloat(heightInputText) % 1820; // 高さにあまりがあるか
+  let divisionRemainderHeightValue: number = 0; // 割ったあまりの数字
+  let divisionJustText: string = ''; // 割ったあまりが0の場合に入れるテキスト変数
+  let divisionRemainderBoxHeightandTopPosition: string | number = ''; // 各余りテキストの高さとTOPポジションの高さを格納
 
-  let hunterListBoxWidth: any = ''; // HunterListのボックスの幅
-  let DivisionRemainderValueWidth = parseFloat(widthInputText) % 303; // 幅にあまりがあるか
-  let DivisionByTwoValueWidth: any = 0;
-  let divisionRemainderBoxWidthPosition: any = 0;
-  let DivisionJustWidth: any = '';
+  let hunterListWrapBoxWidth: any = '25'; // HunterListの親ボックスの幅
+  const divisionRemainderWidth: number = parseFloat(widthInputText) % 303; // 幅にあまりがあるか
+  let divisionRemainderWidthValue: number = divisionRemainderWidth; // 割ったあまりの数字
+  let divisionRemainderBoxWidthPosition: number = 0;
 
-  // 幅に余りがなければ各ボックスの幅は25%
-  if (DivisionRemainderValueWidth === 0) {
-    hunterListBoxWidth = 25;
-    // DivisionByTwoValueWidth = 'ピッタリ';
-  } else {
-    // hunterListBoxWidth = DivisionRemainderValueWidth / 10;
-    hunterListBoxWidth = 25;
-    DivisionByTwoValueWidth = DivisionRemainderValueWidth;
+  let divisionRemaindertext: string = '';
+  let divisionRemainderHeightValueText: string | number = '';
+  let simulationFlag: boolean = false;
+
+  if (widthInputText !== '' && heightInputText !== '') {
+    simulationFlag = true;
   }
 
-  const CalcWidth = (props) => {
-    const isCalc: Boolean = props.isCalc;
-    return (
-      <div className="flex justify-between">
-        <p className="text-right text-xs">余りは{DivisionByTwoValueWidth}mm</p>
-        <p className="text-right text-xs">
-          余りの割る2は{DivisionByTwoValueWidth / 2}mm
-        </p>
-      </div>
-    );
-  };
-
-  // 高さを1820で割って余りが0かの判定
-  if (DivisionRemainderValueHeight === 0) {
-    DivisionRemainderValue = 910;
-    DivisionByTwoValue = 910;
-  } else {
-    DivisionRemainderValue = DivisionRemainderValueHeight;
-    DivisionByTwoValue = DivisionRemainderValue / 2;
-  }
-
-  //入力テキストの割り算
-  const Calc = (props) => {
-    const isInput: Boolean = props.isInput;
-    if (widthInputText !== '' && heightInputText !== '') {
-      useEffect(() => {
-        setCalcFlag(true);
-        setCalcFinish(calcHeightTotal);
-        setCalcWidthFinish(calcWidthTotal);
-      }, []);
-      return <div className="mt-5"></div>;
-    } else {
-      useEffect(() => {
-        setCalcFlag(false);
-      }, []);
-      return <div className="mt-5"></div>;
-    }
-  };
-
-  // styles
+  //////// styles  ////////
   const hunterListStyles: any = {
     height: `${parseFloat(hunterListBoxHeight)}%`,
   };
@@ -126,34 +78,41 @@ export const Index: NextPage<ARG> = () => {
     height: `${parseFloat(hunterListBoxHeight)}%`,
   };
 
-  // 計算後のボックス生成
-  const ShowBord = (props) => {
+  // 入力した高さを1820で割って余りがあるか
+  if (divisionRemainderHeight === 0) {
+    //余りがなければ、2列目以降にずらす1820の半分の910を格納
+    divisionRemainderHeightValue = 910;
+  } else {
+    //余りがあれば、parseFloat(heightInputText) % 1820で余りを格納
+    divisionRemainderHeightValue = divisionRemainderHeight;
+  }
+
+  // HunterListボックス生成
+  const ShowHunterList = (props) => {
     const isShow: Boolean = props.isShow;
     const isTextHidden: Boolean = props.isTextHidden;
     if (isShow) {
-      useEffect(() => {
-        setRepate(boxNum);
-      }, []);
-
-      const createElem: any = [];
-      for (let i = 0; i < repeate; i++) {
-        createElem.push(i);
+      // (parseFloat(heightInputText) / 1820)で割れた数だけhunterlistボックス生成を生成
+      const hunterListCreateElem: any = [];
+      for (let i = 0; i < grayBoxNum; i++) {
+        hunterListCreateElem.push(i);
       }
 
-      let elem = '';
-      if (DivisionRemainderValue % 910 === 0) {
-        DivisionJust = '1820mmピッタリ';
-        elem = `<span class="block text-center text-black w-full" style="height: ${divisionResultStyles.height}">${DivisionJust}</span>`;
+      // 高さの余りが910で割り切れれば、1820の倍数なのでピッタリ
+      if (divisionRemainderHeightValue % 910 === 0) {
+        divisionJustText = '1820mmピッタリ';
+        divisionRemaindertext = `<span class="block text-center text-black w-full" style="height: ${divisionResultStyles.height}">${divisionJustText}</span>`;
       } else {
-        elem = `<span class="block text-center text-black w-full" style="height: ${
+        //割り切れなければ、余りを表示と「1820 - 余り」を表示
+        divisionRemaindertext = `<span class="block text-center text-black w-full" style="height: ${
           divisionResultStyles.height
-        }%">埋められるのは${DivisionRemainderValue}mm</span>
+        }%">埋められるのは${divisionRemainderHeightValue}mm</span>
         <span class="block text-center text-black w-full"
-        }%">余るのは${1820 - DivisionRemainderValue}mm</span>`;
+        }%">余るのは${1820 - divisionRemainderHeightValue}mm</span>`;
       }
 
-      return createElem.map((i, index) => {
-        // if (i % 2 === 0 && i === createElem.length - 1) {
+      return hunterListCreateElem.map((i: React.Key) => {
+        // 偶数列は余りのテキストを出さない処理
         if (isTextHidden) {
           return (
             <HunterList
@@ -162,13 +121,15 @@ export const Index: NextPage<ARG> = () => {
               style={hunterListStyles}></HunterList>
           );
         }
-        if (i === createElem.length - 1) {
+
+        // HunterListの最後のボックスであれば余りのテキストを表示
+        if (i === hunterListCreateElem.length - 1) {
           return (
             <HunterList
               key={i}
               class="w-full flex flex-col items-start justify-start text-white text-xs border border-solid border-blue-600 bg-white bg-opacity-60"
               style={hunterListStyles}
-              innerHTML={{ __html: elem }}></HunterList>
+              innerHTML={{ __html: divisionRemaindertext }}></HunterList>
           );
         } else {
           return (
@@ -184,61 +145,27 @@ export const Index: NextPage<ARG> = () => {
     }
   };
 
-  let ststs: any = '';
-  //1820で割り切れるかの判定
-  if (DivisionRemainderValue !== 910) {
-    ststs = (1820 - DivisionRemainderValue) / 2;
-    divisionRemainderBoxHeight = ((DivisionRemainderValue / 1820) * 100) / 2;
-    if (repeate >= 2) {
-      divisionRemainderBoxHeight =
-        ((DivisionRemainderValue / 1820) * 100) / 2 / 2 / 2;
+  // 高さの余りが910でなければ
+  if (divisionRemainderHeightValue !== 910) {
+    divisionRemainderHeightValueText =
+      (1820 - divisionRemainderHeightValue) * 2;
+    divisionRemainderBoxHeightandTopPosition =
+      ((divisionRemainderHeightValue / 1820) * 100) / 2;
+    // 2列目以降の高さをさらに2で割りサイズ感を出す
+    if (grayBoxNum >= 2) {
+      divisionRemainderBoxHeightandTopPosition =
+        ((divisionRemainderHeightValue / 1820) * 100) / 2 / 2 / 2;
     }
   } else {
-    ststs = 910;
-    divisionRemainderBoxHeight = 100 / repeate / 2;
-    // divisionRemainderBoxHeight = (1820 - DivisionRemainderValue) / 2;
+    divisionRemainderHeightValueText = 910;
+    divisionRemainderBoxHeightandTopPosition = 100 / grayBoxNum / 2;
   }
-  // console.log('DivisionRemainderValue:', DivisionRemainderValue);
-  // console.log('divisionRemainderBoxHeight:', divisionRemainderBoxHeight);
 
-  //余りがある場合の処理
-  const DivisionRemainder = (props) => {
-    const isShow: Boolean = props.isShow;
-    if (isShow) {
-      return (
-        <>
-          <span
-            className="bg-white flex items-center justify-center absolute text-xs text-center w-full"
-            style={{
-              height: `${divisionRemainderBoxHeight}%`,
-              top: `-${divisionRemainderBoxHeight}%`,
-            }}>
-            ここは{ststs}mm
-          </span>
-          <span
-            className="bg-white flex items-center justify-center absolute text-xs text-center w-full"
-            style={{
-              height: `${divisionRemainderBoxHeight}%`,
-              bottom: `${divisionRemainderBoxHeight}%`,
-            }}>
-            ここは{ststs}mm
-          </span>
-        </>
-      );
-    } else {
-      return <span></span>;
-    }
-  };
-
-  // 余りがある場合の幅の処理
-  if (DivisionRemainderValueWidth === 0 && DivisionRemainderValueHeight === 0) {
-    hunterListBoxWidth = 25;
-    divisionRemainderBoxWidthPosition = 0;
-    divisionRemainderBoxHeightPosition = 0;
-  } else if (DivisionRemainderValueWidth !== 0) {
+  // 幅に余りがあれば、leftをマイナス5%にして左にずらす
+  if (divisionRemainderWidth !== 0) {
     divisionRemainderBoxWidthPosition = 5;
   } else {
-    divisionRemainderBoxHeightPosition = 5;
+    divisionRemainderBoxWidthPosition = 0;
   }
 
   return (
@@ -247,49 +174,71 @@ export const Index: NextPage<ARG> = () => {
         <title>ハンターハンター</title>
       </Head>
       <section className="pb-20 mb-28 overflow-y-auto">
-        <CalcWidth isCalc={true} />
+        <HunterWidthResult
+          divisionRemainderWidthValue={divisionRemainderWidthValue}
+        />
         <div className="relative flex h-80 border-2 border-solid border-gray-500">
+          {/* <HunterListWrap
+            classPositionLeft="left-1/4"
+            styleWidth={hunterListWrapBoxWidth}
+            styleTop="0"
+            styleLeft={divisionRemainderBoxWidthPosition}>
+            <ShowHunterList isShow={simulationFlag} />
+            <HunterEvenRows
+              styleHeightandTop={divisionRemainderBoxHeightandTopPosition}
+              text={divisionRemainderHeightValueText}
+              isShow={simulationFlag}
+            />
+          </HunterListWrap> */}
           <div
             className="h-full w-3/12 absolute"
             style={{
-              width: `${hunterListBoxWidth}%`,
+              width: `${hunterListWrapBoxWidth}%`,
               left: `-${divisionRemainderBoxWidthPosition}%`,
             }}>
-            <ShowBord isShow={calcFlag} />
+            <ShowHunterList isShow={simulationFlag} />
           </div>
           <div
             className="h-full w-3/12 absolute left-1/4"
             style={{
-              width: `${hunterListBoxWidth}%`,
-              top: `${divisionRemainderBoxHeight}%`,
+              width: `${hunterListWrapBoxWidth}%`,
+              top: `${divisionRemainderBoxHeightandTopPosition}%`,
               left: `${
-                hunterListBoxWidth - divisionRemainderBoxWidthPosition
+                hunterListWrapBoxWidth - divisionRemainderBoxWidthPosition
               }%`,
             }}>
-            <ShowBord isShow={calcFlag} isTextHidden={true} />
-            <DivisionRemainder isShow={calcFlag} />
+            <ShowHunterList isShow={simulationFlag} isTextHidden={true} />
+            <HunterEvenRows
+              styleHeightandTop={divisionRemainderBoxHeightandTopPosition}
+              text={divisionRemainderHeightValueText}
+              isShow={simulationFlag}
+            />
           </div>
           <div
             className="h-full w-3/12 absolute top-0 left-2/4"
             style={{
-              width: `${hunterListBoxWidth}%`,
+              width: `${hunterListWrapBoxWidth}%`,
               left: `${
-                hunterListBoxWidth * 2 - divisionRemainderBoxWidthPosition
+                hunterListWrapBoxWidth * 2 - divisionRemainderBoxWidthPosition
               }%`,
             }}>
-            <ShowBord isShow={calcFlag} />
+            <ShowHunterList isShow={simulationFlag} />
           </div>
           <div
             className="h-full w-3/12 absolute left-3/4"
             style={{
-              width: `${hunterListBoxWidth}%`,
-              top: `${divisionRemainderBoxHeight}%`,
+              width: `${hunterListWrapBoxWidth}%`,
+              top: `${divisionRemainderBoxHeightandTopPosition}%`,
               left: `${
-                hunterListBoxWidth * 3 - divisionRemainderBoxWidthPosition
+                hunterListWrapBoxWidth * 3 - divisionRemainderBoxWidthPosition
               }%`,
             }}>
-            <ShowBord isShow={calcFlag} isTextHidden={true} />
-            <DivisionRemainder isShow={calcFlag} />
+            <ShowHunterList isShow={simulationFlag} isTextHidden={true} />
+            <HunterEvenRows
+              styleHeightandTop={divisionRemainderBoxHeightandTopPosition}
+              text={divisionRemainderHeightValueText}
+              isShow={simulationFlag}
+            />
           </div>
         </div>
       </section>
@@ -307,57 +256,10 @@ export const Index: NextPage<ARG> = () => {
           value={heightInputText}
         />
       </div>
-      <div className="sm:flex sm:space-x-4 mb-5">
-        <div className="border rounded-lg shadow-md w-full bg-blue-100 p-5 mb-4">
-          <h3 className="font-bold sm:text-lg text-sm mb-4">
-            幅<sub>mm</sub>：{widthInputText}
-            <sub>mm</sub>
-          </h3>
-          <ul className="list-disc pl-5 break-all">
-            <li>
-              幅 ÷ 303<sub>mm</sub> = {parseFloat(widthInputText) / 303}
-              <sub>mm</sub>
-            </li>
-            <li>
-              幅 ÷ 303<sub>mm</sub> の余り = {parseFloat(widthInputText) % 303}
-              <sub>mm</sub>
-            </li>
-            <li>
-              幅 ÷ 303<sub>mm</sub>の余り ÷ 2={' '}
-              {(parseFloat(widthInputText) % 303) / 2}
-              <sub>mm</sub>
-            </li>
-          </ul>
-        </div>
-        <div className="border rounded-lg shadow-md w-full bg-blue-100 p-5 mb-4">
-          <h3 className="font-bold sm:text-lg text-sm mb-4">
-            高さ<sub>mm</sub>：{heightInputText}
-            <sub>mm</sub>
-          </h3>
-          <ul className="list-disc pl-5 break-all">
-            <li>
-              高さ ÷ 1820<sub>mm</sub> = {parseFloat(heightInputText) / 1820}
-              <sub>mm</sub>
-            </li>
-            <li>
-              高さ ÷ 1820<sub>mm</sub> の余り ={' '}
-              {parseFloat(heightInputText) % 1820}
-              <sub>mm</sub>
-            </li>
-            <li>
-              高さ ÷ 1820<sub>mm</sub>の余り ÷ 2={' '}
-              {(parseFloat(heightInputText) % 1820) / 2}
-              <sub>mm</sub>
-            </li>
-          </ul>
-        </div>
-        {/* <Grid container spacing={3}>
-          <Grid className="border rounded-lg shadow-md" item xs={6}></Grid>
-          <Grid className="border rounded-lg shadow-md" item xs={6}></Grid>
-        </Grid> */}
-      </div>
-      {/* <p onMouseMove={onmousedown} ref={pra}> */}
-      <Calc isInput={calcFlag} />
+      <HunterBothResult
+        widthInputText={widthInputText}
+        heightInputText={heightInputText}
+      />
     </Layout>
   );
 };
