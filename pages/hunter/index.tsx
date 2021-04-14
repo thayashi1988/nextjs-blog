@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 
 import Head from 'next/head';
 import Layout from '../../components/layout';
-
+import { NextImg } from '../..//components/img/Img';
 import { TextInput } from '../../components/hunter/HunterTextInput';
 import { HunterList } from '../../components/hunter/HunterList';
 import { HunterListWrap } from '../../components/hunter/HunterListWrap';
@@ -65,6 +65,7 @@ export const Index: NextPage = () => {
   let divisionRemaindertext: string = '';
   let divisionRemainderHeightValueText: string | number = '';
   let simulationFlag: boolean = false;
+  const loopCount: number[] = [1, 2, 3, 4];
 
   if (widthInputText !== '' && heightInputText !== '') {
     simulationFlag = true;
@@ -104,10 +105,10 @@ export const Index: NextPage = () => {
         divisionRemaindertext = `<span class="block text-center text-black w-full" style="height: ${divisionResultStyles.height}">${divisionJustText}</span>`;
       } else {
         //割り切れなければ、余りを表示と「1820 - 余り」を表示
-        divisionRemaindertext = `<span class="block text-center text-black w-full" style="height: ${
+        divisionRemaindertext = `<span class="block text-center text-black text-xs w-full" style="height: ${
           divisionResultStyles.height
         }%">埋められるのは${divisionRemainderHeightValue}mm</span>
-        <span class="block text-center text-black w-full"
+        <span class="block text-center text-black text-xs w-full"
         }%">余るのは${1820 - divisionRemainderHeightValue}mm</span>`;
       }
 
@@ -168,6 +169,47 @@ export const Index: NextPage = () => {
     divisionRemainderBoxWidthPosition = 0;
   }
 
+  const HunterHuunter = () => {
+    if (divisionRemainderHeight === 0 && divisionRemainderWidth === 0) {
+      return (
+        <NextImg
+          class="text-center mb-5"
+          src="/images/xgjhaa.webp"
+          width="586"
+          height="369"></NextImg>
+      );
+    } else {
+      return (
+        <NextImg
+          class="text-center mb-5"
+          src="/images/20170515114123.jpg"
+          width="640"
+          height="480"></NextImg>
+      );
+    }
+  };
+
+  // const LoopCreate: any = () => {
+  //   return loopCount.map((index, key) => {
+  //     return (
+  //       <HunterListWrap
+  //         key={key}
+  //         classPositionLeft={`left-${index - 1}/4`}
+  //         styleWidth={hunterListWrapBoxWidth}
+  //         styleTop="0"
+  //         // styleLeft={divisionRemainderBoxWidthPosition}
+  //       >
+  //         <ShowHunterList isShow={simulationFlag} />
+  //         <HunterEvenRows
+  //           styleHeightandTop={divisionRemainderBoxHeightandTopPosition}
+  //           text={divisionRemainderHeightValueText}
+  //           isShow={simulationFlag}
+  //         />
+  //       </HunterListWrap>
+  //     );
+  //   });
+  // };
+
   return (
     <Layout home={false}>
       <Head>
@@ -178,18 +220,7 @@ export const Index: NextPage = () => {
           divisionRemainderWidthValue={divisionRemainderWidthValue}
         />
         <div className="relative flex h-80 border-2 border-solid border-gray-500">
-          {/* <HunterListWrap
-            classPositionLeft="left-1/4"
-            styleWidth={hunterListWrapBoxWidth}
-            styleTop="0"
-            styleLeft={divisionRemainderBoxWidthPosition}>
-            <ShowHunterList isShow={simulationFlag} />
-            <HunterEvenRows
-              styleHeightandTop={divisionRemainderBoxHeightandTopPosition}
-              text={divisionRemainderHeightValueText}
-              isShow={simulationFlag}
-            />
-          </HunterListWrap> */}
+          {/* <LoopCreate /> */}
           <div
             className="h-full w-3/12 absolute"
             style={{
@@ -242,6 +273,7 @@ export const Index: NextPage = () => {
           </div>
         </div>
       </section>
+      <HunterHuunter />
       <div className="flex space-x-4 mb-5">
         <TextInput
           label="幅(mm)"

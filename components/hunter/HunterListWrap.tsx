@@ -6,7 +6,7 @@ type PROPS = {
   classPositionLeft: string;
   styleWidth: string | number;
   styleTop: string | number;
-  styleLeft: string | number;
+  styleLeft?: string | number;
   children?: React.ReactNode;
 };
 

@@ -68,10 +68,10 @@ export default function Home({ allPostsData, props }) {
         <h2 className="text-blue-600 font-bold text-4xl mt-8 mb-5">
           勉強ページ
         </h2>
-        <ul className="flex flex-wrap justify-start">
+        <ul className="sm:flex sm:flex-wrap sm:justify-start">
           {LINKITEMS.map((link) => {
             return (
-              <li key={link.href} className="flex-initial p-2 w-3/12">
+              <li key={link.href} className="sm:flex-initial p-2 sm:w-3/12">
                 <Btn link href={link.href} class="w-full text-center">
                   {link.linkTxt}
                 </Btn>
