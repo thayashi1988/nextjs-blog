@@ -17,18 +17,25 @@ export const HunterBothResult: VFC<PROPS> = (props) => {
         </h3>
         <ul className="list-disc pl-5 break-all">
           <li>
-            幅 ÷ 303<sub>mm</sub> = {parseFloat(props.widthInputText) / 303}
-            <sub>mm</sub>
+            幅 ÷ 303<sub>mm</sub> ={' '}
+            <span className="text-red-600 font-bold">
+              {parseFloat(props.widthInputText) / 303}
+              <sub>mm</sub>
+            </span>
           </li>
           <li>
             幅 ÷ 303<sub>mm</sub> の余り ={' '}
-            {parseFloat(props.widthInputText) % 303}
-            <sub>mm</sub>
+            <span className="text-red-600 font-bold">
+              {parseFloat(props.widthInputText) % 303}
+              <sub>mm</sub>
+            </span>
           </li>
           <li>
             幅 ÷ 303<sub>mm</sub>の余り ÷ 2={' '}
-            {(parseFloat(props.widthInputText) % 303) / 2}
-            <sub>mm</sub>
+            <span className="text-red-600 font-bold">
+              {(parseFloat(props.widthInputText) % 303) / 2}
+              <sub>mm</sub>
+            </span>
           </li>
         </ul>
       </div>
@@ -40,18 +47,24 @@ export const HunterBothResult: VFC<PROPS> = (props) => {
         <ul className="list-disc pl-5 break-all">
           <li>
             高さ ÷ 1820<sub>mm</sub> ={' '}
-            {parseFloat(props.heightInputText) / 1820}
-            <sub>mm</sub>
+            <span className="text-red-600 font-bold">
+              {parseFloat(props.heightInputText) / 1820}
+              <sub>mm</sub>
+            </span>
           </li>
           <li>
             高さ ÷ 1820<sub>mm</sub> の余り ={' '}
-            {parseFloat(props.heightInputText) % 1820}
-            <sub>mm</sub>
+            <span className="text-red-600 font-bold">
+              {parseFloat(props.heightInputText) % 1820}
+              <sub>mm</sub>
+            </span>
           </li>
           <li>
             高さ ÷ 1820<sub>mm</sub>の余り ÷ 2={' '}
-            {(parseFloat(props.heightInputText) % 1820) / 2}
-            <sub>mm</sub>
+            <span className="text-red-600 font-bold">
+              {(parseFloat(props.heightInputText) % 1820) / 2}
+              <sub>mm</sub>
+            </span>
           </li>
         </ul>
       </div>
