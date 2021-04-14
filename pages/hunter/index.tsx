@@ -71,14 +71,13 @@ export const Index: NextPage<ARG> = () => {
 
   // 幅に余りがなければ各ボックスの幅は25%
   if (DivisionRemainderValueWidth === 0) {
-    hunterListBoxWidth = `25`;
+    hunterListBoxWidth = 25;
+    // DivisionByTwoValueWidth = 'ピッタリ';
   } else {
     // hunterListBoxWidth = DivisionRemainderValueWidth / 10;
-    hunterListBoxWidth = '25';
+    hunterListBoxWidth = 25;
     DivisionByTwoValueWidth = DivisionRemainderValueWidth;
   }
-
-  console.log('DivisionByTwoValueWidth:', DivisionByTwoValueWidth);
 
   const CalcWidth = (props) => {
     const isCalc: Boolean = props.isCalc;
@@ -110,22 +109,12 @@ export const Index: NextPage<ARG> = () => {
         setCalcFinish(calcHeightTotal);
         setCalcWidthFinish(calcWidthTotal);
       }, []);
-      return (
-        <div className="mt-5">
-          {/* <p>303mmで幅を割ると・・・答え：{calcWidthFinish}</p>
-          <p>1820mmで高さを割ると・・・答え：{calcHeightFinish}</p> */}
-        </div>
-      );
+      return <div className="mt-5"></div>;
     } else {
       useEffect(() => {
         setCalcFlag(false);
       }, []);
-      return (
-        <div className="mt-5">
-          {/* <p>303mmで幅を割ると・・・：</p>
-          <p>1820mmで高さを割ると・・・：</p> */}
-        </div>
-      );
+      return <div className="mt-5"></div>;
     }
   };
 
@@ -195,15 +184,19 @@ export const Index: NextPage<ARG> = () => {
     }
   };
 
+  let ststs: any = '';
   //1820で割り切れるかの判定
   if (DivisionRemainderValue !== 910) {
+    ststs = (1820 - DivisionRemainderValue) / 2;
     divisionRemainderBoxHeight = ((DivisionRemainderValue / 1820) * 100) / 2;
     if (repeate >= 2) {
       divisionRemainderBoxHeight =
         ((DivisionRemainderValue / 1820) * 100) / 2 / 2 / 2;
     }
   } else {
+    ststs = 910;
     divisionRemainderBoxHeight = 100 / repeate / 2;
+    // divisionRemainderBoxHeight = (1820 - DivisionRemainderValue) / 2;
   }
   // console.log('DivisionRemainderValue:', DivisionRemainderValue);
   // console.log('divisionRemainderBoxHeight:', divisionRemainderBoxHeight);
@@ -220,7 +213,7 @@ export const Index: NextPage<ARG> = () => {
               height: `${divisionRemainderBoxHeight}%`,
               top: `-${divisionRemainderBoxHeight}%`,
             }}>
-            ここは{DivisionByTwoValue}mm
+            ここは{ststs}mm
           </span>
           <span
             className="bg-white flex items-center justify-center absolute text-xs text-center w-full"
@@ -228,7 +221,7 @@ export const Index: NextPage<ARG> = () => {
               height: `${divisionRemainderBoxHeight}%`,
               bottom: `${divisionRemainderBoxHeight}%`,
             }}>
-            ここは{DivisionByTwoValue}mm
+            ここは{ststs}mm
           </span>
         </>
       );
@@ -237,12 +230,15 @@ export const Index: NextPage<ARG> = () => {
     }
   };
 
+  // 余りがある場合の幅の処理
   if (DivisionRemainderValueWidth === 0 && DivisionRemainderValueHeight === 0) {
     hunterListBoxWidth = 25;
     divisionRemainderBoxWidthPosition = 0;
-    divisionRemainderBoxHeightPosition = 1;
+    divisionRemainderBoxHeightPosition = 0;
+  } else if (DivisionRemainderValueWidth !== 0) {
+    divisionRemainderBoxWidthPosition = 5;
   } else {
-    // divisionRemainderBoxHeight;
+    divisionRemainderBoxHeightPosition = 5;
   }
 
   return (
@@ -250,7 +246,7 @@ export const Index: NextPage<ARG> = () => {
       <Head>
         <title>ハンターハンター</title>
       </Head>
-      <section className="pb-20 mb-28 overflow-hidden">
+      <section className="pb-20 mb-28 overflow-y-auto">
         <CalcWidth isCalc={true} />
         <div className="relative flex h-80 border-2 border-solid border-gray-500">
           <div
@@ -266,7 +262,9 @@ export const Index: NextPage<ARG> = () => {
             style={{
               width: `${hunterListBoxWidth}%`,
               top: `${divisionRemainderBoxHeight}%`,
-              left: `${hunterListBoxWidth}%`,
+              left: `${
+                hunterListBoxWidth - divisionRemainderBoxWidthPosition
+              }%`,
             }}>
             <ShowBord isShow={calcFlag} isTextHidden={true} />
             <DivisionRemainder isShow={calcFlag} />
@@ -275,7 +273,9 @@ export const Index: NextPage<ARG> = () => {
             className="h-full w-3/12 absolute top-0 left-2/4"
             style={{
               width: `${hunterListBoxWidth}%`,
-              left: `${hunterListBoxWidth * 2}%`,
+              left: `${
+                hunterListBoxWidth * 2 - divisionRemainderBoxWidthPosition
+              }%`,
             }}>
             <ShowBord isShow={calcFlag} />
           </div>
@@ -284,7 +284,9 @@ export const Index: NextPage<ARG> = () => {
             style={{
               width: `${hunterListBoxWidth}%`,
               top: `${divisionRemainderBoxHeight}%`,
-              left: `${hunterListBoxWidth * 3}%`,
+              left: `${
+                hunterListBoxWidth * 3 - divisionRemainderBoxWidthPosition
+              }%`,
             }}>
             <ShowBord isShow={calcFlag} isTextHidden={true} />
             <DivisionRemainder isShow={calcFlag} />
@@ -309,10 +311,12 @@ export const Index: NextPage<ARG> = () => {
         <div className="border rounded-lg shadow-md w-full bg-blue-100 p-5 mb-4">
           <h3 className="font-bold sm:text-lg text-sm mb-4">
             幅<sub>mm</sub>：{widthInputText}
+            <sub>mm</sub>
           </h3>
           <ul className="list-disc pl-5 break-all">
             <li>
               幅 ÷ 303<sub>mm</sub> = {parseFloat(widthInputText) / 303}
+              <sub>mm</sub>
             </li>
             <li>
               幅 ÷ 303<sub>mm</sub> の余り = {parseFloat(widthInputText) % 303}
@@ -328,10 +332,12 @@ export const Index: NextPage<ARG> = () => {
         <div className="border rounded-lg shadow-md w-full bg-blue-100 p-5 mb-4">
           <h3 className="font-bold sm:text-lg text-sm mb-4">
             高さ<sub>mm</sub>：{heightInputText}
+            <sub>mm</sub>
           </h3>
           <ul className="list-disc pl-5 break-all">
             <li>
               高さ ÷ 1820<sub>mm</sub> = {parseFloat(heightInputText) / 1820}
+              <sub>mm</sub>
             </li>
             <li>
               高さ ÷ 1820<sub>mm</sub> の余り ={' '}
