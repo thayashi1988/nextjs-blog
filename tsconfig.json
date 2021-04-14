@@ -1,5 +1,14 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/components/*": [
+        "src/components/*"
+      ],
+      "@/styles/*": [
+        "src/styles/*"
+      ],
+    },
     "target": "es5",
     "lib": [
       "dom",
@@ -9,6 +18,8 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
+    "removeComments": true,
+    // "importHelpers": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
