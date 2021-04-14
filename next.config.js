@@ -1,5 +1,8 @@
 const webpack = require('webpack');
 module.exports = {
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   images: {
     // ここ
   },
