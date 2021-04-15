@@ -19,7 +19,7 @@
     "skipLibCheck": true,
     "strict": false,
     "removeComments": true,
-    // "importHelpers": true,
+    "importHelpers": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
