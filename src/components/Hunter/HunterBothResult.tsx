@@ -7,6 +7,16 @@ type PROPS = {
   heightInputText: string;
 };
 
+const settingBordNum = (inputNum: any, type: string): number => {
+  const widthConst: number = 303;
+  const heightConst: number = 1820;
+  if (type === 'width') {
+    return Math.floor(inputNum / widthConst);
+  } else {
+    return Math.floor(inputNum / heightConst);
+  }
+};
+
 export const HunterBothResult: VFC<PROPS> = (props) => {
   return (
     <div className="sm:flex sm:space-x-4 mb-5">
@@ -19,8 +29,8 @@ export const HunterBothResult: VFC<PROPS> = (props) => {
           <li>
             幅 ÷ 303<sub>mm</sub> ={' '}
             <span className="text-red-600 font-bold">
-              {parseFloat(props.widthInputText) / 303}
-              <sub>mm</sub>
+              {settingBordNum(props.widthInputText, 'width')}
+              枚の板を置けるよ
             </span>
           </li>
           <li>
@@ -48,8 +58,8 @@ export const HunterBothResult: VFC<PROPS> = (props) => {
           <li>
             高さ ÷ 1820<sub>mm</sub> ={' '}
             <span className="text-red-600 font-bold">
-              {parseFloat(props.heightInputText) / 1820}
-              <sub>mm</sub>
+              {settingBordNum(props.heightInputText, 'height')}
+              枚の板を置けるよ
             </span>
           </li>
           <li>
