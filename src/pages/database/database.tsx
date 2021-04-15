@@ -42,13 +42,12 @@ export default function dataBase(): JSX.Element {
       return (
         <div className="border border-gray-100 shadow rounded-md p-4 w-full">
           <div className="animate-pulse flex justify-between items-center space-x-4">
-            <div className="h-4 bg-gray-200 rounded w-3/12"></div>
-            <div className="h-4 w-6/12 h-full">
-              <div className="h-4 bg-gray-200 rounded w-full w-11/12"></div>
-              <div className="flex mt-2 space-x-4">
-                <div className="h-4 bg-gray-200 rounded w-4/12"></div>
-                <div className="h-4 bg-gray-200 rounded w-4/12"></div>
-                <div className="h-4 bg-gray-200 rounded w-4/12"></div>
+            <div className="h-5 bg-gray-200 rounded w-3/12"></div>
+            <div className="w-3/12 h-full">
+              <div className="h-5 bg-gray-200 rounded w-full"></div>
+              <div className="flex justify-between mt-2 space-x-4">
+                <div className="h-5 bg-gray-200 rounded w-6/12"></div>
+                <div className="h-5 bg-gray-200 rounded w-6/12"></div>
               </div>
             </div>
           </div>
