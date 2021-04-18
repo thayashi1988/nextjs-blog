@@ -19,7 +19,7 @@ export const HunterEvenRows: VFC<PROPS> = (props) => {
   return (
     <div style={{ display: styles }}>
       <span
-        className="bg-white flex items-center justify-center absolute text-xs text-center w-full"
+        className="bg-white flex items-center justify-center absolute text-black text-xs text-center w-full"
         style={{
           height: `${props.styleHeightandTop}%`,
           top: `-${props.styleHeightandTop}%`,
@@ -27,7 +27,7 @@ export const HunterEvenRows: VFC<PROPS> = (props) => {
         ここは{props.text}mm
       </span>
       <span
-        className="bg-white flex items-center justify-center absolute text-xs text-center w-full"
+        className="bg-white flex items-center justify-center absolute text-black text-xs text-center w-full"
         style={{
           height: `${props.styleHeightandTop}%`,
           bottom: `${props.styleHeightandTop}%`,
