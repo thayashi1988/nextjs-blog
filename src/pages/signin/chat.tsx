@@ -31,7 +31,7 @@ export default function Chat(): JSX.Element {
   const classes = useStyles();
 
   return (
-    <Layout home={false}>
+    <div>
       <Head>
         <title>firebaseでのチャットアプリ</title>
       </Head>
@@ -51,6 +51,6 @@ export default function Chat(): JSX.Element {
           前のページに戻る
         </Btn>
       </div>
-    </Layout>
+    </div>
   );
 }

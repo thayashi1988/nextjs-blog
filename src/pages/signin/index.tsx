@@ -16,7 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 
-const Copyright = () => {
+const Copyright = React.memo(() => {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
@@ -24,7 +24,7 @@ const Copyright = () => {
       {'.'}
     </Typography>
   );
-};
+});
 
 //material-uiのstyle
 const useStyles = makeStyles((theme) => ({
@@ -100,7 +100,7 @@ export default function SignIn(): JSX.Element {
   };
 
   return (
-    <Layout home={false}>
+    <div>
       <Head>
         <title>firebaseでのチャットアプリ</title>
       </Head>
@@ -140,6 +140,6 @@ export default function SignIn(): JSX.Element {
           <Copyright />
         </Box>
       </Container>
-    </Layout>
+    </div>
   );
 }

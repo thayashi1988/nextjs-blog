@@ -57,7 +57,7 @@ export default function login(): JSX.Element {
   };
 
   return (
-    <Layout home={false}>
+    <div>
       <Head>
         <title>firebaseでのGoogle認証</title>
       </Head>
@@ -73,6 +73,6 @@ export default function login(): JSX.Element {
           Google Login
         </Btn>
       )}
-    </Layout>
+    </div>
   );
 }

@@ -2,7 +2,6 @@ import type { NextPage } from 'next';
 import { useState } from 'react';
 import Head from 'next/head';
 import Layout from 'src/components/Layout/layout';
-import { Btn } from 'src/components/Button/Btn';
 import calsses from 'src/styles/weather.module.css';
 
 let val: string = '';
@@ -86,7 +85,7 @@ export const Weather: NextPage = () => {
   };
 
   return (
-    <Layout home={false}>
+    <div>
       <Head>
         <title>天気予報ページ</title>
       </Head>
@@ -101,7 +100,7 @@ export const Weather: NextPage = () => {
               className={calsses.search_bar}
               placeholder="地域を入力..."
             />
-            <Btn link={false}>チェック</Btn>
+            {/* <Btn link={false}>チェック</Btn> */}
           </div>
 
           <div className={calsses.weather_wrap}>
@@ -123,7 +122,7 @@ export const Weather: NextPage = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 };
 export default Weather;

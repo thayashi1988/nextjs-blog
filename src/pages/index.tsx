@@ -17,7 +17,7 @@ export async function getStaticProps() {
   };
 }
 
-const name: string = 'じぃのNext.jsアプリ';
+const name: string = 'Next.jsアプリ';
 
 type Links = {
   href: string;
@@ -53,7 +53,7 @@ const LINKITEMS: Links[] = [
 
 export default function Home({ allPostsData, props }) {
   return (
-    <Layout home>
+    <div>
       <Head>
         <title>{siteTitle}</title>
       </Head>
@@ -96,6 +96,6 @@ export default function Home({ allPostsData, props }) {
           ))}
         </ul>
       </section>
-    </Layout>
+    </div>
   );
 }

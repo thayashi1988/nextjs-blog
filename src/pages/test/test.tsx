@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import Head from 'next/head';
 import Layout from 'src/components/Layout/layout';
 import { NextLink } from 'src/components/Link/Link';
@@ -29,18 +30,19 @@ function handleClick(e: any): void {
 }
 
 // 条件処理
-function Greeting(props) {
+const Greeting = (props) => {
   const isLoggedIn: Boolean = props.isLoggedIn;
   if (isLoggedIn) {
     return <p className="mt-5">aaaaaaaaaaaaaaa</p>;
   }
   return <p className="mt-5">nnnnnnnnnnnnn</p>;
-}
+};
 const pageTitle: string = 'Next.jsのテストページ';
 
 export default function test(): JSX.Element {
+  // const [homeFlag, setHomeFlag] = useState(false);
   return (
-    <Layout home={false}>
+    <div>
       <Head>
         <title>{pageTitle}</title>
       </Head>
@@ -85,6 +87,6 @@ export default function test(): JSX.Element {
           </li>
         ))}
       </ul>
-    </Layout>
+    </div>
   );
 }

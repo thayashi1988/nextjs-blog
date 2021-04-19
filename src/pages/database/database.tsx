@@ -67,7 +67,7 @@ export default function dataBase(): JSX.Element {
   console.log('isfetch:', isfetch);
 
   return (
-    <Layout home={false}>
+    <div>
       <Head>
         <title>firebaseのデータベース読み込み</title>
       </Head>
@@ -88,6 +88,6 @@ export default function dataBase(): JSX.Element {
       </div> */}
 
       <Loading isfetch={isfetch} />
-    </Layout>
+    </div>
   );
 }

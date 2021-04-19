@@ -65,9 +65,10 @@ export const Index: NextPage = () => {
   let simulationFlag: boolean = false; // 計算ボックスを表示させるフラグ
 
   // 幅、高さが両方入力されたらボックス生成開始
-  if (widthInputText !== '' && heightInputText !== '') {
+  if (widthInputText.length > 0 && heightInputText.length > 0) {
     simulationFlag = true;
   }
+  console.log('simulationFlag:', simulationFlag);
 
   //////// crateObject  ////////
   const hunterListCreateElem: any = [];
@@ -210,143 +211,152 @@ export const Index: NextPage = () => {
   let nums = 0;
 
   return (
-    <Layout home={false}>
+    <div>
       <Head>
         <title>ハンターハンター</title>
       </Head>
 
       <section className="pb-20 mb-28 overflow-y-auto">
-        <HunterWidthResult
-          divisionRemainderWidthValue={divisionRemainderWidthValue}
-        />
-        <DragDropContext onDragEnd={onDragEnd}>
-          <Droppable key={1} droppableId="test">
-            {(provided) => (
-              <div
-                className="relative flex h-80 border-2 border-solid border-gray-500"
-                {...provided.droppableProps}
-                ref={provided.innerRef}>
-                {HunterListLoopObj.map((key: any) => {
-                  // 奇数列の場合
-                  if (!key.hunterEvenRows) {
-                    return (
-                      <div
-                        key={key.id}
-                        className={key.classes}
-                        style={{
-                          width: key.styles[0].width,
-                          top: key.styles[0].top,
-                          left: key.styles[0].left,
-                        }}>
-                        {hunterListCreateElem.map((keys: any, index: any) => {
-                          nums++;
-                          // 奇数列で最後のボックス以外
-                          if (index !== hunterListCreateElem.length - 1) {
-                            return (
-                              <Draggable
-                                draggableId={String(keys.id + key.id)}
-                                key={keys.id}
-                                index={nums}>
-                                {(provided) => (
-                                  <div
-                                    // style={hunterListStyles}
-                                    style={{
-                                      height: `${parseFloat(
-                                        hunterListBoxHeight
-                                      )}%`,
-                                    }}>
-                                    <HunterList
-                                      ref={provided.innerRef}
-                                      class="h-full"
-                                      provided={provided}
-                                    />
-                                  </div>
-                                )}
-                              </Draggable>
-                            );
-                          } else {
-                            console.log(hunterListStyles.height);
-                            return (
-                              <Draggable
-                                draggableId={String(keys.id + key.id)}
-                                key={keys.id}
-                                index={nums}>
-                                {(provided) => (
-                                  <div
-                                    // style={hunterListStyles}
-                                    style={{
-                                      height: `${parseFloat(
-                                        hunterListBoxHeight
-                                      )}%`,
-                                    }}>
-                                    <HunterList
-                                      ref={provided.innerRef}
-                                      class="h-full flex-col justify-between"
-                                      innerHTML={{
-                                        __html: divisionRemainderText,
-                                      }}
-                                      provided={provided}
-                                    />
-                                  </div>
-                                )}
-                              </Draggable>
-                            );
-                          }
-                        })}
-                      </div>
-                    );
-                  } else {
-                    // 偶数列の場合
-                    return (
-                      <div
-                        key={key.id}
-                        className={key.classes}
-                        style={{
-                          width: key.styles[0].width,
-                          top: key.styles[0].top,
-                          left: key.styles[0].left,
-                        }}>
-                        {hunterListCreateElem.map((keys: any, index: any) => {
-                          nums++;
-                          return (
-                            <Draggable
-                              draggableId={String(keys.id + key.id)}
-                              key={keys.id}
-                              index={nums}>
-                              {(provided) => (
-                                <div
-                                  // style={hunterListStyles}
-                                  style={{
-                                    height: `${parseFloat(
-                                      hunterListBoxHeight
-                                    )}%`,
-                                  }}>
-                                  <HunterList
-                                    ref={provided.innerRef}
-                                    class="h-full bg-white justify-start flex-col"
-                                    provided={provided}>
-                                    <HunterEvenRows
-                                      styleHeightandTop={
-                                        divisionRemainderBoxHeightandTopPosition
-                                      }
-                                      text={divisionRemainderHeightValueText}
-                                      isShow={simulationFlag}
-                                    />
-                                  </HunterList>
-                                </div>
-                              )}
-                            </Draggable>
-                          );
-                        })}
-                      </div>
-                    );
-                  }
-                })}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
+        {simulationFlag ? (
+          <>
+            <HunterWidthResult
+              divisionRemainderWidthValue={divisionRemainderWidthValue}
+            />
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Droppable key={1} droppableId="test">
+                {(provided) => (
+                  <div
+                    className="relative flex h-80 border-2 border-solid border-gray-500"
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}>
+                    {HunterListLoopObj.map((key: any) => {
+                      // 奇数列の場合
+                      if (!key.hunterEvenRows) {
+                        return (
+                          <div
+                            key={key.id}
+                            className={key.classes}
+                            style={{
+                              width: key.styles[0].width,
+                              top: key.styles[0].top,
+                              left: key.styles[0].left,
+                            }}>
+                            {hunterListCreateElem.map(
+                              (keys: any, index: any) => {
+                                nums++;
+                                // 奇数列で最後のボックス以外
+                                if (index !== hunterListCreateElem.length - 1) {
+                                  return (
+                                    <Draggable
+                                      draggableId={String(keys.id + key.id)}
+                                      key={keys.id}
+                                      index={nums}>
+                                      {(provided) => (
+                                        <div
+                                          // style={hunterListStyles}
+                                          style={{
+                                            height: `${parseFloat(
+                                              hunterListBoxHeight
+                                            )}%`,
+                                          }}>
+                                          <HunterList
+                                            ref={provided.innerRef}
+                                            class="h-full"
+                                            provided={provided}
+                                          />
+                                        </div>
+                                      )}
+                                    </Draggable>
+                                  );
+                                } else {
+                                  return (
+                                    <Draggable
+                                      draggableId={String(keys.id + key.id)}
+                                      key={keys.id}
+                                      index={nums}>
+                                      {(provided) => (
+                                        <div
+                                          // style={hunterListStyles}
+                                          style={{
+                                            height: `${parseFloat(
+                                              hunterListBoxHeight
+                                            )}%`,
+                                          }}>
+                                          <HunterList
+                                            ref={provided.innerRef}
+                                            class="h-full flex-col justify-between"
+                                            innerHTML={{
+                                              __html: divisionRemainderText,
+                                            }}
+                                            provided={provided}
+                                          />
+                                        </div>
+                                      )}
+                                    </Draggable>
+                                  );
+                                }
+                              }
+                            )}
+                          </div>
+                        );
+                      } else {
+                        // 偶数列の場合
+                        return (
+                          <div
+                            key={key.id}
+                            className={key.classes}
+                            style={{
+                              width: key.styles[0].width,
+                              top: key.styles[0].top,
+                              left: key.styles[0].left,
+                            }}>
+                            {hunterListCreateElem.map(
+                              (keys: any, index: any) => {
+                                nums++;
+                                return (
+                                  <Draggable
+                                    draggableId={String(keys.id + key.id)}
+                                    key={keys.id}
+                                    index={nums}>
+                                    {(provided) => (
+                                      <div
+                                        // style={hunterListStyles}
+                                        style={{
+                                          height: `${parseFloat(
+                                            hunterListBoxHeight
+                                          )}%`,
+                                        }}>
+                                        <HunterList
+                                          ref={provided.innerRef}
+                                          class="h-full bg-white justify-start flex-col"
+                                          provided={provided}>
+                                          <HunterEvenRows
+                                            styleHeightandTop={
+                                              divisionRemainderBoxHeightandTopPosition
+                                            }
+                                            text={
+                                              divisionRemainderHeightValueText
+                                            }
+                                            isShow={simulationFlag}
+                                          />
+                                        </HunterList>
+                                      </div>
+                                    )}
+                                  </Draggable>
+                                );
+                              }
+                            )}
+                          </div>
+                        );
+                      }
+                    })}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
+          </>
+        ) : null}
       </section>
       <HunterHunter
         widthValue={divisionRemainderWidth}
@@ -370,7 +380,7 @@ export const Index: NextPage = () => {
         widthInputText={widthInputText}
         heightInputText={heightInputText}
       />
-    </Layout>
+    </div>
   );
 };
 
