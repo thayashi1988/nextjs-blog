@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 module.exports = {
+  reactStrictMode: true,
+  poweredByHeader: false,
   typescript: {
     ignoreBuildErrors: true,
   },
