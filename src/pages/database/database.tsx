@@ -71,7 +71,7 @@ export default function dataBase(): JSX.Element {
       <Head>
         <title>firebaseのデータベース読み込み</title>
       </Head>
-      {/* <div className="flex justify-center items-center space-x-4 mb-8">
+      <div className="flex justify-center items-center space-x-4 mb-8">
         <input
           className="border border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
           name="tashname"
@@ -81,11 +81,10 @@ export default function dataBase(): JSX.Element {
         <Btn
           link={false}
           class="flex-initial text-sm rounded-xl bg-blue-600 hover:bg-blue-700"
-          click={addTask}
-        >
+          click={addTask}>
           タスク追加
         </Btn>
-      </div> */}
+      </div>
 
       <Loading isfetch={isfetch} />
     </div>
