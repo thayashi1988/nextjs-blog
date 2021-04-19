@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import Head from 'next/head';
 import { NextLink } from 'src/components/Link/Link';
 import { Header } from 'src/components/Header/Header';
@@ -6,10 +7,11 @@ import { Btn } from 'src/components/Button/Btn';
 import styles from 'src/components/Layout/layout.module.css';
 import utilStyles from '@/styles/utils.module.css';
 
-const name: string = 'じぃのNext.jsアプリ';
+const name: string = 'Next.jsアプリ';
 export const siteTitle: string = 'Next.js Sample Website';
 
-export default function Layout({ children, home }) {
+export const Layout = ({ children, home }) => {
+  // home = false;
   return (
     <div>
       <Header />
@@ -66,4 +68,5 @@ export default function Layout({ children, home }) {
       <Footer />
     </div>
   );
-}
+};
+export default memo(Layout);
