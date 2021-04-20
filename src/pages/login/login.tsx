@@ -10,11 +10,6 @@ export default function login(): JSX.Element {
 
   // user情報を取得
   useEffect(() => {
-    // return auth.onAuthStateChanged((user) => {
-    //   setUser(user);
-    //   setIsNull(user);
-    //   console.log('user:', user);
-    // });
     const authProcess = auth.onAuthStateChanged((user: any) => {
       setUser(user);
       setIsNull(user);
@@ -35,8 +30,8 @@ export default function login(): JSX.Element {
     auth.signOut();
   };
 
-  const IsLogin = () => {
-    if (isNull === null) {
+  const IsLogin = (props) => {
+    if (props.isNull === null) {
       return (
         <div>
           <h2>ログインしてください。</h2>
@@ -46,13 +41,15 @@ export default function login(): JSX.Element {
         </div>
       );
     } else {
-      <div>
-        <h2>ログインしました！</h2>
-        <p>あなたのUID: {user && user.uid}</p>
-        <Btn link={false} click={logout}>
-          Google Logout
-        </Btn>
-      </div>;
+      return (
+        <div>
+          <h2>ログインしました！</h2>
+          <p>あなたのUID: {user && user.uid}</p>
+          <Btn link={false} click={logout}>
+            Google Logout
+          </Btn>
+        </div>
+      );
     }
   };
 
@@ -61,18 +58,7 @@ export default function login(): JSX.Element {
       <Head>
         <title>firebaseでのGoogle認証</title>
       </Head>
-      {/* {IsLogin} */}
-      {/* <IsLogin isNull={isNull} /> */}
-      <p>UID: {user && user.uid}</p>
-      {user ? (
-        <Btn link={false} click={logout}>
-          Google Logout
-        </Btn>
-      ) : (
-        <Btn link={false} click={login}>
-          Google Login
-        </Btn>
-      )}
+      <IsLogin isNull={isNull} />
     </div>
   );
 }
