@@ -32,29 +32,32 @@ export const Layout = ({ children, home }) => {
           <meta name="twitter:card" content="summary_large_image" />
         </Head>
         <div className="flex flex-col items-center mt-5">
-          {home ? (
-            <>
-              <img
-                src="/images/profile.jpg"
-                className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
-                alt={name}
-              />
-              <h1 className={utilStyles.heading2Xl}>{name}</h1>
-            </>
-          ) : (
-            <>
-              <NextLink href="/">
+          {
+            home ? (
+              <>
                 <img
                   src="/images/profile.jpg"
-                  className={`${styles.headerImage} ${utilStyles.borderCircle}`}
+                  className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
                   alt={name}
                 />
-              </NextLink>
-              <h2 className={utilStyles.headingLg}>
-                <NextLink href="/">{name}</NextLink>
-              </h2>
-            </>
-          )}
+                <h1 className={utilStyles.heading2Xl}>{name}</h1>
+              </>
+            ) : null
+            // (
+            // <>
+            //   <NextLink href="/">
+            //     <img
+            //       src="/images/profile.jpg"
+            //       className={`${styles.headerImage} ${utilStyles.borderCircle}`}
+            //       alt={name}
+            //     />
+            //   </NextLink>
+            //   <h2 className={utilStyles.headingLg}>
+            //     <NextLink href="/">{name}</NextLink>
+            //   </h2>
+            // </>
+            // )
+          }
         </div>
         <main className="mt-5">{children}</main>
         {!home && (
