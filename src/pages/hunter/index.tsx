@@ -215,8 +215,11 @@ export const Index: NextPage = () => {
       <Head>
         <title>ハンターハンター</title>
       </Head>
-
-      <section className="pb-20 mb-28 overflow-y-auto">
+      <HunterHunter
+        widthValue={divisionRemainderWidth}
+        heightValue={divisionRemainderHeight}
+      />
+      <section className="mb-20 overflow-y-auto">
         {simulationFlag ? (
           <>
             <HunterWidthResult
@@ -358,10 +361,6 @@ export const Index: NextPage = () => {
           </>
         ) : null}
       </section>
-      <HunterHunter
-        widthValue={divisionRemainderWidth}
-        heightValue={divisionRemainderHeight}
-      />
       <div className="flex space-x-4 mb-5">
         <TextInput
           label="幅(mm)"
