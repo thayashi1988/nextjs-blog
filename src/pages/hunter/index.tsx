@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import type { NextPage } from 'next';
 import { renderToString } from 'react-dom/server';
 
@@ -10,27 +10,27 @@ import {
 } from 'react-beautiful-dnd';
 
 import Head from 'next/head';
-import Layout from 'src/components/Layout/layout';
 import { TextInput } from 'src/components/Hunter/HunterTextInput';
 import { HunterList } from 'src/components/Hunter/HunterList';
-// import { HunterListWrap } from 'src/components/Hunter/HunterListWrap';
 import { HunterWidthResult } from 'src/components/Hunter/HunterWidthResult';
 import { HunterBothResult } from 'src/components/Hunter/HunterBothResult';
 import { HunterEvenRows } from 'src/components/Hunter/HunterEvenRows';
 import { HunterHunter } from 'src/components/Hunter/HunterHunter';
 
-// interface VARIABLE{
-//   widthInputText: number;
-//   heightInputText: number;
-//   grayBoxNum: number;
-//   hunterListBoxHeight: any;
-//   divisionRemainderHeightValue: string | number;
-// };
+type stylesObj = {
+  height: string;
+};
 
 type HunterObj = {
-  divisionJustText: string | number;
-  divisionRemainderText: string | number;
-  isTextHidden: boolean;
+  id: number;
+  classes: string;
+  styles: {
+    width: string;
+    top: string;
+    left: string;
+  };
+  textHidden: boolean;
+  hunterEvenRows: boolean;
 };
 
 export const Index: NextPage = () => {
@@ -68,10 +68,9 @@ export const Index: NextPage = () => {
   if (widthInputText.length > 0 && heightInputText.length > 0) {
     simulationFlag = true;
   }
-  console.log('simulationFlag:', simulationFlag);
 
   //////// crateObject  ////////
-  const hunterListCreateElem: any = [];
+  const hunterListCreateElem: object[] = [];
   for (let i = 0; i < grayBoxNum; i++) {
     hunterListCreateElem.push({
       id: Math.floor(Math.random() * 100000000001) * i,
@@ -79,11 +78,11 @@ export const Index: NextPage = () => {
   }
 
   //////// boxStyles  ////////
-  const hunterListStyles: any = {
+  const hunterListStyles: stylesObj = {
     height: `${parseFloat(hunterListBoxHeight)}% !important`,
   };
 
-  const divisionResultStyles: any = {
+  const divisionResultStyles: stylesObj = {
     height: `${parseFloat(hunterListBoxHeight)}%`,
   };
 
@@ -134,7 +133,7 @@ export const Index: NextPage = () => {
   }
 
   ///// ドラッグ処理 ///////
-  const onDragEnd = (result) => {
+  const onDragEnd = (result: any) => {
     // dropped outside the list
     if (!result.destination) {
       return;
@@ -146,62 +145,52 @@ export const Index: NextPage = () => {
   renderToString();
 
   ///// HunterListをドラッグ可能にするためオブジェクトをループして生成させる ///////
-  const HunterListLoopObj = [
+  const HunterListLoopObj: HunterObj[] = [
     {
       id: Math.floor(Math.random() * 10001),
       classes: 'h-full w-3/12 absolute',
-      styles: [
-        {
-          width: `${hunterListWrapBoxWidth}%`,
-          top: `0`,
-          left: `-${divisionRemainderBoxWidthPosition}%`,
-        },
-      ],
+      styles: {
+        width: `${hunterListWrapBoxWidth}%`,
+        top: `0`,
+        left: `-${divisionRemainderBoxWidthPosition}%`,
+      },
       textHidden: false,
       hunterEvenRows: false,
     },
     {
       id: Math.floor(Math.random() * 10001),
       classes: 'h-full w-3/12 absolute left-1/4',
-      styles: [
-        {
-          width: `${hunterListWrapBoxWidth}%`,
-          top: `${divisionRemainderBoxHeightandTopPosition}%`,
-          left: `${
-            hunterListWrapBoxWidth - divisionRemainderBoxWidthPosition
-          }%`,
-        },
-      ],
+      styles: {
+        width: `${hunterListWrapBoxWidth}%`,
+        top: `${divisionRemainderBoxHeightandTopPosition}%`,
+        left: `${hunterListWrapBoxWidth - divisionRemainderBoxWidthPosition}%`,
+      },
       textHidden: true,
       hunterEvenRows: true,
     },
     {
       id: Math.floor(Math.random() * 10001),
       classes: 'h-full w-3/12 absolute left-2/4',
-      styles: [
-        {
-          width: `${hunterListWrapBoxWidth}%`,
-          top: `0%`,
-          left: `${
-            hunterListWrapBoxWidth * 2 - divisionRemainderBoxWidthPosition
-          }%`,
-        },
-      ],
+      styles: {
+        width: `${hunterListWrapBoxWidth}%`,
+        top: `0%`,
+        left: `${
+          hunterListWrapBoxWidth * 2 - divisionRemainderBoxWidthPosition
+        }%`,
+      },
       textHidden: false,
       hunterEvenRows: false,
     },
     {
       id: Math.floor(Math.random() * 10001),
       classes: 'h-full w-3/12 absolute left-3/4',
-      styles: [
-        {
-          width: `${hunterListWrapBoxWidth}%`,
-          top: `${divisionRemainderBoxHeightandTopPosition}%`,
-          left: `${
-            hunterListWrapBoxWidth * 3 - divisionRemainderBoxWidthPosition
-          }%`,
-        },
-      ],
+      styles: {
+        width: `${hunterListWrapBoxWidth}%`,
+        top: `${divisionRemainderBoxHeightandTopPosition}%`,
+        left: `${
+          hunterListWrapBoxWidth * 3 - divisionRemainderBoxWidthPosition
+        }%`,
+      },
       textHidden: true,
       hunterEvenRows: true,
     },
@@ -240,13 +229,15 @@ export const Index: NextPage = () => {
                             key={key.id}
                             className={key.classes}
                             style={{
-                              width: key.styles[0].width,
-                              top: key.styles[0].top,
-                              left: key.styles[0].left,
+                              width: key.styles.width,
+                              top: key.styles.top,
+                              left: key.styles.left,
                             }}>
                             {hunterListCreateElem.map(
                               (keys: any, index: any) => {
                                 nums++;
+                                // ボックスが50を超えると見えないし処理が激重なため49で中断
+                                if (index > 49) return;
                                 // 奇数列で最後のボックス以外
                                 if (index !== hunterListCreateElem.length - 1) {
                                   return (
@@ -309,13 +300,15 @@ export const Index: NextPage = () => {
                             key={key.id}
                             className={key.classes}
                             style={{
-                              width: key.styles[0].width,
-                              top: key.styles[0].top,
-                              left: key.styles[0].left,
+                              width: key.styles.width,
+                              top: key.styles.top,
+                              left: key.styles.left,
                             }}>
                             {hunterListCreateElem.map(
                               (keys: any, index: any) => {
                                 nums++;
+                                // ボックスが50を超えると見えないし処理が激重なため49で中断
+                                if (index > 49) return;
                                 return (
                                   <Draggable
                                     draggableId={String(keys.id + key.id)}
@@ -365,12 +358,14 @@ export const Index: NextPage = () => {
         <TextInput
           label="幅(mm)"
           variant="outlined"
+          inputAttr={{ inputMode: 'numeric', pattern: '^[0-9]+$' }}
           onChange={widthTextGet}
           value={widthInputText}
         />
         <TextInput
           label="高さ(mm)"
           variant="outlined"
+          inputAttr={{ inputMode: 'numeric', pattern: '^[0-9]+$' }}
           onChange={heightTextGet}
           value={heightInputText}
         />

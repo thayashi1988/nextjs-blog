@@ -11,12 +11,15 @@ type PROPS = {
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   value: string;
   onKeyPress?: React.KeyboardEventHandler<HTMLInputElement>;
+  inputAttr?: object;
 };
 
 export const TextInput: VFC<PROPS> = (props) => {
+  console.log('1-HunterTextInput.tsx');
   return (
     <TextField
-      type="number"
+      type="text"
+      inputProps={props.inputAttr}
       onChange={props.onChange}
       onKeyPress={props.onKeyPress}
       label={props.label}

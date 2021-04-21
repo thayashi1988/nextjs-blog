@@ -49,6 +49,10 @@ const LINKITEMS: Links[] = [
     href: '/hunter',
     linkTxt: 'ハンターハンターへ',
   },
+  {
+    href: '/material',
+    linkTxt: 'materialUIサンプルへ',
+  },
 ];
 
 export default function Home({ allPostsData, props }) {
