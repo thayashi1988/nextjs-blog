@@ -62,7 +62,7 @@ export default function Index({ blogData }): JSX.Element {
         {blogContents.map((contents) => (
           <li className="sm:flex-initial p-2 sm:w-4/12" key={contents.id}>
             <NextLink
-              class="block w-full h-full rounded p-2 shadow-lg text-sm"
+              class="block w-full h-full rounded p-2 shadow-lg text-sm dark:bg-white dark:text-black"
               href={`/blog/${contents.id}`}>
               <NextImg
                 class="mb-2"

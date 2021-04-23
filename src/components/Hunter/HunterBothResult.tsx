@@ -20,7 +20,7 @@ const settingBordNum = (inputNum: any, type: string): number => {
 export const HunterBothResult: VFC<PROPS> = (props) => {
   return (
     <div className="sm:flex sm:space-x-4 mb-5">
-      <div className="border rounded-lg shadow-md w-full bg-blue-100 p-5 mb-4">
+      <div className="border rounded-lg shadow-md w-full bg-blue-100 p-5 mb-4 dark:text-black">
         <h3 className="font-bold sm:text-lg text-sm mb-4 break-all">
           幅：{props.widthInputText}
           <sub>mm</sub>
@@ -49,7 +49,7 @@ export const HunterBothResult: VFC<PROPS> = (props) => {
           </li>
         </ul>
       </div>
-      <div className="border rounded-lg shadow-md w-full bg-blue-100 p-5 mb-4">
+      <div className="border rounded-lg shadow-md w-full bg-blue-100 p-5 mb-4 dark:text-black">
         <h3 className="font-bold sm:text-lg text-sm mb-4 break-all">
           高さ：{props.heightInputText}
           <sub>mm</sub>
