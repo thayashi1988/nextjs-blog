@@ -3,18 +3,17 @@ import Head from 'next/head';
 import { NextImg } from 'src/components/Img/Img';
 import { NextLink } from 'src/components/Link/Link';
 
-type BLOGDATA = {
-  contents: object[];
+type MICROCMSDATA = {
+  contents: [];
   limit: number;
   offset: number;
   totalCount: number;
 };
 
-type DATA = {
-  body: {
-    fieldId: string;
-    rich: string;
-  };
+type ARTICLEDATA = [{ fieldId: string; rich?: string; html?: string }];
+
+type BLOGDATA = {
+  body: ARTICLEDATA;
   category: number;
   createdAt: number;
   date: number;
@@ -49,9 +48,10 @@ export async function getStaticProps() {
 }
 
 export default function Index({ blogData }): JSX.Element {
-  const blogDatas: BLOGDATA = blogData;
-  const blogContents = blogDatas.contents;
-  console.log('blogContents:', blogContents);
+  const blogDatas: MICROCMSDATA = blogData;
+  const blogContents: BLOGDATA[] = blogDatas.contents;
+  // console.log('blogDatas:', blogDatas);
+  // console.log('blogContents:', blogContents);
 
   return (
     <div>
@@ -59,7 +59,7 @@ export default function Index({ blogData }): JSX.Element {
         <title>microCMS読み込み</title>
       </Head>
       <ul className="sm:flex sm:flex-wrap sm:justify-start">
-        {blogContents.map((contents: DATA) => (
+        {blogContents.map((contents) => (
           <li className="sm:flex-initial p-2 sm:w-4/12" key={contents.id}>
             <NextLink
               class="block w-full h-full rounded p-2 shadow-lg text-sm"

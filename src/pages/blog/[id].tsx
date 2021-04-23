@@ -3,6 +3,33 @@ import Head from 'next/head';
 import { NextImg } from 'src/components/Img/Img';
 import { Btn } from 'src/components/Button/Btn';
 
+type MICROCMSDATA = {
+  contents: object[];
+  limit: number;
+  offset: number;
+  totalCount: number;
+};
+
+type ARTICLEDATA = [{ fieldId: string; rich?: string; html?: string }];
+
+type BLOGDATA = {
+  body: ARTICLEDATA;
+  category: number;
+  createdAt: number;
+  date: number;
+  id: string;
+  publishedAt: string;
+  revisedAt: string;
+  thumb: boolean;
+  thumbImg: {
+    url: string;
+    height: number;
+    width: number;
+  };
+  title: string;
+  updatedAt: string;
+};
+
 // 静的生成のためのパスを指定します
 export async function getStaticPaths() {
   const pageLimit = 50;
@@ -13,9 +40,9 @@ export async function getStaticPaths() {
     `${process.env.MICROCMS_API_URL}/blog?limit=${pageLimit}`,
     key
   );
-  const res = await data.json();
+  const res: MICROCMSDATA = await data.json();
 
-  const paths = res.contents.map((content) => `/blog/${content.id}`);
+  const paths = res.contents.map((content: BLOGDATA) => `/blog/${content.id}`);
   return { paths, fallback: false };
 }
 
@@ -36,7 +63,9 @@ export async function getStaticProps(context) {
 }
 
 export default function Index({ blog }): JSX.Element {
-  const blogBody = blog.body;
+  const articleData: BLOGDATA = blog;
+  const articlbody = articleData.body;
+  // console.log('articlbody:', articlbody);
 
   return (
     <div>
@@ -50,7 +79,7 @@ export default function Index({ blog }): JSX.Element {
         width={blog.thumbImg.width}
         height={blog.thumbImg.height}
       />
-      {blogBody.map((body) => {
+      {articlbody.map((body) => {
         if (body.fieldId === 'rich') {
           return (
             <div
