@@ -3,10 +3,9 @@ import Head from 'next/head';
 import { NextImg } from 'src/components/Img/Img';
 import { Btn } from 'src/components/Button/Btn';
 
-const pageLimit = 50;
-
 // 静的生成のためのパスを指定します
 export async function getStaticPaths() {
+  const pageLimit = 50;
   const key = {
     headers: { 'X-API-KEY': `${process.env.MICROCMS_API_KEY}` },
   };
@@ -38,7 +37,6 @@ export async function getStaticProps(context) {
 
 export default function Index({ blog }): JSX.Element {
   const blogBody = blog.body;
-  // console.log('blog.body:', blog.body);
 
   return (
     <div>
@@ -53,7 +51,6 @@ export default function Index({ blog }): JSX.Element {
         height={blog.thumbImg.height}
       />
       {blogBody.map((body) => {
-        console.log('body:', body);
         if (body.fieldId === 'rich') {
           return (
             <div

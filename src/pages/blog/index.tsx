@@ -1,34 +1,35 @@
 import React from 'react';
 import Head from 'next/head';
+import { NextImg } from 'src/components/Img/Img';
 import { NextLink } from 'src/components/Link/Link';
 
-type BLOGDATA = [
-  contents: object[],
-  limit: number,
-  offset: number,
-  totalCount: number
-];
+type BLOGDATA = {
+  contents: object[];
+  limit: number;
+  offset: number;
+  totalCount: number;
+};
 
-type DATA = [
+type DATA = {
   body: {
     fieldId: string;
     rich: string;
-  },
-  category: number,
-  createdAt: number,
-  date: number,
-  id: string,
-  publishedAt: string,
-  revisedAt: string,
-  thumb: boolean,
+  };
+  category: number;
+  createdAt: number;
+  date: number;
+  id: string;
+  publishedAt: string;
+  revisedAt: string;
+  thumb: boolean;
   thumbImg: {
     url: string;
     height: number;
     width: number;
-  },
-  title: string,
-  updatedAt: string
-];
+  };
+  title: string;
+  updatedAt: string;
+};
 
 export async function getStaticProps() {
   const limit = 50;
@@ -48,19 +49,29 @@ export async function getStaticProps() {
 }
 
 export default function Index({ blogData }): JSX.Element {
-  const blogContents = blogData.contents;
-  // console.log('blogData:', blogData);
-  // console.log('blogContents:', blogContents);
+  const blogDatas: BLOGDATA = blogData;
+  const blogContents = blogDatas.contents;
+  console.log('blogContents:', blogContents);
 
   return (
     <div>
       <Head>
         <title>microCMS読み込み</title>
       </Head>
-      <ul>
-        {blogContents.map((contents) => (
-          <li key={contents.id}>
-            <NextLink href={`/blog/${contents.id}`}>{contents.title}</NextLink>
+      <ul className="sm:flex sm:flex-wrap sm:justify-start">
+        {blogContents.map((contents: DATA) => (
+          <li className="sm:flex-initial p-2 sm:w-4/12" key={contents.id}>
+            <NextLink
+              class="block w-full h-full rounded p-2 shadow-lg text-sm"
+              href={`/blog/${contents.id}`}>
+              <NextImg
+                class="mb-2"
+                src={contents.thumbImg.url}
+                width={contents.thumbImg.width}
+                height={contents.thumbImg.height}
+              />
+              {contents.title}
+            </NextLink>
           </li>
         ))}
       </ul>
