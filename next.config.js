@@ -6,7 +6,7 @@ module.exports = {
     ignoreBuildErrors: true,
   },
   images: {
-    // ここ
+    domains: ['images.microcms-assets.io'],
   },
   webpack: (config) => {
     const env = Object.keys(process.env).reduce((acc, curr) => {
