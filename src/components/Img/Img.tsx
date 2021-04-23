@@ -4,8 +4,8 @@ import Image from 'next/image';
 type PROPS = {
   class?: string;
   src: string;
-  width?: string;
-  height?: string;
+  width?: string | number;
+  height?: string | number;
   quality?: string;
 };
 
