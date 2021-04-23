@@ -53,6 +53,10 @@ const LINKITEMS: Links[] = [
     href: '/material',
     linkTxt: 'materialUIサンプルへ',
   },
+  {
+    href: '/blog',
+    linkTxt: 'microCMSへ',
+  },
 ];
 
 export default function Home({ allPostsData, props }) {
