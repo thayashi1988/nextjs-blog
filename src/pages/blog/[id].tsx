@@ -1,3 +1,4 @@
+import { GetStaticProps, GetStaticPaths } from 'next';
 import React from 'react';
 import Head from 'next/head';
 import { NextImg } from 'src/components/Img/Img';
@@ -47,7 +48,7 @@ export async function getStaticPaths() {
 }
 
 // データをテンプレートに受け渡す部分の処理を記述します
-export async function getStaticProps(context) {
+export async function getStaticProps(context: { params: { id: string } }) {
   const id = context.params.id;
   const key = {
     headers: { 'X-API-KEY': `${process.env.MICROCMS_API_KEY}` },
