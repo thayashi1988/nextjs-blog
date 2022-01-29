@@ -10,9 +10,9 @@ import Switch from '@material-ui/core/Switch';
 import Link from 'next/link';
 
 type PROPS = {
-  theme: 'dark' | 'light';
-  mounted: boolean;
-  toggleDarkMode: DOMAttributes<HTMLButtonElement>['onClick'];
+  theme?: 'dark' | 'light';
+  mounted?: boolean;
+  toggleDarkMode?: DOMAttributes<HTMLButtonElement>['onClick'];
 };
 
 export const Header: VFC<PROPS> = () => {
@@ -29,15 +29,15 @@ export const Header: VFC<PROPS> = () => {
       ? setState({ ...state, checkedDarkMode: true })
       : setState({ ...state, checkedDarkMode: false });
     // inputEl.current.checked = true;
-    console.log(inputEl);
+    // console.log(inputEl);
   }, []);
 
   const handleDarkMode = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [e.target.name]: e.target.checked });
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
-  console.log('state:', state);
-  console.log('theme:', theme);
+  // console.log('state:', state);
+  // console.log('theme:', theme);
 
   return (
     <header className="flex items-center justify-between bg-blue-300 p-2">
