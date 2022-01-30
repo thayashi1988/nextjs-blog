@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Layout from 'src/components/Layout/layout';
@@ -9,7 +10,7 @@ import { db } from '../../../firebase';
 //   key?: string;
 // }
 
-export default function dataBase(): JSX.Element {
+export default function DataBase(): JSX.Element {
   const [tasks, setTasks] = useState([{ id: '', title: '' }]);
   const [isfetch, setIsfetch] = useState(false);
   const [input, setInput] = useState('');

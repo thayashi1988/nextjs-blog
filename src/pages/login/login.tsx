@@ -4,7 +4,7 @@ import Layout from 'src/components/Layout/layout';
 import { Btn } from 'src/components/Button/Btn';
 import { fbApp, auth } from '../../../firebase';
 
-export default function login(): JSX.Element {
+export default function Login(): JSX.Element {
   const [user, setUser] = useState(null);
   const [isNull, setIsNull] = useState();
 
