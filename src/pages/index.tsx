@@ -33,18 +33,18 @@ const LINKITEMS: Links[] = [
     href: '/weather/weather',
     linkTxt: '天気予報ページへ',
   },
-  {
-    href: '/database/database',
-    linkTxt: 'firebase読み込み',
-  },
-  {
-    href: '/login/login',
-    linkTxt: 'Googleログイン',
-  },
-  {
-    href: '/signin',
-    linkTxt: 'チャットアプリへ',
-  },
+  // {
+  //   href: '/database/database',
+  //   linkTxt: 'firebase読み込み',
+  // },
+  // {
+  //   href: '/login/login',
+  //   linkTxt: 'Googleログイン',
+  // },
+  // {
+  //   href: '/signin',
+  //   linkTxt: 'チャットアプリへ',
+  // },
   {
     href: '/hunter',
     linkTxt: 'ハンターハンターへ',
