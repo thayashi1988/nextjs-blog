@@ -57,6 +57,10 @@ const LINKITEMS: Links[] = [
     href: '/blog',
     linkTxt: 'microCMSへ',
   },
+  {
+    href: '/qin',
+    linkTxt: 'React',
+  },
 ];
 
 export default function Home({ allPostsData, props }) {
