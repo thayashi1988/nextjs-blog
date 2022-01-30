@@ -7,7 +7,7 @@ import { siteTitle } from '@/components/Layout/layout';
 import { Btn } from 'src/components/Button/Btn';
 import { getSortedPostsData } from 'src/lib/posts';
 import utilStyles from 'src/styles/utils.module.css';
-import 'tailwindcss/tailwind.css';
+// import 'tailwindcss/tailwind.css';
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();

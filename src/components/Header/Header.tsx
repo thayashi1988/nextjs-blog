@@ -1,7 +1,7 @@
 import type { DOMAttributes, VFC } from 'react';
 import React, { useState, useEffect, useRef } from 'react';
 import { useTheme } from 'next-themes';
-import 'tailwindcss/tailwind.css';
+// import 'tailwindcss/tailwind.css';
 
 // material-ui
 import Switch from '@material-ui/core/Switch';
@@ -26,11 +26,11 @@ export const Header: VFC<PROPS> = () => {
   useEffect(() => {
     setMounted(true);
     theme === 'dark'
-      ? setState({ ...state, checkedDarkMode: true })
-      : setState({ ...state, checkedDarkMode: false });
+      ? setState((s) => ({ checkedDarkMode: true }))
+      : setState((s) => ({ checkedDarkMode: false }));
     // inputEl.current.checked = true;
     // console.log(inputEl);
-  }, []);
+  }, [theme]);
 
   const handleDarkMode = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [e.target.name]: e.target.checked });
