@@ -2,7 +2,8 @@
 import type { DOMAttributes, VFC } from 'react';
 import React from 'react';
 
-export const HunterDiv = React.forwardRef((props: any, ref: any) => {
+// eslint-disable-next-line react/display-name
+export const HunterDiv: VFC = React.forwardRef((props: any, ref: any) => {
   const okok = props.provided;
   // console.log('props.provided:', props.provided);
 

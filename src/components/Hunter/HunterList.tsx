@@ -1,5 +1,5 @@
 // react
-// import type { DOMAttributes, VFC } from 'react';
+import type { VFC } from 'react';
 import React from 'react';
 
 // type PROPS = {
@@ -10,7 +10,8 @@ import React from 'react';
 //   children?: React.ReactNode;
 // };
 
-export const HunterList = React.forwardRef((props: any, ref: any) => {
+// eslint-disable-next-line react/display-name
+export const HunterList: VFC = React.forwardRef((props: any, ref: any) => {
   const provided = props.provided;
 
   return (
