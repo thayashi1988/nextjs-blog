@@ -1,8 +1,9 @@
+import { NextPage } from 'next';
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Date from 'src/components/date';
-import Layout, { siteTitle } from '@/components/Layout/layout';
+import { siteTitle } from '@/components/Layout/layout';
 import { Btn } from 'src/components/Button/Btn';
 import { getSortedPostsData } from 'src/lib/posts';
 import utilStyles from 'src/styles/utils.module.css';
@@ -63,7 +64,7 @@ const LINKITEMS: Links[] = [
   },
 ];
 
-export default function Home({ allPostsData, props }) {
+const Home = ({ allPostsData, props }): NextPage => {
   return (
     <div>
       <Head>
@@ -110,4 +111,6 @@ export default function Home({ allPostsData, props }) {
       </section>
     </div>
   );
-}
+};
+
+export default Home;
