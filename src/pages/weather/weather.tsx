@@ -1,13 +1,12 @@
 import type { NextPage } from 'next';
 import { useState } from 'react';
 import Head from 'next/head';
-import Layout from 'src/components/Layout/layout';
 import calsses from 'src/styles/weather.module.css';
 
 let val: string = '';
 const apiUrl: string = 'https://weather.tsukumijima.net/api/forecast?city=';
 
-export const Weather: NextPage = () => {
+const Weather: NextPage = () => {
   const [city, setCity] = useState('');
   const [tempMax, setTempMax] = useState('');
   const [telop, setTelop] = useState('');

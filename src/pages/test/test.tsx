@@ -1,6 +1,6 @@
+import { NextPage } from 'next';
 import React, { useState } from 'react';
 import Head from 'next/head';
-import Layout from 'src/components/Layout/layout';
 import { NextLink } from 'src/components/Link/Link';
 import { NextImg } from 'src/components/Img/Img';
 import { Btn } from 'src/components/Button/Btn';
@@ -24,13 +24,13 @@ const LISTITEMS: ListItems[] = [
 ];
 
 // clickイベント
-function handleClick(e: any): void {
+const handleClick = (e: React.MouseEvent): void => {
   e.preventDefault();
   alert('クリックイベントのアラート');
-}
+};
 
 // 条件処理
-const Greeting = (props) => {
+const Greeting = (props: { isLoggedIn: Boolean }) => {
   const isLoggedIn: Boolean = props.isLoggedIn;
   if (isLoggedIn) {
     return <p className="mt-5">aaaaaaaaaaaaaaa</p>;
@@ -39,7 +39,7 @@ const Greeting = (props) => {
 };
 const pageTitle: string = 'Next.jsのテストページ';
 
-export default function test(): JSX.Element {
+const Test: NextPage = () => {
   // const [homeFlag, setHomeFlag] = useState(false);
   return (
     <div>
@@ -89,4 +89,6 @@ export default function test(): JSX.Element {
       </ul>
     </div>
   );
-}
+};
+
+export default Test;

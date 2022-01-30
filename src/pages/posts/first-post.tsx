@@ -1,8 +1,9 @@
+import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import Layout from 'src/components/Layout/layout';
 
-export default function FirstPost() {
+const FirstPost: NextPage = () => {
   return (
     <Layout home={false}>
       <Head>
@@ -16,4 +17,6 @@ export default function FirstPost() {
       </h2>
     </Layout>
   );
-}
+};
+
+export default FirstPost;

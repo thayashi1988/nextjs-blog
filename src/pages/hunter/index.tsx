@@ -33,7 +33,7 @@ type HunterObj = {
   hunterEvenRows: boolean;
 };
 
-export const Index: NextPage = () => {
+const Index: NextPage = () => {
   //////// useState  ////////
   // 幅と高さを入力するテキストボックス
   const [widthInputText, setWidthInputText] = useState<string>('');
