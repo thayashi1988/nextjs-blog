@@ -1,8 +1,9 @@
+import { AppProps } from 'next/app';
 import { ThemeProvider } from 'next-themes'; // ダークモードのプラグイン
 import '@/styles/global.css';
 import Layout from 'src/components/Layout/layout';
 
-export default function App({ Component, pageProps }): JSX.Element {
+const App = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
     <ThemeProvider attribute="class">
       <Layout home={false}>
@@ -10,4 +11,6 @@ export default function App({ Component, pageProps }): JSX.Element {
       </Layout>
     </ThemeProvider>
   );
-}
+};
+
+export default App;
