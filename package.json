@@ -33,5 +33,12 @@
     "tailwindcss": "^3.0.18",
     "tslib": "^2.2.0",
     "typescript": "^4.3.2"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "Android >= 5",
+    "ie >= 11",
+    "iOS >= 10"
+  ]
 }
