@@ -1,5 +1,9 @@
+const path = require('path');
 const webpack = require('webpack');
 module.exports = {
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
+  },
   reactStrictMode: true,
   poweredByHeader: false,
   typescript: {

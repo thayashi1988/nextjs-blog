@@ -4,7 +4,7 @@ import { NextLink } from 'src/components/Link/Link';
 import { Header } from 'src/components/Header/Header';
 import { Footer } from 'src/components/Footer/Footer';
 import { Btn } from 'src/components/Button/Btn';
-import styles from 'src/components/Layout/layout.module.css';
+import styles from 'src/components/Layout/layout.module.scss';
 import utilStyles from '@/styles/utils.module.css';
 
 const name: string = 'Next.jsアプリ';
