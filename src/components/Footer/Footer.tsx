@@ -1,5 +1,4 @@
 import type { VFC } from 'react';
-// import 'tailwindcss/tailwind.css';
 
 export const Footer: VFC = () => {
   const currentYear = new Date().getFullYear();

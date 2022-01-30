@@ -1,7 +1,6 @@
 import type { DOMAttributes, VFC } from 'react';
 import React, { useState, useEffect, useRef } from 'react';
 import { useTheme } from 'next-themes';
-// import 'tailwindcss/tailwind.css';
 
 // material-ui
 import Switch from '@material-ui/core/Switch';
