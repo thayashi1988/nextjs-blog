@@ -64,7 +64,17 @@ const LINKITEMS: Links[] = [
   },
 ];
 
-const Home = ({ allPostsData, props }): NextPage => {
+type postDatas = {
+  id: string;
+  date: string;
+  title: string;
+}[];
+interface Props {
+  allPostsData?: postDatas;
+  props?: any;
+}
+
+const Home: NextPage<Props> = ({ allPostsData, props }) => {
   return (
     <div>
       <Head>
