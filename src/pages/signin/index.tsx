@@ -16,6 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 
+// eslint-disable-next-line react/display-name
 const Copyright = React.memo(() => {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
