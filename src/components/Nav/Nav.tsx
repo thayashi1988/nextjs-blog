@@ -30,7 +30,6 @@ export const Nav: VFC = () => {
       item.current = false;
     }
   });
-  console.log('router.asPath:', router.asPath);
 
   return (
     <nav className="w-3/5 mx-auto">
