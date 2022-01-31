@@ -8,7 +8,7 @@ const PostId: NextPage = () => {
     <>
       <Post />
       <Btn link href="/qin" class="block mt-4">
-        前のページに戻る
+        React講座へ戻る
       </Btn>
     </>
   );
