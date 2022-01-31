@@ -59,7 +59,7 @@ const LINKITEMS: Links[] = [
   },
   {
     href: '/qin',
-    linkTxt: 'React',
+    linkTxt: 'React講座',
   },
 ];
 
