@@ -8,6 +8,9 @@
       "@/styles/*": [
         "src/styles/*"
       ],
+      "@/lib/*": [
+        "src/lib/*"
+      ],
     },
     "target": "es5",
     "lib": [
