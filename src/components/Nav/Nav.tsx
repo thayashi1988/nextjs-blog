@@ -4,7 +4,7 @@ import React from 'react';
 
 const NavItems = [
   {
-    href: '/qin',
+    href: '/qin/posts',
     txt: 'Posts',
   },
   {
