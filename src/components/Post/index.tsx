@@ -4,7 +4,7 @@ import React from 'react';
 import { usePost } from '@/components/Hooks/usePost';
 
 export const Post: VFC = () => {
-  const { posts, user, error, isLoading } = usePost();
+  const { post, user, error, isLoading } = usePost();
 
   if (isLoading) {
     return (
@@ -18,16 +18,16 @@ export const Post: VFC = () => {
   if (error) {
     return <div>{error.message}</div>;
   }
-  console.log({ posts, user });
+  console.log({ post, user });
 
   return (
     <>
       <Head>
-        <title>{posts?.title}</title>
+        <title>{post?.title}</title>
       </Head>
       <div className="text-center">
-        <h1 className="text-2xl font-bold">{posts?.title}</h1>
-        <p className="mt-3">{posts?.body}</p>
+        <h1 className="text-2xl font-bold">{post?.title}</h1>
+        <p className="mt-3">{post?.body}</p>
         {user?.name ? (
           <p className="text-left">created by {user.name}</p>
         ) : null}
