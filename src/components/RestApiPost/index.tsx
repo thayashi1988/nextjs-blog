@@ -48,11 +48,13 @@ type apiProps = {
   title: {
     rendered: string;
   };
+  name?: string;
 };
 
 export const RestApiPost: VFC = () => {
   const { data, error, isLoading, isEmpty } = usePosts(
-    `${process.env.SAKURA_REST_API}`
+    `https://jsonplaceholder.typicode.com/users`
+    // `${process.env.SAKURA_REST_API}`
   );
   // const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -96,17 +98,23 @@ export const RestApiPost: VFC = () => {
       {data.map((post: apiProps) => {
         return (
           <li className="mb-4 text-sm" key={post.id}>
-            <NextLink
+            {/* <NextLink
               href={post.link}
               target
               class="text-blue-800 hover:opacity-80">
               {post.title.rendered}
+            </NextLink> */}
+            <NextLink
+              href={`/qin/${post.id}`}
+              class="text-blue-800 hover:opacity-80">
+              {post.id}&nbsp;
+              {post.name}
             </NextLink>
-            <Link href={`/qin/${post.id}`}>
+            {/* <Link href={`/qin/${post.id}`}>
               <a className="block text-green-700">
                 動的ルーティング apiのidは{post.id}
               </a>
-            </Link>
+            </Link> */}
           </li>
         );
       })}
