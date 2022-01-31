@@ -104,7 +104,7 @@ export const RestApiPost: VFC = () => {
               {post.title.rendered}
             </NextLink> */}
             <NextLink
-              href={`/qin/${post.id}`}
+              href={`/qin/posts/${post.id}`}
               class="text-black-600 hover:opacity-80">
               {post.id}&nbsp;
               {post.title}
