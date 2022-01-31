@@ -1,6 +1,5 @@
 import type { VFC } from 'react';
 import React from 'react';
-import Link from 'next/link';
 import { NextLink } from '@/components/Link/Link';
 import { usePosts } from '@/components/Hooks/usePosts';
 
@@ -53,7 +52,7 @@ type apiProps = {
 
 export const RestApiPost: VFC = () => {
   const { data, error, isLoading, isEmpty } = usePosts(
-    `https://jsonplaceholder.typicode.com/users`
+    `https://jsonplaceholder.typicode.com/posts`
     // `${process.env.SAKURA_REST_API}`
   );
   // const [state, dispatch] = useReducer(reducer, initialState);
@@ -106,9 +105,9 @@ export const RestApiPost: VFC = () => {
             </NextLink> */}
             <NextLink
               href={`/qin/${post.id}`}
-              class="text-blue-800 hover:opacity-80">
+              class="text-black-600 hover:opacity-80">
               {post.id}&nbsp;
-              {post.name}
+              {post.title}
             </NextLink>
             {/* <Link href={`/qin/${post.id}`}>
               <a className="block text-green-700">
