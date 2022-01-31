@@ -1,5 +1,6 @@
 import type { VFC } from 'react';
 import React from 'react';
+import Link from 'next/link';
 import { NextLink } from '@/components/Link/Link';
 import { usePosts } from '@/components/Hooks/usePosts';
 
@@ -94,13 +95,18 @@ export const RestApiPost: VFC = () => {
     <ul className="my-5">
       {data.map((post: apiProps) => {
         return (
-          <li className="mb-3 text-sm" key={post.id}>
+          <li className="mb-4 text-sm" key={post.id}>
             <NextLink
               href={post.link}
               target
               class="text-blue-800 hover:opacity-80">
               {post.title.rendered}
             </NextLink>
+            <Link href={`/qin/${post.id}`}>
+              <a className="block text-green-700">
+                動的ルーティング apiのidは{post.id}
+              </a>
+            </Link>
           </li>
         );
       })}
