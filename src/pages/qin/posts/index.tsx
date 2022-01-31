@@ -8,7 +8,7 @@ const Index: NextPage = () => {
   return (
     <>
       <Head>
-        <title>React講座</title>
+        <title>React講座 postsを表示</title>
       </Head>
       <Nav />
       <RestApiPost />
