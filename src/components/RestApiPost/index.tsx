@@ -90,7 +90,7 @@ export const RestApiPost: VFC = () => {
   if (isEmpty) {
     return <div>データはからです...</div>;
   }
-  console.log('data:', data);
+  // console.log('data:', data);
 
   return (
     <ul className="my-5">
