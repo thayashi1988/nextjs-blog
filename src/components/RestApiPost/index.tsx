@@ -95,7 +95,10 @@ export const RestApiPost: VFC = () => {
       {data.map((post: apiProps) => {
         return (
           <li className="mb-3 text-sm" key={post.id}>
-            <NextLink href={post.link} class="text-blue-800 hover:opacity-80">
+            <NextLink
+              href={post.link}
+              target
+              class="text-blue-800 hover:opacity-80">
               {post.title.rendered}
             </NextLink>
           </li>
