@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import React from 'react';
 import Head from 'next/head';
-import { Btn } from '@/components/Button/Btn';
+import { Nav } from '@/components/Nav/Nav';
 import { RestApiPost } from '@/components/RestApiPost';
 
 const Index: NextPage = () => {
@@ -10,9 +10,7 @@ const Index: NextPage = () => {
       <Head>
         <title>React講座</title>
       </Head>
-      <div className="text-center">
-        <Btn link={false}>ボタンコンポーネント呼び出し</Btn>
-      </div>
+      <Nav />
       <RestApiPost />
     </>
   );
