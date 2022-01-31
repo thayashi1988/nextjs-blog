@@ -5,13 +5,24 @@ import Link from 'next/link';
 type PROPS = {
   href: string;
   class?: string;
+  target?: Boolean;
   children: React.ReactNode;
 };
 
 export const NextLink: VFC<PROPS> = (props) => {
-  return (
-    <Link href={props.href}>
-      <a className={props.class}>{props.children}</a>
-    </Link>
-  );
+  if (props.target) {
+    return (
+      <Link href={props.href}>
+        <a className={props.class} target="_blank">
+          {props.children}
+        </a>
+      </Link>
+    );
+  } else {
+    return (
+      <Link href={props.href}>
+        <a className={props.class}>{props.children}</a>
+      </Link>
+    );
+  }
 };
