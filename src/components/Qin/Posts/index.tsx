@@ -97,23 +97,12 @@ export const Posts: VFC = () => {
       {data.map((post: apiPostsProps) => {
         return (
           <li className="mb-4 text-sm" key={post.id}>
-            {/* <NextLink
-              href={post.link}
-              target
-              class="text-blue-800 hover:opacity-80">
-              {post.title.rendered}
-            </NextLink> */}
             <NextLink
               href={`/qin/posts/${post.id}`}
               class="text-black-600 hover:opacity-80">
               {post.id}&nbsp;
               {post.title}
             </NextLink>
-            {/* <Link href={`/qin/${post.id}`}>
-              <a className="block text-green-700">
-                動的ルーティング apiのidは{post.id}
-              </a>
-            </Link> */}
           </li>
         );
       })}

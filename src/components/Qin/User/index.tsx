@@ -22,7 +22,7 @@ export const User: VFC = () => {
       </Head>
       <h1 className="text-2xl font-bold text-center mb-6">id {personal?.id}</h1>
       <div className="text-left">
-        <h1 className="text-2xl font-bold">{personal?.name}</h1>
+        <h2 className="text-2xl font-bold">{personal?.name}</h2>
         <p className="mt-3">mail address：{personal?.email}</p>
         <p className="mt-3">phone：{personal?.phone}</p>
         <p className="mt-3">company：{personal?.company.name}</p>

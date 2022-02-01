@@ -28,10 +28,10 @@ export const Comment: VFC = () => {
       <Head>
         <title>Comments 下層ページ</title>
       </Head>
+      <h1 className="text-2xl font-bold text-center mb-6">
+        postId {router.query.id}
+      </h1>
       <ul>
-        <h1 className="text-2xl font-bold text-center mb-6">
-          postId {router.query.id}
-        </h1>
         {comment.map((commentItem: apiCommentProps) => {
           return (
             <li key={commentItem.id} className="mb-5">
