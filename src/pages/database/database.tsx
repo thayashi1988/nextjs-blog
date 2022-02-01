@@ -1,16 +1,12 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+import type { VFC } from 'react';
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import Layout from 'src/components/Layout/layout';
-import { Btn } from 'src/components/Button/Btn';
-import FirebaseItems from 'src/components/Firebase/FirebaseItems';
+import { Btn } from '@/components/Button/Btn';
+import { FirebaseItems } from '@/components/Firebase/FirebaseItems';
 import { db } from '../../../firebase';
+import { LoadingFirebase } from '@/components/Loading/LoadingFirebase';
 
-// interface IntrinsicAttributes {
-//   key?: string;
-// }
-
-export default function DataBase(): JSX.Element {
+export const DataBase: VFC = () => {
   const [tasks, setTasks] = useState([{ id: '', title: '' }]);
   const [isfetch, setIsfetch] = useState(false);
   const [input, setInput] = useState('');
@@ -33,38 +29,13 @@ export default function DataBase(): JSX.Element {
   };
 
   // インプットイベント
-  const taslInput = (e) => {
+  const taskInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
 
-  // 条件処理
-  const Loading: any = () => {
-    if (!isfetch) {
-      return (
-        <div className="border border-gray-100 shadow rounded-md p-4 w-full">
-          <div className="animate-pulse flex justify-between items-center space-x-4">
-            <div className="h-5 bg-gray-200 rounded w-3/12"></div>
-            <div className="w-3/12 h-full">
-              <div className="h-5 bg-gray-200 rounded w-full"></div>
-              <div className="flex justify-between mt-2 space-x-4">
-                <div className="h-5 bg-gray-200 rounded w-6/12"></div>
-                <div className="h-5 bg-gray-200 rounded w-6/12"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      );
-    }
-    return (
-      <ul>
-        {tasks.map((task, index) => {
-          return (
-            <FirebaseItems id={task.id} title={task.title} key={task.id} />
-          );
-        })}
-      </ul>
-    );
-  };
+  if (!isfetch) {
+    return <LoadingFirebase />;
+  }
   console.log('isfetch:', isfetch);
 
   return (
@@ -77,7 +48,7 @@ export default function DataBase(): JSX.Element {
           className="border border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
           name="tashname"
           value={input}
-          onChange={taslInput}
+          onChange={taskInput}
         />
         <Btn
           link={false}
@@ -87,7 +58,15 @@ export default function DataBase(): JSX.Element {
         </Btn>
       </div>
 
-      <Loading isfetch={isfetch} />
+      <ul>
+        {tasks.map((task) => {
+          return (
+            <FirebaseItems id={task.id} title={task.title} key={task.id} />
+          );
+        })}
+      </ul>
     </div>
   );
-}
+};
+
+export default DataBase;
