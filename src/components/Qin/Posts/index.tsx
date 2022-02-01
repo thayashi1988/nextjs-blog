@@ -1,7 +1,7 @@
 import type { VFC } from 'react';
 import React from 'react';
 import { NextLink } from '@/components/Link/Link';
-import { usePosts } from '@/components/Hooks/useFetch';
+import { usePosts, useCustom } from '@/components/Hooks/useFetch';
 
 // サーバーサイドレンダリング時に使用する（静的ジェネレーターの場合で使用）
 // export async function getStaticProps() {
@@ -52,6 +52,14 @@ type apiPostsProps = {
 
 export const Posts: VFC = () => {
   const { data, error, isLoading, isEmpty } = usePosts();
+  const {
+    data: sakura,
+    error: sakuraError,
+    isLoading: sarakuIsLoading,
+    isEmpty: sakuraIsEmpty,
+  } = useCustom(`${process.env.SAKURA_REST_API}`);
+  console.log('sakura:', sakura);
+
   // const [state, dispatch] = useReducer(reducer, initialState);
 
   // const getPosts = useCallback(async () => {
