@@ -17,11 +17,11 @@ export const usePosts = () => {
   return useFetch(`${API_URL}/posts`);
 };
 
-export const useUser = () => {
+export const useUsers = () => {
   return useFetch(`${API_URL}/users`);
 };
 
-export const useComment = () => {
+export const useComments = () => {
   return useFetch(`${API_URL}/comments`);
 };
 
