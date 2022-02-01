@@ -32,7 +32,7 @@ export const Nav: VFC = () => {
   });
 
   return (
-    <nav className="w-3/5 mx-auto">
+    <nav className="max-w-screen-md w-full mx-auto">
       <ul className="flex items-center justify-between">
         {NavItems.map((item) => {
           return (
