@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import React from 'react';
 import { Btn } from '@/components/Button/Btn';
-import { User } from '@/components/User';
+import { User } from '@/components/Qin/User';
 
 const UserId: NextPage = () => {
   return (

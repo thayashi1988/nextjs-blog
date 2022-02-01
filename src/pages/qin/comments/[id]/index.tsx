@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import React from 'react';
 import { Btn } from '@/components/Button/Btn';
-import { Comment } from '@/components/Comment';
+import { Comment } from '@/components/Qin/Comment';
 
 const commentsId: NextPage = () => {
   return (

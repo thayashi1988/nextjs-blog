@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import React from 'react';
 import { Btn } from '@/components/Button/Btn';
-import { Post } from '@/components/Post';
+import { Post } from '@/components/Qin/Post';
 
 const PostId: NextPage = () => {
   return (

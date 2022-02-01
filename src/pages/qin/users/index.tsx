@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import React from 'react';
 import Head from 'next/head';
 import { Nav } from '@/components/Nav/Nav';
-import { Users } from '@/components/Users';
+import { Users } from '@/components/Qin/Users';
 
 const Index: NextPage = () => {
   return (
