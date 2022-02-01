@@ -1,7 +1,7 @@
 import type { VFC } from 'react';
 import React from 'react';
-import { usePosts } from '@/components/Hooks/usePosts';
 import { NextLink } from '@/components/Link/Link';
+import { useComments } from '@/components/Hooks/useFetch';
 
 type apiCommentsProps = {
   id?: string;
@@ -11,9 +11,7 @@ type apiCommentsProps = {
 };
 
 export const Comments: VFC = () => {
-  const { data, error, isLoading } = usePosts(
-    'https://jsonplaceholder.typicode.com/comments'
-  );
+  const { data, error, isLoading } = useComments();
 
   if (isLoading) {
     return (

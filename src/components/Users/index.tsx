@@ -1,17 +1,15 @@
 import type { VFC } from 'react';
 import React from 'react';
 import { NextLink } from '@/components/Link/Link';
-import { usePosts } from '@/components/Hooks/usePosts';
+import { useUsers } from '@/components/Hooks/useFetch';
 
-type apiUserProps = {
+type apiUsersProps = {
   id?: string;
   name?: string;
 };
 
 export const Users: VFC = () => {
-  const { data, error, isLoading } = usePosts(
-    'https://jsonplaceholder.typicode.com/users'
-  );
+  const { data, error, isLoading } = useUsers();
 
   if (isLoading) {
     return (
@@ -27,7 +25,7 @@ export const Users: VFC = () => {
   }
   return (
     <ul className="my-5">
-      {data.map((user: apiUserProps) => {
+      {data.map((user: apiUsersProps) => {
         return (
           <li className="mb-4 text-sm" key={user.id}>
             <NextLink
