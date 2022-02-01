@@ -2,18 +2,13 @@ import type { VFC } from 'react';
 import Head from 'next/head';
 import React from 'react';
 import { useUser } from '@/components/Hooks/useUser';
+import { Loading } from '@/components/Loading/Loading';
 
 export const User: VFC = () => {
   const { personal, error, isLoading } = useUser();
 
   if (isLoading) {
-    return (
-      <div className="animate-pulse mt-5">
-        <div className="h-3 w-3/5 mb-3 bg-gray-400 rounded"></div>
-        <div className="h-3 w-3/5 mb-3 bg-gray-400 rounded"></div>
-        <div className="h-3 w-3/5 mb-3 bg-gray-400 rounded"></div>
-      </div>
-    );
+    return <Loading />;
   }
   if (error) {
     return <div>{error.message}</div>;

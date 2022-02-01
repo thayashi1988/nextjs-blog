@@ -3,6 +3,7 @@ import Head from 'next/head';
 import React from 'react';
 import { useComment } from '@/components/Hooks/useComment';
 import { useRouter } from 'next/router';
+import { Loading } from '@/components/Loading/Loading';
 
 type apiCommentProps = {
   id?: string;
@@ -15,13 +16,7 @@ export const Comment: VFC = () => {
   const { comment, error, isLoading } = useComment();
 
   if (isLoading) {
-    return (
-      <div className="animate-pulse mt-5">
-        <div className="h-3 w-3/5 mb-3 bg-gray-400 rounded"></div>
-        <div className="h-3 w-3/5 mb-3 bg-gray-400 rounded"></div>
-        <div className="h-3 w-3/5 mb-3 bg-gray-400 rounded"></div>
-      </div>
-    );
+    return <Loading />;
   }
   if (error) {
     return <div>{error.message}</div>;

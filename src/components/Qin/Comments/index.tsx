@@ -2,6 +2,7 @@ import type { VFC } from 'react';
 import React from 'react';
 import { NextLink } from '@/components/Link/Link';
 import { useComments } from '@/components/Hooks/useFetch';
+import { Loading } from '@/components/Loading/Loading';
 
 type apiCommentsProps = {
   id?: string;
@@ -14,13 +15,7 @@ export const Comments: VFC = () => {
   const { data, error, isLoading } = useComments();
 
   if (isLoading) {
-    return (
-      <div className="animate-pulse mt-5">
-        <div className="h-3 w-3/5 mb-3 bg-gray-400 rounded"></div>
-        <div className="h-3 w-3/5 mb-3 bg-gray-400 rounded"></div>
-        <div className="h-3 w-3/5 mb-3 bg-gray-400 rounded"></div>
-      </div>
-    );
+    return <Loading />;
   }
   if (error) {
     return <div>{error.message}</div>;

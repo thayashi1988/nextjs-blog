@@ -2,6 +2,7 @@ import type { VFC } from 'react';
 import React from 'react';
 import { NextLink } from '@/components/Link/Link';
 import { useUsers } from '@/components/Hooks/useFetch';
+import { Loading } from '@/components/Loading/Loading';
 
 type apiUsersProps = {
   id?: string;
@@ -12,13 +13,7 @@ export const Users: VFC = () => {
   const { data, error, isLoading } = useUsers();
 
   if (isLoading) {
-    return (
-      <div className="animate-pulse mt-5">
-        <div className="h-3 w-3/5 mb-3 bg-gray-400 rounded"></div>
-        <div className="h-3 w-3/5 mb-3 bg-gray-400 rounded"></div>
-        <div className="h-3 w-3/5 mb-3 bg-gray-400 rounded"></div>
-      </div>
-    );
+    return <Loading />;
   }
   if (error) {
     return <div>{error.message}</div>;

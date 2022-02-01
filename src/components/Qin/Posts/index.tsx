@@ -2,6 +2,7 @@ import type { VFC } from 'react';
 import React from 'react';
 import { NextLink } from '@/components/Link/Link';
 import { usePosts, useCustom } from '@/components/Hooks/useFetch';
+import { Loading } from '@/components/Loading/Loading';
 
 // サーバーサイドレンダリング時に使用する（静的ジェネレーターの場合で使用）
 // export async function getStaticProps() {
@@ -81,13 +82,7 @@ export const Posts: VFC = () => {
   // }, [getPosts]);
 
   if (isLoading) {
-    return (
-      <div className="animate-pulse mt-5">
-        <div className="h-3 w-3/5 mb-3 bg-gray-400 rounded"></div>
-        <div className="h-3 w-3/5 mb-3 bg-gray-400 rounded"></div>
-        <div className="h-3 w-3/5 mb-3 bg-gray-400 rounded"></div>
-      </div>
-    );
+    return <Loading />;
   }
   if (error) {
     return <div>{error.message}</div>;
