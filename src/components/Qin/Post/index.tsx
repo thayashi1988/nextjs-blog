@@ -25,8 +25,9 @@ export const Post: VFC = () => {
       <Head>
         <title>{post?.title}</title>
       </Head>
-      <div className="text-center">
-        <h1 className="text-2xl font-bold">{post?.title}</h1>
+      <h1 className="text-center text-2xl font-bold">id {post?.id}</h1>
+      <div className="text-left">
+        <h1 className="text-xl font-bold">{post?.title}</h1>
         <p className="mt-3">{post?.body}</p>
         {user?.name ? (
           <p className="text-left">created by {user.name}</p>
