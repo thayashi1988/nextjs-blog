@@ -1,9 +1,10 @@
+import type { NextPage } from 'next';
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { Btn } from 'src/components/Button/Btn';
 import { fbApp, auth } from '../../../firebase';
 
-export default function Login(): JSX.Element {
+export const Login: NextPage = () => {
   const [user, setUser] = useState(null);
   const [isNull, setIsNull] = useState();
 
@@ -14,7 +15,6 @@ export default function Login(): JSX.Element {
       setIsNull(user);
     });
     return () => authProcess();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // ログイン機能
@@ -53,4 +53,6 @@ export default function Login(): JSX.Element {
       )}
     </div>
   );
-}
+};
+
+export default Login;

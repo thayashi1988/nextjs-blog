@@ -1,15 +1,10 @@
-// react
+import type { NextPage } from 'next';
 import React from 'react';
-import { useRouter } from 'next/router';
-
-// components
 import Head from 'next/head';
-import Layout from 'src/components/Layout/layout';
+import { useRouter } from 'next/router';
 import { Btn } from 'src/components/Button/Btn';
 import { ChatList } from 'src/components/List/ChatList';
 import { ChatListInput } from 'src/components/List/ChatListInput';
-
-// @material-ui
 import { makeStyles } from '@material-ui/core/styles';
 
 //material-uiのstyle
@@ -21,7 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Chat(): JSX.Element {
+export const Chat: NextPage = () => {
   const router = useRouter();
   const name = router.query.userName;
   if (name === '') {
@@ -53,4 +48,6 @@ export default function Chat(): JSX.Element {
       </div>
     </div>
   );
-}
+};
+
+export default Chat;

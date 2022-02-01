@@ -1,13 +1,8 @@
-// react
+import type { NextPage } from 'next';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-
-// components
 import Head from 'next/head';
-import Layout from 'src/components/Layout/layout';
 import { NextLink } from 'src/components/Link/Link';
-
-// @material-ui
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -16,7 +11,6 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 
-// eslint-disable-next-line react/display-name
 const Copyright = React.memo(() => {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -26,6 +20,7 @@ const Copyright = React.memo(() => {
     </Typography>
   );
 });
+Copyright.displayName = 'Copyright';
 
 //material-uiのstyle
 const useStyles = makeStyles((theme) => ({
@@ -48,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn(): JSX.Element {
+export const SignIn: NextPage = () => {
   // ルーター
   const router = useRouter();
 
@@ -143,4 +138,6 @@ export default function SignIn(): JSX.Element {
       </Container>
     </div>
   );
-}
+};
+
+export default SignIn;
