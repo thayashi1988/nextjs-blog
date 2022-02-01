@@ -1,6 +1,7 @@
 import React, { useState, VFC } from 'react';
-import { Btn } from '@/components/Button/Btn';
 import { db } from '../../../firebase';
+import { Btn } from '@/components/Button/Btn';
+import { FirebaseInput } from '@/components/Firebase/FirebaseInput';
 
 type PROPS = {
   title: string;
@@ -31,12 +32,7 @@ export const FirebaseItems: VFC<PROPS> = (props) => {
       {props.title}
       <div className="flex items-center justify-between space-x-2">
         <div className="flex flex-col">
-          <input
-            className="border border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-xs p-2"
-            name="tashname"
-            value={title}
-            onChange={inputChange}
-          />
+          <FirebaseInput value={title} name="tashname" change={inputChange} />
           <div className="flex space-x-4 mt-2 mx-0 items-center justify-between">
             <Btn
               link={false}

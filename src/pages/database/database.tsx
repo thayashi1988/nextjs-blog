@@ -1,10 +1,11 @@
 import type { VFC } from 'react';
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
+import { db } from '../../../firebase';
 import { Btn } from '@/components/Button/Btn';
 import { FirebaseItems } from '@/components/Firebase/FirebaseItems';
-import { db } from '../../../firebase';
 import { LoadingFirebase } from '@/components/Loading/LoadingFirebase';
+import { FirebaseInput } from '@/components/Firebase/FirebaseInput';
 
 export const DataBase: VFC = () => {
   const [tasks, setTasks] = useState([{ id: '', title: '' }]);
@@ -44,12 +45,7 @@ export const DataBase: VFC = () => {
         <title>firebaseのデータベース読み込み</title>
       </Head>
       <div className="flex justify-center items-center space-x-4 mb-8">
-        <input
-          className="border border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-          name="tashname"
-          value={input}
-          onChange={taskInput}
-        />
+        <FirebaseInput value={input} name="tashname" change={taskInput} />
         <Btn
           link={false}
           class="flex-initial text-sm rounded-xl bg-blue-600 hover:bg-blue-700"
