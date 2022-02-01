@@ -10,6 +10,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
+import { auth } from '../../../firebase';
 
 const Copyright = React.memo(() => {
   return (
@@ -59,11 +60,19 @@ export const SignIn: NextPage = () => {
   // 入力テキスト
   const [string, setString] = useState('');
 
+  // ログイン情報
+  const [user, setUser] = useState(null);
+
   //ボタン活性化
-  useEffect((): void => {
+  useEffect(() => {
     const disabled = string === '' ? true : false;
     setdisabled(disabled);
+    const authProcess = auth.onAuthStateChanged((user: any) => {
+      setUser(user);
+    });
+    return () => authProcess();
   }, [string]);
+  console.log('user:', user);
 
   //入力テキスト取得
   const inputFunc = (e: React.ChangeEvent<HTMLInputElement>): void => {
