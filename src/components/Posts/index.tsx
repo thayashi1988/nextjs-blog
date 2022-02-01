@@ -1,7 +1,7 @@
 import type { VFC } from 'react';
 import React from 'react';
 import { NextLink } from '@/components/Link/Link';
-import { usePosts } from '@/components/Hooks/usePosts';
+import { usePosts } from '@/components/Hooks/useFetch';
 
 // サーバーサイドレンダリング時に使用する（静的ジェネレーターの場合で使用）
 // export async function getStaticProps() {
@@ -41,7 +41,7 @@ import { usePosts } from '@/components/Hooks/usePosts';
 //       throw new Error('エラー');
 //   }
 // };
-type apiProps = {
+type apiPostsProps = {
   id: string;
   link: string;
   title: {
@@ -50,11 +50,8 @@ type apiProps = {
   name?: string;
 };
 
-export const RestApiPost: VFC = () => {
-  const { data, error, isLoading, isEmpty } = usePosts(
-    `https://jsonplaceholder.typicode.com/posts`
-    // `${process.env.SAKURA_REST_API}`
-  );
+export const Posts: VFC = () => {
+  const { data, error, isLoading, isEmpty } = usePosts();
   // const [state, dispatch] = useReducer(reducer, initialState);
 
   // const getPosts = useCallback(async () => {
@@ -90,11 +87,10 @@ export const RestApiPost: VFC = () => {
   if (isEmpty) {
     return <div>データはからです...</div>;
   }
-  // console.log('data:', data);
 
   return (
     <ul className="my-5">
-      {data.map((post: apiProps) => {
+      {data.map((post: apiPostsProps) => {
         return (
           <li className="mb-4 text-sm" key={post.id}>
             {/* <NextLink
