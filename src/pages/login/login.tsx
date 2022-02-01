@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import Layout from 'src/components/Layout/layout';
 import { Btn } from 'src/components/Button/Btn';
 import { fbApp, auth } from '../../../firebase';
 
@@ -13,7 +12,6 @@ export default function Login(): JSX.Element {
     const authProcess = auth.onAuthStateChanged((user: any) => {
       setUser(user);
       setIsNull(user);
-      console.log('isNull:', isNull);
     });
     return () => authProcess();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -30,19 +28,21 @@ export default function Login(): JSX.Element {
   const logout = (): void => {
     auth.signOut();
   };
+  console.log('isNull:', isNull);
 
-  const IsLogin = (props) => {
-    if (props.isNull === null) {
-      return (
+  return (
+    <div>
+      <Head>
+        <title>firebaseでのGoogle認証</title>
+      </Head>
+      {isNull === null ? (
         <div>
           <h2>ログインしてください。</h2>
           <Btn link={false} click={login}>
             Google Login
           </Btn>
         </div>
-      );
-    } else {
-      return (
+      ) : (
         <div>
           <h2>ログインしました！</h2>
           <p>あなたのUID: {user && user.uid}</p>
@@ -50,16 +50,7 @@ export default function Login(): JSX.Element {
             Google Logout
           </Btn>
         </div>
-      );
-    }
-  };
-
-  return (
-    <div>
-      <Head>
-        <title>firebaseでのGoogle認証</title>
-      </Head>
-      <IsLogin isNull={isNull} />
+      )}
     </div>
   );
 }
