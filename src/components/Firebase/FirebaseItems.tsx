@@ -1,5 +1,5 @@
 import React, { useState, VFC } from 'react';
-import { Btn } from '../Button/Btn';
+import { Btn } from '@/components/Button/Btn';
 import { db } from '../../../firebase';
 
 type PROPS = {
@@ -7,7 +7,7 @@ type PROPS = {
   id: string;
 };
 
-const FirebaseItems: VFC<PROPS> = (props) => {
+export const FirebaseItems: VFC<PROPS> = (props) => {
   const [title, setTitle] = useState(props.title);
 
   //入力データでfirebaseのデータを更新
@@ -56,5 +56,3 @@ const FirebaseItems: VFC<PROPS> = (props) => {
     </li>
   );
 };
-
-export default FirebaseItems;
