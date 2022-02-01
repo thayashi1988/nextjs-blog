@@ -3,6 +3,7 @@ import Head from 'next/head';
 import React from 'react';
 import { useUser } from '@/components/Hooks/useUser';
 import { Loading } from '@/components/Loading/Loading';
+import { TextAlert } from '@/components/Text/TextAlert';
 
 export const User: VFC = () => {
   const { personal, error, isLoading } = useUser();
@@ -11,7 +12,7 @@ export const User: VFC = () => {
     return <Loading />;
   }
   if (error) {
-    return <div>{error.message}</div>;
+    return <TextAlert>{error.message}</TextAlert>;
   }
 
   return (

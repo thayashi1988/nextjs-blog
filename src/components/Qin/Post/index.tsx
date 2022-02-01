@@ -3,6 +3,7 @@ import Head from 'next/head';
 import React from 'react';
 import { usePost } from '@/components/Hooks/usePost';
 import { Loading } from '@/components/Loading/Loading';
+import { TextAlert } from '@/components/Text/TextAlert';
 
 export const Post: VFC = () => {
   const { post, user, error, isLoading } = usePost();
@@ -11,9 +12,8 @@ export const Post: VFC = () => {
     return <Loading />;
   }
   if (error) {
-    return <div>{error.message}</div>;
+    return <TextAlert>{error.message}</TextAlert>;
   }
-  console.log({ post, user });
 
   return (
     <>

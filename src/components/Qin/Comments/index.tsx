@@ -3,6 +3,7 @@ import React from 'react';
 import { NextLink } from '@/components/Link/Link';
 import { useComments } from '@/components/Hooks/useFetch';
 import { Loading } from '@/components/Loading/Loading';
+import { TextAlert } from '@/components/Text/TextAlert';
 
 type apiCommentsProps = {
   id?: string;
@@ -18,7 +19,7 @@ export const Comments: VFC = () => {
     return <Loading />;
   }
   if (error) {
-    return <div>{error.message}</div>;
+    return <TextAlert>{error.message}</TextAlert>;
   }
   return (
     <ul className="my-5">

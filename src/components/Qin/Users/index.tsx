@@ -3,6 +3,7 @@ import React from 'react';
 import { NextLink } from '@/components/Link/Link';
 import { useUsers } from '@/components/Hooks/useFetch';
 import { Loading } from '@/components/Loading/Loading';
+import { TextAlert } from '@/components/Text/TextAlert';
 
 type apiUsersProps = {
   id?: string;
@@ -16,7 +17,7 @@ export const Users: VFC = () => {
     return <Loading />;
   }
   if (error) {
-    return <div>{error.message}</div>;
+    return <TextAlert>{error.message}</TextAlert>;
   }
   return (
     <ul className="my-5">

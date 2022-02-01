@@ -3,6 +3,7 @@ import React from 'react';
 import { NextLink } from '@/components/Link/Link';
 import { usePosts, useCustom } from '@/components/Hooks/useFetch';
 import { Loading } from '@/components/Loading/Loading';
+import { TextAlert } from '@/components/Text/TextAlert';
 
 // サーバーサイドレンダリング時に使用する（静的ジェネレーターの場合で使用）
 // export async function getStaticProps() {
@@ -85,7 +86,7 @@ export const Posts: VFC = () => {
     return <Loading />;
   }
   if (error) {
-    return <div>{error.message}</div>;
+    return <TextAlert>{error.message}</TextAlert>;
   }
   if (isEmpty) {
     return <div>データはからです...</div>;

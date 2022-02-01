@@ -4,6 +4,7 @@ import React from 'react';
 import { useComment } from '@/components/Hooks/useComment';
 import { useRouter } from 'next/router';
 import { Loading } from '@/components/Loading/Loading';
+import { TextAlert } from '@/components/Text/TextAlert';
 
 type apiCommentProps = {
   id?: string;
@@ -19,7 +20,7 @@ export const Comment: VFC = () => {
     return <Loading />;
   }
   if (error) {
-    return <div>{error.message}</div>;
+    return <TextAlert>{error.message}</TextAlert>;
   }
 
   return (
