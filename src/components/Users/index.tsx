@@ -3,6 +3,11 @@ import React from 'react';
 import { NextLink } from '@/components/Link/Link';
 import { usePosts } from '@/components/Hooks/usePosts';
 
+type apiUserProps = {
+  id?: string;
+  name?: string;
+};
+
 export const Users: VFC = () => {
   const { data, error, isLoading } = usePosts(
     'https://jsonplaceholder.typicode.com/users'
@@ -22,7 +27,7 @@ export const Users: VFC = () => {
   }
   return (
     <ul className="my-5">
-      {data.map((user: any) => {
+      {data.map((user: apiUserProps) => {
         return (
           <li className="mb-4 text-sm" key={user.id}>
             <NextLink

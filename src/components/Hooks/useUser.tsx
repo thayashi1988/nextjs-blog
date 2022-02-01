@@ -4,20 +4,20 @@ import { fetcher } from '@/lib/fetcher';
 
 export const useUser = () => {
   const router = useRouter();
-  const { data: post, error: postError } = useSWR(
+  const { data: user, error: userError } = useSWR(
     router.query.id
       ? `https://jsonplaceholder.typicode.com/users/${router.query.id}`
       : null,
     fetcher
   );
-  const { data: user, error: userError } = useSWR(
-    post?.id ? `https://jsonplaceholder.typicode.com/users/${post.id}` : null,
+  const { data: personal, error: personalError } = useSWR(
+    user?.id ? `https://jsonplaceholder.typicode.com/users/${user.id}` : null,
     fetcher
   );
   return {
-    post,
     user,
-    error: postError || userError,
-    isLoading: !user && !userError,
+    personal,
+    error: userError || personalError,
+    isLoading: !personal && !personalError,
   };
 };

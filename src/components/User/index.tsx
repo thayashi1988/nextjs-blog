@@ -4,7 +4,7 @@ import React from 'react';
 import { useUser } from '@/components/Hooks/useUser';
 
 export const User: VFC = () => {
-  const { post, user, error, isLoading } = useUser();
+  const { personal, error, isLoading } = useUser();
 
   if (isLoading) {
     return (
@@ -22,13 +22,14 @@ export const User: VFC = () => {
   return (
     <>
       <Head>
-        <title>{post?.title}</title>
+        <title>{personal?.title}</title>
       </Head>
-      <div className="text-center">
-        <h1 className="text-2xl font-bold">{post?.name}</h1>
-        <p className="mt-3">mail address：{post?.email}</p>
-        <p className="mt-3">phone：{post?.phone}</p>
-        <p className="mt-3">company：{post?.company.name}</p>
+      <h1 className="text-2xl font-bold text-center mb-6">id {personal?.id}</h1>
+      <div className="text-left">
+        <h1 className="text-2xl font-bold">{personal?.name}</h1>
+        <p className="mt-3">mail address：{personal?.email}</p>
+        <p className="mt-3">phone：{personal?.phone}</p>
+        <p className="mt-3">company：{personal?.company.name}</p>
       </div>
     </>
   );
