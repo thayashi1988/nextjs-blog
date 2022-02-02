@@ -61,6 +61,10 @@ const LINKITEMS: Links[] = [
     href: '/qin',
     linkTxt: 'React講座',
   },
+  {
+    href: '/components',
+    linkTxt: 'コンポーネントページ',
+  },
 ];
 
 type postDatas = {
