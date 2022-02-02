@@ -14,6 +14,10 @@ import { BtnSecondary } from '@/components/Button/BtnSecondary';
 import { BtnSuccess } from '@/components/Button/BtnSuccess';
 import { BtnDanger } from '@/components/Button/BtnDanger';
 import { BtnInfo } from '@/components/Button/BtnInfo';
+import { List } from '@/components/List/List';
+import { ListItem } from '@/components/List/ListItem';
+import { Column } from '@/components/Column/Column';
+import { ColumnItem } from '@/components/Column/ColumnItem';
 
 export const Index: NextPage = () => {
   return (
@@ -50,6 +54,30 @@ export const Index: NextPage = () => {
       <BtnInfo link={false}>
         インフォボタン margin-bottom: PC:1.25rem MD:1.25rem
       </BtnInfo>
+      <HeadingComponent class="mt-8">リストコンポーネント</HeadingComponent>
+      <List>
+        <ListItem mark="・">
+          リストアイテム margin-bottom: PC:0.25rem MD:0.25rem
+        </ListItem>
+        <ListItem mark="※" small={true}>
+          リストアイテム 注釈 font-size: PC:0.875rem MD:0.875rem
+        </ListItem>
+      </List>
+      <HeadingComponent class="mt-8">カラムコンポーネント</HeadingComponent>
+      <Column>
+        <ColumnItem col="6">
+          <Text>左カラム</Text>
+        </ColumnItem>
+        <ColumnItem col="6">
+          <Text>右カラム</Text>
+        </ColumnItem>
+        <ColumnItem col="6">
+          <Text>右カラム</Text>
+        </ColumnItem>
+        <ColumnItem col="6">
+          <Text>右カラム</Text>
+        </ColumnItem>
+      </Column>
     </div>
   );
 };
