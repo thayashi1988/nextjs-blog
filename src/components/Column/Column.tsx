@@ -7,8 +7,10 @@ type PROPS = {
 };
 
 export const Column: VFC<PROPS> = (props) => {
+  const addColumnClass = props.class ? ` ${props.class}` : '';
+
   return (
-    <div className={`flex flex-wrap -mx-2 -mt-2 mb-5 ${props.class}`}>
+    <div className={`flex flex-wrap -mx-2 -mt-2 mb-5${addColumnClass}`}>
       {props.children}
     </div>
   );

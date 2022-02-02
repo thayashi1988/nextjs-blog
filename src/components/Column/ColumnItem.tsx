@@ -9,9 +9,10 @@ type PROPS = {
 
 export const ColumnItem: VFC<PROPS> = (props) => {
   console.log('props.col:', `md:w-${props.col}/12`);
-  // md: w - 4 / 12;
+  const addColumnClass = props.class ? ` ${props.class}` : '';
+
   return (
-    <div className={`w-full md:w-${props.col}/12 px-2 pt-2 ${props.class}`}>
+    <div className={`w-full md:w-${props.col}/12 px-2 pt-2${addColumnClass}`}>
       {/* <div className={`w-full md:w-${props.col}/12 px-2 pt-2 ${props.class}`}> */}
       {props.children}
     </div>
