@@ -49,7 +49,7 @@ export const Layout = ({ children }) => {
         className="flex flex-col min-h-screen"
         style={{ minHeight: `calc(100vh - ${footerHeight}px)` }}>
         <Header />
-        <main className="flex-1 my-6">{children}</main>
+        <main className="flex-1 my-6 px-2">{children}</main>
         {!isHome ? (
           <div className={styles.backToHome}>
             <Btn link href="/">
