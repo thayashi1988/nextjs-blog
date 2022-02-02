@@ -1,66 +1,71 @@
-import type { DOMAttributes, VFC } from 'react';
+import type { VFC } from 'react';
 import React, { useState, useEffect, useRef } from 'react';
 import { useTheme } from 'next-themes';
-
-// material-ui
 import Switch from '@material-ui/core/Switch';
-
-// components
-import Link from 'next/link';
+import { Text } from '@/components/Text/Text';
+import { Heading1 } from '@/components/Heading/Heading1';
+import { NextLink } from '@/components/Link/Link';
+import { BtnSecondary } from '@/components/Button/BtnSecondary';
+import { auth } from '../../../firebase';
+import { handleLogOut } from '@/components/Firebase/FirebaseAuth';
 
 type PROPS = {
   theme?: 'dark' | 'light';
-  mounted?: boolean;
-  toggleDarkMode?: DOMAttributes<HTMLButtonElement>['onClick'];
 };
 
 export const Header: VFC<PROPS> = () => {
-  const inputEl = useRef();
+  const darkModeSwitchRef = useRef();
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
   const [state, setState] = useState({
     checkedDarkMode: false,
   });
+  const [isLogin, setIsLogin] = useState(null);
 
+  // ログイン情報を取得
   useEffect(() => {
-    setMounted(true);
     theme === 'dark'
       ? setState((s) => ({ checkedDarkMode: true }))
       : setState((s) => ({ checkedDarkMode: false }));
-    // inputEl.current.checked = true;
-    // console.log(inputEl);
-  }, [theme]);
+
+    const authProcess = auth.onAuthStateChanged((firebaseDatas: any) => {
+      setIsLogin(firebaseDatas);
+    });
+    return () => authProcess();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleDarkMode = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [e.target.name]: e.target.checked });
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
-  // console.log('state:', state);
-  // console.log('theme:', theme);
 
   return (
-    <header className="flex items-center justify-between bg-blue-300 p-2">
-      <div className="">
-        <h1>
-          <Link href="/">
-            <a className="no-underline hover:no-underline hover:opacity-50">
-              ヘッダー
-            </a>
-          </Link>
-        </h1>
-      </div>
-      <div className="flex flex-col items-center">
-        <Switch
-          inputRef={inputEl}
-          checked={state.checkedDarkMode}
-          onChange={handleDarkMode}
-          color="primary"
-          name="checkedDarkMode"
-          inputProps={{ 'aria-label': 'ダークモードスイッチ' }}
-        />
-        <p>
-          {mounted && <>{theme === 'dark' ? 'ダークモード' : 'ライトモード'}</>}
-        </p>
+    <header className="flex items-center justify-between bg-blue-300 px-2 py-5">
+      <NextLink
+        href="/"
+        margin="mb-0"
+        class="text-black dark:text-white no-underline md:hover:text-black hover:text-black dark:hover:text-white hover:no-underline">
+        <Heading1 margin="md:mb-0 mb-0">Next.jsアプリ</Heading1>
+      </NextLink>
+      <div className="flex flex-col-reverse md:flex-row items-center">
+        {isLogin ? (
+          <BtnSecondary link={false} margin="mb-0 md:mr-5" click={handleLogOut}>
+            ログアウト
+          </BtnSecondary>
+        ) : null}
+        <div className="flex flex-col items-center">
+          <Switch
+            inputRef={darkModeSwitchRef}
+            checked={state.checkedDarkMode}
+            onChange={handleDarkMode}
+            color="primary"
+            name="checkedDarkMode"
+            inputProps={{ 'aria-label': 'ダークモードスイッチ' }}
+          />
+          <Text class="md:mb-0">
+            <>{theme === 'dark' ? 'ダークモード' : 'ライトモード'}</>
+          </Text>
+        </div>
       </div>
     </header>
   );
