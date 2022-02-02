@@ -15,7 +15,7 @@ export const NextLink: VFC<PROPS> = (props) => {
       <div className="mb-3">
         <Link href={props.href}>
           <a
-            className={`md:text-base text-sm text-blue-600 underline inline-block hover:text-blue-400 m-link-icon ${props.class}`}
+            className={`text-sm text-blue-600 underline inline-block hover:text-blue-400 m-link-icon ${props.class}`}
             target="_blank">
             {props.children}
           </a>
@@ -27,7 +27,7 @@ export const NextLink: VFC<PROPS> = (props) => {
       <div className="mb-3">
         <Link href={props.href}>
           <a
-            className={`md:text-base text-sm text-blue-600 underline inline-block hover:text-blue-400 ${props.class}`}>
+            className={`text-sm text-blue-600 underline inline-block hover:text-blue-400 ${props.class}`}>
             {props.children}
           </a>
         </Link>
