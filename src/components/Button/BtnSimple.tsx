@@ -15,7 +15,7 @@ export const BtnSimple: VFC<PROPS> = (props) => {
   const addBtnClass = props.class ? ` ${props.class}` : '';
   if (props.link) {
     return (
-      <div className={`mb-5${addMarginClass}`}>
+      <div className={addMarginClass}>
         <Link href={props.href}>
           <a className={`max-w-xs outline-none inline-block${addBtnClass}`}>
             {props.children}
@@ -25,7 +25,7 @@ export const BtnSimple: VFC<PROPS> = (props) => {
     );
   } else {
     return (
-      <div className={`mb-5${addMarginClass}`}>
+      <div className={addMarginClass}>
         <button
           className={`max-w-xs outline-none${addBtnClass}`}
           onClick={props.click}>
