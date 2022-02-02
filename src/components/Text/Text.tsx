@@ -6,9 +6,9 @@ type PROPS = {
   children: React.ReactNode;
 };
 
-export const TextAlert: VFC<PROPS> = (props) => {
+export const Text: VFC<PROPS> = (props) => {
   return (
-    <p className={`text-red-700 md:text-base text-sm ${props.class}`}>
+    <p className={`text-black md:text-base text-sm mb-3 ${props.class}`}>
       {props.children}
     </p>
   );
