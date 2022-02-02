@@ -12,17 +12,26 @@ type PROPS = {
 export const NextLink: VFC<PROPS> = (props) => {
   if (props.target) {
     return (
-      <Link href={props.href}>
-        <a className={props.class} target="_blank">
-          {props.children}
-        </a>
-      </Link>
+      <div className="mb-3">
+        <Link href={props.href}>
+          <a
+            className={`md:text-base text-sm text-blue-600 underline inline-block hover:text-blue-400 m-link-icon ${props.class}`}
+            target="_blank">
+            {props.children}
+          </a>
+        </Link>
+      </div>
     );
   } else {
     return (
-      <Link href={props.href}>
-        <a className={props.class}>{props.children}</a>
-      </Link>
+      <div className="mb-3">
+        <Link href={props.href}>
+          <a
+            className={`md:text-base text-sm text-blue-600 underline inline-block hover:text-blue-400 ${props.class}`}>
+            {props.children}
+          </a>
+        </Link>
+      </div>
     );
   }
 };
