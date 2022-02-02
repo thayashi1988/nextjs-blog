@@ -11,8 +11,9 @@ type PROPS = {
 };
 
 export const NextImg: VFC<PROPS> = (props) => {
+  const addParentClass = props.class ? ` ${props.class}` : '';
   return (
-    <figure className={props.class}>
+    <figure className={`m-0${addParentClass}`}>
       <Image
         alt={props.alt}
         src={props.src}
