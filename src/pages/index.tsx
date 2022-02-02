@@ -3,10 +3,13 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Date from 'src/components/date';
-import { siteTitle } from '@/components/Layout/layout';
+import { siteSettings } from '@/components/Layout/layout';
 import { Btn } from 'src/components/Button/Btn';
 import { getSortedPostsData } from 'src/lib/posts';
 import utilStyles from 'src/styles/utils.module.css';
+import { Column } from '@/components/Column/Column';
+import { ColumnItem } from '@/components/Column/ColumnItem';
+import { NextImg } from '@/components/Img/Img';
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -79,17 +82,30 @@ interface Props {
 
 const Home: NextPage<Props> = ({ allPostsData, props }) => {
   return (
-    <div>
+    <>
       <Head>
-        <title>{siteTitle}</title>
+        <title>{siteSettings.siteTitle}</title>
       </Head>
-      <section className={utilStyles.headingMd}>
-        <p>{name}</p>
-        <p>
-          (This is a sample website - you’ll be building a site like this on{' '}
-          <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
-        </p>
+      <section>
+        <Column>
+          <ColumnItem col="6" class="pr-0">
+            <div className="h-full bg-[url('https://source.unsplash.com/random')] bg-no-repeat bg-cover bg-center"></div>
+          </ColumnItem>
+          <ColumnItem col="6" class="pl-0">
+            <div className="h-full shadow-black-500/50 shadow-lg p-4">
+              <NextImg
+                class="w-[40px] h-[40px] mx-auto mb-3"
+                src="/images/icon/icon_login.svg"
+                alt=""
+                width="128"
+                height="128"
+              />
+              <Btn link={false}>あああああああああああああ</Btn>
+            </div>
+          </ColumnItem>
+        </Column>
       </section>
+
       <section>
         <h2 className="text-blue-600 font-bold text-4xl mt-8 mb-5">
           勉強ページ
@@ -122,7 +138,7 @@ const Home: NextPage<Props> = ({ allPostsData, props }) => {
           ))}
         </ul>
       </section>
-    </div>
+    </>
   );
 };
 
