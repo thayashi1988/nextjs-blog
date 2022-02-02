@@ -7,7 +7,7 @@ import 'tailwindcss/tailwind.css';
 const App = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
     <ThemeProvider attribute="class">
-      <Layout home={false}>
+      <Layout>
         <Component {...pageProps} />
       </Layout>
     </ThemeProvider>
