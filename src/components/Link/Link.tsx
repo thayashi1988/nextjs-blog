@@ -19,7 +19,7 @@ export const NextLink: VFC<PROPS> = (props) => {
       <div className={`mb-3${addMarginClass}`}>
         <Link href={props.href}>
           <a
-            className={`text-sm text-blue-600 underline inline-block hover:text-blue-400 m-link-icon${addLinkClass}`}
+            className={`text-sm text-blue-600 underline inline-block md:hover:text-blue-400 m-link-icon${addLinkClass}`}
             target="_blank">
             {props.children}
           </a>
@@ -31,7 +31,7 @@ export const NextLink: VFC<PROPS> = (props) => {
       <div className={`mb-3${addMarginClass}`}>
         <Link href={props.href}>
           <a
-            className={`text-sm text-blue-600 underline inline-block hover:text-blue-400${addLinkClass}`}>
+            className={`text-sm text-blue-600 underline inline-block md:hover:text-blue-400${addLinkClass}`}>
             {props.children}
           </a>
         </Link>
