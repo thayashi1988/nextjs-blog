@@ -9,7 +9,7 @@ type PROPS = {
 export const Heading3: VFC<PROPS> = (props) => {
   return (
     <div className={`mb-4`}>
-      <h3 className={`text-black md:text-xl text-lg font-bold ${props.class}`}>
+      <h3 className={`md:text-xl text-lg font-bold ${props.class}`}>
         {props.children}
       </h3>
     </div>
