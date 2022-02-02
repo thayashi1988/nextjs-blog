@@ -5,19 +5,21 @@ type PROPS = {
   link: boolean;
   href?: string;
   class?: string;
-  parantClass?: string;
+  margin?: string;
   children: React.ReactNode;
   click?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 export const Btn: VFC<PROPS> = (props) => {
+  const addMarginClass = props.margin ? ` ${props.margin}` : '';
+  const addBtnClass = props.class ? ` ${props.class}` : '';
   // console.log('Btnコンポーネントのprops確認:', props);
   if (props.link) {
     return (
-      <div className={`mb-5 ${props.parantClass}`}>
+      <div className={`mb-5${addMarginClass}`}>
         <Link href={props.href}>
           <a
-            className={`max-w-xs outline-none inline-block bg-blue-500 hover:bg-blue-600 hover:no-underline md:text-base text-sm text-white font-bold py-2 px-4 rounded shadow-md ${props.class}`}>
+            className={`max-w-xs outline-none inline-block bg-blue-500 hover:bg-blue-600 hover:no-underline md:text-base text-sm text-white font-bold py-2 px-4 rounded shadow-md${addBtnClass}`}>
             {props.children}
           </a>
         </Link>
@@ -25,9 +27,9 @@ export const Btn: VFC<PROPS> = (props) => {
     );
   } else {
     return (
-      <div className={`mb-5 ${props.parantClass}`}>
+      <div className={`mb-5${addMarginClass}`}>
         <button
-          className={`max-w-xs outline-none bg-blue-500 hover:bg-blue-600 hover:no-underline md:text-base text-sm text-white font-bold py-2 px-4 rounded shadow-md ${props.class}`}
+          className={`max-w-xs outline-none bg-blue-500 hover:bg-blue-600 hover:no-underline md:text-base text-sm text-white font-bold py-2 px-4 rounded shadow-md${addBtnClass}`}
           onClick={props.click}>
           {props.children}
         </button>

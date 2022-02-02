@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 // ?はPartial。stringもしくはundefinedとなる。
 type PROPS = {
+  margin?: string;
   href: string;
   class?: string;
   target?: Boolean;
@@ -10,12 +11,15 @@ type PROPS = {
 };
 
 export const NextLink: VFC<PROPS> = (props) => {
+  const addMarginClass = props.margin ? ` ${props.margin}` : '';
+  const addLinkClass = props.class ? ` ${props.class}` : '';
+
   if (props.target) {
     return (
-      <div className="mb-3">
+      <div className={`mb-3${addMarginClass}`}>
         <Link href={props.href}>
           <a
-            className={`text-sm text-blue-600 underline inline-block hover:text-blue-400 m-link-icon ${props.class}`}
+            className={`text-sm text-blue-600 underline inline-block hover:text-blue-400 m-link-icon${addLinkClass}`}
             target="_blank">
             {props.children}
           </a>
@@ -24,10 +28,10 @@ export const NextLink: VFC<PROPS> = (props) => {
     );
   } else {
     return (
-      <div className="mb-3">
+      <div className={`mb-3${addMarginClass}`}>
         <Link href={props.href}>
           <a
-            className={`text-sm text-blue-600 underline inline-block hover:text-blue-400 ${props.class}`}>
+            className={`text-sm text-blue-600 underline inline-block hover:text-blue-400${addLinkClass}`}>
             {props.children}
           </a>
         </Link>

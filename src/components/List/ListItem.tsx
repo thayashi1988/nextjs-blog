@@ -9,16 +9,18 @@ type PROPS = {
 };
 
 export const ListItem: VFC<PROPS> = (props) => {
+  const addListItemClass = props.class ? ` ${props.class}` : '';
+
   if (!props.small) {
     return (
-      <li className={`mb-1 text-sm table ${props.class}`}>
+      <li className={`mb-1 text-sm table${addListItemClass}`}>
         <span className="table-cell">{props.mark}</span>
         {props.children}
       </li>
     );
   } else {
     return (
-      <li className={`mb-1 text-xs table ${props.class}`}>
+      <li className={`mb-1 text-xs table${addListItemClass}`}>
         <span className="table-cell">{props.mark}</span>
         {props.children}
       </li>

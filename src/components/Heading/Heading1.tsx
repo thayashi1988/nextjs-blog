@@ -2,14 +2,18 @@ import type { VFC } from 'react';
 import React from 'react';
 
 type PROPS = {
+  margin?: string;
   class?: string;
   children: React.ReactNode;
 };
 
 export const Heading1: VFC<PROPS> = (props) => {
+  const addMarginClass = props.margin ? ` ${props.margin}` : '';
+  const addHeadingClass = props.class ? ` ${props.class}` : '';
+
   return (
-    <div className={`md:mb-12 mb-8`}>
-      <h1 className={`md:text-3xl text-2xl font-bold ${props.class}`}>
+    <div className={`md:mb-12 mb-8${addMarginClass}`}>
+      <h1 className={`md:text-3xl text-2xl font-bold${addHeadingClass}`}>
         {props.children}
       </h1>
     </div>

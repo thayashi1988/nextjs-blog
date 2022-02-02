@@ -7,5 +7,7 @@ type PROPS = {
 };
 
 export const Text: VFC<PROPS> = (props) => {
-  return <p className={`text-sm mb-3 ${props.class}`}>{props.children}</p>;
+  const addTextClass = props.class ? ` ${props.class}` : '';
+
+  return <p className={`text-sm mb-3${addTextClass}`}>{props.children}</p>;
 };
