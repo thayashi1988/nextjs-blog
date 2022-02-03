@@ -1,5 +1,6 @@
 import type { VFC } from 'react';
 import React, { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/router';
 import { useTheme } from 'next-themes';
 import Switch from '@material-ui/core/Switch';
 import { Text } from '@/components/Text/Text';
@@ -7,7 +8,6 @@ import { Heading1 } from '@/components/Heading/Heading1';
 import { NextLink } from '@/components/Link/Link';
 import { BtnSecondary } from '@/components/Button/BtnSecondary';
 import { auth } from '../../../firebase';
-import { handleLogOut } from '@/components/Firebase/FirebaseAuth';
 
 type PROPS = {
   theme?: 'dark' | 'light';
@@ -20,6 +20,7 @@ export const Header: VFC<PROPS> = () => {
     checkedDarkMode: false,
   });
   const [isLogin, setIsLogin] = useState(null);
+  const router = useRouter();
 
   // ログイン情報を取得
   useEffect(() => {
@@ -30,9 +31,26 @@ export const Header: VFC<PROPS> = () => {
     const authProcess = auth.onAuthStateChanged((firebaseDatas: any) => {
       setIsLogin(firebaseDatas);
     });
+    if (isLogin !== null) {
+      const userUid = isLogin.uid;
+      router.push({
+        pathname: `/${userUid}/`,
+      });
+    } else {
+      router.push({
+        pathname: `/`,
+      });
+    }
     return () => authProcess();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isLogin]);
+
+  // ログアウト機能
+  const handleLogOut = (): any => {
+    router.push({
+      pathname: `/`,
+    });
+    auth.signOut();
+  };
 
   const handleDarkMode = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [e.target.name]: e.target.checked });
