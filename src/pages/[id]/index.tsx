@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -9,6 +9,7 @@ import utilStyles from 'src/styles/utils.module.css';
 import { Heading1 } from '@/components/Heading/Heading1';
 import { Column } from '@/components/Column/Column';
 import { ColumnItem } from '@/components/Column/ColumnItem';
+import { auth } from '../../../firebase';
 
 type Links = {
   href: string;
@@ -60,8 +61,14 @@ const LINKITEMS: Links[] = [
 ];
 
 const Index: NextPage = () => {
-  const router = useRouter();
-  const name = router.query.loginName;
+  const [loginName, setLoginName] = useState(null);
+  useEffect(() => {
+    const authProcess = auth.onAuthStateChanged((firebaseDatas: any) => {
+      const authName = firebaseDatas.displayName;
+      setLoginName(authName);
+    });
+    return () => authProcess();
+  }, [loginName]);
 
   return (
     <>
@@ -71,7 +78,7 @@ const Index: NextPage = () => {
       <section>
         <Heading1>
           ようこそ！
-          <span className="md:font-lg font-lg">{name}さん</span>
+          <span className="md:font-lg font-lg">{loginName}さん</span>
         </Heading1>
         <Column>
           {LINKITEMS.map((item) => {
