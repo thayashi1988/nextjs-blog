@@ -1,4 +1,4 @@
-import type { VFC } from 'react';
+import React from 'react';
 import Image from 'next/image';
 
 type PROPS = {
@@ -10,7 +10,7 @@ type PROPS = {
   quality?: string;
 };
 
-export const NextImg: VFC<PROPS> = (props) => {
+export const NextImg: React.VFC<PROPS> = (props) => {
   const addParentClass = props.class ? ` ${props.class}` : '';
   return (
     <figure className={`m-0${addParentClass}`}>
