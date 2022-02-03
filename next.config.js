@@ -10,7 +10,7 @@ module.exports = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ['images.microcms-assets.io'],
+    domains: ['images.microcms-assets.io', 'via.placeholder.com'],
   },
   webpack: (config) => {
     const env = Object.keys(process.env).reduce((acc, curr) => {
