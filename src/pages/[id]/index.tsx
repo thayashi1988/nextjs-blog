@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import React from 'react';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
 import Date from 'src/components/date';
@@ -58,13 +59,19 @@ const LINKITEMS: Links[] = [
 ];
 
 const Index: NextPage = () => {
+  const router = useRouter();
+  const name = router.query.loginName;
+
   return (
     <>
       <Head>
         <title>ホーム | Next.jsアプリ</title>
       </Head>
       <section>
-        <Heading2>勉強ページ</Heading2>
+        <Heading1>
+          ようこそ！
+          <span className="md:font-lg font-lg">{name}さん</span>
+        </Heading1>
         <Column>
           {LINKITEMS.map((item) => {
             return (
