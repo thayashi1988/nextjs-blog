@@ -61,7 +61,9 @@ export const Layout = ({ children }) => {
         // style={{ minHeight: `calc(100vh - ${footerHeight}px)` }}
       >
         <Header />
-        <main className="my-6 px-2 max-w-[960px] mx-auto">{children}</main>
+        <main className="my-6 px-2 w-full max-w-[960px] mx-auto">
+          {children}
+        </main>
         {!isHome ? (
           <div className={styles.backToHome}>
             <Btn
