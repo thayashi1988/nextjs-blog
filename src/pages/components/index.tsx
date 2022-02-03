@@ -23,8 +23,12 @@ export const Index: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>コンポーネント集</title>
+        <title>コンポーネント集 | Next.jsアプリ</title>
       </Head>
+      <Heading1 margin="md:mb-0 mb-0">コンポーネント集</Heading1>
+      <Text class="sm:mb-8">
+        本アプリで使用している各種コンポーネントです。
+      </Text>
       <HeadingComponent>見出しコンポーネント</HeadingComponent>
       <Heading1>見出し1 margin-bottom: PC:3rem MD:2rem</Heading1>
       <Heading2>見出し2 margin-bottom: PC:2.5rem MD:1.5rem</Heading2>

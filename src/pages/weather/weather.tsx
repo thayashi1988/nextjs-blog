@@ -2,6 +2,9 @@ import type { NextPage } from 'next';
 import { useState } from 'react';
 import Head from 'next/head';
 import calsses from 'src/styles/weather.module.css';
+import { Text } from '@/components/Text/Text';
+import { Heading1 } from '@/components/Heading/Heading1';
+import { NextLink } from '@/components/Link/Link';
 
 let val: string = '';
 const apiUrl: string = 'https://weather.tsukumijima.net/api/forecast?city=';
@@ -86,8 +89,28 @@ const Weather: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>天気予報ページ</title>
+        <title>天気予報ページ | Next.jsアプリ</title>
       </Head>
+      <Heading1>天気予報API</Heading1>
+      <Text>
+        以下天気用法APIを叩いて各地地域の天気予報を表示します。
+        <br />
+        <NextLink target href="https://weather.tsukumijima.net/">
+          https://weather.tsukumijima.net/
+        </NextLink>
+      </Text>
+      <Text>
+        APIの仕様上
+        <NextLink
+          margin="mb-0 inline-block"
+          target
+          href="https://weather.tsukumijima.net/primary_area.xml">
+          全国の地点定義表
+        </NextLink>
+        の地域コードを入力する形となります。
+        <br />
+        例）那覇 = 471010
+      </Text>
       {/* {rainArrrayJoin} */}
       <div className={`${calsses.app}`}>
         <div className={`${calsses.container}`}>

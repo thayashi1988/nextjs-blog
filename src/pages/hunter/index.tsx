@@ -10,6 +10,8 @@ import {
 } from 'react-beautiful-dnd';
 
 import Head from 'next/head';
+import { Text } from '@/components/Text/Text';
+import { Heading1 } from '@/components/Heading/Heading1';
 import { TextInput } from 'src/components/Hunter/HunterTextInput';
 import { HunterList } from 'src/components/Hunter/HunterList';
 import { HunterWidthResult } from 'src/components/Hunter/HunterWidthResult';
@@ -33,7 +35,7 @@ type HunterObj = {
   hunterEvenRows: boolean;
 };
 
-const Index: NextPage = () => {
+export const Index: NextPage = () => {
   //////// useState  ////////
   // 幅と高さを入力するテキストボックス
   const [widthInputText, setWidthInputText] = useState<string>('');
@@ -202,8 +204,10 @@ const Index: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>ハンターハンター</title>
+        <title>ハンターハンター | Next.jsアプリ</title>
       </Head>
+      <Heading1>大工計算ツール</Heading1>
+      <Text>大工が使用する計算ツールです。</Text>
       <HunterHunter
         widthValue={divisionRemainderWidth}
         heightValue={divisionRemainderHeight}

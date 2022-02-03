@@ -2,6 +2,8 @@ import React from 'react';
 import Head from 'next/head';
 import { NextImg } from 'src/components/Img/Img';
 import { NextLink } from 'src/components/Link/Link';
+import { Text } from '@/components/Text/Text';
+import { Heading1 } from '@/components/Heading/Heading1';
 
 type MICROCMSDATA = {
   contents: [];
@@ -56,8 +58,15 @@ export default function Index({ blogData }): JSX.Element {
   return (
     <div>
       <Head>
-        <title>microCMS読み込み</title>
+        <title>microCMS読み込み | Next.jsアプリ</title>
       </Head>
+      <Heading1>microCMS読み込み</Heading1>
+      <Text>
+        ヘッドレスCMSの「microCMS」に登録されている記事データを表示させています。
+        <br />
+        SSG (Static Site
+        Generation)で生成しているので、アプリビルド時にhtmlを生成しそれを表示させています。
+      </Text>
       <ul className="sm:flex sm:flex-wrap sm:justify-start">
         {blogContents.map((contents) => (
           <li className="sm:flex-initial p-2 sm:w-4/12" key={contents.id}>
