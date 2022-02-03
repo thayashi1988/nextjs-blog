@@ -21,6 +21,10 @@ const LINKITEMS: Links[] = [
     linkTxt: 'next.js チュートリアル',
   },
   {
+    href: '/material',
+    linkTxt: 'materialUIサンプル',
+  },
+  {
     href: '/weather',
     linkTxt: '天気予報ページ',
   },
@@ -40,10 +44,7 @@ const LINKITEMS: Links[] = [
     href: '/hunter',
     linkTxt: '大工ハンターハンター',
   },
-  {
-    href: '/material',
-    linkTxt: 'materialUIサンプル',
-  },
+
   {
     href: '/blog',
     linkTxt: 'microCMS SSG',
