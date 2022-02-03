@@ -1,6 +1,6 @@
 import React from 'react';
 import { useUser } from '@/components/Hooks/useUser';
-import { Loading } from '@/components/Loading/Loading';
+import { LoadingBox } from '@/components/Loading/LoadingBox';
 import { TextAlert } from '@/components/Text/TextAlert';
 import { Text } from '@/components/Text/Text';
 import { Heading2 } from '@/components/Heading/Heading2';
@@ -10,7 +10,7 @@ export const User: React.VFC = () => {
   const { personal, error, isLoading } = useUser();
 
   if (isLoading) {
-    return <Loading />;
+    return <LoadingBox />;
   }
   if (error) {
     return <TextAlert>{error.message}</TextAlert>;
