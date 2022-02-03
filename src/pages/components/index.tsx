@@ -65,16 +65,16 @@ export const Index: NextPage = () => {
       </List>
       <HeadingComponent class="mt-8">カラムコンポーネント</HeadingComponent>
       <Column>
-        <ColumnItem col="6">
+        <ColumnItem col="6" colSm="3">
           <Text>左カラム</Text>
         </ColumnItem>
-        <ColumnItem col="6">
+        <ColumnItem col="6" colSm="3">
           <Text>右カラム</Text>
         </ColumnItem>
-        <ColumnItem col="6">
+        <ColumnItem col="6" colSm="3">
           <Text>右カラム</Text>
         </ColumnItem>
-        <ColumnItem col="6">
+        <ColumnItem col="6" colSm="3">
           <Text>右カラム</Text>
         </ColumnItem>
       </Column>

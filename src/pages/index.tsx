@@ -41,10 +41,10 @@ const Home: NextPage<Props> = ({ allPostsData, props }) => {
       </Head>
       <section className="shadow-gray-300/50 shadow-xl">
         <Column class="mb-0">
-          <ColumnItem col="6" class="pr-0">
+          <ColumnItem col="6" colSm="6" class="pr-0 pt-0">
             <div className="h-full bg-[url('https://source.unsplash.com/random')] bg-no-repeat bg-cover bg-center"></div>
           </ColumnItem>
-          <ColumnItem col="6" class="pl-0">
+          <ColumnItem col="6" colSm="6" class="pl-0">
             <div className="h-full p-4">
               <NextImg
                 class="w-[40px] h-[40px] mx-auto mb-3"
@@ -55,16 +55,16 @@ const Home: NextPage<Props> = ({ allPostsData, props }) => {
               />
               <Heading1 class="text-center">ログイン</Heading1>
               <Column>
-                <ColumnItem col="6" class="pr-0">
+                <ColumnItem col="6" colSm="3" class="pr-0">
                   <LoginGoogle />
                 </ColumnItem>
-                <ColumnItem col="6" class="pr-0">
+                <ColumnItem col="6" colSm="3" class="pr-0">
                   <LoginFacebook />
                 </ColumnItem>
-                <ColumnItem col="6" class="pr-0">
+                <ColumnItem col="6" colSm="3" class="pr-0">
                   <LoginYahoo />
                 </ColumnItem>
-                <ColumnItem col="6" class="pr-0">
+                <ColumnItem col="6" colSm="3" class="pr-0">
                   <LoginGithub />
                 </ColumnItem>
               </Column>
