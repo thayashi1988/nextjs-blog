@@ -38,7 +38,7 @@ const LINKITEMS: Links[] = [
   // },
   {
     href: '/signin',
-    linkTxt: 'チャットアプリへ',
+    linkTxt: 'チャットアプリ',
   },
   {
     href: '/hunter',
