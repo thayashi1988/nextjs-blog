@@ -1,11 +1,12 @@
-import type { VFC } from 'react';
-import Head from 'next/head';
 import React from 'react';
 import { useUser } from '@/components/Hooks/useUser';
 import { Loading } from '@/components/Loading/Loading';
 import { TextAlert } from '@/components/Text/TextAlert';
+import { Text } from '@/components/Text/Text';
+import { Heading2 } from '@/components/Heading/Heading2';
+import { ResultCard } from '@/components/Qin/ResultCard/ResultCard';
 
-export const User: VFC = () => {
+export const User: React.VFC = () => {
   const { personal, error, isLoading } = useUser();
 
   if (isLoading) {
@@ -17,16 +18,12 @@ export const User: VFC = () => {
 
   return (
     <>
-      <Head>
-        <title>{personal?.title}</title>
-      </Head>
-      <h1 className="text-2xl font-bold text-center mb-6">id {personal?.id}</h1>
-      <div className="text-left">
-        <h2 className="text-2xl font-bold">{personal?.name}</h2>
-        <p className="mt-3">mail address：{personal?.email}</p>
-        <p className="mt-3">phone：{personal?.phone}</p>
-        <p className="mt-3">company：{personal?.company.name}</p>
-      </div>
+      <ResultCard>
+        <Heading2 class="text-center">id：{personal?.id}</Heading2>
+        <Text class="text-lg">postId：{personal?.postId}</Text>
+        <Text class="text-lg">email：{personal?.email}</Text>
+        <Text class="text-lg">body：{personal?.body}</Text>
+      </ResultCard>
     </>
   );
 };
