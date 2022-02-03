@@ -33,8 +33,10 @@ export const Header: VFC<PROPS> = () => {
     });
     if (isLogin !== null) {
       const userUid = isLogin.uid;
+      const userDisplayName = isLogin.displayName;
       router.push({
         pathname: `/${userUid}/`,
+        query: { loginName: userDisplayName },
       });
     } else {
       router.push({
