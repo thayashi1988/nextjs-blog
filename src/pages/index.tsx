@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Date from 'src/components/date';
@@ -10,6 +10,13 @@ import utilStyles from 'src/styles/utils.module.css';
 import { Column } from '@/components/Column/Column';
 import { ColumnItem } from '@/components/Column/ColumnItem';
 import { NextImg } from '@/components/Img/Img';
+import { Heading1 } from '@/components/Heading/Heading1';
+import {
+  LoginGoogle,
+  LoginFacebook,
+  LoginYahoo,
+  LoginGithub,
+} from '@/components/Login/Login';
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -20,7 +27,15 @@ export async function getStaticProps() {
   };
 }
 
-const name: string = 'Next.jsアプリ';
+type postDatas = {
+  id: string;
+  date: string;
+  title: string;
+}[];
+interface Props {
+  allPostsData?: postDatas;
+  props?: any;
+}
 
 type Links = {
   href: string;
@@ -70,16 +85,6 @@ const LINKITEMS: Links[] = [
   },
 ];
 
-type postDatas = {
-  id: string;
-  date: string;
-  title: string;
-}[];
-interface Props {
-  allPostsData?: postDatas;
-  props?: any;
-}
-
 const Home: NextPage<Props> = ({ allPostsData, props }) => {
   return (
     <>
@@ -100,7 +105,21 @@ const Home: NextPage<Props> = ({ allPostsData, props }) => {
                 width="128"
                 height="128"
               />
-              <Btn link={false}>あああああああああああああ</Btn>
+              <Heading1 class="text-center">ログイン</Heading1>
+              <Column>
+                <ColumnItem col="6" class="pr-0">
+                  <LoginGoogle />
+                </ColumnItem>
+                <ColumnItem col="6" class="pr-0">
+                  <LoginFacebook />
+                </ColumnItem>
+                <ColumnItem col="6" class="pr-0">
+                  <LoginYahoo />
+                </ColumnItem>
+                <ColumnItem col="6" class="pr-0">
+                  <LoginGithub />
+                </ColumnItem>
+              </Column>
             </div>
           </ColumnItem>
         </Column>
