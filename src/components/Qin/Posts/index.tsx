@@ -1,7 +1,7 @@
 import React from 'react';
 import { NextLink } from '@/components/Link/Link';
 import { usePosts, useCustom } from '@/components/Hooks/useFetch';
-import { Loading } from '@/components/Loading/Loading';
+import { LoadingText } from '@/components/Loading/LoadingText';
 import { TextAlert } from '@/components/Text/TextAlert';
 
 // サーバーサイドレンダリング時に使用する（静的ジェネレーターの場合で使用）
@@ -82,7 +82,7 @@ export const Posts: React.VFC = () => {
   // }, [getPosts]);
 
   if (isLoading) {
-    return <Loading />;
+    return <LoadingText />;
   }
   if (error) {
     return <TextAlert>{error.message}</TextAlert>;

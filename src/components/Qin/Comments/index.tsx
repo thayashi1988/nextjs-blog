@@ -1,7 +1,7 @@
 import React from 'react';
 import { NextLink } from '@/components/Link/Link';
 import { useComments } from '@/components/Hooks/useFetch';
-import { Loading } from '@/components/Loading/Loading';
+import { LoadingText } from '@/components/Loading/LoadingText';
 import { TextAlert } from '@/components/Text/TextAlert';
 
 type APICOMMENTSPROPS = {
@@ -15,7 +15,7 @@ export const Comments: React.VFC = () => {
   const { data, error, isLoading } = useComments();
 
   if (isLoading) {
-    return <Loading />;
+    return <LoadingText />;
   }
   if (error) {
     return <TextAlert>{error.message}</TextAlert>;
