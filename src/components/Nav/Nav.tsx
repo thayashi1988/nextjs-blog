@@ -24,7 +24,8 @@ const NavItems = [
 export const Nav: React.VFC = () => {
   const router = useRouter();
   NavItems.forEach((item) => {
-    if (item.href === router.asPath) {
+    if (router.asPath.indexOf(item.href) !== -1) {
+      // if (item.href === router.asPath) {
       item.current = true;
     } else {
       item.current = false;
@@ -32,12 +33,12 @@ export const Nav: React.VFC = () => {
   });
 
   return (
-    <nav className="max-w-screen-md w-full mx-auto">
+    <nav>
       <BtnInfo
         link
         href="/qin"
         margin="text-cener"
-        class="text-center sm:max-w-full">
+        class="text-center sm:max-w-sm">
         動的ルーティング・連続fetchのTOPへ戻る
       </BtnInfo>
       <ul className="flex items-center justify-between">
