@@ -8,14 +8,15 @@ type PROPS = {
   margin?: string;
   children: React.ReactNode;
   click?: React.MouseEventHandler<HTMLButtonElement>;
+  clickDiv?: React.MouseEventHandler<HTMLDivElement>;
 };
 
-export const BtnSimple: VFC<PROPS> = (props) => {
+export const BtnLogin: VFC<PROPS> = (props) => {
   const addMarginClass = props.margin ? ` ${props.margin}` : '';
   const addBtnClass = props.class ? ` ${props.class}` : '';
   if (props.link) {
     return (
-      <div className={addMarginClass}>
+      <div className={addMarginClass} onClick={props.clickDiv}>
         <Link href={props.href}>
           <a
             className={`w-full max-w-full sm:max-w-xs outline-none inline-block focus:ring-2 focus:ring-black${addBtnClass}`}>
@@ -26,7 +27,7 @@ export const BtnSimple: VFC<PROPS> = (props) => {
     );
   } else {
     return (
-      <div className={addMarginClass}>
+      <div className={addMarginClass} onClick={props.clickDiv}>
         <button
           className={`w-full max-w-full sm:max-w-xs outline-none focus:ring-2 focus:ring-black${addBtnClass}`}
           onClick={props.click}>
