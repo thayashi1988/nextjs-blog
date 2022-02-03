@@ -1,4 +1,3 @@
-import type { VFC } from 'react';
 import React from 'react';
 import { NextLink } from '@/components/Link/Link';
 import { usePosts, useCustom } from '@/components/Hooks/useFetch';
@@ -43,7 +42,7 @@ import { TextAlert } from '@/components/Text/TextAlert';
 //       throw new Error('エラー');
 //   }
 // };
-type apiPostsProps = {
+type APIPOSTPROPS = {
   id: string;
   link: string;
   title: {
@@ -52,7 +51,7 @@ type apiPostsProps = {
   name?: string;
 };
 
-export const Posts: VFC = () => {
+export const Posts: React.VFC = () => {
   const { data, error, isLoading, isEmpty } = usePosts();
   const {
     data: sakura,
@@ -94,7 +93,7 @@ export const Posts: VFC = () => {
 
   return (
     <ul className="my-5">
-      {data.map((post: apiPostsProps) => {
+      {data.map((post: APIPOSTPROPS) => {
         return (
           <li className="mb-4 text-sm" key={post.id}>
             <NextLink
