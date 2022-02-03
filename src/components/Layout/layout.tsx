@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { Header } from 'src/components/Header/Header';
 import { Footer } from 'src/components/Footer/Footer';
-import { Btn } from 'src/components/Button/Btn';
+import { BtnInfo } from 'src/components/Button/BtnInfo';
 import styles from 'src/components/Layout/layout.module.scss';
 import { auth } from '../../../firebase';
 
@@ -63,17 +63,15 @@ export const Layout = ({ children }) => {
         <Header />
         <main className="my-6 px-2 w-full max-w-[960px] mx-auto">
           {children}
-        </main>
-        {!isHome ? (
-          <div className={styles.backToHome}>
-            <Btn
+          {!isHome ? (
+            <BtnInfo
               link
               href={isLogin ? `/${isLogin.uid}` : '/'}
-              margin="text-center">
+              margin="mt-5 text-center">
               アプリTOPへ戻る
-            </Btn>
-          </div>
-        ) : null}
+            </BtnInfo>
+          ) : null}
+        </main>
       </div>
       <div ref={footerElem}>
         <Footer />
