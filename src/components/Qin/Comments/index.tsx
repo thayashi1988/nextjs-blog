@@ -1,18 +1,17 @@
-import type { VFC } from 'react';
 import React from 'react';
 import { NextLink } from '@/components/Link/Link';
 import { useComments } from '@/components/Hooks/useFetch';
 import { Loading } from '@/components/Loading/Loading';
 import { TextAlert } from '@/components/Text/TextAlert';
 
-type apiCommentsProps = {
+type APICOMMENTSPROPS = {
   id?: string;
   postId?: string;
   name?: string;
   email?: string;
 };
 
-export const Comments: VFC = () => {
+export const Comments: React.VFC = () => {
   const { data, error, isLoading } = useComments();
 
   if (isLoading) {
@@ -22,18 +21,13 @@ export const Comments: VFC = () => {
     return <TextAlert>{error.message}</TextAlert>;
   }
   return (
-    <ul className="my-5">
-      {data.map((comment: apiCommentsProps) => {
+    <ul>
+      {data.map((comment: APICOMMENTSPROPS) => {
         return (
           <li className="mb-4 text-sm" key={comment.id}>
-            <NextLink
-              href={`/qin/comments/${comment.postId}`}
-              class="text-black-600 hover:opacity-80">
-              postId：{comment.postId}
-              <br />
-              {comment.name}
-              <br />
-              {comment.email}
+            <NextLink href={`/qin/comments/${comment.id}`}>
+              id：{comment.id}
+              <span className="ml-2">{comment.email}</span>
             </NextLink>
           </li>
         );

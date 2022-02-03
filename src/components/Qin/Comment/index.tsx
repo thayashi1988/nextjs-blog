@@ -1,20 +1,24 @@
-import type { VFC } from 'react';
-import Head from 'next/head';
 import React from 'react';
 import { useComment } from '@/components/Hooks/useComment';
-import { useRouter } from 'next/router';
 import { Loading } from '@/components/Loading/Loading';
 import { TextAlert } from '@/components/Text/TextAlert';
+import { Text } from '@/components/Text/Text';
+import { Heading2 } from '@/components/Heading/Heading2';
+import { ResultCard } from '@/components/Qin/ResultCard/ResultCard';
+import { NextImg } from '@/components/Img/Img';
 
-type apiCommentProps = {
+type APIPHOTOPROPS = {
+  albumId?: string;
   id?: string;
-  email?: string;
-  body?: string;
+  title?: string;
+  url?: string;
+  thumbnailUrl?: string;
 };
 
-export const Comment: VFC = () => {
-  const router = useRouter();
-  const { comment, error, isLoading } = useComment();
+export const Comment: React.VFC = () => {
+  const { photo, error, isLoading } = useComment();
+  console.log('photo:', photo);
+  console.log('isLoading:', isLoading);
 
   if (isLoading) {
     return <Loading />;
@@ -25,25 +29,34 @@ export const Comment: VFC = () => {
 
   return (
     <>
-      <Head>
-        <title>Comments 下層ページ</title>
-      </Head>
-      <h1 className="text-2xl font-bold text-center mb-6">
-        postId {router.query.id}
-      </h1>
-      <ul>
-        {comment.map((commentItem: apiCommentProps) => {
-          return (
-            <li key={commentItem.id} className="mb-5">
-              <div className="text-left">
-                <h1 className="text-xl font-bold">id：{commentItem?.id}</h1>
-                <p className="mt-3">email：{commentItem?.email}</p>
-                <p className="mt-3">body：{commentItem?.body}</p>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+      {/* <ResultCard>
+        <Heading2 class="text-center">id：{photo[0]?.id}</Heading2>
+        <Text class="text-lg">albumId：{photo[0]?.albumId}</Text>
+        <Text class="text-lg">title：{photo[0]?.title}</Text>
+        <NextImg
+          src={photo[0]?.thumbnailUrl}
+          alt={photo[0]?.title}
+          width="150"
+          height="150"
+        />
+      </ResultCard> */}
+      {photo.map((data: APIPHOTOPROPS) => {
+        return (
+          <ResultCard key={data?.id}>
+            <Heading2 class="text-center">id：{data?.id}</Heading2>
+            <Text class="text-lg">albumId：{data?.albumId}</Text>
+            <Text class="text-lg">title：{data?.title}</Text>
+            <Text class="text-lg">thumbnai：</Text>
+            <NextImg
+              src={data?.thumbnailUrl}
+              alt={data?.title}
+              width="150"
+              height="150"
+              class="text-center"
+            />
+          </ResultCard>
+        );
+      })}
     </>
   );
 };
