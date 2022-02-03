@@ -18,7 +18,7 @@ const UserId: NextPage = () => {
           Next.jsアプリ
         </title>
       </Head>
-      <Heading1>postAPI連続fetch</Heading1>
+      <Heading1>userAPI連続fetch</Heading1>
       <Text>
         このページで前のページで取得したidとuserIdを元に動的ルーティングを行っております。
         <br />
