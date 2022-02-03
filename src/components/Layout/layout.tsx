@@ -7,7 +7,7 @@ import { Btn } from 'src/components/Button/Btn';
 import styles from 'src/components/Layout/layout.module.scss';
 
 export const siteSettings = {
-  siteTitle: 'Next.jsアプリ',
+  siteTitle: 'ログイン | Next.jsアプリ',
   siteDescription: 'Next.js Sample Website',
   siteUrl: 'https://nextjs-sample-app.vercel.app',
 };
