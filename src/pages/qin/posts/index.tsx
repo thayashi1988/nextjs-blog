@@ -16,11 +16,10 @@ const Index: NextPage = () => {
       <Heading1>postAPI表示</Heading1>
       <Text>
         このページでは以下のAPIを叩きデータを取得し、id、bodyを表示させています。
-        <br />
-        <NextLink target href="https://jsonplaceholder.typicode.com/posts">
-          https://jsonplaceholder.typicode.com/posts
-        </NextLink>
       </Text>
+      <NextLink target href="https://jsonplaceholder.typicode.com/posts">
+        https://jsonplaceholder.typicode.com/posts
+      </NextLink>
       <Nav />
       <Posts />
     </>

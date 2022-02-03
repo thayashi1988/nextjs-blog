@@ -25,13 +25,12 @@ const PostId: NextPage = () => {
         例）/qin/posts で10番目のリンクを叩くと、/qin/posts/10
         と前のページで取得したidをページディレクトリとしてルーティングさせています。
       </Text>
-      <Text>
+      <Text class="mb-0">
         また、userIdを用いて以下のAPをさらにたたき、userIdに紐付いたuser情報を取得し、表示させています。
-        <br />
-        <NextLink target href="https://jsonplaceholder.typicode.com/users">
-          {`https://jsonplaceholder.typicode.com/users/{id}`}
-        </NextLink>
       </Text>
+      <NextLink target href="https://jsonplaceholder.typicode.com/users">
+        {`https://jsonplaceholder.typicode.com/users/{id}`}
+      </NextLink>
       <List>
         <ListItem mark="※">
           https://jsonplaceholder.typicode.com/postsのidとuserIdは同じではないので注意してください。
