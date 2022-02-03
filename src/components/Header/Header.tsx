@@ -42,6 +42,7 @@ export const Header: VFC<PROPS> = () => {
       });
     }
     return () => authProcess();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLogin]);
 
   // ログアウト機能
@@ -60,7 +61,7 @@ export const Header: VFC<PROPS> = () => {
   return (
     <header className="flex items-center justify-between bg-blue-300 px-2 py-5">
       <NextLink
-        href="/"
+        href={isLogin ? `/${isLogin.uid}` : '/'}
         margin="mb-0"
         class="text-black dark:text-white no-underline md:hover:text-black hover:text-black dark:hover:text-white hover:no-underline">
         <Heading1 margin="md:mb-0 mb-0">Next.jsアプリ</Heading1>
