@@ -100,25 +100,25 @@ export const Index: NextPage = () => {
         <title>天気予報ページ | Next.jsアプリ</title>
       </Head>
       <Heading1>天気予報API</Heading1>
-      <Text>
+      <Text class="!mb-0">
         以下天気用法APIを叩いて各地地域の天気予報を表示します。
-        <br />
-        <NextLink target href="https://weather.tsukumijima.net/">
-          https://weather.tsukumijima.net/
-        </NextLink>
       </Text>
+      <NextLink target href="https://weather.tsukumijima.net/">
+        https://weather.tsukumijima.net/
+      </NextLink>
+      <Text class="!mb-0 inline-block">APIの仕様上、</Text>
+      <NextLink
+        margin="!mb-0 inline-block"
+        target
+        href="https://weather.tsukumijima.net/primary_area.xml">
+        全国の地点定義表
+      </NextLink>
       <Text>
-        APIの仕様上
-        <NextLink
-          margin="mb-0 inline-block"
-          target
-          href="https://weather.tsukumijima.net/primary_area.xml">
-          全国の地点定義表
-        </NextLink>
         の地域コードを入力する形となります。
         <br />
         例）那覇 = 471010
       </Text>
+
       {/* {rainArrrayJoin} */}
       <div className={`${calsses.app}`}>
         <div className={`${calsses.container}`}>
