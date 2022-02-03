@@ -64,9 +64,9 @@ export const Header: VFC<PROPS> = () => {
     <header className="flex items-center justify-between bg-blue-300 px-2 py-5">
       <NextLink
         href={isLogin ? `/${isLogin.uid}` : '/'}
-        margin="mb-0"
-        class="text-black dark:text-white no-underline md:hover:text-black hover:text-black dark:hover:text-white hover:no-underline">
-        <Heading1 margin="md:mb-0 mb-0">Next.jsアプリ</Heading1>
+        margin="!mb-0"
+        class="text-black dark:text-white no-underline hover:!text-black dark:hover:text-white hover:no-underline">
+        <Heading1 margin="md:mb-0 !mb-0">Next.jsアプリ</Heading1>
       </NextLink>
       <div className="flex flex-col-reverse md:flex-row items-center">
         {isLogin ? (
