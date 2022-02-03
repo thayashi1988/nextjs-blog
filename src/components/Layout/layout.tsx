@@ -5,6 +5,7 @@ import { Header } from 'src/components/Header/Header';
 import { Footer } from 'src/components/Footer/Footer';
 import { Btn } from 'src/components/Button/Btn';
 import styles from 'src/components/Layout/layout.module.scss';
+import { auth } from '../../../firebase';
 
 export const siteSettings = {
   siteTitle: 'ログイン | Next.jsアプリ',
@@ -13,19 +14,29 @@ export const siteSettings = {
 };
 
 export const Layout = ({ children }) => {
-  const [footerHeight, setFooterHeight] = useState(0);
+  // const [footerHeight, setFooterHeight] = useState(0);
   const footerElem = useRef();
+  const [isLogin, setIsLogin] = useState(null);
+
+  useEffect(() => {
+    const authProcess = auth.onAuthStateChanged((firebaseDatas: any) => {
+      setIsLogin(firebaseDatas);
+    });
+    return () => authProcess();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLogin]);
 
   const router = useRouter();
   const { pathname } = router;
   const isHome = pathname === '/';
 
-  useEffect(() => {
-    const target: any = footerElem.current;
-    const getHeight = target.getBoundingClientRect();
-    console.log('footerHeight:', footerHeight);
-    setFooterHeight((prev) => getHeight.height);
-  }, [footerHeight]);
+  // useEffect(() => {
+  //   const target: any = footerElem.current;
+  //   const getHeight = target.getBoundingClientRect();
+  //   // console.log('footerHeight:', footerHeight);
+  //   setFooterHeight((prev) => getHeight.height);
+  // }, [footerHeight]);
+
   return (
     <>
       <Head>
@@ -46,14 +57,18 @@ export const Layout = ({ children }) => {
       </Head>
 
       <div
-        className="flex flex-col min-h-screen"
-        style={{ minHeight: `calc(100vh - ${footerHeight}px)` }}>
+        className="flex flex-col"
+        // style={{ minHeight: `calc(100vh - ${footerHeight}px)` }}
+      >
         <Header />
-        <main className="flex-1 my-6 px-2">{children}</main>
+        <main className="my-6 px-2 max-w-[960px] mx-auto">{children}</main>
         {!isHome ? (
           <div className={styles.backToHome}>
-            <Btn link href="/">
-              TOPへ戻る
+            <Btn
+              link
+              href={isLogin ? `/${isLogin.uid}` : '/'}
+              margin="text-center">
+              アプリTOPへ戻る
             </Btn>
           </div>
         ) : null}
