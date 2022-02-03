@@ -11,7 +11,9 @@ export const useUser = () => {
     fetcher
   );
   const { data: personal, error: personalError } = useSWR(
-    user?.id ? `https://jsonplaceholder.typicode.com/users/${user.id}` : null,
+    user?.id
+      ? `https://jsonplaceholder.typicode.com/comments/${user.id}`
+      : null,
     fetcher
   );
   return {
