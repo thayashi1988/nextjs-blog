@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Date from 'src/components/date';
 import { Btn } from 'src/components/Button/Btn';
 import utilStyles from 'src/styles/utils.module.css';
-import { Heading2 } from '@/components/Heading/Heading2';
+import { Heading1 } from '@/components/Heading/Heading1';
 import { Column } from '@/components/Column/Column';
 import { ColumnItem } from '@/components/Column/ColumnItem';
 
@@ -16,10 +16,10 @@ type Links = {
 };
 
 const LINKITEMS: Links[] = [
-  // {
-  //   href: '/test/test',
-  //   linkTxt: 'テストページへ',
-  // },
+  {
+    href: '/test/test',
+    linkTxt: 'next.js チュートリアル',
+  },
   {
     href: '/weather/weather',
     linkTxt: '天気予報ページ',
@@ -28,14 +28,14 @@ const LINKITEMS: Links[] = [
     href: '/database/database',
     linkTxt: 'Cloud Firestore読み込み',
   },
-  {
-    href: '/login/login',
-    linkTxt: 'firebase Authentication',
-  },
   // {
-  //   href: '/signin',
-  //   linkTxt: 'チャットアプリへ',
+  //   href: '/login/login',
+  //   linkTxt: 'firebase Authentication',
   // },
+  {
+    href: '/signin',
+    linkTxt: 'チャットアプリへ',
+  },
   {
     href: '/hunter',
     linkTxt: '大工ハンターハンター',
