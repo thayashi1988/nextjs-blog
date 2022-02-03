@@ -1,51 +1,57 @@
 import React from 'react';
-import { BtnSimple } from 'src/components/Button/BtnSimple';
+import { BtnLogin } from '@/components/Button/BtnLogin';
 import { NextImg } from '@/components/Img/Img';
 import { handleLogIn } from '@/components/Firebase/FirebaseAuth';
 
-export const LoginGoogle = () => {
+type PROPS = {
+  click: React.MouseEventHandler<HTMLElement>;
+};
+
+export const LoginGoogle: React.VFC<PROPS> = (props) => {
   return (
-    <BtnSimple
-      link={false}
-      class="bg-white py-0 px-0 max-w-full w-full md:hover:opacity-80"
-      click={handleLogIn}>
-      <NextImg
-        class="leading-none"
-        src="/images/login/login_google.png"
-        alt=""
-        width="382"
-        height="92"
-      />
-    </BtnSimple>
+    <div onClick={props.click}>
+      <BtnLogin
+        link={false}
+        class="bg-white py-0 px-0 max-w-full w-full md:hover:opacity-80"
+        click={handleLogIn}>
+        <NextImg
+          class="leading-none"
+          src="/images/login/login_google.png"
+          alt=""
+          width="382"
+          height="92"
+        />
+      </BtnLogin>
+    </div>
   );
 };
 
 export const LoginFacebook = () => {
   return (
-    <BtnSimple
+    <BtnLogin
       link={false}
       class="bg-white py-0 px-0 max-w-full w-full md:hover:opacity-80">
       Facebookを追加予定
-    </BtnSimple>
+    </BtnLogin>
   );
 };
 
 export const LoginYahoo = () => {
   return (
-    <BtnSimple
+    <BtnLogin
       link={false}
       class="bg-white py-0 px-0 max-w-full w-full md:hover:opacity-80">
       yahooを追加予定
-    </BtnSimple>
+    </BtnLogin>
   );
 };
 
 export const LoginGithub = () => {
   return (
-    <BtnSimple
+    <BtnLogin
       link={false}
       class="bg-white py-0 px-0 max-w-full w-full md:hover:opacity-80">
       githubを追加予定
-    </BtnSimple>
+    </BtnLogin>
   );
 };
