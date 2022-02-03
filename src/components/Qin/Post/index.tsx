@@ -17,16 +17,12 @@ export const Post: React.VFC = () => {
   }
 
   return (
-    <>
-      <ResultCard>
-        <Heading2 class="text-center">userId：{user?.id}</Heading2>
-        <Text class="text-lg">name：{user?.name}</Text>
-        <Text class="text-lg">email：{user?.email}</Text>
-        <Text class="text-lg">website：{user?.website}</Text>
-        {user?.name ? (
-          <Text class="text-lg">created by {user.name}</Text>
-        ) : null}
-      </ResultCard>
-    </>
+    <ResultCard>
+      <Heading2 class="text-center">userId：{user?.id}</Heading2>
+      <Text class="text-lg">name：{user?.name}</Text>
+      <Text class="text-lg">email：{user?.email}</Text>
+      <Text class="text-lg">website：{user?.website}</Text>
+      {user?.name ? <Text class="text-lg">created by {user.name}</Text> : null}
+    </ResultCard>
   );
 };

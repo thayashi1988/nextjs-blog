@@ -17,13 +17,11 @@ export const User: React.VFC = () => {
   }
 
   return (
-    <>
-      <ResultCard>
-        <Heading2 class="text-center">id：{personal?.id}</Heading2>
-        <Text class="text-lg">postId：{personal?.postId}</Text>
-        <Text class="text-lg">email：{personal?.email}</Text>
-        <Text class="text-lg">body：{personal?.body}</Text>
-      </ResultCard>
-    </>
+    <ResultCard>
+      <Heading2 class="text-center">id：{personal?.id}</Heading2>
+      <Text class="text-lg">postId：{personal?.postId}</Text>
+      <Text class="text-lg">email：{personal?.email}</Text>
+      <Text class="text-lg">body：{personal?.body}</Text>
+    </ResultCard>
   );
 };
