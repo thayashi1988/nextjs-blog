@@ -1,18 +1,24 @@
-import type { VFC } from 'react';
+import type { NextPage } from 'next';
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { db } from '../../../firebase';
 import { Text } from '@/components/Text/Text';
 import { Heading1 } from '@/components/Heading/Heading1';
+import { Heading2 } from '@/components/Heading/Heading2';
 import { Btn } from '@/components/Button/Btn';
 import { FirebaseItems } from '@/components/Firebase/FirebaseItems';
 import { LoadingFirebase } from '@/components/Loading/LoadingFirebase';
 import { FirebaseInput } from '@/components/Firebase/FirebaseInput';
 
-export const Index: VFC = () => {
-  const [tasks, setTasks] = useState([{ id: '', title: '' }]);
-  const [isfetch, setIsfetch] = useState(false);
-  const [input, setInput] = useState('');
+type TASKSTATE = {
+  id: string;
+  title: string;
+}[];
+
+export const Index: NextPage = () => {
+  const [tasks, setTasks] = useState<TASKSTATE>([{ id: '', title: '' }]);
+  const [isFetch, setIsFetch] = useState<Boolean>(false);
+  const [input, setInput] = useState<string>('');
 
   // firebaseのデータを取得;
   useEffect(() => {
@@ -20,7 +26,7 @@ export const Index: VFC = () => {
       setTasks(
         snapshot.docs.map((doc) => ({ id: doc.id, title: doc.data().title }))
       );
-      setIsfetch(true);
+      setIsFetch(true);
     });
     return () => unSub();
   }, []);
@@ -36,13 +42,13 @@ export const Index: VFC = () => {
     setInput(e.target.value);
   };
 
-  if (!isfetch) {
+  if (!isFetch) {
     return <LoadingFirebase />;
   }
-  console.log('isfetch:', isfetch);
+  console.log('isFetch:', isFetch);
 
   return (
-    <div>
+    <>
       <Head>
         <title>Cloud Firestore読み込み | Next.jsアプリ</title>
       </Head>
@@ -51,24 +57,31 @@ export const Index: VFC = () => {
         FirebaseのCloud
         Firestoreを使用して、データの「読み込み・書き込み・削除」を行います。
       </Text>
-      <div className="flex justify-center items-center space-x-4 mb-8">
-        <FirebaseInput value={input} name="tashname" change={taskInput} />
+      <Heading2 margin="md:mb-4 !mb-3">タスク追加</Heading2>
+      <div className="flex flex-col sm:flex-row mb-3 sm:mb-8">
+        <FirebaseInput value={input} name="taskName" change={taskInput} />
         <Btn
           link={false}
-          class="flex-initial text-sm rounded-xl bg-blue-600 hover:bg-blue-700"
-          click={addTask}>
-          タスク追加
+          click={addTask}
+          class="h-full"
+          margin="mb-0 mt-2 sm:mt-0 sm:ml-4">
+          タスクを追加する
         </Btn>
       </div>
-
+      <Heading2 margin="md:mb-4 mb-4">タスク一覧</Heading2>
       <ul>
-        {tasks.map((task) => {
+        {tasks.map((task, index) => {
           return (
-            <FirebaseItems id={task.id} title={task.title} key={task.id} />
+            <FirebaseItems
+              num={index + 1}
+              id={task.id}
+              title={task.title}
+              key={task.id}
+            />
           );
         })}
       </ul>
-    </div>
+    </>
   );
 };
 
