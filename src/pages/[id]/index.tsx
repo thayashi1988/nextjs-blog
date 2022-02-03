@@ -25,7 +25,7 @@ const LINKITEMS: Links[] = [
     linkTxt: '天気予報ページ',
   },
   {
-    href: '/database/database',
+    href: '/firestore',
     linkTxt: 'Cloud Firestore読み込み',
   },
   // {
