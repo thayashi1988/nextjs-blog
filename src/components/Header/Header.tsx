@@ -21,6 +21,7 @@ export const Header: VFC<PROPS> = () => {
   });
   const [isLogin, setIsLogin] = useState(null);
   const router = useRouter();
+  const currentPath = router.pathname;
 
   // ログイン情報を取得
   useEffect(() => {
@@ -31,6 +32,8 @@ export const Header: VFC<PROPS> = () => {
     const authProcess = auth.onAuthStateChanged((firebaseDatas: any) => {
       setIsLogin(firebaseDatas);
     });
+
+    // ログインできたか確認処理
     if (isLogin !== null) {
       const userUid = isLogin.uid;
       const userDisplayName = isLogin.displayName;
@@ -39,9 +42,11 @@ export const Header: VFC<PROPS> = () => {
         query: { loginName: userDisplayName },
       });
     } else {
-      router.push({
-        pathname: `/`,
-      });
+      if (currentPath.indexOf('loading') === -1) {
+        router.push({
+          pathname: `/`,
+        });
+      }
     }
     return () => authProcess();
     // eslint-disable-next-line react-hooks/exhaustive-deps
