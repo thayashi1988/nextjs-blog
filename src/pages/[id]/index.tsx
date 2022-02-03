@@ -21,7 +21,7 @@ const LINKITEMS: Links[] = [
     linkTxt: 'next.js チュートリアル',
   },
   {
-    href: '/weather/weather',
+    href: '/weather',
     linkTxt: '天気予報ページ',
   },
   {
