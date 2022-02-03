@@ -5,11 +5,12 @@ import calsses from 'src/styles/weather.module.css';
 import { Text } from '@/components/Text/Text';
 import { Heading1 } from '@/components/Heading/Heading1';
 import { NextLink } from '@/components/Link/Link';
+import { BtnSuccess } from '@/components/Button/BtnSuccess';
 
 let val: string = '';
 const apiUrl: string = 'https://weather.tsukumijima.net/api/forecast?city=';
 
-const Weather: NextPage = () => {
+export const Index: NextPage = () => {
   const [city, setCity] = useState('');
   const [tempMax, setTempMax] = useState('');
   const [telop, setTelop] = useState('');
@@ -40,16 +41,23 @@ const Weather: NextPage = () => {
     return `${year}年 ${month} ${date}日 ${day}`;
   };
 
-  const inputData = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleGetInputData = (e: React.ChangeEvent<HTMLInputElement>) => {
     val = e.target.value;
   };
 
-  const weatherCheck = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyPressWatherCheck = (
+    e: React.KeyboardEvent<HTMLInputElement>
+  ) => {
     const pressKey = e.key;
     if (pressKey === 'Enter') {
       fetchWeather(val);
       dateBuilder();
     }
+  };
+
+  const handleClickWeatherCheck = (e: React.MouseEvent<HTMLButtonElement>) => {
+    fetchWeather(val);
+    dateBuilder();
   };
 
   const fetchWeather = async (areaName: string) => {
@@ -87,7 +95,7 @@ const Weather: NextPage = () => {
   };
 
   return (
-    <div>
+    <>
       <Head>
         <title>天気予報ページ | Next.jsアプリ</title>
       </Head>
@@ -117,12 +125,17 @@ const Weather: NextPage = () => {
           <div className={`${calsses.search_box}`}>
             <input
               type="text"
-              onChange={inputData}
-              onKeyPress={weatherCheck}
+              onChange={handleGetInputData}
+              onKeyPress={handleKeyPressWatherCheck}
               className={calsses.search_bar}
               placeholder="地域を入力..."
             />
-            {/* <Btn link={false}>チェック</Btn> */}
+            <BtnSuccess
+              margin="text-center mt-3"
+              link={false}
+              click={handleClickWeatherCheck}>
+              天気予報をチェック
+            </BtnSuccess>
           </div>
 
           <div className={calsses.weather_wrap}>
@@ -144,7 +157,7 @@ const Weather: NextPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
-export default Weather;
+export default Index;
