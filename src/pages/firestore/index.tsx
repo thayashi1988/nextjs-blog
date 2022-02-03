@@ -2,12 +2,14 @@ import type { VFC } from 'react';
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { db } from '../../../firebase';
+import { Text } from '@/components/Text/Text';
+import { Heading1 } from '@/components/Heading/Heading1';
 import { Btn } from '@/components/Button/Btn';
 import { FirebaseItems } from '@/components/Firebase/FirebaseItems';
 import { LoadingFirebase } from '@/components/Loading/LoadingFirebase';
 import { FirebaseInput } from '@/components/Firebase/FirebaseInput';
 
-export const DataBase: VFC = () => {
+export const Index: VFC = () => {
   const [tasks, setTasks] = useState([{ id: '', title: '' }]);
   const [isfetch, setIsfetch] = useState(false);
   const [input, setInput] = useState('');
@@ -42,8 +44,13 @@ export const DataBase: VFC = () => {
   return (
     <div>
       <Head>
-        <title>firebaseのデータベース読み込み</title>
+        <title>Cloud Firestore読み込み | Next.jsアプリ</title>
       </Head>
+      <Heading1>Cloud Firestore読み込み</Heading1>
+      <Text>
+        FirebaseのCloud
+        Firestoreを使用して、データの「読み込み・書き込み・削除」を行います。
+      </Text>
       <div className="flex justify-center items-center space-x-4 mb-8">
         <FirebaseInput value={input} name="tashname" change={taskInput} />
         <Btn
@@ -65,4 +72,4 @@ export const DataBase: VFC = () => {
   );
 };
 
-export default DataBase;
+export default Index;
