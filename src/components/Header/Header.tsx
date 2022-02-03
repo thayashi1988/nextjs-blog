@@ -42,7 +42,7 @@ export const Header: VFC<PROPS> = () => {
         query: { loginName: userDisplayName },
       });
     } else {
-      if (currentPath.indexOf('loading') === -1) {
+      if (!/.+/.test(currentPath)) {
         router.push({
           pathname: `/`,
         });
