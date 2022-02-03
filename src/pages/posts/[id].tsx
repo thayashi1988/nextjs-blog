@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Layout from 'src/components/Layout/layout';
+import Layout from '@/components/Layout/layout';
 // インポートのためにこの文を追加する
 import Date from 'src/components/date';
 // Add this line
@@ -25,7 +25,7 @@ export async function getStaticPaths() {
 
 export default function Post({ postData }) {
   return (
-    <Layout home={false}>
+    <Layout>
       <Head>
         <title>{postData.title}</title>
       </Head>

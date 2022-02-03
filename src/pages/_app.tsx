@@ -1,7 +1,7 @@
 import { AppProps } from 'next/app';
 import { ThemeProvider } from 'next-themes'; // ダークモードのプラグイン
 import '@/styles/global.css';
-import Layout from 'src/components/Layout/layout';
+import Layout from '@/components/Layout/layout';
 import 'tailwindcss/tailwind.css';
 
 const App = ({ Component, pageProps }: AppProps): JSX.Element => {

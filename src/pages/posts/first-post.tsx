@@ -1,11 +1,11 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import Layout from 'src/components/Layout/layout';
+import Layout from '@/components/Layout/layout';
 
 const FirstPost: NextPage = () => {
   return (
-    <Layout home={false}>
+    <Layout>
       <Head>
         <title>First Post</title>
       </Head>
