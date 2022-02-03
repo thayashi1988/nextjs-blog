@@ -4,15 +4,15 @@ import { fetcher } from '@/lib/fetcher';
 
 export const useComment = () => {
   const router = useRouter();
-  const { data: comment, error: commentError } = useSWR(
+  const { data: photo, error: photoError } = useSWR(
     router.query.id
-      ? `https://jsonplaceholder.typicode.com/comments/?postId=${router.query.id}`
+      ? `https://jsonplaceholder.typicode.com/photos?id=${router.query.id}`
       : null,
     fetcher
   );
   return {
-    comment,
-    error: commentError,
-    isLoading: !comment && !commentError,
+    photo,
+    error: photoError,
+    isLoading: !photo && !photoError,
   };
 };
