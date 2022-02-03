@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import React from 'react';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { siteSettings } from '@/components/Layout/layout';
 import { getSortedPostsData } from 'src/lib/posts';
@@ -34,6 +35,11 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ allPostsData, props }) => {
+  const router = useRouter();
+  const handleRouteLoading = () => {
+    router.push('/loading');
+  };
+
   return (
     <>
       <Head>
@@ -56,7 +62,7 @@ const Home: NextPage<Props> = ({ allPostsData, props }) => {
               <Heading1 class="text-center">ログイン</Heading1>
               <Column>
                 <ColumnItem col="6" colSm="3" class="pr-0">
-                  <LoginGoogle />
+                  <LoginGoogle click={handleRouteLoading} />
                 </ColumnItem>
                 <ColumnItem col="6" colSm="3" class="pr-0">
                   <LoginFacebook />
