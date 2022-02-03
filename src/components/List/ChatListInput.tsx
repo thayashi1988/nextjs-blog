@@ -1,4 +1,3 @@
-// react
 import React, { useState, useRef } from 'react';
 import { GravatarPath } from '../Img/Gravatar';
 import { MessageField } from '../Form/MessageField';

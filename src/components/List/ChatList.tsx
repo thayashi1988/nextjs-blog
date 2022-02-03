@@ -1,4 +1,3 @@
-// react
 import React, { useState, useEffect } from 'react';
 import { ChatListMessages } from './ChatListMessages';
 import { messagesRef } from '../../../firebase';

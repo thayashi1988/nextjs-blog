@@ -1,4 +1,3 @@
-// react
 import React from 'react';
 import { pushMessage } from '../../../firebase';
 import { IconButton } from '@material-ui/core';
