@@ -17,7 +17,8 @@ export const BtnSimple: VFC<PROPS> = (props) => {
     return (
       <div className={addMarginClass}>
         <Link href={props.href}>
-          <a className={`max-w-xs outline-none inline-block${addBtnClass}`}>
+          <a
+            className={`w-full max-w-full sm:max-w-xs outline-none inline-block${addBtnClass}`}>
             {props.children}
           </a>
         </Link>
@@ -27,7 +28,7 @@ export const BtnSimple: VFC<PROPS> = (props) => {
     return (
       <div className={addMarginClass}>
         <button
-          className={`max-w-xs outline-none${addBtnClass}`}
+          className={`w-full max-w-full sm:max-w-xs outline-none${addBtnClass}`}
           onClick={props.click}>
           {props.children}
         </button>
