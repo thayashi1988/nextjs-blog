@@ -1,16 +1,15 @@
 // react
-import type { VFC } from 'react';
 import React, { useState, useEffect } from 'react';
-
-// components
 import { ChatListMessages } from './ChatListMessages';
-
-// firebase
 import { messagesRef } from '../../../firebase';
-
-// @material-ui
 import { makeStyles } from '@material-ui/core/styles';
 import { List } from '@material-ui/core/';
+
+type MESSAGEPROPS = {
+  key: string;
+  name: string;
+  text: string;
+}[];
 
 //material-uiのstyle
 const useStyles = makeStyles({
@@ -21,8 +20,8 @@ const useStyles = makeStyles({
   },
 });
 
-export const ChatList: VFC = () => {
-  const [messages, setMessages] = useState([]);
+export const ChatList: React.VFC = () => {
+  const [messages, setMessages] = useState<MESSAGEPROPS>([]);
   const classes = useStyles();
 
   //firebaseからのデータ取得
@@ -37,6 +36,7 @@ export const ChatList: VFC = () => {
         const newMessages = entries.map((entry) => {
           // const key = entry[0];
           // const datas = entry[1]
+          console.log('entry:', entry);
           const [key, datas]: any = entry;
           return { key: key, ...datas };
         });

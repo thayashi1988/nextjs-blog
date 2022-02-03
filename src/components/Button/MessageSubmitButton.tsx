@@ -1,22 +1,17 @@
 // react
-import type { VFC } from 'react';
 import React from 'react';
-
-// firebase
 import { pushMessage } from '../../../firebase';
-
-// @material-ui
 import { IconButton } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 
-type ARG = {
+type PROPS = {
   inputEl: React.MutableRefObject<HTMLInputElement>;
   userName: string | string[];
   setInputText: React.Dispatch<string>;
   inputText: string;
 };
 
-export const MessageSubmitButton: VFC<ARG> = ({
+export const MessageSubmitButton: React.VFC<PROPS> = ({
   inputEl,
   userName,
   setInputText,

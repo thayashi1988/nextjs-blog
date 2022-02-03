@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { NextLink } from 'src/components/Link/Link';
+// import { NextLink } from 'src/componnts/Link/Link';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -12,16 +12,16 @@ import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import { auth } from '../../../firebase';
 
-const Copyright = React.memo(() => {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <NextLink href="/">チャットアプリ</NextLink> {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-});
-Copyright.displayName = 'Copyright';
+// const Copyright = React.memo(() => {
+//   return (
+//     <Typography variant="body2" color="textSecondary" align="center">
+//       {'Copyright © '}
+//       <NextLink href="/">チャットアプリ</NextLink> {new Date().getFullYear()}
+//       {'.'}
+//     </Typography>
+//   );
+// });
+// Copyright.displayName = 'Copyright';
 
 //material-uiのstyle
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const SignIn: NextPage = () => {
+export const Index: NextPage = () => {
   // ルーター
   const router = useRouter();
 
@@ -72,7 +72,7 @@ export const SignIn: NextPage = () => {
     });
     return () => authProcess();
   }, [string]);
-  console.log('user:', user);
+  // console.log('user:', user);
 
   //入力テキスト取得
   const inputFunc = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -97,9 +97,10 @@ export const SignIn: NextPage = () => {
 
   //ボタンクリックアクション
   const clickFunc = (): void => {
+    console.log('string:', string);
     setName(string);
     router.push({
-      pathname: './signin/chat',
+      pathname: '/signin/chat',
       query: { userName: name }, //入力したユーザーネームを渡す
     });
   };
@@ -107,13 +108,13 @@ export const SignIn: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>firebaseでのチャットアプリ</title>
+        <title>チャットアプリ | Next.jsアプリ</title>
       </Head>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
-            ようこそ
+            チャットアプリへようこそ
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
@@ -122,7 +123,7 @@ export const SignIn: NextPage = () => {
               required
               fullWidth
               id="name"
-              label="お名前"
+              label="お名前を入力してください"
               name="name"
               autoFocus
               onChange={inputFunc}
@@ -141,12 +142,10 @@ export const SignIn: NextPage = () => {
             </Button>
           </form>
         </div>
-        <Box mt={2}>
-          <Copyright />
-        </Box>
+        <Box mt={2}>{/* <Copyright /> */}</Box>
       </Container>
     </div>
   );
 };
 
-export default SignIn;
+export default Index;

@@ -28,7 +28,7 @@ export const Chat: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>firebaseでのチャットアプリ</title>
+        <title>ルーム | チャットアプリ | Next.jsアプリ</title>
       </Head>
       <div className={classes.root}>
         <ChatList />
@@ -38,11 +38,7 @@ export const Chat: NextPage = () => {
         />
       </div>
       <div className="text-center">
-        <Btn
-          link
-          href="/signin"
-          class="text-sm text-center max-w-sm mx-auto bg-purple-600 hover:bg-purple-800">
-          {/* {router.query.userName} */}
+        <Btn link href="/signin">
           前のページに戻る
         </Btn>
       </div>
