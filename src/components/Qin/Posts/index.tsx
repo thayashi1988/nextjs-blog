@@ -92,13 +92,11 @@ export const Posts: React.VFC = () => {
   }
 
   return (
-    <ul className="my-5">
+    <ul>
       {data.map((post: APIPOSTPROPS) => {
         return (
-          <li className="mb-4 text-sm" key={post.id}>
-            <NextLink
-              href={`/qin/posts/${post.id}`}
-              class="text-black-600 hover:opacity-80">
+          <li className="mb-4" key={post.id}>
+            <NextLink href={`/qin/posts/${post.id}`}>
               {post.id}&nbsp;
               {post.title}
             </NextLink>
