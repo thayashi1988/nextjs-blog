@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import Head from 'next/head';
 import { FBTest, storage, storageRef } from '../../../firebase';
 import { Text } from '@/components/Text/Text';
@@ -33,6 +33,38 @@ export const Index: NextPage = (props) => {
   });
   const [oldDir, setOldDir] = useState<string>('');
   const [prog, setProg] = useState<number>(0);
+
+  const imgRootRef = storageRef;
+  const underItems = [];
+  const underDirs = [];
+  useEffect(() => {
+    // const kkk = () => {
+    imgRootRef
+      .listAll()
+      .then((res) => {
+        res.prefixes.forEach((folderRef) => {
+          underDirs.push(folderRef.name);
+          console.log('folderRef.name:', folderRef.name);
+          allDirDatas.root[folderRef.name] = { files: '' };
+          allDirDatas.root[folderRef.name].path = `${folderRef.name}`;
+          res.items.forEach((itemRef) => {
+            underItems.push(itemRef.name);
+            console.log('itemRef.name:', itemRef.name);
+          });
+          allDirDatas.root[folderRef.name].files = [underItems];
+        });
+        console.log('allDirDatas:', allDirDatas);
+        setStorageDir([...underDirs]);
+        setStorageDatas([...underItems]);
+      })
+      .catch((error) => {
+        alert('handleShowFiles エラーが発生しました。');
+        console.log('handleShowFiles error:', error);
+      });
+    // };
+    // return () => kkk();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleFileUp = () => {
     const file =
@@ -88,6 +120,7 @@ export const Index: NextPage = (props) => {
   const handleShowFiles = () => {
     setStorageDatas([]);
     setStorageDir([]);
+    setOldDir('');
     // const imgDirRef = storageRef.child('images');
     const imgRootRef = storageRef;
     const underItems = [];
@@ -96,63 +129,95 @@ export const Index: NextPage = (props) => {
     imgRootRef
       .listAll()
       .then((res) => {
-        res.items.forEach((itemRef) => {
-          // All the items under listRef.
-          underItems.push(itemRef.name);
-          console.log('itemRef.name:', itemRef.name);
-          // allDirDatas.root.oldDir = itemRef.name;
-        });
-        setStorageDatas([...underItems]);
         res.prefixes.forEach((folderRef) => {
-          // All the prefixes under listRef.
-          // You may call listAll() recursively on them.
           underDirs.push(folderRef.name);
           console.log('folderRef.name:', folderRef.name);
+          allDirDatas.root[folderRef.name] = { files: '' };
+          allDirDatas.root[folderRef.name].path = `${folderRef.name}`;
+          res.items.forEach((itemRef) => {
+            underItems.push(itemRef.name);
+            console.log('itemRef.name:', itemRef.name);
+          });
+          // allDirDatas.root[folderRef.name].files = [underItems];
         });
+        console.log('allDirDatas:', allDirDatas);
         setStorageDir([...underDirs]);
+        setStorageDatas([...underItems]);
+
+        // res.items.forEach((itemRef) => {
+        //   underItems.push(itemRef.name);
+        //   console.log('itemRef.name:', itemRef.name);
+        // });
+        // setStorageDatas([...underItems]);
+        // allDirDatas.root[folderRef.name] = [underItems];
       })
       .catch((error) => {
         alert('handleShowFiles エラーが発生しました。');
         console.log('handleShowFiles error:', error);
       });
   };
-  console.log('allDirDatas:', allDirDatas);
 
   const handleDirSearch = (e) => {
     setStorageDatas(['']);
     setStorageDir(['']);
-    console.log('storageDatas:', storageDatas);
-    console.log('storageDir:', storageDir);
 
-    const dir = e.target.value;
-    console.log('dir:', dir);
-    setOldDir(dir);
+    const clickedDir = e.target.value;
+    console.log('clickedDir:', clickedDir);
+    if (/\//.test(oldDir)) {
+      setOldDir(`${clickedDir}`);
+    } else {
+      setOldDir((prev) => `${prev}/${clickedDir}`);
+    }
+    // const hhhh = Object.keys(allDirDatas.root[oldDir]);
+    // const hhhh = Object.entries(allDirDatas).find(([key, index]) => {
+    //   console.log('key:', key);
+    //   // key[clickedDir] === clickedDir
+    // });
+    // console.log('hhhh:', hhhh);
     console.log('oldDir:', oldDir);
-    const imgRootRef = storageRef.child(`${dir}`);
+    const jjjj = `${oldDir}/${clickedDir}`;
+    console.log('jjjj:', jjjj);
+    const imgRootRef = storageRef.child(`${clickedDir}`);
     const underItems = [];
     const underDirs = [];
     imgRootRef
       .listAll()
       .then((res) => {
-        console.log('res.items:', res.items);
-        res.items.forEach((itemRef) => {
-          console.log('itemRef.name:', itemRef.name);
-          underItems.push(itemRef.name);
-        });
-        console.log('underItems:', underItems);
-        setStorageDatas([...underItems]);
-
         res.prefixes.forEach((folderRef) => {
-          underDirs.push(folderRef.name);
-          console.log('folderRef.name:', folderRef.name);
+          underDirs.push(`${clickedDir}/${folderRef.name}`);
+          // console.log('handleDirSearch folderRef.name:', folderRef.name);
+          // allDirDatas.root[clickedDir][folderRef.name] = { files: '' };
+          // allDirDatas.root[clickedDir][
+          //   folderRef.name
+          // ].path = `${clickedDir}/${folderRef.name}`;
         });
-        console.log('underDirs:', underDirs);
+        res.items.forEach((itemRef) => {
+          // console.log('handleDirSearch itemRef.name:', itemRef.name);
+          underItems.push(`${itemRef.name}`);
+        });
+        // console.log(
+        //   'allDirDatas.root[clickedDir]:',
+        //   allDirDatas.root[clickedDir]
+        // );
+        // allDirDatas.root[clickedDir].files = [...underItems];
+        // console.log('underDirs:', underDirs);
         setStorageDir([...underDirs]);
+        setStorageDatas([...underItems]);
+        console.log('storageDir:', storageDir);
+
+        // res.items.forEach((itemRef) => {
+        //   console.log('handleDirSearch itemRef.name:', itemRef.name);
+        //   underItems.push(itemRef.name);
+        // });
+        // allDirDatas.root[clickedDir] = [...underItems];
+        // console.log('underItems:', underItems);
       })
       .catch((error) => {
         alert('handleShowFiles エラーが発生しました。');
         console.log('handleShowFiles error:', error);
       });
+
+    // console.log('allDirDatas:', allDirDatas);
   };
 
   return (
@@ -189,10 +254,17 @@ export const Index: NextPage = (props) => {
       </div>
       <Heading2>Storage表示</Heading2>
       <div className="text-left">
-        <Btn link={false} click={handleShowFiles}>
+        {/* <Btn link={false} click={handleShowFiles}>
           storage表示
-        </Btn>
-        <Text>/{oldDir === '' ? 'root' : oldDir}</Text>
+        </Btn> */}
+        <Text>
+          現在のディレクトリ
+          <br />
+          {`https://firebasestorage.googleapis.com/v0/b/udemy-todo-f0672.appspot.com/o/${oldDir}`}
+          {/* {oldDir === ''
+            ? 'https://firebasestorage.googleapis.com/v0/b/udemy-todo-f0672.appspot.com/o/'
+            : `https://firebasestorage.googleapis.com/v0/b/udemy-todo-f0672.appspot.com/o/${oldDir}`} */}
+        </Text>
         {storageDatas.length !== 0
           ? storageDatas.map((data) => {
               return (
@@ -202,7 +274,6 @@ export const Index: NextPage = (props) => {
               );
             })
           : null}
-        {/* <Text>ディレクトリ一覧</Text> */}
         {storageDir.length !== 0
           ? storageDir.map((data) => {
               return (
@@ -213,6 +284,7 @@ export const Index: NextPage = (props) => {
                     value={data}
                     onClick={handleDirSearch}
                   />
+                  <span className="text-xs">ディレクトリ</span>
                 </div>
               );
             })
