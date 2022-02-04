@@ -100,7 +100,7 @@ export const Index: NextPage = () => {
     console.log('string:', string);
     setName(string);
     router.push({
-      pathname: '/signin/chat',
+      pathname: '/chat/room',
       query: { userName: name }, //入力したユーザーネームを渡す
     });
   };

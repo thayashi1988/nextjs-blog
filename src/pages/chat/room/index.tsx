@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const Chat: NextPage = () => {
+export const Index: NextPage = () => {
   const router = useRouter();
   const name = router.query.userName;
   if (name === '') {
@@ -46,4 +46,4 @@ export const Chat: NextPage = () => {
   );
 };
 
-export default Chat;
+export default Index;
