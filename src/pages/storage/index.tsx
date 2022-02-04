@@ -44,7 +44,7 @@ export const Index: NextPage = (props) => {
           });
           allDirDatas.root[folderRef.name].files = [underItems];
         });
-        console.log('allDirDatas:', allDirDatas);
+        // console.log('allDirDatas:', allDirDatas);
         setStorageDir([...underDirs]);
         setStorageDatas([...underItems]);
       })
@@ -58,6 +58,11 @@ export const Index: NextPage = (props) => {
   const handleFileUp = () => {
     const file =
       document.querySelector<HTMLInputElement>('input[type="file"]').files[0];
+    console.log('file:', file);
+    if (!file) {
+      alert('アップロードファイルを選択してください。');
+      return;
+    }
     const uploadTask = storageRef
       .child('images/' + file.name)
       .put(file, fileMetadata);
@@ -99,6 +104,10 @@ export const Index: NextPage = (props) => {
           setUploadedUrl(downloadURL);
           console.log('File available at', downloadURL);
           setProg(100);
+          alert('アップロードが完了しました。');
+          setTimeout(() => {
+            setProg(0);
+          }, 1000);
         });
       }
     );
@@ -125,7 +134,7 @@ export const Index: NextPage = (props) => {
             underItems.push(itemRef.name);
           });
         });
-        console.log('allDirDatas:', allDirDatas);
+        // console.log('allDirDatas:', allDirDatas);
         setStorageDir([...underDirs]);
         setStorageDatas([...underItems]);
       })
@@ -238,6 +247,7 @@ export const Index: NextPage = (props) => {
           <br />
           {`https://firebasestorage.googleapis.com/v0/b/udemy-todo-f0672.appspot.com/o/${oldDir}`}
         </Text>
+        <Text>配下にあるファイル・ディレクトリ</Text>
         {storageDatas.length !== 0
           ? storageDatas.map((data) => {
               return (
