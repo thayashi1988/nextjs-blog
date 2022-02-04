@@ -16,11 +16,22 @@ const fileMetadata = {
   contentType: 'image/*',
 };
 
+const allDirDatas = {
+  root: {
+    path: '/',
+  },
+};
+
 export const Index: NextPage = (props) => {
-  const [uploadedUrl, setUploadedUrl] = useState('');
-  const [storageDatas, setStorageDatas] = useState<any>([]);
-  const [storageDir, setStorageDir] = useState<any>([]);
-  const [oldDir, setOldDir] = useState<any>('');
+  const [uploadedUrl, setUploadedUrl] = useState<string>('');
+  const [storageDatas, setStorageDatas] = useState<string[]>([]);
+  const [storageDir, setStorageDir] = useState<string[]>([]);
+  const [allDir, setAllDir] = useState<any>({
+    root: {
+      path: '/',
+    },
+  });
+  const [oldDir, setOldDir] = useState<string>('');
   const [prog, setProg] = useState<number>(0);
 
   const handleFileUp = () => {
@@ -89,6 +100,7 @@ export const Index: NextPage = (props) => {
           // All the items under listRef.
           underItems.push(itemRef.name);
           console.log('itemRef.name:', itemRef.name);
+          // allDirDatas.root.oldDir = itemRef.name;
         });
         setStorageDatas([...underItems]);
         res.prefixes.forEach((folderRef) => {
@@ -104,6 +116,7 @@ export const Index: NextPage = (props) => {
         console.log('handleShowFiles error:', error);
       });
   };
+  console.log('allDirDatas:', allDirDatas);
 
   const handleDirSearch = (e) => {
     setStorageDatas(['']);
@@ -159,7 +172,7 @@ export const Index: NextPage = (props) => {
       <Text>
         アップロード中・・・{`${prog}%`}
         <span
-          className={`block w-[${prog}%] h-5 bg-gray-200 rounded`}
+          className={`block h-5 bg-gray-200 rounded`}
           style={{ width: `${prog}%` }}></span>
       </Text>
       <div className="text-center">
@@ -174,10 +187,10 @@ export const Index: NextPage = (props) => {
           class="mb-8"
         />
       </div>
-      <Heading2>Storage一覧表示</Heading2>
+      <Heading2>Storage表示</Heading2>
       <div className="text-left">
         <Btn link={false} click={handleShowFiles}>
-          storage一覧表示
+          storage表示
         </Btn>
         <Text>/{oldDir === '' ? 'root' : oldDir}</Text>
         {storageDatas.length !== 0
