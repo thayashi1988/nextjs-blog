@@ -53,13 +53,13 @@ export const Index: NextPage = (props) => {
   }, []);
 
   const handleFileUp = () => {
-    setProg(1);
     const file =
       document.querySelector<HTMLInputElement>('input[type="file"]').files[0];
     if (!file) {
       alert('アップロードファイルを選択してください。');
       return;
     }
+    setProg(1);
     const uploadTask = storageRef
       .child('images/' + file.name)
       .put(file, fileMetadata);
@@ -67,8 +67,9 @@ export const Index: NextPage = (props) => {
     uploadTask.on(
       'state_changed',
       (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
         setProg(progress);
         switch (snapshot.state) {
           case FBTest.storage.TaskState.PAUSED: // or 'paused'
@@ -174,13 +175,13 @@ export const Index: NextPage = (props) => {
         <title>ファイルアップ | Next.jsアプリ</title>
       </Head>
       <Heading2>ファイルアップロード</Heading2>
-      <div className="flex flex-col sm:flex-row items-start mb-4 sm:mb-8">
+      <div className="flex flex-col items-center mb-4 sm:mb-8 justify-center">
         <label htmlFor="" className="block w-full max-w-[320px]">
           <input type="file" className="w-full" />
         </label>
         <Btn
           link={false}
-          class="mt-3 sm:mt-0"
+          class="mt-3"
           margin="mb-0 w-full sm:max-w-xs"
           click={handleFileUp}>
           アップロード
@@ -210,9 +211,9 @@ export const Index: NextPage = (props) => {
           />
         ) : null}
       </div>
-      <Heading2>Storage表示</Heading2>
+      <Heading2 margin="md:mb-2">Storage表示</Heading2>
       <div className="text-left">
-        <Text class="break-all">
+        <Text class="break-all mb-6">
           現在のディレクトリ
           <br />
           {`https://firebasestorage.googleapis.com/v0/b/udemy-todo-f0672.appspot.com/o/${oldDir}`}
@@ -224,7 +225,7 @@ export const Index: NextPage = (props) => {
           loading={isLoading}
           click={handleDirSearch}
         />
-        <Btn link={false} click={handleDirBackToTop}>
+        <Btn link={false} margin="mt-4 text-center" click={handleDirBackToTop}>
           storageTOPに戻る
         </Btn>
       </div>
