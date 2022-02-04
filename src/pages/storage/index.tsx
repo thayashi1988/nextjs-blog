@@ -7,6 +7,8 @@ import { Btn } from '@/components/Button/Btn';
 import { NextImg } from '@/components/Img/Img';
 import { Heading2 } from '@/components/Heading/Heading2';
 import { LoadingText } from '@/components/Loading/LoadingText';
+import { FirebaseStorageFiles } from '@/components/Firebase/FirebaseStorageFiles';
+import { FirebaseStorageDirectorys } from '@/components/Firebase/FirebaseStorageDirectorys';
 
 const imgRef = storageRef.child('images/img_01.png');
 
@@ -32,32 +34,41 @@ export const Index: NextPage = (props) => {
   const underItems = [];
   const underDirs = [];
   useEffect(() => {
+    let unmounted = false;
     imgRootRef
       .listAll()
       .then((res) => {
         res.prefixes.forEach((folderRef) => {
           underDirs.push(folderRef.name);
-          console.log('folderRef.name:', folderRef.name);
-          allDirDatas.root[folderRef.name] = { files: '' };
-          allDirDatas.root[folderRef.name].path = `${folderRef.name}`;
+          // allDirDatas.root[folderRef.name] = { files: '' };
+          // allDirDatas.root[folderRef.name].path = `${folderRef.name}`;
           res.items.forEach((itemRef) => {
             underItems.push(itemRef.name);
-            console.log('itemRef.name:', itemRef.name);
           });
-          allDirDatas.root[folderRef.name].files = [underItems];
+          // allDirDatas.root[folderRef.name].files = [underItems];
         });
         // console.log('allDirDatas:', allDirDatas);
         setStorageDir([...underDirs]);
         setStorageDatas([...underItems]);
+        setIsLoading(underItems.length === 0 && underDirs.length === 0);
+        console.log('underDirs:', underDirs);
+        // console.log('underItems:', underItems);
+        // console.log('storageDatas:', storageDatas);
+        console.log('storageDir:', storageDir);
+        console.log('isLoading:', isLoading);
       })
       .catch((error) => {
         alert('useEffect エラーが発生しました。');
         console.log('useEffect error:', error);
       });
+    return () => {
+      unmounted = true;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleFileUp = () => {
+    setProg(1);
     const file =
       document.querySelector<HTMLInputElement>('input[type="file"]').files[0];
     if (!file) {
@@ -90,12 +101,15 @@ export const Index: NextPage = (props) => {
       (error) => {
         switch (error.code) {
           case 'storage/unauthorized':
+            setProg(0);
             alert('エラーが発生しました。 unauthorized');
             break;
           case 'storage/canceled':
+            setProg(0);
             alert('エラーが発生しました。canceled');
             break;
           case 'storage/unknown':
+            setProg(0);
             alert('エラーが発生しました。unknown');
             break;
         }
@@ -119,6 +133,7 @@ export const Index: NextPage = (props) => {
   const handleDirBackToTop = () => {
     setStorageDatas([]);
     setStorageDir([]);
+    setIsLoading(true);
     setOldDir('');
     const imgRootRef = storageRef;
     const underItems = [];
@@ -129,8 +144,8 @@ export const Index: NextPage = (props) => {
       .then((res) => {
         res.prefixes.forEach((folderRef) => {
           underDirs.push(folderRef.name);
-          allDirDatas.root[folderRef.name] = { files: '' };
-          allDirDatas.root[folderRef.name].path = `${folderRef.name}`;
+          // allDirDatas.root[folderRef.name] = { files: '' };
+          // allDirDatas.root[folderRef.name].path = `${folderRef.name}`;
           res.items.forEach((itemRef) => {
             underItems.push(itemRef.name);
           });
@@ -138,6 +153,9 @@ export const Index: NextPage = (props) => {
         // console.log('allDirDatas:', allDirDatas);
         setStorageDir([...underDirs]);
         setStorageDatas([...underItems]);
+        setIsLoading(underItems.length === 0 && underDirs.length === 0);
+        console.log('storageDatas:', storageDatas);
+        console.log('storageDir:', storageDir);
       })
       .catch((error) => {
         alert('handleDirBackToTop エラーが発生しました。');
@@ -148,6 +166,7 @@ export const Index: NextPage = (props) => {
   const handleDirSearch = (e) => {
     setStorageDatas([]);
     setStorageDir([]);
+    setIsLoading(true);
 
     const clickedDir = e.target.value;
     // console.log('clickedDir:', clickedDir);
@@ -191,6 +210,7 @@ export const Index: NextPage = (props) => {
         // console.log('underDirs:', underDirs);
         setStorageDir([...underDirs]);
         setStorageDatas([...underItems]);
+        setIsLoading(storageDatas.length === 0 && storageDir.length === 0);
         // console.log('storageDir:', storageDir);
 
         // res.items.forEach((itemRef) => {
@@ -258,33 +278,74 @@ export const Index: NextPage = (props) => {
           <br />
           {`https://firebasestorage.googleapis.com/v0/b/udemy-todo-f0672.appspot.com/o/${oldDir}`}
         </Text>
+        {/* <FirebaseStorageFiles loading={isLoading}>
+          ああああああああああ
+        </FirebaseStorageFiles> */}
         <Text>配下にあるファイル・ディレクトリ</Text>
-        {storageDatas.length !== 0
-          ? storageDatas.map((data) => {
-              return (
-                <Text key={data} class="pl-3 mb-2">
-                  {data}
-                </Text>
-              );
-            })
-          : null}
-        {storageDir.length !== 0 ? (
+        {/* {isLoading ? null : null} */}
+        <FirebaseStorageFiles datas={storageDatas} loading={isLoading} />
+        <FirebaseStorageDirectorys
+          datas={storageDir}
+          loading={isLoading}
+          click={handleDirSearch}
+        />
+        {/* {storageDatas &&
+          storageDatas.map((data) => {
+            return (
+              <FirebaseStorageFiles
+                datas={storageDatas}
+                loading={isLoading}
+                key={data}>
+                {data}
+              </FirebaseStorageFiles>
+            );
+          })} */}
+        {/* {storageDir &&
           storageDir.map((data) => {
             return (
-              <div key={data} className="-mt-2">
-                <input
-                  className="text-sm cursor-pointer sm:hover:opacity-80 text-blue-400 pl-3 inline-block mb-2"
-                  type="button"
-                  value={data}
-                  onClick={handleDirSearch}
-                />
-                <span className="text-xs">ディレクトリ</span>
-              </div>
+              <FirebaseStorageDirectorys
+                loading={isLoading}
+                key={data}
+                value={data}
+                click={handleDirSearch}
+              />
+            );
+          })} */}
+        {/* {isLoading
+          ? storageDatas.map((data) => {
+              return (
+                <FirebaseStorageFiles loading={isLoading} key={data}>
+                  {data}
+                </FirebaseStorageFiles>
+
+                // <Text key={data} class="pl-3 mb-2">
+                //   {data}
+                // </Text>
+              );
+            })
+          : null} */}
+        {/* {isLoading ? (
+          storageDir.map((data) => {
+            return (
+              <FirebaseStorageDirectorys
+                loading={isLoading}
+                key={data}
+                value={data}
+                click={handleDirSearch}></FirebaseStorageDirectorys>
+              // <div key={data} className="-mt-2">
+              //   <input
+              //     className="text-sm cursor-pointer sm:hover:opacity-80 text-blue-400 pl-3 inline-block mb-2"
+              //     type="button"
+              //     value={data}
+              //     onClick={handleDirSearch}
+              //   />
+              //   <span className="text-xs">ディレクトリ</span>
+              // </div>
             );
           })
         ) : (
           <LoadingText />
-        )}
+        )} */}
       </div>
     </>
   );
