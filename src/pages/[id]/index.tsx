@@ -58,6 +58,10 @@ const LINKITEMS: Links[] = [
     href: '/components',
     linkTxt: 'コンポーネントページ',
   },
+  {
+    href: '/storage',
+    linkTxt: 'ファイルアップ',
+  },
 ];
 
 const Index: NextPage = () => {
