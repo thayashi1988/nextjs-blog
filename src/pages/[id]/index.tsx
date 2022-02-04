@@ -38,7 +38,7 @@ const LINKITEMS: Links[] = [
   //   linkTxt: 'firebase Authentication',
   // },
   {
-    href: '/signin',
+    href: '/chat',
     linkTxt: 'チャットアプリ',
   },
   {
