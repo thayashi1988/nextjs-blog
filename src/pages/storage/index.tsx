@@ -13,10 +13,13 @@ const fileMetadata = {
   contentType: 'image/*',
 };
 
+let underItemslUrls = [];
+
 export const Index: NextPage = (props) => {
   const [uploadedUrl, setUploadedUrl] = useState<string>('');
   const [storageDatas, setStorageDatas] = useState<string[]>([]);
-  const [storageDir, setStorageDir] = useState<string[]>([]);
+  const [storageDirs, setStorageDirs] = useState<string[]>([]);
+  const [storagelUrls, setStoragelUrls] = useState<string[]>([]);
   const [oldDir, setOldDir] = useState<string>('');
   const [prog, setProg] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -35,12 +38,12 @@ export const Index: NextPage = (props) => {
             underItems.push(itemRef.name);
           });
         });
-        setStorageDir([...underDirs]);
+        setStorageDirs([...underDirs]);
         setStorageDatas([...underItems]);
         setIsLoading(underItems.length === 0 && underDirs.length === 0);
-        console.log('underDirs:', underDirs);
-        console.log('storageDir:', storageDir);
-        console.log('isLoading:', isLoading);
+        // console.log('underDirs:', underDirs);
+        // console.log('storageDirs:', storageDirs);
+        // console.log('isLoading:', isLoading);
       })
       .catch((error) => {
         alert('useEffect エラーが発生しました。');
@@ -110,7 +113,7 @@ export const Index: NextPage = (props) => {
 
   const handleDirBackToTop = () => {
     setStorageDatas([]);
-    setStorageDir([]);
+    setStorageDirs([]);
     setIsLoading(true);
     setOldDir('');
     const imgRootRef = storageRef;
@@ -126,7 +129,7 @@ export const Index: NextPage = (props) => {
             underItems.push(itemRef.name);
           });
         });
-        setStorageDir([...underDirs]);
+        setStorageDirs([...underDirs]);
         setStorageDatas([...underItems]);
         setIsLoading(underItems.length === 0 && underDirs.length === 0);
       })
@@ -138,7 +141,8 @@ export const Index: NextPage = (props) => {
 
   const handleDirSearch = (e: any) => {
     setStorageDatas([]);
-    setStorageDir([]);
+    setStorageDirs([]);
+    setStoragelUrls([]);
     setIsLoading(true);
 
     const clickedDir = e.target.value;
@@ -150,6 +154,12 @@ export const Index: NextPage = (props) => {
     const imgRootRef = storageRef.child(`${clickedDir}`);
     const underItems = [];
     const underDirs = [];
+    underItemslUrls = [];
+    // const underItemslUrls = [];
+    // console.log(
+    //   'imgRootRef[0].getDownloadURL():',
+    //   imgRootRef[0].getDownloadURL()
+    // );
     imgRootRef
       .listAll()
       .then((res) => {
@@ -159,14 +169,33 @@ export const Index: NextPage = (props) => {
         res.items.forEach((itemRef) => {
           underItems.push(`${itemRef.name}`);
         });
-        setStorageDir([...underDirs]);
+        setStorageDirs([...underDirs]);
         setStorageDatas([...underItems]);
-        setIsLoading(storageDatas.length === 0 && storageDir.length === 0);
+        setIsLoading(storageDatas.length === 0 && storageDirs.length === 0);
+        console.log('ここは最初のthenの最後');
+      })
+      .then(() => {
+        console.log('ここはthenでつないだ場所');
+        underItems.forEach((elem, index) => {
+          const imgRootRef = storageRef.child(`${clickedDir}/${elem}`);
+          // Get the download URL
+          imgRootRef
+            .getDownloadURL()
+            .then((url) => {
+              // Insert url into an <img> tag to "download"
+              underItemslUrls.push(url);
+            })
+            .then(() => {
+              setStoragelUrls([...underItemslUrls]);
+              console.log('storagelUrls:', storagelUrls);
+            });
+        });
       })
       .catch((error) => {
         alert('handleDirSearch エラーが発生しました。');
         console.log('handleDirSearch error:', error);
       });
+    console.log('underItemslUrls:', underItemslUrls);
   };
 
   return (
@@ -212,6 +241,9 @@ export const Index: NextPage = (props) => {
         ) : null}
       </div>
       <Heading2 margin="md:mb-2">Storage表示</Heading2>
+      {/* {underItemslUrls.map((mm) => {
+        return <p key={mm}>{mm}</p>;
+      })} */}
       <div className="text-left">
         <Text class="break-all mb-6">
           現在のディレクトリ
@@ -219,9 +251,13 @@ export const Index: NextPage = (props) => {
           {`https://firebasestorage.googleapis.com/v0/b/udemy-todo-f0672.appspot.com/o/${oldDir}`}
         </Text>
         <Text>配下にあるファイル・ディレクトリ</Text>
-        <FirebaseStorageFiles datas={storageDatas} loading={isLoading} />
+        <FirebaseStorageFiles
+          path={underItemslUrls}
+          datas={storageDatas}
+          loading={isLoading}
+        />
         <FirebaseStorageDirectorys
-          datas={storageDir}
+          datas={storageDirs}
           loading={isLoading}
           click={handleDirSearch}
         />
