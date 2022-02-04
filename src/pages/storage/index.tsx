@@ -8,9 +8,6 @@ import { NextImg } from '@/components/Img/Img';
 import { Heading2 } from '@/components/Heading/Heading2';
 
 const imgRef = storageRef.child('images/img_01.png');
-// console.log('imgRef:', imgRef.fullPath);
-// console.log('imgRef:', imgRef.name);
-// console.log('imgRef:', imgRef.bucket);
 
 const fileMetadata = {
   contentType: 'image/*',
@@ -26,11 +23,6 @@ export const Index: NextPage = (props) => {
   const [uploadedUrl, setUploadedUrl] = useState<string>('');
   const [storageDatas, setStorageDatas] = useState<string[]>([]);
   const [storageDir, setStorageDir] = useState<string[]>([]);
-  const [allDir, setAllDir] = useState<any>({
-    root: {
-      path: '/',
-    },
-  });
   const [oldDir, setOldDir] = useState<string>('');
   const [prog, setProg] = useState<number>(0);
 
@@ -38,7 +30,6 @@ export const Index: NextPage = (props) => {
   const underItems = [];
   const underDirs = [];
   useEffect(() => {
-    // const kkk = () => {
     imgRootRef
       .listAll()
       .then((res) => {
@@ -58,11 +49,9 @@ export const Index: NextPage = (props) => {
         setStorageDatas([...underItems]);
       })
       .catch((error) => {
-        alert('handleShowFiles エラーが発生しました。');
-        console.log('handleShowFiles error:', error);
+        alert('useEffect エラーが発生しました。');
+        console.log('useEffect error:', error);
       });
-    // };
-    // return () => kkk();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -117,43 +106,32 @@ export const Index: NextPage = (props) => {
     console.log('file:', file);
   };
 
-  const handleShowFiles = () => {
+  const handleDirBackToTop = () => {
     setStorageDatas([]);
     setStorageDir([]);
     setOldDir('');
-    // const imgDirRef = storageRef.child('images');
     const imgRootRef = storageRef;
     const underItems = [];
     const underDirs = [];
-    // Find all the prefixes and items.
+
     imgRootRef
       .listAll()
       .then((res) => {
         res.prefixes.forEach((folderRef) => {
           underDirs.push(folderRef.name);
-          console.log('folderRef.name:', folderRef.name);
           allDirDatas.root[folderRef.name] = { files: '' };
           allDirDatas.root[folderRef.name].path = `${folderRef.name}`;
           res.items.forEach((itemRef) => {
             underItems.push(itemRef.name);
-            console.log('itemRef.name:', itemRef.name);
           });
-          // allDirDatas.root[folderRef.name].files = [underItems];
         });
         console.log('allDirDatas:', allDirDatas);
         setStorageDir([...underDirs]);
         setStorageDatas([...underItems]);
-
-        // res.items.forEach((itemRef) => {
-        //   underItems.push(itemRef.name);
-        //   console.log('itemRef.name:', itemRef.name);
-        // });
-        // setStorageDatas([...underItems]);
-        // allDirDatas.root[folderRef.name] = [underItems];
       })
       .catch((error) => {
-        alert('handleShowFiles エラーが発生しました。');
-        console.log('handleShowFiles error:', error);
+        alert('handleDirBackToTop エラーが発生しました。');
+        console.log('handleDirBackToTop error:', error);
       });
   };
 
@@ -162,7 +140,7 @@ export const Index: NextPage = (props) => {
     setStorageDir(['']);
 
     const clickedDir = e.target.value;
-    console.log('clickedDir:', clickedDir);
+    // console.log('clickedDir:', clickedDir);
     if (/\//.test(oldDir)) {
       setOldDir(`${clickedDir}`);
     } else {
@@ -174,9 +152,9 @@ export const Index: NextPage = (props) => {
     //   // key[clickedDir] === clickedDir
     // });
     // console.log('hhhh:', hhhh);
-    console.log('oldDir:', oldDir);
-    const jjjj = `${oldDir}/${clickedDir}`;
-    console.log('jjjj:', jjjj);
+    // console.log('oldDir:', oldDir);
+    // const jjjj = `${oldDir}/${clickedDir}`;
+    // console.log('jjjj:', jjjj);
     const imgRootRef = storageRef.child(`${clickedDir}`);
     const underItems = [];
     const underDirs = [];
@@ -203,7 +181,7 @@ export const Index: NextPage = (props) => {
         // console.log('underDirs:', underDirs);
         setStorageDir([...underDirs]);
         setStorageDatas([...underItems]);
-        console.log('storageDir:', storageDir);
+        // console.log('storageDir:', storageDir);
 
         // res.items.forEach((itemRef) => {
         //   console.log('handleDirSearch itemRef.name:', itemRef.name);
@@ -213,11 +191,9 @@ export const Index: NextPage = (props) => {
         // console.log('underItems:', underItems);
       })
       .catch((error) => {
-        alert('handleShowFiles エラーが発生しました。');
-        console.log('handleShowFiles error:', error);
+        alert('handleDirBackToTop エラーが発生しました。');
+        console.log('handleDirBackToTop error:', error);
       });
-
-    // console.log('allDirDatas:', allDirDatas);
   };
 
   return (
@@ -226,11 +202,11 @@ export const Index: NextPage = (props) => {
         <title>ファイルアップ | Next.jsアプリ</title>
       </Head>
       <Heading2>ファイルアップロード</Heading2>
-      <div className="flex">
+      <div className="flex flex-col sm:flex-row">
         <label htmlFor="">
           <input type="file" />
         </label>
-        <Btn link={false} click={handleFileUp}>
+        <Btn link={false} class="mt-3" click={handleFileUp}>
           アップロード
         </Btn>
       </div>
@@ -254,16 +230,13 @@ export const Index: NextPage = (props) => {
       </div>
       <Heading2>Storage表示</Heading2>
       <div className="text-left">
-        {/* <Btn link={false} click={handleShowFiles}>
-          storage表示
-        </Btn> */}
+        <Btn link={false} click={handleDirBackToTop}>
+          storageTOPに戻る
+        </Btn>
         <Text>
           現在のディレクトリ
           <br />
           {`https://firebasestorage.googleapis.com/v0/b/udemy-todo-f0672.appspot.com/o/${oldDir}`}
-          {/* {oldDir === ''
-            ? 'https://firebasestorage.googleapis.com/v0/b/udemy-todo-f0672.appspot.com/o/'
-            : `https://firebasestorage.googleapis.com/v0/b/udemy-todo-f0672.appspot.com/o/${oldDir}`} */}
         </Text>
         {storageDatas.length !== 0
           ? storageDatas.map((data) => {
