@@ -2,6 +2,7 @@ import firebaseTest from 'firebase';
 import firebaseApp from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import 'firebase/storage';
 
 if (!firebaseTest.apps.length) {
   const firebaseTestApp = firebaseTest.initializeApp({
@@ -15,6 +16,8 @@ if (!firebaseTest.apps.length) {
     appId: process.env.FIREBASE_APP_ID,
   });
 }
+
+export const FBTest = firebaseTest;
 
 // firestore databaseで必要
 export const db = firebaseTest.firestore();
@@ -33,3 +36,7 @@ export const messagesRef = RTDB.ref('messages');
 export const pushMessage = ({ name, text }) => {
   messagesRef.push({ name, text });
 };
+
+// ストレージで必要
+export const storage = firebaseTest.storage();
+export const storageRef = storage.ref();
