@@ -7,11 +7,12 @@ type PROPS = {
   src: string;
   width?: string | number;
   height?: string | number;
-  quality?: string;
+  quality?: number;
 };
 
 export const NextImg: React.VFC<PROPS> = (props) => {
   const addParentClass = props.class ? ` ${props.class}` : '';
+  const quality = props.quality ? props.quality : 75;
   return (
     <figure className={`m-0${addParentClass}`}>
       <Image
@@ -19,7 +20,7 @@ export const NextImg: React.VFC<PROPS> = (props) => {
         src={props.src}
         width={props.width}
         height={props.height}
-        quality={props.quality}
+        quality={quality}
       />
     </figure>
   );
