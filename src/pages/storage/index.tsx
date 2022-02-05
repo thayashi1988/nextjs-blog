@@ -15,6 +15,7 @@ const fileMetadata = {
   contentType: 'image/*',
 };
 
+// FirebaseStorageFilesに渡すダウンロードURL
 let underItemslUrls = [];
 
 export const Index: NextPage = (props) => {
@@ -29,6 +30,7 @@ export const Index: NextPage = (props) => {
   const imgRootRef = storageRef;
   const underItems = [];
   const underDirs = [];
+
   useEffect(() => {
     let unmounted = false;
     imgRootRef
@@ -43,9 +45,6 @@ export const Index: NextPage = (props) => {
         setStorageDirs([...underDirs]);
         setStorageDatas([...underItems]);
         setIsLoading(underItems.length === 0 && underDirs.length === 0);
-        // console.log('underDirs:', underDirs);
-        // console.log('storageDirs:', storageDirs);
-        // console.log('isLoading:', isLoading);
       })
       .catch((error) => {
         alert('useEffect エラーが発生しました。');
@@ -118,7 +117,7 @@ export const Index: NextPage = (props) => {
     setStorageDirs([]);
     setIsLoading(true);
     setOldDir('');
-    const imgRootRef = storageRef;
+    // const imgRootRef = storageRef;
     const underItems = [];
     const underDirs = [];
 
@@ -153,16 +152,11 @@ export const Index: NextPage = (props) => {
     } else {
       setOldDir((prev) => `${prev}/${clickedDir}`);
     }
-    const imgRootRef = storageRef.child(`${clickedDir}`);
+    const dirRef = storageRef.child(`${clickedDir}`);
     const underItems = [];
     const underDirs = [];
     underItemslUrls = [];
-    // const underItemslUrls = [];
-    // console.log(
-    //   'imgRootRef[0].getDownloadURL():',
-    //   imgRootRef[0].getDownloadURL()
-    // );
-    imgRootRef
+    dirRef
       .listAll()
       .then((res) => {
         res.prefixes.forEach((folderRef) => {
@@ -174,30 +168,29 @@ export const Index: NextPage = (props) => {
         setStorageDirs([...underDirs]);
         setStorageDatas([...underItems]);
         setIsLoading(storageDatas.length === 0 && storageDirs.length === 0);
-        console.log('ここは最初のthenの最後');
+        console.log('handleDirSearchのファイル・ディレクトリ取得のthen');
       })
       .then(() => {
-        console.log('ここはthenでつないだ場所');
-        underItems.forEach((elem, index) => {
-          const imgRootRef = storageRef.child(`${clickedDir}/${elem}`);
-          // Get the download URL
-          imgRootRef
-            .getDownloadURL()
-            .then((url) => {
-              // Insert url into an <img> tag to "download"
-              underItemslUrls.push(url);
-            })
-            .then(() => {
-              setStoragelUrls([...underItemslUrls]);
-              // console.log('storagelUrls:', storagelUrls);
-            });
-        });
+        console.log('ここはそのthenをさらにthenでつないだ場所');
+        getUrlOnebyOne(clickedDir, underItems);
       })
       .catch((error) => {
         alert('handleDirSearch エラーが発生しました。');
         console.log('handleDirSearch error:', error);
       });
     // console.log('underItemslUrls:', underItemslUrls);
+  };
+
+  const getUrlOnebyOne = async (directory, fileNames) => {
+    for (let i = 0; i < fileNames.length; i++) {
+      const imgRef = storageRef.child(`${directory}/${fileNames[i]}`);
+      const imgUrl = imgRef.getDownloadURL();
+      await imgUrl.then((url) => {
+        underItemslUrls.push(url);
+        // console.log('url:', url);
+      });
+    }
+    setStoragelUrls([...underItemslUrls]);
   };
 
   return (
