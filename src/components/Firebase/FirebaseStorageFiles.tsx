@@ -1,7 +1,9 @@
 import React from 'react';
 import { LoadingText } from '@/components/Loading/LoadingText';
-import { Text } from '../Text/Text';
-import { NextImg } from '../Img/Img';
+import { Text } from '@/components/Text/Text';
+import { NextImg } from '@/components/Img/Img';
+import { Grid } from '@/components/Grid/Grid';
+import { GridItem } from '@/components/Grid/GridItem';
 
 type PROPS = {
   datas: string[];
@@ -10,33 +12,35 @@ type PROPS = {
   children?: React.ReactNode;
 };
 
-const storagePath =
-  'https://firebasestorage.googleapis.com/v0/b/udemy-todo-f0672.appspot.com/o/';
+// const storagePath =
+//   'https://firebasestorage.googleapis.com/v0/b/udemy-todo-f0672.appspot.com/o/';
 
 export const FirebaseStorageFiles: React.VFC<PROPS> = (props) => {
-  console.log('props.path[0]:', props.path[0]);
   if (props.loading) {
     return <LoadingText />;
   }
+  if (props.datas.length === 0) {
+    return <Text class="!mb-5">配下にファイルはありません。</Text>;
+  }
   return (
-    <>
+    <Grid class="grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-5">
       {props.datas.map((data, index) => {
         return (
-          <div key={data}>
+          <GridItem key={data} class="border border-gray-100 shadow-md">
             <NextImg
               src={
-                props.path[0]
-                  ? props.path[0]
-                  : 'https://via.placeholder.com/200/771796'
+                props.path[index]
+                  ? props.path[index]
+                  : 'https://via.placeholder.com/200/666666/FFFFFF?text=now+loading...'
               }
               alt={data}
               width="300"
               height="300"
             />
-            <Text class="pl-3 mb-2">{data}</Text>
-          </div>
+            <Text class="p-2 !mb-0 break-all">{data}</Text>
+          </GridItem>
         );
       })}
-    </>
+    </Grid>
   );
 };
