@@ -1,6 +1,7 @@
 import React from 'react';
 import { LoadingText } from '@/components/Loading/LoadingText';
 import { Text } from '@/components/Text/Text';
+import { TextAlert } from '@/components/Text/TextAlert';
 import { NextImg } from '@/components/Img/Img';
 import { Grid } from '@/components/Grid/Grid';
 import { GridItem } from '@/components/Grid/GridItem';
@@ -20,13 +21,13 @@ export const FirebaseStorageFiles: React.VFC<PROPS> = (props) => {
     return <LoadingText />;
   }
   if (props.datas.length === 0) {
-    return <Text class="!mb-5">配下にファイルはありません。</Text>;
+    return <TextAlert class="!mb-5">配下にファイルはありません。</TextAlert>;
   }
   return (
     <Grid class="grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-5">
       {props.datas.map((data, index) => {
         return (
-          <GridItem key={data} class="border border-gray-100 shadow-md">
+          <GridItem key={data} class="border border-gray-100 shadow-md rounded">
             <NextImg
               src={
                 props.path[index]

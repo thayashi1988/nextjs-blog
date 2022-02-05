@@ -1,6 +1,7 @@
 import React from 'react';
 import { LoadingText } from '@/components/Loading/LoadingText';
 import { Text } from '@/components/Text/Text';
+import { TextAlert } from '@/components/Text/TextAlert';
 
 type PROPS = {
   datas: string[];
@@ -15,7 +16,7 @@ export const FirebaseStorageDirectorys: React.VFC<PROPS> = (props) => {
     return <LoadingText />;
   }
   if (props.datas.length === 0) {
-    return <Text>配下にディレクトリはありません。</Text>;
+    return <TextAlert>配下にディレクトリはありません。</TextAlert>;
   }
   return (
     <>
