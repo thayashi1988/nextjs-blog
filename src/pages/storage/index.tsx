@@ -189,7 +189,7 @@ export const Index: NextPage = (props) => {
             })
             .then(() => {
               setStoragelUrls([...underItemslUrls]);
-              console.log('storagelUrls:', storagelUrls);
+              // console.log('storagelUrls:', storagelUrls);
             });
         });
       })
@@ -197,7 +197,7 @@ export const Index: NextPage = (props) => {
         alert('handleDirSearch エラーが発生しました。');
         console.log('handleDirSearch error:', error);
       });
-    console.log('underItemslUrls:', underItemslUrls);
+    // console.log('underItemslUrls:', underItemslUrls);
   };
 
   return (
@@ -233,7 +233,7 @@ export const Index: NextPage = (props) => {
             src={
               uploadedUrl
                 ? uploadedUrl
-                : 'https://via.placeholder.com/200/771796'
+                : 'https://via.placeholder.com/200/666666/FFFFFF?text=now+loading...'
             }
             alt=""
             width="200"
@@ -244,14 +244,17 @@ export const Index: NextPage = (props) => {
       </div>
       <Heading2 margin="sm:!mb-6">Storage表示</Heading2>
       <Heading3 margin="!mb-1">現在のディレクトリ</Heading3>
-      <Text class="break-all !mb-5">{`https://firebasestorage.googleapis.com/v0/b/udemy-todo-f0672.appspot.com/o/${oldDir}`}</Text>
+      <Text class="break-all !mb-5">
+        https://firebasestorage.googleapis.com/v0/b/udemy-todo-f0672.appspot.com/o/
+        <span className="text-cyan-500">{oldDir}</span>
+      </Text>
       <Heading3 margin="!mb-2 sm:!mb-2">配下にあるファイル</Heading3>
       <FirebaseStorageFiles
         path={underItemslUrls}
         datas={storageDatas}
         loading={isLoading}
       />
-      <Heading3 margin="!mb-2 sm:!mb-2">配下にあるディレクトリ</Heading3>
+      <Heading3 margin="!mb-2 sm:!mb-2 mt-5">配下にあるディレクトリ</Heading3>
       <FirebaseStorageDirectorys
         datas={storageDirs}
         loading={isLoading}
