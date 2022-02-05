@@ -5,7 +5,9 @@ import { FBTest, storageRef } from '../../../firebase';
 import { Text } from '@/components/Text/Text';
 import { Btn } from '@/components/Button/Btn';
 import { NextImg } from '@/components/Img/Img';
+import { Heading1 } from '@/components/Heading/Heading1';
 import { Heading2 } from '@/components/Heading/Heading2';
+import { Heading3 } from '@/components/Heading/Heading3';
 import { FirebaseStorageFiles } from '@/components/Firebase/FirebaseStorageFiles';
 import { FirebaseStorageDirectorys } from '@/components/Firebase/FirebaseStorageDirectorys';
 
@@ -203,8 +205,8 @@ export const Index: NextPage = (props) => {
       <Head>
         <title>ファイルアップ | Next.jsアプリ</title>
       </Head>
-      <Heading2>ファイルアップロード</Heading2>
-      <div className="flex flex-col items-center mb-4 sm:mb-8 justify-center">
+      <Heading1>ファイルアップロード</Heading1>
+      <div className="flex flex-col items-center justify-center mb-4 sm:mb-8">
         <label htmlFor="" className="block w-full max-w-[320px]">
           <input type="file" className="w-full" />
         </label>
@@ -224,7 +226,7 @@ export const Index: NextPage = (props) => {
             style={{ width: `${prog}%` }}></span>
         </Text>
       ) : null}
-      <div className="text-center shadow-lg border border-gray-300 mb-10 max-w-md mx-auto min-h-[200px]">
+      <div className="text-center shadow-lg border border-gray-300 mb-10 max-w-md mx-auto min-h-[200px] p-2">
         <Text>ここにアップロード画像が表示されます。</Text>
         {uploadedUrl ? (
           <NextImg
@@ -240,31 +242,27 @@ export const Index: NextPage = (props) => {
           />
         ) : null}
       </div>
-      <Heading2 margin="md:mb-2">Storage表示</Heading2>
-      {/* {underItemslUrls.map((mm) => {
-        return <p key={mm}>{mm}</p>;
-      })} */}
-      <div className="text-left">
-        <Text class="break-all mb-6">
-          現在のディレクトリ
-          <br />
-          {`https://firebasestorage.googleapis.com/v0/b/udemy-todo-f0672.appspot.com/o/${oldDir}`}
-        </Text>
-        <Text>配下にあるファイル・ディレクトリ</Text>
-        <FirebaseStorageFiles
-          path={underItemslUrls}
-          datas={storageDatas}
-          loading={isLoading}
-        />
-        <FirebaseStorageDirectorys
-          datas={storageDirs}
-          loading={isLoading}
-          click={handleDirSearch}
-        />
-        <Btn link={false} margin="mt-4 text-center" click={handleDirBackToTop}>
-          storageTOPに戻る
-        </Btn>
-      </div>
+      <Heading2 margin="sm:!mb-6">Storage表示</Heading2>
+      <Heading3 margin="!mb-1">現在のディレクトリ</Heading3>
+      <Text class="break-all !mb-5">{`https://firebasestorage.googleapis.com/v0/b/udemy-todo-f0672.appspot.com/o/${oldDir}`}</Text>
+      <Heading3 margin="!mb-2 sm:!mb-2">配下にあるファイル</Heading3>
+      <FirebaseStorageFiles
+        path={underItemslUrls}
+        datas={storageDatas}
+        loading={isLoading}
+      />
+      <Heading3 margin="!mb-2 sm:!mb-2">配下にあるディレクトリ</Heading3>
+      <FirebaseStorageDirectorys
+        datas={storageDirs}
+        loading={isLoading}
+        click={handleDirSearch}
+      />
+      <Btn
+        link={false}
+        margin="mt-5 sm:mt-5 text-center"
+        click={handleDirBackToTop}>
+        storageTOPに戻る
+      </Btn>
     </>
   );
 };
