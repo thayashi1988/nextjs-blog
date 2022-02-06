@@ -5,11 +5,13 @@ import { TextAlert } from '@/components/Text/TextAlert';
 import { NextImg } from '@/components/Img/Img';
 import { Grid } from '@/components/Grid/Grid';
 import { GridItem } from '@/components/Grid/GridItem';
+import { BtnDanger } from '@/components/Button/BtnDanger';
 
 type PROPS = {
   datas: string[];
   path: string[];
   loading: Boolean;
+  delete: React.MouseEventHandler<HTMLButtonElement>;
   children?: React.ReactNode;
 };
 
@@ -27,7 +29,9 @@ export const FirebaseStorageFiles: React.VFC<PROPS> = (props) => {
     <Grid class="grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-5">
       {props.datas.map((data, index) => {
         return (
-          <GridItem key={data} class="border border-gray-100 shadow-md rounded">
+          <GridItem
+            key={data}
+            class="border border-gray-100 shadow-md rounded flex flex-col">
             <NextImg
               src={
                 props.path[index]
@@ -39,6 +43,12 @@ export const FirebaseStorageFiles: React.VFC<PROPS> = (props) => {
               height="300"
             />
             <Text class="p-2 !mb-0 break-all">{data}</Text>
+            <BtnDanger
+              link={false}
+              margin="!mb-2 mt-auto mx-2"
+              click={props.delete}>
+              削除
+            </BtnDanger>
           </GridItem>
         );
       })}
