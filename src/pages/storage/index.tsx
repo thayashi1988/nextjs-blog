@@ -10,6 +10,7 @@ import { Heading2 } from '@/components/Heading/Heading2';
 import { Heading3 } from '@/components/Heading/Heading3';
 import { FirebaseStorageFiles } from '@/components/Firebase/FirebaseStorageFiles';
 import { FirebaseStorageDirectorys } from '@/components/Firebase/FirebaseStorageDirectorys';
+import { useMicromodal } from '@/components/Modal/';
 
 const fileMetadata = {
   contentType: 'image/*',
@@ -19,6 +20,7 @@ const fileMetadata = {
 let underItemslUrls = [];
 
 export const Index: NextPage = (props) => {
+  const { Modal, open, close } = useMicromodal('sample-modal');
   const [uploadedUrl, setUploadedUrl] = useState<string>('');
   const [storageDatas, setStorageDatas] = useState<string[]>([]);
   const [storageDirs, setStorageDirs] = useState<string[]>([]);
@@ -181,7 +183,10 @@ export const Index: NextPage = (props) => {
     // console.log('underItemslUrls:', underItemslUrls);
   };
 
-  const getUrlOnebyOne = async (directory, fileNames) => {
+  const getUrlOnebyOne = async (
+    directory: string,
+    fileNames: string[]
+  ): Promise<void> => {
     for (let i = 0; i < fileNames.length; i++) {
       const imgRef = storageRef.child(`${directory}/${fileNames[i]}`);
       const imgUrl = imgRef.getDownloadURL();
@@ -191,6 +196,10 @@ export const Index: NextPage = (props) => {
       });
     }
     setStoragelUrls([...underItemslUrls]);
+  };
+
+  const handleDelete = (e: React.MouseEvent) => {
+    open();
   };
 
   return (
@@ -246,6 +255,7 @@ export const Index: NextPage = (props) => {
         path={underItemslUrls}
         datas={storageDatas}
         loading={isLoading}
+        delete={handleDelete}
       />
       <Heading3 margin="!mb-2 sm:!mb-2 mt-5">配下にあるディレクトリ</Heading3>
       <FirebaseStorageDirectorys
@@ -259,6 +269,10 @@ export const Index: NextPage = (props) => {
         click={handleDirBackToTop}>
         storageTOPに戻る
       </Btn>
+      <Modal id="sample-modal">
+        <p>Opend modal</p>
+        <button onClick={close}>close</button>
+      </Modal>
     </>
   );
 };
