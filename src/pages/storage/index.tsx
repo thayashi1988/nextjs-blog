@@ -31,7 +31,7 @@ export const Index: NextPage = (props) => {
   const [storageDirs, setStorageDirs] = useState<string[]>([]);
   const [storagelUrls, setStoragelUrls] = useState<string[]>([]);
   const [oldDir, setOldDir] = useState<string>('');
-  const [prog, setProg] = useState<number>(0);
+  const [progressBar, setProgressBar] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const imgRootRef = storageRef;
@@ -70,7 +70,7 @@ export const Index: NextPage = (props) => {
       alert('アップロードファイルを選択してください。');
       return;
     }
-    setProg(1);
+    setProgressBar(1);
     const uploadTask = storageRef
       .child('images/' + file.name)
       .put(file, fileMetadata);
@@ -81,7 +81,7 @@ export const Index: NextPage = (props) => {
         const progress = Math.round(
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         );
-        setProg(progress);
+        setProgressBar(progress);
         switch (snapshot.state) {
           case FBTest.storage.TaskState.PAUSED: // or 'paused'
             break;
@@ -92,15 +92,15 @@ export const Index: NextPage = (props) => {
       (error) => {
         switch (error.code) {
           case 'storage/unauthorized':
-            setProg(0);
+            setProgressBar(0);
             alert('エラーが発生しました。 unauthorized');
             break;
           case 'storage/canceled':
-            setProg(0);
+            setProgressBar(0);
             alert('エラーが発生しました。canceled');
             break;
           case 'storage/unknown':
-            setProg(0);
+            setProgressBar(0);
             alert('エラーが発生しました。unknown');
             break;
         }
@@ -109,10 +109,10 @@ export const Index: NextPage = (props) => {
         uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
           setUploadedUrl(downloadURL);
           console.log('File available at', downloadURL);
-          setProg(100);
+          setProgressBar(100);
           alert('アップロードが完了しました。');
           setTimeout(() => {
-            setProg(0);
+            setProgressBar(0);
           }, 1000);
         });
       }
@@ -124,22 +124,21 @@ export const Index: NextPage = (props) => {
     setStorageDirs([]);
     setIsLoading(true);
     setOldDir('');
-    // const imgRootRef = storageRef;
-    const underItems = [];
-    const underDirs = [];
+    const backToTopItems = [];
+    const backToTopDirs = [];
 
     imgRootRef
       .listAll()
       .then((res) => {
         res.prefixes.forEach((folderRef) => {
-          underDirs.push(folderRef.name);
+          backToTopDirs.push(folderRef.name);
           res.items.forEach((itemRef) => {
-            underItems.push(itemRef.name);
+            backToTopItems.push(itemRef.name);
           });
         });
-        setStorageDirs([...underDirs]);
-        setStorageDatas([...underItems]);
-        setIsLoading(underItems.length === 0 && underDirs.length === 0);
+        setStorageDirs([...backToTopDirs]);
+        setStorageDatas([...backToTopItems]);
+        setIsLoading(backToTopItems.length === 0 && backToTopDirs.length === 0);
       })
       .catch((error) => {
         alert('handleDirBackToTop エラーが発生しました。');
@@ -160,26 +159,26 @@ export const Index: NextPage = (props) => {
       setOldDir((prev) => `${prev}/${clickedDir}`);
     }
     const dirRef = storageRef.child(`${clickedDir}`);
-    const underItems = [];
-    const underDirs = [];
+    const searchUnderItems = [];
+    const searchUnderDirs = [];
     underItemslUrls = [];
     dirRef
       .listAll()
       .then((res) => {
         res.prefixes.forEach((folderRef) => {
-          underDirs.push(`${clickedDir}/${folderRef.name}`);
+          searchUnderDirs.push(`${clickedDir}/${folderRef.name}`);
         });
         res.items.forEach((itemRef) => {
-          underItems.push(`${itemRef.name}`);
+          searchUnderItems.push(`${itemRef.name}`);
         });
-        setStorageDirs([...underDirs]);
-        setStorageDatas([...underItems]);
+        setStorageDirs([...searchUnderDirs]);
+        setStorageDatas([...searchUnderItems]);
         setIsLoading(storageDatas.length === 0 && storageDirs.length === 0);
         console.log('handleDirSearchのファイル・ディレクトリ取得のthen');
       })
       .then(() => {
         console.log('ここはそのthenをさらにthenでつないだ場所');
-        getUrlOnebyOne(clickedDir, underItems);
+        getUrlOnebyOne(clickedDir, searchUnderItems);
       })
       .catch((error) => {
         alert('handleDirSearch エラーが発生しました。');
@@ -225,12 +224,12 @@ export const Index: NextPage = (props) => {
           アップロード
         </Btn>
       </div>
-      {prog !== 0 ? (
+      {progressBar !== 0 ? (
         <Text>
-          アップロード中・・・{`${prog}%`}
+          アップロード中・・・{`${progressBar}%`}
           <span
             className={`block h-5 bg-gray-200 rounded`}
-            style={{ width: `${prog}%` }}></span>
+            style={{ width: `${progressBar}%` }}></span>
         </Text>
       ) : null}
       <div className="text-center shadow-lg border border-gray-300 mb-10 max-w-md mx-auto min-h-[200px] p-2">
