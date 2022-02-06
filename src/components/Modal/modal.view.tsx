@@ -11,10 +11,14 @@ export const Modal: React.VFC<Props> = (props) => {
   const ref = useRef();
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
+    let unmounted = false;
     ref.current = document.querySelector('#__next');
     setMounted(true);
+    return () => {
+      unmounted = true;
+    };
   }, []);
-  console.log('mounted:', mounted);
+  // console.log('mounted:', mounted);
 
   return mounted
     ? createPortal(
