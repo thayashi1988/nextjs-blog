@@ -4,6 +4,9 @@
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.formatOnType": true,
+  "editor.quickSuggestions": {
+    "strings": true
+  },
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
   },
