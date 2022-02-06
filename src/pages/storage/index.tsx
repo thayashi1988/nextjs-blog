@@ -4,6 +4,8 @@ import Head from 'next/head';
 import { FBTest, storageRef } from '../../../firebase';
 import { Text } from '@/components/Text/Text';
 import { Btn } from '@/components/Button/Btn';
+import { BtnSecondary } from '@/components/Button/BtnSecondary';
+import { BtnSuccess } from '@/components/Button/BtnSuccess';
 import { NextImg } from '@/components/Img/Img';
 import { Heading1 } from '@/components/Heading/Heading1';
 import { Heading2 } from '@/components/Heading/Heading2';
@@ -11,6 +13,9 @@ import { Heading3 } from '@/components/Heading/Heading3';
 import { FirebaseStorageFiles } from '@/components/Firebase/FirebaseStorageFiles';
 import { FirebaseStorageDirectorys } from '@/components/Firebase/FirebaseStorageDirectorys';
 import { useMicromodal } from '@/components/Modal/';
+import { TextAlert } from '@/components/Text/TextAlert';
+import { Grid } from '@/components/Grid/Grid';
+import { GridItem } from '@/components/Grid/GridItem';
 
 const fileMetadata = {
   contentType: 'image/*',
@@ -270,8 +275,19 @@ export const Index: NextPage = (props) => {
         storageTOPに戻る
       </Btn>
       <Modal id="sample-modal">
-        <p>Opend modal</p>
-        <button onClick={close}>close</button>
+        <TextAlert class="mb-6">画像をサーバーから削除しますか？</TextAlert>
+        <Grid class="grid-cols-2 gap-4">
+          <GridItem>
+            <BtnSuccess link={false} click={close} margin="!mb-0">
+              削除
+            </BtnSuccess>
+          </GridItem>
+          <GridItem>
+            <BtnSecondary link={false} click={close} margin="!mb-0">
+              キャンセル
+            </BtnSecondary>
+          </GridItem>
+        </Grid>
       </Modal>
     </>
   );
