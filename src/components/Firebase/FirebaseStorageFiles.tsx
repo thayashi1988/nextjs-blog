@@ -11,7 +11,7 @@ type PROPS = {
   datas: string[];
   path: string[];
   loading: Boolean;
-  delete: React.MouseEventHandler<HTMLButtonElement>;
+  createPath(data: string): React.MouseEventHandler<HTMLButtonElement> | any;
   children?: React.ReactNode;
 };
 
@@ -46,7 +46,7 @@ export const FirebaseStorageFiles: React.VFC<PROPS> = (props) => {
             <BtnDanger
               link={false}
               margin="!mb-2 mt-auto mx-2"
-              click={props.delete}>
+              click={() => props.createPath(data)}>
               削除
             </BtnDanger>
           </GridItem>
