@@ -86,8 +86,9 @@ modal
   overflow-y: auto;
   max-height: 100vh;
   max-width: 500px;
-  padding: 20px;
   background-color: #fff;
+  padding: 20px;
+  margin: 0 0.5rem;
 }
 
 @keyframes mmfadeIn {
