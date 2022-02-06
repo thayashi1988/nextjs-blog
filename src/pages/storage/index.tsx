@@ -37,6 +37,7 @@ export const Index: NextPage = (props) => {
   const imgRootRef = storageRef;
   const underItems = [];
   const underDirs = [];
+  let clickedDir = '';
 
   useEffect(() => {
     let unmounted = false;
@@ -152,7 +153,7 @@ export const Index: NextPage = (props) => {
     setStoragelUrls([]);
     setIsLoading(true);
 
-    const clickedDir = e.target.value;
+    clickedDir = e.target.value;
     if (/\//.test(oldDir)) {
       setOldDir(`${clickedDir}`);
     } else {
@@ -184,7 +185,6 @@ export const Index: NextPage = (props) => {
         alert('handleDirSearch エラーが発生しました。');
         console.log('handleDirSearch error:', error);
       });
-    // console.log('underItemslUrls:', underItemslUrls);
   };
 
   const getUrlOnebyOne = async (
@@ -196,7 +196,6 @@ export const Index: NextPage = (props) => {
       const imgUrl = imgRef.getDownloadURL();
       await imgUrl.then((url) => {
         underItemslUrls.push(url);
-        // console.log('url:', url);
       });
     }
     setStoragelUrls([...underItemslUrls]);
