@@ -27,6 +27,8 @@ let underItemslUrls = [];
 export const Index: NextPage = (props) => {
   const { Modal, open, close } = useMicromodal('sample-modal');
   const [uploadedUrl, setUploadedUrl] = useState<string>('');
+  const [deleteFileNameStr, setDeleteFileNameStr] = useState<string>('');
+  const [deleteFilePathStr, setDeleteFilePathStr] = useState<string>('');
   const [storageDatas, setStorageDatas] = useState<string[]>([]);
   const [storageDirs, setStorageDirs] = useState<string[]>([]);
   const [storagelUrls, setStoragelUrls] = useState<string[]>([]);
@@ -201,8 +203,34 @@ export const Index: NextPage = (props) => {
     setStoragelUrls([...underItemslUrls]);
   };
 
-  const handleDelete = (e: React.MouseEvent) => {
+  const handleCreateFilePath = (data: string): void => {
     open();
+    setDeleteFileNameStr(data);
+    setDeleteFilePathStr(`${oldDir}/${data}`);
+  };
+
+  const handleFileDelete = () => {
+    console.log('deleteFilePathStr:', deleteFilePathStr);
+    const deleteRef = storageRef.child(deleteFilePathStr);
+    const deletedUnderItemslUrls = underItemslUrls.filter((prev) => {
+      return prev.indexOf(deleteFileNameStr) === -1;
+    });
+    const deletedStorageDatas = storageDatas.filter((prev) => {
+      return prev.indexOf(deleteFileNameStr) === -1;
+    });
+    underItemslUrls = [...deletedUnderItemslUrls];
+    setStorageDatas([...deletedStorageDatas]);
+    console.log('最後 underItemslUrls:', underItemslUrls);
+    deleteRef
+      .delete()
+      .then(() => {
+        alert('削除が完了しました。');
+        close();
+      })
+      .catch((error) => {
+        alert('handleDelete エラーが発生しました。');
+        console.log('handleDelete error:', error);
+      });
   };
 
   return (
@@ -258,7 +286,7 @@ export const Index: NextPage = (props) => {
         path={underItemslUrls}
         datas={storageDatas}
         loading={isLoading}
-        delete={handleDelete}
+        createPath={handleCreateFilePath}
       />
       <Heading3 margin="!mb-2 sm:!mb-2 mt-5">配下にあるディレクトリ</Heading3>
       <FirebaseStorageDirectorys
@@ -276,7 +304,7 @@ export const Index: NextPage = (props) => {
         <TextAlert class="mb-6">画像をサーバーから削除しますか？</TextAlert>
         <Grid class="grid-cols-2 gap-4">
           <GridItem>
-            <BtnSuccess link={false} click={close} margin="!mb-0">
+            <BtnSuccess link={false} click={handleFileDelete} margin="!mb-0">
               削除
             </BtnSuccess>
           </GridItem>
