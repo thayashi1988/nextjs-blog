@@ -26,7 +26,7 @@ const PostId: NextPage = () => {
         と前のページで取得したidをページディレクトリとしてルーティングさせています。
       </Text>
       <Text class="mb-0">
-        また、userIdを用いて以下のAPをさらにたたき、userIdに紐付いたuser情報を取得し、表示させています。
+        また、userIdを用いて以下のAPIをさらにたたき、userIdに紐付いたuser情報を取得し表示させています。
       </Text>
       <NextLink target href="https://jsonplaceholder.typicode.com/users">
         {`https://jsonplaceholder.typicode.com/users/{id}`}

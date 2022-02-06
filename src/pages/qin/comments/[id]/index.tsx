@@ -24,7 +24,7 @@ const commentsId: NextPage = () => {
         と前のページで取得したidをページディレクトリとしてルーティングさせています。
       </Text>
       <Text class="mb-0">
-        また、そのidを用いて以下のAPをさらにたたき、idに紐付いたphotos情報を取得し、表示させています。
+        また、そのidを用いて以下のAPIをさらにたたき、idに紐付いたphotos情報を取得し表示させています。
       </Text>
       <NextLink target href="https://jsonplaceholder.typicode.com/photos">
         {`https://jsonplaceholder.typicode.com/photos?id={id}`}

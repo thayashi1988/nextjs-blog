@@ -26,7 +26,7 @@ const UserId: NextPage = () => {
         と前のページで取得したidをページディレクトリとしてルーティングさせています。
       </Text>
       <Text class="mb-0">
-        また、そのidを用いて以下のAPをさらにたたき、idに紐付いたcomments情報を取得し、表示させています。
+        また、そのidを用いて以下のAPIをさらにたたき、idに紐付いたcomments情報を取得し表示させています。
       </Text>
       <NextLink target href="https://jsonplaceholder.typicode.com/comments">
         {`https://jsonplaceholder.typicode.com/comments/{id}`}
