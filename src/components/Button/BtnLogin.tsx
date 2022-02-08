@@ -12,7 +12,7 @@ type PROPS = {
 };
 
 export const BtnLogin: VFC<PROPS> = (props) => {
-  const addMarginClass = props.margin ? ` ${props.margin}` : '';
+  const addMarginClass = props.margin ? `${props.margin}` : '';
   const addBtnClass = props.class ? ` ${props.class}` : '';
   if (props.link) {
     return (
