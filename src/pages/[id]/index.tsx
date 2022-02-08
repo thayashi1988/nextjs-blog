@@ -1,24 +1,20 @@
 import type { NextPage } from 'next';
-import React, { useEffect, useState, useCallback } from 'react';
-import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
-import Date from 'src/components/date';
 import { Btn } from 'src/components/Button/Btn';
-import utilStyles from 'src/styles/utils.module.css';
 import { Heading1 } from '@/components/Heading/Heading1';
 import { Column } from '@/components/Column/Column';
 import { ColumnItem } from '@/components/Column/ColumnItem';
 import { auth } from '../../../firebase';
 
-type Links = {
+type LINKS = {
   href: string;
   linkTxt: string;
-};
+}[];
 
-const LINKITEMS: Links[] = [
+const LINKITEMS: LINKS = [
   {
-    href: '/test/test',
+    href: '/tutorial',
     linkTxt: 'next.js チュートリアル',
   },
   {
@@ -33,10 +29,6 @@ const LINKITEMS: Links[] = [
     href: '/firestore',
     linkTxt: 'Cloud Firestore読み込み',
   },
-  // {
-  //   href: '/login/login',
-  //   linkTxt: 'firebase Authentication',
-  // },
   {
     href: '/chat',
     linkTxt: 'チャットアプリ',
@@ -67,7 +59,7 @@ const LINKITEMS: Links[] = [
 const Index: NextPage = () => {
   const [loginName, setLoginName] = useState(null);
   useEffect(() => {
-    const authProcess = auth.onAuthStateChanged((firebaseDatas: any) => {
+    const authProcess = auth.onAuthStateChanged((firebaseDatas) => {
       const authName = firebaseDatas.displayName;
       setLoginName(authName);
     });
@@ -100,22 +92,6 @@ const Index: NextPage = () => {
           })}
         </Column>
       </section>
-      {/* <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className="text-blue-600 font-bold text-4xl mt-8 mb-5">Blog</h2>
-        <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title }) => (
-            <li className={utilStyles.listItem} key={id}>
-              <Link href={`/posts/${id}`}>
-                <a className="text-blue-500">{title}</a>
-              </Link>
-              <br />
-              <small className={utilStyles.lightText}>
-                <Date dateString={date} />
-              </small>
-            </li>
-          ))}
-        </ul>
-      </section> */}
     </>
   );
 };
