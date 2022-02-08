@@ -9,17 +9,17 @@ type PROPS = {
 
 export const LoginGoogle: React.VFC<PROPS> = (props) => {
   return (
-    <div onClick={props.click}>
+    <div onClick={props.click} className="max-w-[191px] mx-auto">
       <BtnLogin
         link={false}
-        class="bg-white py-0 px-0 max-w-full w-full md:hover:opacity-80"
+        class="bg-white py-0 px-0 max-w-full w-full md:hover:opacity-80 h-[46px]"
         click={handleLogIn}>
         <NextImg
-          class="leading-none"
+          class="inline-block"
           src="/images/login/login_google.png"
           alt=""
-          width="382"
-          height="92"
+          width="191"
+          height="46"
         />
       </BtnLogin>
     </div>
@@ -36,13 +36,24 @@ export const LoginFacebook = () => {
   );
 };
 
-export const LoginYahoo = () => {
+export const LoginYahoo = (props) => {
   return (
-    <BtnLogin
-      link={false}
-      class="bg-white py-0 px-0 max-w-full w-full md:hover:opacity-80">
-      yahooを追加予定
-    </BtnLogin>
+    <div onClick={props.click} className="max-w-[191px] mx-auto">
+      <BtnLogin
+        link={false}
+        class="p-2 w-full md:hover:opacity-80 bg-[#ff0033] flex items-center rounded mx-auto">
+        <NextImg
+          class="inline-block"
+          src="/images/login/login_yahoo.png"
+          alt=""
+          width="32"
+          height="18"
+        />
+        <span className="text-white font-bold text-[14px] inline-block w-[75%]">
+          ログイン
+        </span>
+      </BtnLogin>
+    </div>
   );
 };
 
