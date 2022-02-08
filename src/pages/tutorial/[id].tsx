@@ -39,7 +39,7 @@ export const Index: InferGetStaticPropsType<typeof getStaticProps> = ({
         </div>
         <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
         <Btn link href="/tutorial" margin="text-center mt-5">
-          一覧へ戻る
+          マークダウン記事一覧へ戻る
         </Btn>
       </article>
     </>
