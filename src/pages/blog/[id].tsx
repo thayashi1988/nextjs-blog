@@ -32,8 +32,8 @@ type BLOGDATA = {
 };
 
 // 静的生成のためのパスを指定します
-export async function getStaticPaths() {
-  const pageLimit = 50;
+export const getStaticPaths: GetStaticPaths = async () => {
+  const pageLimit = 5;
   const key = {
     headers: { 'X-API-KEY': `${process.env.MICROCMS_API_KEY}` },
   };
@@ -45,10 +45,12 @@ export async function getStaticPaths() {
 
   const paths = res.contents.map((content: BLOGDATA) => `/blog/${content.id}`);
   return { paths, fallback: false };
-}
+};
 
 // データをテンプレートに受け渡す部分の処理を記述します
-export async function getStaticProps(context: { params: { id: string } }) {
+export const getStaticProps: GetStaticProps = async (context: {
+  params: { id: string };
+}) => {
   const id = context.params.id;
   const key = {
     headers: { 'X-API-KEY': `${process.env.MICROCMS_API_KEY}` },
@@ -61,9 +63,9 @@ export async function getStaticProps(context: { params: { id: string } }) {
       blog: res,
     },
   };
-}
+};
 
-export default function Index({ blog }): JSX.Element {
+export const Index = ({ blog }) => {
   const articleData: BLOGDATA = blog;
   const articlbody = articleData.body;
   // console.log('articlbody:', articlbody);
@@ -108,4 +110,5 @@ export default function Index({ blog }): JSX.Element {
       </div>
     </div>
   );
-}
+};
+export default Index;

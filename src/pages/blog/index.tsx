@@ -1,15 +1,20 @@
+import { GetStaticProps } from 'next';
+import { InferGetStaticPropsType } from 'next';
 import React from 'react';
 import Head from 'next/head';
 import { NextImg } from 'src/components/Img/Img';
 import { NextLink } from 'src/components/Link/Link';
 import { Text } from '@/components/Text/Text';
 import { Heading1 } from '@/components/Heading/Heading1';
+import { List } from '@/components/List/List';
+import { ListItem } from '@/components/List/ListItem';
 
 type MICROCMSDATA = {
   contents: [];
   limit: number;
   offset: number;
   totalCount: number;
+  children?: React.ReactNode;
 };
 
 type ARTICLEDATA = [{ fieldId: string; rich?: string; html?: string }];
@@ -32,8 +37,8 @@ type BLOGDATA = {
   updatedAt: string;
 };
 
-export async function getStaticProps() {
-  const limit = 50;
+export const getStaticProps: GetStaticProps = async () => {
+  const limit = 5;
   const key = {
     headers: { 'X-API-KEY': `${process.env.MICROCMS_API_KEY}` },
   };
@@ -41,15 +46,17 @@ export async function getStaticProps() {
     `${process.env.MICROCMS_API_URL}/blog?limit=${limit}`,
     key
   );
-  const res = await data.json();
+  const res: MICROCMSDATA = await data.json();
   return {
     props: {
       blogData: res,
     },
   };
-}
+};
 
-export default function Index({ blogData }): JSX.Element {
+export const Index: InferGetStaticPropsType<typeof getStaticProps> = ({
+  blogData,
+}) => {
   const blogDatas: MICROCMSDATA = blogData;
   const blogContents: BLOGDATA[] = blogDatas.contents;
   // console.log('blogDatas:', blogDatas);
@@ -65,8 +72,13 @@ export default function Index({ blogData }): JSX.Element {
         ヘッドレスCMSの「microCMS」に登録されている記事データを表示させています。
         <br />
         SSG (Static Site
-        Generation)で生成しているので、アプリビルド時にhtmlを生成しそれを表示させています。
+        Generation)で生成しているので、アプリビルド時にデータの取得を行いHTMLを生成し表示させています。
       </Text>
+      <List>
+        <ListItem mark="※" class="!text-[14px]">
+          勉強用のもののため、表示は最新5件としています。
+        </ListItem>
+      </List>
       <ul className="sm:flex sm:flex-wrap sm:justify-start">
         {blogContents.map((contents) => (
           <li className="sm:flex-initial p-2 sm:w-4/12" key={contents.id}>
@@ -86,4 +98,6 @@ export default function Index({ blogData }): JSX.Element {
       </ul>
     </div>
   );
-}
+};
+
+export default Index;
