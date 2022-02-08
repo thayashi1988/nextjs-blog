@@ -1,9 +1,8 @@
-import { NextPage } from 'next';
 import React from 'react';
+import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { siteSettings } from '@/components/Layout/layout';
-import { getSortedPostsData } from 'src/lib/posts';
 import { Column } from '@/components/Column/Column';
 import { ColumnItem } from '@/components/Column/ColumnItem';
 import { NextImg } from '@/components/Img/Img';
@@ -15,26 +14,7 @@ import {
   LoginGithub,
 } from '@/components/Login/Login';
 
-export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
-  return {
-    props: {
-      allPostsData,
-    },
-  };
-}
-
-type postDatas = {
-  id: string;
-  date: string;
-  title: string;
-}[];
-interface Props {
-  allPostsData?: postDatas;
-  props?: any;
-}
-
-const Home: NextPage<Props> = ({ allPostsData, props }) => {
+export const Home: NextPage = () => {
   const router = useRouter();
   const handleRouteLoading = () => {
     router.push('/loading');

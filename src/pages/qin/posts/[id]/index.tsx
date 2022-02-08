@@ -1,13 +1,13 @@
-import type { NextPage } from 'next';
 import React from 'react';
+import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Nav } from '@/components/Nav/Nav';
 import { Text } from '@/components/Text/Text';
 import { Heading1 } from '@/components/Heading/Heading1';
 import { NextLink } from '@/components/Link/Link';
-import { Post } from '@/components/Qin/Post';
 import { List } from '@/components/List/List';
 import { ListItem } from '@/components/List/ListItem';
+import { Post } from '@/components/Qin/Post';
 
 const PostId: NextPage = () => {
   return (

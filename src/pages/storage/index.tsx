@@ -1,7 +1,6 @@
-import type { NextPage } from 'next';
 import React, { useState, useEffect } from 'react';
+import type { NextPage } from 'next';
 import Head from 'next/head';
-import { FBTest, storageRef } from '../../../firebase';
 import { Text } from '@/components/Text/Text';
 import { Btn } from '@/components/Button/Btn';
 import { BtnSecondary } from '@/components/Button/BtnSecondary';
@@ -16,6 +15,7 @@ import { useMicromodal } from '@/components/Modal/';
 import { TextAlert } from '@/components/Text/TextAlert';
 import { Grid } from '@/components/Grid/Grid';
 import { GridItem } from '@/components/Grid/GridItem';
+import { FBTest, storageRef } from '../../../firebase';
 
 const fileMetadata = {
   contentType: 'image/*',
@@ -24,7 +24,7 @@ const fileMetadata = {
 // FirebaseStorageFilesに渡すダウンロードURL
 let underItemslUrls = [];
 
-export const Index: NextPage = (props) => {
+const Index: NextPage = () => {
   const { Modal, open, close } = useMicromodal('sample-modal');
   const [uploadedUrl, setUploadedUrl] = useState<string>('');
   const [deleteFileNameStr, setDeleteFileNameStr] = useState<string>('');

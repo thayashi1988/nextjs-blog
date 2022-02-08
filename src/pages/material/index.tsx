@@ -1,9 +1,8 @@
-import type { NextPage } from 'next';
 import React from 'react';
+import type { NextPage } from 'next';
 import Head from 'next/head';
+import { Text } from '@/components/Text/Text';
 import { Heading1 } from '@/components/Heading/Heading1';
-
-// material-ui
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,9 +14,8 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import { Text } from '@/components/Text/Text';
+import { makeStyles } from '@material-ui/core/styles';
 
 function Copyright() {
   return (
@@ -65,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Index: NextPage = () => {
+const Index: NextPage = () => {
   const classes = useStyles();
 
   return (

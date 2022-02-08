@@ -23,7 +23,7 @@ export const getStaticPaths: GetStaticPaths = () => {
   };
 };
 
-export const Index: InferGetStaticPropsType<typeof getStaticProps> = ({
+const TutorialPost: InferGetStaticPropsType<typeof getStaticProps> = ({
   postData,
 }) => {
   return (
@@ -44,4 +44,4 @@ export const Index: InferGetStaticPropsType<typeof getStaticProps> = ({
     </>
   );
 };
-export default Index;
+export default TutorialPost;

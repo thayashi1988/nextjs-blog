@@ -1,8 +1,7 @@
-import type { NextPage } from 'next';
 import React, { useState, useEffect } from 'react';
+import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-// import { NextLink } from 'src/componnts/Link/Link';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -44,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Index: NextPage = () => {
+const Index: NextPage = () => {
   // ルーター
   const router = useRouter();
 

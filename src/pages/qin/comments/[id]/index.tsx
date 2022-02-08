@@ -1,13 +1,13 @@
-import type { NextPage } from 'next';
 import React from 'react';
+import type { NextPage } from 'next';
 import Head from 'next/head';
-import { Comment } from '@/components/Qin/Comment';
 import { Nav } from '@/components/Nav/Nav';
 import { Text } from '@/components/Text/Text';
 import { Heading1 } from '@/components/Heading/Heading1';
 import { NextLink } from '@/components/Link/Link';
+import { Comment } from '@/components/Qin/Comment';
 
-const commentsId: NextPage = () => {
+const commentId: NextPage = () => {
   return (
     <>
       <Head>
@@ -35,4 +35,4 @@ const commentsId: NextPage = () => {
   );
 };
 
-export default commentsId;
+export default commentId;

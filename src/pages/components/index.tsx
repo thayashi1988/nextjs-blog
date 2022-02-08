@@ -1,5 +1,5 @@
-import type { NextPage } from 'next';
 import React from 'react';
+import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Text } from '@/components/Text/Text';
 import { TextAlert } from '@/components/Text/TextAlert';
@@ -19,9 +19,9 @@ import { ListItem } from '@/components/List/ListItem';
 import { Column } from '@/components/Column/Column';
 import { ColumnItem } from '@/components/Column/ColumnItem';
 
-export const Index: NextPage = () => {
+const Index: NextPage = () => {
   return (
-    <div>
+    <>
       <Head>
         <title>コンポーネント集 | Next.jsアプリ</title>
       </Head>
@@ -82,7 +82,7 @@ export const Index: NextPage = () => {
           <Text>右カラム</Text>
         </ColumnItem>
       </Column>
-    </div>
+    </>
   );
 };
 

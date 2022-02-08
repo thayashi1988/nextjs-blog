@@ -1,5 +1,5 @@
-import type { NextPage } from 'next';
 import React, { useEffect, useState } from 'react';
+import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Btn } from 'src/components/Button/Btn';
 import { Heading1 } from '@/components/Heading/Heading1';

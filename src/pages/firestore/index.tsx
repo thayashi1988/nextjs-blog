@@ -1,21 +1,21 @@
-import type { NextPage } from 'next';
 import React, { useState, useEffect } from 'react';
+import type { NextPage } from 'next';
 import Head from 'next/head';
-import { db } from '../../../firebase';
+import { Btn } from '@/components/Button/Btn';
 import { Text } from '@/components/Text/Text';
 import { Heading1 } from '@/components/Heading/Heading1';
 import { Heading2 } from '@/components/Heading/Heading2';
-import { Btn } from '@/components/Button/Btn';
 import { FirebaseItems } from '@/components/Firebase/FirebaseItems';
 import { LoadingFirebase } from '@/components/Loading/LoadingFirebase';
 import { FirebaseInput } from '@/components/Firebase/FirebaseInput';
+import { db } from '../../../firebase';
 
 type TASKSTATE = {
   id: string;
   title: string;
 }[];
 
-export const Index: NextPage = () => {
+const Index: NextPage = () => {
   const [tasks, setTasks] = useState<TASKSTATE>([{ id: '', title: '' }]);
   const [isFetch, setIsFetch] = useState<Boolean>(false);
   const [input, setInput] = useState<string>('');
@@ -45,7 +45,6 @@ export const Index: NextPage = () => {
   if (!isFetch) {
     return <LoadingFirebase />;
   }
-  console.log('isFetch:', isFetch);
 
   return (
     <>

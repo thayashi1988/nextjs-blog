@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import type { NextPage } from 'next';
 import { renderToString } from 'react-dom/server';
-
 import {
   DragDropContext,
   Droppable,
   Draggable,
   resetServerContext,
 } from 'react-beautiful-dnd';
-
 import Head from 'next/head';
 import { Text } from '@/components/Text/Text';
 import { Heading1 } from '@/components/Heading/Heading1';
@@ -19,11 +17,11 @@ import { HunterBothResult } from 'src/components/Hunter/HunterBothResult';
 import { HunterEvenRows } from 'src/components/Hunter/HunterEvenRows';
 import { HunterHunter } from 'src/components/Hunter/HunterHunter';
 
-type stylesObj = {
+type STYLEOBJ = {
   height: string;
 };
 
-type HunterObj = {
+type HUNTEROBJ = {
   id: number;
   classes: string;
   styles: {
@@ -35,7 +33,7 @@ type HunterObj = {
   hunterEvenRows: boolean;
 };
 
-export const Index: NextPage = () => {
+const Index: NextPage = () => {
   //////// useState  ////////
   // 幅と高さを入力するテキストボックス
   const [widthInputText, setWidthInputText] = useState<string>('');
@@ -80,11 +78,11 @@ export const Index: NextPage = () => {
   }
 
   //////// boxStyles  ////////
-  const hunterListStyles: stylesObj = {
+  const hunterListStyles: STYLEOBJ = {
     height: `${parseFloat(hunterListBoxHeight)}% !important`,
   };
 
-  const divisionResultStyles: stylesObj = {
+  const divisionResultStyles: STYLEOBJ = {
     height: `${parseFloat(hunterListBoxHeight)}%`,
   };
 
@@ -147,7 +145,7 @@ export const Index: NextPage = () => {
   renderToString();
 
   ///// HunterListをドラッグ可能にするためオブジェクトをループして生成させる ///////
-  const HunterListLoopObj: HunterObj[] = [
+  const HunterListLoopObj: HUNTEROBJ[] = [
     {
       id: Math.floor(Math.random() * 10001),
       classes: 'h-full w-3/12 absolute',

@@ -1,9 +1,9 @@
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import React from 'react';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
+import { Text } from '@/components/Text/Text';
 import { NextImg } from '@/components/Img/Img';
 import { NextLink } from '@/components/Link/Link';
-import { Text } from '@/components/Text/Text';
 import { Heading1 } from '@/components/Heading/Heading1';
 import { List } from '@/components/List/List';
 import { ListItem } from '@/components/List/ListItem';
@@ -53,7 +53,7 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-export const Index: InferGetStaticPropsType<typeof getStaticProps> = ({
+const Index: InferGetStaticPropsType<typeof getStaticProps> = ({
   blogData,
 }) => {
   const blogDatas: MICROCMSDATA = blogData;

@@ -1,7 +1,7 @@
-import type { NextPage } from 'next';
 import React from 'react';
-import Head from 'next/head';
+import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import { Btn } from 'src/components/Button/Btn';
 import { ChatList } from 'src/components/List/ChatList';
 import { ChatListInput } from 'src/components/List/ChatListInput';
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const Index: NextPage = () => {
+const Index: NextPage = () => {
   const router = useRouter();
   const name = router.query.userName;
   if (name === '') {

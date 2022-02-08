@@ -1,8 +1,8 @@
-import { GetStaticProps, GetStaticPaths, InferGetStaticPropsType } from 'next';
 import React from 'react';
+import { GetStaticProps, GetStaticPaths, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
-import { NextImg } from '@/components/Img/Img';
 import { Btn } from '@/components/Button/Btn';
+import { NextImg } from '@/components/Img/Img';
 
 type MICROCMSDATA = {
   contents: object[];
@@ -65,9 +65,7 @@ export const getStaticProps: GetStaticProps = async (context: {
   };
 };
 
-export const Index: InferGetStaticPropsType<typeof getStaticProps> = ({
-  blog,
-}) => {
+const Index: InferGetStaticPropsType<typeof getStaticProps> = ({ blog }) => {
   const articleData: BLOGDATA = blog;
   const articlbody = articleData.body;
   // console.log('articlbody:', articlbody);
