@@ -238,7 +238,16 @@ export const Index: NextPage = (props) => {
       <Head>
         <title>ファイルアップ | Next.jsアプリ</title>
       </Head>
-      <Heading1>ファイルアップロード</Heading1>
+      <Heading1>ファイルアップ</Heading1>
+      <Text class="!mb-8">
+        Cloud Storage for
+        Firebaseを使用して、画像のアップロード・削除ができるページです。
+        <br />
+        また、Google Cloud Storage List APIを使用して、
+        <br />
+        Cloud Storage for
+        Firebaseに格納したファイルを確認できるように処理をしています。
+      </Text>
       <div className="flex flex-col items-center justify-center mb-4 sm:mb-8">
         <label htmlFor="" className="block w-full max-w-[320px]">
           <input type="file" className="w-full" />
