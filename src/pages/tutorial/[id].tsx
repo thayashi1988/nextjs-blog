@@ -33,7 +33,6 @@ export const Index: InferGetStaticPropsType<typeof getStaticProps> = ({
       </Head>
       <article>
         <Heading1 class={utilStyles.headingXl}>{postData.title}</Heading1>
-        {/* <h1 className={utilStyles.headingXl}>{postData.title}</h1> */}
         <div className={utilStyles.lightText}>
           <Date dateString={postData.date} />
         </div>
