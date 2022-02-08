@@ -45,7 +45,7 @@ const Home: NextPage<Props> = ({ allPostsData, props }) => {
       <Head>
         <title>{siteSettings.siteTitle}</title>
       </Head>
-      <section className="shadow-gray-300/50 shadow-xl">
+      <section className="shadow-gray-300/50 shadow-xl border border-gray-200 rounded-md max-w-md mx-auto">
         <Column class="mb-0">
           <ColumnItem col="6" colSm="6" class="pr-0 pt-0">
             <div className="h-full bg-[url('https://source.unsplash.com/random')] bg-no-repeat bg-cover bg-center"></div>
@@ -65,13 +65,13 @@ const Home: NextPage<Props> = ({ allPostsData, props }) => {
                   <LoginGoogle click={handleRouteLoading} />
                 </ColumnItem>
                 <ColumnItem col="6" colSm="3" class="pr-0">
-                  <LoginFacebook />
+                  {/* <LoginFacebook /> */}
                 </ColumnItem>
                 <ColumnItem col="6" colSm="3" class="pr-0">
-                  <LoginYahoo />
+                  {/* <LoginYahoo /> */}
                 </ColumnItem>
                 <ColumnItem col="6" colSm="3" class="pr-0">
-                  <LoginGithub />
+                  {/* <LoginGithub /> */}
                 </ColumnItem>
               </Column>
             </div>
