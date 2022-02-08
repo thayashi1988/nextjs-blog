@@ -1,10 +1,10 @@
 import { memo, useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { Header } from 'src/components/Header/Header';
-import { Footer } from 'src/components/Footer/Footer';
-import { BtnInfo } from 'src/components/Button/BtnInfo';
-import styles from 'src/components/Layout/layout.module.scss';
+import { Header } from '@/components/Header/Header';
+import { Footer } from '@/components/Footer/Footer';
+import { BtnInfo } from '@/components/Button/BtnInfo';
+import styles from '@/components/Layout/layout.module.scss';
 import { auth } from '../../../firebase';
 
 export const siteSettings = {
