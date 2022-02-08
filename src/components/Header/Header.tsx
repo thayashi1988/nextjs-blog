@@ -20,6 +20,7 @@ export const Header: VFC<PROPS> = () => {
     checkedDarkMode: false,
   });
   const [isLogin, setIsLogin] = useState(null);
+  const [isMounted, setisMounted] = useState(false);
   const router = useRouter();
   const currentPath = router.pathname;
 
@@ -48,6 +49,7 @@ export const Header: VFC<PROPS> = () => {
         });
       }
     }
+    setisMounted(true);
     return () => authProcess();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLogin]);
@@ -89,7 +91,9 @@ export const Header: VFC<PROPS> = () => {
             inputProps={{ 'aria-label': 'ダークモードスイッチ' }}
           />
           <Text class="md:mb-0">
-            <>{theme === 'dark' ? 'ダークモード' : 'ライトモード'}</>
+            <>
+              {isMounted && theme === 'dark' ? 'ダークモード' : 'ライトモード'}
+            </>
           </Text>
         </div>
       </div>
