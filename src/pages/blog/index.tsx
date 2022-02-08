@@ -1,9 +1,8 @@
-import { GetStaticProps } from 'next';
-import { InferGetStaticPropsType } from 'next';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import React from 'react';
 import Head from 'next/head';
-import { NextImg } from 'src/components/Img/Img';
-import { NextLink } from 'src/components/Link/Link';
+import { NextImg } from '@/components/Img/Img';
+import { NextLink } from '@/components/Link/Link';
 import { Text } from '@/components/Text/Text';
 import { Heading1 } from '@/components/Heading/Heading1';
 import { List } from '@/components/List/List';
