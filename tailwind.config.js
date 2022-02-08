@@ -5,7 +5,12 @@ module.exports = {
   ],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      // フォントを追加
+      // fontFamily: {
+      //   roboto: ['Roboto'],
+      // },
+    },
   },
   variants: {
     extend: {},
