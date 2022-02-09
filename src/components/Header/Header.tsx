@@ -1,19 +1,18 @@
-import type { VFC } from 'react';
-import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { useTheme } from 'next-themes';
-import Switch from '@material-ui/core/Switch';
+import React, { useState, useEffect, useRef } from 'react';
 import { Text } from '@/components/Text/Text';
-import { Heading1 } from '@/components/Heading/Heading1';
-import { NextLink } from '@/components/Link/Link';
 import { BtnSecondary } from '@/components/Button/BtnSecondary';
+import { NextLink } from '@/components/Link/Link';
+import { Heading1 } from '@/components/Heading/Heading1';
+import Switch from '@material-ui/core/Switch';
 import { auth } from '../../../firebase';
 
 type PROPS = {
   theme?: 'dark' | 'light';
 };
 
-export const Header: VFC<PROPS> = () => {
+export const Header: React.VFC<PROPS> = () => {
   const darkModeSwitchRef = useRef();
   const { theme, setTheme } = useTheme();
   const [state, setState] = useState({

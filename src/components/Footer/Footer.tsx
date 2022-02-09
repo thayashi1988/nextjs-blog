@@ -1,6 +1,6 @@
-import type { VFC } from 'react';
+import React from 'react';
 
-export const Footer: VFC = () => {
+export const Footer: React.VFC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
