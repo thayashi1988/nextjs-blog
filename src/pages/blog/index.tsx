@@ -45,17 +45,26 @@ export const getStaticProps: GetStaticProps = async () => {
     `${process.env.MICROCMS_API_URL}/blog?limit=${limit}`,
     key
   );
+  // const menuData = await fetch(
+  //   `${process.env.MICROCMS_API_URL}/menu?limit=3`,
+  //   key
+  // );
   const res: MICROCMSDATA = await data.json();
+  // const menuRes = await menuData.json();
   return {
     props: {
       blogData: res,
+      // aaaa: menuRes,
     },
   };
 };
 
 const Index: InferGetStaticPropsType<typeof getStaticProps> = ({
   blogData,
+  // aaaa,
 }) => {
+  // console.log('aaaa:', aaaa);
+
   const blogDatas: MICROCMSDATA = blogData;
   const blogContents: BLOGDATA[] = blogDatas.contents;
   // console.log('blogDatas:', blogDatas);
@@ -74,7 +83,7 @@ const Index: InferGetStaticPropsType<typeof getStaticProps> = ({
         Generation)で生成しているので、アプリビルド時にデータの取得を行いHTMLを生成し表示させています。
       </Text>
       <List>
-        <ListItem mark="※" class="!text-[14px]">
+        <ListItem mark="※" notice={true}>
           勉強用のもののため、表示は最新5件としています。
         </ListItem>
       </List>
