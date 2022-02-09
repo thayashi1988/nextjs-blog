@@ -1,7 +1,6 @@
-import type { VFC } from 'react';
+import React from 'react';
 import Link from 'next/link';
 
-// ?はPartial。stringもしくはundefinedとなる。
 type PROPS = {
   margin?: string;
   href: string;
@@ -10,7 +9,7 @@ type PROPS = {
   children: React.ReactNode;
 };
 
-export const NextLink: VFC<PROPS> = (props) => {
+export const NextLink: React.VFC<PROPS> = (props) => {
   const addMarginClass = props.margin ? ` ${props.margin}` : '';
   const addLinkClass = props.class ? ` ${props.class}` : '';
 
