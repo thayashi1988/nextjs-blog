@@ -7,7 +7,7 @@
 /coverage
 
 # next.js
-# /.next
+/.next
 /out/
 
 # production
@@ -26,7 +26,7 @@ yarn-error.log*
 .env*
 .firebase-config.js
 /bin
-# /.next
+/.next
 
 # vercel
 .vercel
