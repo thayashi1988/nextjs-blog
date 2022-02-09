@@ -1,4 +1,4 @@
-import type { VFC } from 'react';
+import React from 'react';
 import Link from 'next/link';
 
 type PROPS = {
@@ -10,7 +10,7 @@ type PROPS = {
   click?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-export const BtnInfo: VFC<PROPS> = (props) => {
+export const BtnInfo: React.VFC<PROPS> = (props) => {
   const addMarginClass = props.margin ? ` ${props.margin}` : '';
   const addBtnClass = props.class ? ` ${props.class}` : '';
   if (props.link) {
