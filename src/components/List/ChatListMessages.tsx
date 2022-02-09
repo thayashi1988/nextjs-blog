@@ -1,11 +1,6 @@
-// react
 import type { VFC } from 'react';
 import React, { useEffect, useRef } from 'react';
-
-// components
-import { GravatarPath } from '../Img/Gravatar';
-
-// @material-ui
+import { GravatarPath } from '@/components/Img/Gravatar';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   ListItem,
@@ -22,13 +17,17 @@ const useStyles = makeStyles({
   },
 });
 
-type ARG = {
+type PROPS = {
   isLastItem: boolean;
   name: string;
   text: string;
 };
 
-export const ChatListMessages: VFC<ARG> = ({ isLastItem, name, text }) => {
+export const ChatListMessages: React.VFC<PROPS> = ({
+  isLastItem,
+  name,
+  text,
+}) => {
   const classes = useStyles();
   const ref = useRef(null);
   const avatarPath = GravatarPath(name);

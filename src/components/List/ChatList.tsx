@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ChatListMessages } from './ChatListMessages';
-import { messagesRef } from '../../../firebase';
+import { ChatListMessages } from '@/components/List/ChatListMessages';
 import { makeStyles } from '@material-ui/core/styles';
 import { List } from '@material-ui/core/';
+import { messagesRef } from '../../../firebase';
 
 type MESSAGEPROPS = {
   key: string;

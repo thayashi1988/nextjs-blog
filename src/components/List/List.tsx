@@ -1,4 +1,3 @@
-import type { VFC } from 'react';
 import React from 'react';
 
 type PROPS = {
@@ -7,7 +6,7 @@ type PROPS = {
   children: React.ReactNode;
 };
 
-export const List: VFC<PROPS> = (props) => {
+export const List: React.VFC<PROPS> = (props) => {
   if (!props.tag) {
     return <ul className={props.class}>{props.children}</ul>;
   } else {
