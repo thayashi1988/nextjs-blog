@@ -1,17 +1,18 @@
-import type { VFC } from 'react';
 import React from 'react';
 
 type PROPS = {
-  small?: Boolean;
+  notice?: Boolean;
   mark: string;
   class?: string;
   children: React.ReactNode;
 };
 
-export const ListItem: VFC<PROPS> = (props) => {
+export const ListItem: React.VFC<PROPS> = (props) => {
   const addListItemClass = props.class ? ` ${props.class}` : '';
+  const textSize = props.notice ? true : false;
+  console.log('textSize:', textSize);
 
-  if (!props.small) {
+  if (!textSize) {
     return (
       <li className={`mb-1 text-sm table${addListItemClass}`}>
         <span className="table-cell">{props.mark}</span>
