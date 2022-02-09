@@ -32,7 +32,7 @@ const UserId: NextPage = () => {
         {`https://jsonplaceholder.typicode.com/comments/{id}`}
       </NextLink>
       <List>
-        <ListItem mark="※">
+        <ListItem mark="※" notice={true}>
           APIの構成上、https://jsonplaceholder.typicode.com/usersのidは10件までしかないため、comments情報はid10までしか取得できません。
         </ListItem>
       </List>

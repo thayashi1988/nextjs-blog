@@ -63,7 +63,7 @@ const Index: NextPage = () => {
         <ListItem mark="・">
           リストアイテム margin-bottom: PC:0.25rem MD:0.25rem
         </ListItem>
-        <ListItem mark="※" small={true}>
+        <ListItem mark="※" notice={true}>
           リストアイテム 注釈 font-size: PC:0.875rem MD:0.875rem
         </ListItem>
       </List>

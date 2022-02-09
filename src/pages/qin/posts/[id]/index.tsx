@@ -32,7 +32,7 @@ const PostId: NextPage = () => {
         {`https://jsonplaceholder.typicode.com/users/{id}`}
       </NextLink>
       <List>
-        <ListItem mark="※">
+        <ListItem mark="※" notice={true}>
           https://jsonplaceholder.typicode.com/postsのidとuserIdは同じではないので注意してください。
         </ListItem>
       </List>
