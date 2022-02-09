@@ -17,8 +17,6 @@ type APIPHOTOPROPS = {
 
 export const Comment: React.VFC = () => {
   const { photo, error, isLoading } = useComment();
-  console.log('photo:', photo);
-  console.log('isLoading:', isLoading);
 
   if (isLoading) {
     return <LoadingBox />;
@@ -29,17 +27,6 @@ export const Comment: React.VFC = () => {
 
   return (
     <>
-      {/* <ResultCard>
-        <Heading2 class="text-center">id：{photo[0]?.id}</Heading2>
-        <Text class="text-lg">albumId：{photo[0]?.albumId}</Text>
-        <Text class="text-lg">title：{photo[0]?.title}</Text>
-        <NextImg
-          src={photo[0]?.thumbnailUrl}
-          alt={photo[0]?.title}
-          width="150"
-          height="150"
-        />
-      </ResultCard> */}
       {photo.map((data: APIPHOTOPROPS) => {
         return (
           <ResultCard key={data?.id}>

@@ -1,7 +1,7 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { BtnInfo } from '@/components/Button/BtnInfo';
 import { NextLink } from '@/components/Link/Link';
-import { useRouter } from 'next/router';
 
 const NavItems = [
   {

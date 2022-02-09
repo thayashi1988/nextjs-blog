@@ -13,11 +13,6 @@ export const LoadingTop: React.VFC = () => {
           <div className="h-8 bg-gray-400 rounded"></div>
           <div className="h-8 bg-gray-400 rounded"></div>
         </div>
-        {/* <div className="flex flex-wrap ">
-          <div className="h-8 w-4/12 bg-gray-400 rounded"></div>
-          <div className="h-8 w-4/12 bg-gray-400 rounded"></div>
-          <div className="h-8 w-4/12 bg-gray-400 rounded"></div>
-        </div> */}
       </div>
     </div>
   );

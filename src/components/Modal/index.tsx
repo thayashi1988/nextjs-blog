@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useHook } from '@/components/Hooks/modal.hook';
 import { Modal as ModalComponent } from '@/components/Modal/modal.view';
-import { useCallback } from 'react';
 
 export type UseMicromodal = (id: string) => {
   Modal: React.VFC<{ children: React.ReactNode; id: string }>;

@@ -2,12 +2,12 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
-type Props = {
+type PROPS = {
   id: string;
   children: React.ReactNode;
 };
 
-export const Modal: React.VFC<Props> = (props) => {
+export const Modal: React.VFC<PROPS> = (props) => {
   const ref = useRef();
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
@@ -18,20 +18,9 @@ export const Modal: React.VFC<Props> = (props) => {
       unmounted = true;
     };
   }, []);
-  // console.log('mounted:', mounted);
 
   return mounted
     ? createPortal(
-        // <div
-        //   id={props.id}
-        //   aria-hidden="true"
-        //   className={`${classes.wrap}, ${classes['micromodal-slide']}`}>
-        //   <div className={classes.overlay} tabIndex={-1} data-micromodal-close>
-        //     <div role="dialog" className={classes.dialog} aria-modal="true">
-        //       {props.children}
-        //     </div>
-        //   </div>
-        // </div>,
         <div id={props.id} aria-hidden="true" className="wrap micromodal-slide">
           <div className="overlay" tabIndex={-1} data-micromodal-close>
             <div role="dialog" className="dialog" aria-modal="true">

@@ -1,4 +1,3 @@
-import type { VFC } from 'react';
 import React from 'react';
 
 type PROPS = {
@@ -6,7 +5,7 @@ type PROPS = {
   children: React.ReactNode;
 };
 
-export const TextAlert: VFC<PROPS> = (props) => {
+export const TextAlert: React.VFC<PROPS> = (props) => {
   const addTextClass = props.class ? ` ${props.class}` : '';
 
   return (
