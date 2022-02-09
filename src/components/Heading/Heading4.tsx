@@ -1,4 +1,3 @@
-import type { VFC } from 'react';
 import React from 'react';
 
 type PROPS = {
@@ -7,7 +6,7 @@ type PROPS = {
   children: React.ReactNode;
 };
 
-export const Heading4: VFC<PROPS> = (props) => {
+export const Heading4: React.VFC<PROPS> = (props) => {
   const addMarginClass = props.margin ? ` ${props.margin}` : '';
   const addHeadingClass = props.class ? ` ${props.class}` : '';
 
