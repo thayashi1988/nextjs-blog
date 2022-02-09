@@ -1,5 +1,3 @@
-// react
-import type { DOMAttributes, VFC } from 'react';
 import React from 'react';
 
 type PROPS = {
@@ -8,7 +6,7 @@ type PROPS = {
   text: string | number;
 };
 
-export const HunterEvenRows: VFC<PROPS> = (props) => {
+export const HunterEvenRows: React.VFC<PROPS> = (props) => {
   let styles = '';
   let flag = props.isShow;
   if (flag) {

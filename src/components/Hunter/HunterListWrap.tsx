@@ -1,5 +1,3 @@
-// react
-import type { DOMAttributes, VFC } from 'react';
 import React from 'react';
 
 type PROPS = {
@@ -10,7 +8,7 @@ type PROPS = {
   children?: React.ReactNode;
 };
 
-export const HunterListWrap: VFC<PROPS> = (props) => {
+export const HunterListWrap: React.VFC<PROPS> = (props) => {
   return (
     <div
       className={`h-full w-3/12 absolute ${props.classPositionLeft}`}

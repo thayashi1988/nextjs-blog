@@ -1,11 +1,14 @@
-// react
-import type { DOMAttributes, VFC } from 'react';
 import React from 'react';
 
 type PROPS = {
   widthInputText: string;
   heightInputText: string;
 };
+
+// type SETTINGBORDNUM = {
+//   inputNum: string | number;
+//   type: string;
+// };
 
 const settingBordNum = (inputNum: any, type: string): number => {
   const widthConst: number = 303;
@@ -17,7 +20,7 @@ const settingBordNum = (inputNum: any, type: string): number => {
   }
 };
 
-export const HunterBothResult: VFC<PROPS> = (props) => {
+export const HunterBothResult: React.VFC<PROPS> = (props) => {
   const displayWidthNum =
     props.widthInputText === '' ? '0' : props.widthInputText;
   const displayHeightNum =

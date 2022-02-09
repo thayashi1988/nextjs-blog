@@ -1,5 +1,4 @@
-// react
-import type { DOMAttributes, VFC } from 'react';
+import type { VFC } from 'react';
 import React from 'react';
 
 // eslint-disable-next-line react/display-name

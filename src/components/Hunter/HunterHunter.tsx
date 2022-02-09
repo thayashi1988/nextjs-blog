@@ -1,8 +1,4 @@
-// react
-import type { VFC } from 'react';
 import React from 'react';
-
-// components
 import { NextImg } from 'src/components/Img/Img';
 
 type PROPS = {
@@ -10,7 +6,7 @@ type PROPS = {
   widthValue: number;
 };
 
-export const HunterHunter: VFC<PROPS> = (props) => {
+export const HunterHunter: React.VFC<PROPS> = (props) => {
   if (props.heightValue === 0 && props.widthValue === 0) {
     return (
       <NextImg
