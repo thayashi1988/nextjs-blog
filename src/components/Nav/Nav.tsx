@@ -37,7 +37,7 @@ export const Nav: React.VFC = () => {
       <BtnInfo
         link
         href="/qin"
-        margin="text-center"
+        margin="text-center mt-6"
         class="text-center sm:max-w-sm">
         動的ルーティング・連続fetchのTOPへ戻る
       </BtnInfo>
