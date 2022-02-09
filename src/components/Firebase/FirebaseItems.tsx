@@ -35,22 +35,22 @@ export const FirebaseItems: React.VFC<PROPS> = (props) => {
   return (
     <li className="border-b-2 border-blue-500 mb-5">
       <Column>
-        <ColumnItem col="8" colSm="3" class="sm:w-3/6 md:w-7/12">
+        <ColumnItem class="sm:w-6/12 md:w-7/12">
           <Text class="text-base sm:text-lg">
             <span className="font-bold">タスクNo {props.num}</span>
             <br />
             {props.title}
           </Text>
         </ColumnItem>
-        <ColumnItem col="4" colSm="3" class="sm:w-3/6 md:w-5/12">
+        <ColumnItem class="sm:w-6/12 md:w-5/12">
           <FirebaseInput value={title} name="taskName" change={inputChange} />
           <Column class="mb-0">
-            <ColumnItem col="6" colSm="3" class="w-3/6">
+            <ColumnItem class="w-6/12">
               <BtnSuccess margin="mb-0 mt-2" link={false} click={editTask}>
                 タスク編集
               </BtnSuccess>
             </ColumnItem>
-            <ColumnItem col="6" colSm="3" class="w-3/6">
+            <ColumnItem class="w-6/12">
               <BtnDanger margin="mb-0 mt-2" link={false} click={deleteTask}>
                 タスク削除
               </BtnDanger>

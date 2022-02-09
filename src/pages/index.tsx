@@ -25,12 +25,12 @@ export const Home: NextPage = () => {
       <Head>
         <title>{siteSettings.siteTitle}</title>
       </Head>
-      <section className="shadow-gray-300/50 shadow-xl border border-gray-200 rounded-md max-w-md mx-auto">
+      <section className="shadow-gray-300/50 shadow-xl border border-gray-200 rounded-md max-w-3xl mx-auto">
         <Column class="mb-0">
-          <ColumnItem col="6" colSm="6" class="pr-0 pt-0">
+          <ColumnItem class="pr-0 pt-0 sm:w-6/12 md:w-6/12">
             <div className="h-full bg-[url('https://source.unsplash.com/random')] bg-no-repeat bg-cover bg-center"></div>
           </ColumnItem>
-          <ColumnItem col="6" colSm="6" class="pl-0">
+          <ColumnItem class="pl-0 sm:w-6/12 md:w-6/12">
             <div className="h-full p-4">
               <NextImg
                 class="w-[40px] h-[40px] mx-auto mb-3"
@@ -41,16 +41,16 @@ export const Home: NextPage = () => {
               />
               <Heading1 class="text-center">ログイン</Heading1>
               <Column>
-                <ColumnItem col="6" colSm="3" class="pr-0">
+                <ColumnItem class="pr-0 sm:w-6/12 md:w-6/12">
                   <LoginGoogle click={handleRouteLoading} />
                 </ColumnItem>
-                <ColumnItem col="6" colSm="3" class="pr-0">
+                <ColumnItem class="pr-0 sm:w-6/12 md:w-6/12">
                   {/* <LoginFacebook /> */}
                 </ColumnItem>
-                <ColumnItem col="6" colSm="3" class="pr-0">
+                <ColumnItem class="pr-0 sm:w-6/12 md:w-6/12">
                   {/* <LoginYahoo /> */}
                 </ColumnItem>
-                <ColumnItem col="6" colSm="3" class="pr-0">
+                <ColumnItem class="pr-0 sm:w-6/12 md:w-6/12">
                   {/* <LoginGithub /> */}
                 </ColumnItem>
               </Column>

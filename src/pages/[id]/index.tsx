@@ -79,7 +79,7 @@ const Index: NextPage = () => {
         <Column>
           {LINKITEMS.map((item) => {
             return (
-              <ColumnItem col="4" colSm="3" key={item.href} class="md:w-4/12">
+              <ColumnItem key={item.href} class="sm:w-6/12 md:w-4/12">
                 <Btn
                   link
                   href={item.href}

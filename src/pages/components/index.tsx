@@ -69,16 +69,16 @@ const Index: NextPage = () => {
       </List>
       <HeadingComponent class="mt-8">カラムコンポーネント</HeadingComponent>
       <Column>
-        <ColumnItem col="6" colSm="3">
+        <ColumnItem class="sm:w-6/12 md:w-6/12">
           <Text>左カラム</Text>
         </ColumnItem>
-        <ColumnItem col="6" colSm="3">
+        <ColumnItem class="sm:w-6/12 md:w-6/12">
           <Text>右カラム</Text>
         </ColumnItem>
-        <ColumnItem col="6" colSm="3">
+        <ColumnItem class="sm:w-6/12 md:w-6/12">
           <Text>右カラム</Text>
         </ColumnItem>
-        <ColumnItem col="6" colSm="3">
+        <ColumnItem class="sm:w-6/12 md:w-6/12">
           <Text>右カラム</Text>
         </ColumnItem>
       </Column>
