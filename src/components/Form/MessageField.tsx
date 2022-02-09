@@ -1,21 +1,15 @@
-// react
-import type { VFC } from 'react';
 import React, { useState } from 'react';
-
-// firebase
+import { TextField } from '@material-ui/core';
 import { pushMessage } from '../../../firebase';
 
-// @material-ui
-import { TextField } from '@material-ui/core';
-
-type ARG = {
+type PROPS = {
   inputEl: React.MutableRefObject<HTMLInputElement>;
   userName: string | string[];
   setInputText: React.Dispatch<string>;
   inputText: string;
 };
 
-export const MessageField: VFC<ARG> = ({
+export const MessageField: React.VFC<PROPS> = ({
   inputEl,
   userName,
   setInputText,
@@ -24,13 +18,13 @@ export const MessageField: VFC<ARG> = ({
   const [isComposed, setIsComposed] = useState(false);
 
   //入力テキストを取得
-  const changeText = (e) => {
+  const changeText = (e: React.ChangeEvent<HTMLInputElement>) => {
     const targetText = e.target.value;
     setInputText(targetText);
   };
 
-  //Enterキーでのfirebaseへの送信制御
-  const keydownText = (e) => {
+  //Enterキーでのfirebaseへの送信制御（KeyboardEventでe.target.valueが通らない。。）
+  const keydownText = (e: React.KeyboardEvent | any) => {
     if (isComposed) return;
 
     const targetKeydownText = e.target.value;
