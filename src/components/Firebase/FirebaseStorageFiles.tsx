@@ -1,11 +1,11 @@
 import React from 'react';
-import { LoadingText } from '@/components/Loading/LoadingText';
+import { BtnDanger } from '@/components/Button/BtnDanger';
 import { Text } from '@/components/Text/Text';
 import { TextAlert } from '@/components/Text/TextAlert';
 import { NextImg } from '@/components/Img/Img';
+import { LoadingText } from '@/components/Loading/LoadingText';
 import { Grid } from '@/components/Grid/Grid';
 import { GridItem } from '@/components/Grid/GridItem';
-import { BtnDanger } from '@/components/Button/BtnDanger';
 
 type PROPS = {
   datas: string[];
@@ -14,9 +14,6 @@ type PROPS = {
   createPath(data: string): React.MouseEventHandler<HTMLButtonElement> | any;
   children?: React.ReactNode;
 };
-
-// const storagePath =
-//   'https://firebasestorage.googleapis.com/v0/b/udemy-todo-f0672.appspot.com/o/';
 
 export const FirebaseStorageFiles: React.VFC<PROPS> = (props) => {
   if (props.loading) {

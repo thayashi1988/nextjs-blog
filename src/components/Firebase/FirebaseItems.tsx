@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { db } from '../../../firebase';
 import { Text } from '@/components/Text/Text';
 import { BtnSuccess } from '@/components/Button/BtnSuccess';
 import { BtnDanger } from '@/components/Button/BtnDanger';
 import { FirebaseInput } from '@/components/Firebase/FirebaseInput';
 import { Column } from '@/components/Column/Column';
 import { ColumnItem } from '@/components/Column/ColumnItem';
+import { db } from '../../../firebase';
 
 type PROPS = {
   title: string;
