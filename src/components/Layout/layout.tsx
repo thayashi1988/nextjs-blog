@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { Header } from '@/components/Header/Header';
 import { Footer } from '@/components/Footer/Footer';
 import { BtnInfo } from '@/components/Button/BtnInfo';
-import styles from '@/components/Layout/layout.module.scss';
+// import styles from '@/components/Layout/layout.module.scss';
 import { auth } from '../../../firebase';
 
 export const siteSettings = {
@@ -15,7 +15,7 @@ export const siteSettings = {
 
 export const Layout = ({ children }) => {
   // const [footerHeight, setFooterHeight] = useState(0);
-  const footerElem = useRef();
+  // const footerElem = useRef();
   const [isLogin, setIsLogin] = useState(null);
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export const Layout = ({ children }) => {
           ) : null}
         </main>
       </div>
-      <div ref={footerElem}>
+      <div>
         <Footer />
       </div>
     </>
