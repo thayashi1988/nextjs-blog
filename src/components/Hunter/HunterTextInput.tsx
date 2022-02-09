@@ -1,8 +1,4 @@
-// react
-import type { DOMAttributes, VFC } from 'react';
 import React from 'react';
-
-// @material-ui
 import { TextField } from '@material-ui/core';
 
 type PROPS = {
@@ -14,8 +10,7 @@ type PROPS = {
   inputAttr?: object;
 };
 
-export const TextInput: VFC<PROPS> = (props) => {
-  console.log('1-HunterTextInput.tsx');
+export const TextInput: React.VFC<PROPS> = (props) => {
   return (
     <TextField
       type="text"
