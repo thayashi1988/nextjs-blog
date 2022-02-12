@@ -19,7 +19,7 @@ export const Header: React.VFC<PROPS> = () => {
     checkedDarkMode: false,
   });
   const [isLogin, setIsLogin] = useState(null);
-  const [isMounted, setisMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
   const currentPath = router.pathname;
 
@@ -48,7 +48,7 @@ export const Header: React.VFC<PROPS> = () => {
         });
       }
     }
-    setisMounted(true);
+    setIsMounted(true);
     return () => authProcess();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLogin]);
