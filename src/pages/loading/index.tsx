@@ -2,8 +2,8 @@ import React from 'react';
 import { NextPage } from 'next';
 import { LoadingTop } from '@/components/Loading/LoadingTop';
 
-const index: NextPage = () => {
+const Index: NextPage = () => {
   return <LoadingTop />;
 };
 
-export default index;
+export default Index;
