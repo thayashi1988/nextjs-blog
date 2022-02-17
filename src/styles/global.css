@@ -148,3 +148,10 @@ modal
 .micromodal-slide .overlay {
   will-change: transform;
 }
+
+/* //////////
+button disabled
+////////// */
+button:disabled {
+  background-color: gray !important;
+}
