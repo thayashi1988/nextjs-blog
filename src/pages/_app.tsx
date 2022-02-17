@@ -3,14 +3,17 @@ import { ThemeProvider } from 'next-themes'; // ダークモードのプラグ�
 import { Layout } from '@/components/Layout/layout';
 import '@/styles/global.css';
 import 'tailwindcss/tailwind.css';
+import { AdminFlagProvoder } from '@/components/Providers/AdminFlagProvoder';
 
 const App = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
-    <ThemeProvider attribute="class">
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ThemeProvider>
+    <AdminFlagProvoder>
+      <ThemeProvider attribute="class">
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
+    </AdminFlagProvoder>
   );
 };
 
