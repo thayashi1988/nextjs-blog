@@ -54,6 +54,10 @@ const LINKITEMS: LINKS = [
     href: '/storage',
     linkTxt: 'ファイルアップ',
   },
+  {
+    href: '/hooks/memo',
+    linkTxt: 'UseMemo',
+  },
 ];
 
 const Index: NextPage = () => {
