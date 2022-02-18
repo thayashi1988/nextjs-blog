@@ -43,6 +43,11 @@ export const Header: React.VFC<PROPS> = () => {
           pathname: `/${userUid}/`,
           query: { loginName: userDisplayName },
         });
+      } else if (currentPath === '/') {
+        router.push({
+          pathname: `/${userUid}/`,
+          query: { loginName: userDisplayName },
+        });
       }
     } else {
       if (!/.+/.test(currentPath)) {
