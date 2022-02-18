@@ -10,17 +10,18 @@ type PROPS = {
 };
 
 export const NextLink: React.VFC<PROPS> = (props) => {
-  const addMarginClass = props.margin ? ` ${props.margin}` : '';
-  const addLinkClass = props.class ? ` ${props.class}` : '';
+  const { margin, href, class: className, target, children } = props;
+  const addMarginClass = margin ? ` ${margin}` : '';
+  const addLinkClass = className ? ` ${className}` : '';
 
-  if (props.target) {
+  if (target) {
     return (
       <div className={`mb-3${addMarginClass}`}>
-        <Link href={props.href}>
+        <Link href={href}>
           <a
             className={`text-sm text-blue-600 underline inline-block md:hover:text-blue-400 m-link-icon${addLinkClass}`}
             target="_blank">
-            {props.children}
+            {children}
           </a>
         </Link>
       </div>
@@ -28,10 +29,10 @@ export const NextLink: React.VFC<PROPS> = (props) => {
   } else {
     return (
       <div className={`mb-3${addMarginClass}`}>
-        <Link href={props.href}>
+        <Link href={href}>
           <a
             className={`text-sm text-blue-600 underline inline-block md:hover:text-blue-400${addLinkClass}`}>
-            {props.children}
+            {children}
           </a>
         </Link>
       </div>
