@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, memo } from 'react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import { auth } from '../../../firebase';
+import { BtnSuccess } from '@/components/Button/BtnSuccess';
 
 // const Copyright = React.memo(() => {
 //   return (
@@ -43,7 +44,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Index: NextPage = () => {
+const Index: NextPage = memo(() => {
+  console.log('chat レンダリング');
+
   // ルーター
   const router = useRouter();
 
@@ -60,28 +63,35 @@ const Index: NextPage = () => {
   const [string, setString] = useState('');
 
   // ログイン情報
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
 
   //ボタン活性化
   useEffect(() => {
-    const disabled = string === '' ? true : false;
-    setdisabled(disabled);
-    const authProcess = auth.onAuthStateChanged((user: any) => {
-      setUser(user);
-    });
-    return () => authProcess();
-  }, [string]);
+    const disabled = function () {
+      const disabledBooelan = string === '' ? true : false;
+      setdisabled(disabledBooelan);
+    };
+    console.log('useEffect:');
+    // const authProcess = auth.onAuthStateChanged((user: any) => {
+    //   setUser(user);
+    // });
+    return () => disabled();
+  }, []);
   // console.log('user:', user);
 
   //入力テキスト取得
   const inputFunc = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    // setString((prev) => prev + e.target.value);
     setString(e.target.value);
+    e.target.value.length !== 0 ? setdisabled(false) : setdisabled(true);
   };
+  // console.log('string:', string);
 
   //キーダウン取得
   const keydownFunc = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     const pressdKey = e.key;
     setName(string);
+    console.log('pressdKey:', pressdKey);
 
     if (pressdKey === 'Enter') {
       setName(string);
@@ -90,17 +100,19 @@ const Index: NextPage = () => {
   };
 
   //日本語入力処理
-  const compositionFunc = (): void => {
+  const compositionFunc = useCallback((): void => {
     // console.log('name:', name);
-  };
+  }, []);
 
   //ボタンクリックアクション
   const clickFunc = (): void => {
-    console.log('string:', string);
     setName(string);
+    console.log('clickFunc string:', string);
+    console.log('clickFunc name:', name);
+    console.log('clickFunc disabled:', disabled);
     router.push({
       pathname: '/chat/room',
-      query: { userName: name }, //入力したユーザーネームを渡す
+      query: { userName: string }, //入力したユーザーネームを渡す
     });
   };
 
@@ -110,26 +122,36 @@ const Index: NextPage = () => {
         <title>チャットアプリ | Next.jsアプリ</title>
       </Head>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
+        {/* <CssBaseline /> */}
+        {/* <div className={classes.paper}> */}
+        <div className="flex flex-col items-center">
           <Typography component="h1" variant="h5">
             チャットアプリへようこそ
           </Typography>
-          <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="name"
-              label="お名前を入力してください"
-              name="name"
-              autoFocus
-              onChange={inputFunc}
-              onKeyDown={keydownFunc}
-              onCompositionStart={compositionFunc}
-            />
-            <Button
+          {/* <form className={classes.form} noValidate> */}
+          {/* <form className="w-full" noValidate> */}
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="name"
+            label="お名前を入力してください"
+            name="name"
+            autoFocus
+            onChange={inputFunc}
+            onKeyDown={keydownFunc}
+            onCompositionStart={compositionFunc}
+          />
+          <BtnSuccess
+            link={false}
+            click={clickFunc}
+            class="sm:!max-w-full"
+            margin="w-full"
+            disabled={disabled}>
+            はじめる
+          </BtnSuccess>
+          {/* <Button
               type="button"
               fullWidth
               variant="contained"
@@ -138,13 +160,13 @@ const Index: NextPage = () => {
               disabled={disabled}
               onClick={clickFunc}>
               はじめる
-            </Button>
-          </form>
+            </Button> */}
+          {/* </form> */}
         </div>
-        <Box mt={2}>{/* <Copyright /> */}</Box>
+        {/* <Box mt={2}><Copyright /></Box> */}
       </Container>
     </div>
   );
-};
+});
 
 export default Index;
