@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 type PROPS = {
   value: string;
@@ -7,7 +7,8 @@ type PROPS = {
   change: React.ChangeEventHandler<HTMLInputElement>;
 };
 
-export const FirebaseInput: React.VFC<PROPS> = (props) => {
+export const FirebaseInput: React.VFC<PROPS> = memo((props) => {
+  console.log('FirebaseInput レンダリング:');
   const addFirebaseInputClass = props.class ? ` ${props.class}` : '';
   return (
     <input
@@ -17,4 +18,4 @@ export const FirebaseInput: React.VFC<PROPS> = (props) => {
       onChange={props.change}
     />
   );
-};
+});

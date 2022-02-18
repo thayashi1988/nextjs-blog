@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import { Text } from '@/components/Text/Text';
 import { BtnSuccess } from '@/components/Button/BtnSuccess';
 import { BtnDanger } from '@/components/Button/BtnDanger';
@@ -13,24 +13,27 @@ type PROPS = {
   num: number;
 };
 
-export const FirebaseItems: React.VFC<PROPS> = (props) => {
+export const FirebaseItems: React.VFC<PROPS> = memo((props) => {
   const [title, setTitle] = useState(props.title);
 
   //入力データでfirebaseのデータを更新
-  const editTask = (): void => {
+  const editTask = useCallback((): void => {
     db.collection('tasks').doc(props.id).set({ title: title }, { merge: true });
-  };
+  }, [title, props.id]);
 
   //firebaseのデータを削除
-  const deleteTask = (): void => {
+  const deleteTask = useCallback((): void => {
     db.collection('tasks').doc(props.id).delete();
-  };
+  }, [props.id]);
 
   // インプットイベント
-  const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
-    console.log('e.target.value:', e.target.value);
-  };
+  const inputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>): void => {
+      setTitle(e.target.value);
+    },
+    [setTitle]
+  );
+  console.log('FirebaseItems レンダリング:');
 
   return (
     <li className="border-b-2 border-blue-500 mb-5">
@@ -60,4 +63,4 @@ export const FirebaseItems: React.VFC<PROPS> = (props) => {
       </Column>
     </li>
   );
-};
+});
