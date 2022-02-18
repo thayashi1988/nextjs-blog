@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback, memo } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import calsses from 'src/styles/weather.module.css';
@@ -6,20 +6,22 @@ import { Text } from '@/components/Text/Text';
 import { Heading1 } from '@/components/Heading/Heading1';
 import { NextLink } from '@/components/Link/Link';
 import { BtnSuccess } from '@/components/Button/BtnSuccess';
+import { WeatherInput } from '@/components/Weather/WeatherInput';
 
-let val: string = '';
 const apiUrl: string = 'https://weather.tsukumijima.net/api/forecast?city=';
 
-const Index: NextPage = () => {
+const Index: NextPage = memo(() => {
+  console.log('wether レンダリング');
+  const [val, setVal] = useState('');
   const [city, setCity] = useState('');
   const [tempMax, setTempMax] = useState('');
   const [telop, setTelop] = useState('');
-  const [rainArrrayJoin, setRainArrayJoin] = useState('');
+  const [rainArrrayJoin, setRainArrayJoin] = useState([]);
 
   //当日の日付取得関数
-  const dateBuilder = () => {
-    let d = new Date();
-    let months = [
+  const dateBuilder = useCallback((): string => {
+    const d = new Date();
+    const months = [
       '1月',
       '2月',
       '3月',
@@ -33,41 +35,48 @@ const Index: NextPage = () => {
       '11月',
       '12月',
     ];
-    let days = ['日曜', '月曜', '火曜', '水曜', '木曜', '金曜', '土曜'];
-    let day = days[d.getDay()];
-    let date = d.getDate();
-    let month = months[d.getMonth()];
-    let year = d.getFullYear();
+    const days = ['日曜', '月曜', '火曜', '水曜', '木曜', '金曜', '土曜'];
+    const day = days[d.getDay()];
+    const date = d.getDate();
+    const month = months[d.getMonth()];
+    const year = d.getFullYear();
     return `${year}年 ${month} ${date}日 ${day}`;
-  };
+  }, []);
 
-  const handleGetInputData = (e: React.ChangeEvent<HTMLInputElement>) => {
-    val = e.target.value;
-  };
+  const handleGetInputData = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setVal(e.target.value);
+    },
+    [setVal]
+  );
 
-  const handleKeyPressWatherCheck = (
-    e: React.KeyboardEvent<HTMLInputElement>
-  ) => {
-    const pressKey = e.key;
-    if (pressKey === 'Enter') {
+  const handleKeyPressWatherCheck = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      const pressKey = e.key;
+      if (pressKey === 'Enter') {
+        fetchWeather(val);
+        dateBuilder();
+      }
+    },
+    [val, dateBuilder]
+  );
+
+  const handleClickWeatherCheck = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
       fetchWeather(val);
       dateBuilder();
-    }
-  };
+    },
+    [val, dateBuilder]
+  );
 
-  const handleClickWeatherCheck = (e: React.MouseEvent<HTMLButtonElement>) => {
-    fetchWeather(val);
-    dateBuilder();
-  };
-
-  const fetchWeather = async (areaName: string) => {
+  const fetchWeather = async (areaCode: string) => {
     try {
       // state初期化
       setCity('');
       setTempMax('');
       setTelop('');
-      setRainArrayJoin('');
-      const res = await fetch(`${apiUrl}${areaName}`);
+      setRainArrayJoin([]);
+      const res = await fetch(`${apiUrl}${areaCode}`);
       const jsonData = await res.json();
       console.log('jsonData:', jsonData);
 
@@ -79,14 +88,12 @@ const Index: NextPage = () => {
       // 降水確率処理
       const rain = jsonData.forecasts[0].chanceOfRain;
       const rainArray = [];
-      rainArray.push(`00~06時：${rain.T00_06}<br>`);
-      rainArray.push(`06~12時：${rain.T06_12}<br>`);
-      rainArray.push(`12~18時：${rain.T12_18}<br>`);
-      rainArray.push(`18~24時：${rain.T18_24}<br>`);
-
-      // 降水確率配列を文字列にしてstateにセット
-      const test = rainArray.join('');
-      setRainArrayJoin(test);
+      for (const [key, value] of Object.entries(rain)) {
+        const txtSplit = key.split(/T/)[1];
+        const txtReplace = txtSplit.replace(/_/, '〜');
+        rainArray.push(`${txtReplace}時： ${value}`);
+      }
+      setRainArrayJoin(rainArray);
     } catch (error) {
       //該当地域がなければアラート
       alert('該当するエリアがデータにありません。');
@@ -119,16 +126,13 @@ const Index: NextPage = () => {
         例）那覇 = 471010
       </Text>
 
-      {/* {rainArrrayJoin} */}
       <div className={`${calsses.app}`}>
         <div className={`${calsses.container}`}>
           <div className={`${calsses.search_box}`}>
-            <input
-              type="text"
-              onChange={handleGetInputData}
-              onKeyPress={handleKeyPressWatherCheck}
-              className={calsses.search_bar}
-              placeholder="地域を入力..."
+            <WeatherInput
+              change={handleGetInputData}
+              keypress={handleKeyPressWatherCheck}
+              class={calsses.search_bar}
             />
             <BtnSuccess
               margin="text-center mt-3"
@@ -147,10 +151,16 @@ const Index: NextPage = () => {
             <div className={calsses.weather_box}>
               <div className={calsses.temp}>{tempMax}°c</div>
               <div className={calsses.rain}>
-                降水確率
-                <div
-                  className={calsses.rainlist}
-                  dangerouslySetInnerHTML={{ __html: rainArrrayJoin }}></div>
+                {rainArrrayJoin.length !== 0 ? '降水確率' : null}
+                <div className={calsses.rainlist}>
+                  <ul>
+                    {rainArrrayJoin.length !== 0
+                      ? rainArrrayJoin.map((item) => {
+                          return <li key={item}>{item}</li>;
+                        })
+                      : null}
+                  </ul>
+                </div>
               </div>
               <div className={calsses.weather}>{telop}</div>
             </div>
@@ -159,5 +169,5 @@ const Index: NextPage = () => {
       </div>
     </>
   );
-};
+});
 export default Index;
