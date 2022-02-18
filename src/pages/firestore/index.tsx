@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, memo } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Btn } from '@/components/Button/Btn';
@@ -15,7 +15,7 @@ type TASKSTATE = {
   title: string;
 }[];
 
-const Index: NextPage = () => {
+const Index: NextPage = memo(() => {
   const [tasks, setTasks] = useState<TASKSTATE>([{ id: '', title: '' }]);
   const [isFetch, setIsFetch] = useState<Boolean>(false);
   const [input, setInput] = useState<string>('');
@@ -42,9 +42,13 @@ const Index: NextPage = () => {
   }, [input]);
 
   // インプットイベント
-  const taskInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
-  };
+  const taskInput = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>): void => {
+      setInput(e.target.value);
+    },
+    []
+  );
+  console.log('firebase index レンダリング');
 
   if (!isFetch) {
     return <LoadingFirebase />;
@@ -86,6 +90,6 @@ const Index: NextPage = () => {
       </ul>
     </>
   );
-};
+});
 
 export default Index;
