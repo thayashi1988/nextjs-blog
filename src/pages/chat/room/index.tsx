@@ -8,29 +8,32 @@ import { ChatListInput } from 'src/components/List/ChatListInput';
 import { makeStyles } from '@material-ui/core/styles';
 
 //material-uiのstyle
-const useStyles = makeStyles({
-  root: {
-    display: 'grid',
-    height: '90vh',
-    gridTemplateRows: '1fr auto',
-  },
-});
+// const useStyles = makeStyles({
+//   root: {
+//     display: 'grid',
+//     height: '90vh',
+//     gridTemplateRows: '1fr auto',
+//   },
+// });
 
 const Index: NextPage = () => {
   const router = useRouter();
   const name = router.query.userName;
-  if (name === '') {
-    router.push('/signin');
-  }
+  // const name = 'router.query.userName';
+  // if (name === '') {
+  //   router.push('/signin');
+  // }
 
-  const classes = useStyles();
+  console.log('room レンダリング', name);
+  // const classes = useStyles();
 
   return (
     <div>
       <Head>
         <title>ルーム | チャットアプリ | Next.jsアプリ</title>
       </Head>
-      <div className={classes.root}>
+      {/* <div className={classes.root}> */}
+      <div>
         <ChatList />
         <ChatListInput
           userName={name}
@@ -38,7 +41,7 @@ const Index: NextPage = () => {
         />
       </div>
       <div className="text-center">
-        <Btn link href="/signin">
+        <Btn link href="/chat">
           前のページに戻る
         </Btn>
       </div>
