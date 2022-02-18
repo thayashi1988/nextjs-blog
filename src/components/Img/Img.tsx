@@ -11,16 +11,17 @@ type PROPS = {
 };
 
 export const NextImg: React.VFC<PROPS> = (props) => {
-  const addParentClass = props.class ? ` ${props.class}` : '';
-  const quality = props.quality ? props.quality : 75;
+  const { alt, src, width, height, quality, class: className } = props;
+  const addParentClass = className ? ` ${className}` : '';
+  const qualityValue = quality ? quality : 75;
   return (
     <figure className={`m-0${addParentClass}`}>
       <Image
-        alt={props.alt}
-        src={props.src}
-        width={props.width}
-        height={props.height}
-        quality={quality}
+        alt={alt}
+        src={src}
+        width={width}
+        height={height}
+        quality={qualityValue}
       />
     </figure>
   );
