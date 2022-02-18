@@ -8,6 +8,7 @@ type PROPS = {
 };
 
 export const Modal: React.VFC<PROPS> = (props) => {
+  const { id, children } = props;
   const ref = useRef();
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
@@ -21,10 +22,10 @@ export const Modal: React.VFC<PROPS> = (props) => {
 
   return mounted
     ? createPortal(
-        <div id={props.id} aria-hidden="true" className="wrap micromodal-slide">
+        <div id={id} aria-hidden="true" className="wrap micromodal-slide">
           <div className="overlay" tabIndex={-1} data-micromodal-close>
             <div role="dialog" className="dialog" aria-modal="true">
-              {props.children}
+              {children}
             </div>
           </div>
         </div>,

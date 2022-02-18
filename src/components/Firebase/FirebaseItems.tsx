@@ -14,17 +14,18 @@ type PROPS = {
 };
 
 export const FirebaseItems: React.VFC<PROPS> = memo((props) => {
-  const [title, setTitle] = useState(props.title);
+  const { title: taskTitle, id: taskId, num: taskNum } = props;
+  const [title, setTitle] = useState(taskTitle);
 
   //入力データでfirebaseのデータを更新
   const editTask = useCallback((): void => {
-    db.collection('tasks').doc(props.id).set({ title: title }, { merge: true });
-  }, [title, props.id]);
+    db.collection('tasks').doc(taskId).set({ title: title }, { merge: true });
+  }, [title, taskId]);
 
   //firebaseのデータを削除
   const deleteTask = useCallback((): void => {
-    db.collection('tasks').doc(props.id).delete();
-  }, [props.id]);
+    db.collection('tasks').doc(taskId).delete();
+  }, [taskId]);
 
   // インプットイベント
   const inputChange = useCallback(
@@ -33,16 +34,15 @@ export const FirebaseItems: React.VFC<PROPS> = memo((props) => {
     },
     [setTitle]
   );
-  console.log('FirebaseItems レンダリング:');
 
   return (
     <li className="border-b-2 border-blue-500 mb-5">
       <Column>
         <ColumnItem class="sm:w-6/12 md:w-7/12">
           <Text class="text-base sm:text-lg">
-            <span className="font-bold">タスクNo {props.num}</span>
+            <span className="font-bold">タスクNo {taskNum}</span>
             <br />
-            {props.title}
+            {taskTitle}
           </Text>
         </ColumnItem>
         <ColumnItem class="sm:w-6/12 md:w-5/12">
