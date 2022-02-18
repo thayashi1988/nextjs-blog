@@ -34,13 +34,16 @@ export const Header: React.VFC<PROPS> = () => {
     });
 
     // ログインできたか確認処理
+    console.log('currentPath:', currentPath);
     if (isLogin !== null) {
       const userUid = isLogin.uid;
       const userDisplayName = isLogin.displayName;
-      router.push({
-        pathname: `/${userUid}/`,
-        query: { loginName: userDisplayName },
-      });
+      if (currentPath === '/loading') {
+        router.push({
+          pathname: `/${userUid}/`,
+          query: { loginName: userDisplayName },
+        });
+      }
     } else {
       if (!/.+/.test(currentPath)) {
         router.push({
@@ -50,8 +53,7 @@ export const Header: React.VFC<PROPS> = () => {
     }
     setIsMounted(true);
     return () => authProcess();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLogin]);
+  }, [isLogin, currentPath]);
 
   // ログアウト機能
   const handleLogOut = (): any => {
