@@ -32,10 +32,14 @@ const Index: NextPage = () => {
   }, []);
 
   //入力データをfirebaseに登録
-  const addTask = () => {
-    db.collection('tasks').add({ title: input });
-    setInput('');
-  };
+  const addTask = useCallback((): void => {
+    if (input !== '') {
+      db.collection('tasks').add({ title: input });
+      setInput('');
+    } else {
+      alert('タスク名を入力してください');
+    }
+  }, [input]);
 
   // インプットイベント
   const taskInput = (e: React.ChangeEvent<HTMLInputElement>) => {
