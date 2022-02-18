@@ -7,9 +7,10 @@ type PROPS = {
 };
 
 export const List: React.VFC<PROPS> = (props) => {
-  if (!props.tag) {
-    return <ul className={props.class}>{props.children}</ul>;
+  const { tag: listTag, class: className, children } = props;
+  if (!listTag) {
+    return <ul className={className}>{children}</ul>;
   } else {
-    return <ol className={props.class}>{props.children}</ol>;
+    return <ol className={className}>{children}</ol>;
   }
 };

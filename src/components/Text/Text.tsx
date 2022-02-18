@@ -6,7 +6,8 @@ type PROPS = {
 };
 
 export const Text: React.VFC<PROPS> = (props) => {
-  const addTextClass = props.class ? ` ${props.class}` : '';
+  const { class: className, children } = props;
+  const addTextClass = className ? ` ${className}` : '';
 
-  return <p className={`text-sm mb-3${addTextClass}`}>{props.children}</p>;
+  return <p className={`text-sm mb-3${addTextClass}`}>{children}</p>;
 };

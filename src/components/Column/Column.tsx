@@ -6,11 +6,12 @@ type PROPS = {
 };
 
 export const Column: React.VFC<PROPS> = (props) => {
-  const addColumnClass = props.class ? ` ${props.class}` : '';
+  const { class: className, children } = props;
+  const addColumnClass = className ? ` ${className}` : '';
 
   return (
     <div className={`flex flex-wrap -mx-2 -mt-2 mb-5${addColumnClass}`}>
-      {props.children}
+      {children}
     </div>
   );
 };

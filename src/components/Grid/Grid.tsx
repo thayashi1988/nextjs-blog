@@ -6,7 +6,8 @@ type PROPS = {
 };
 
 export const Grid: React.VFC<PROPS> = (props) => {
-  const addGridClass = props.class ? ` ${props.class}` : '';
+  const { class: className, children } = props;
+  const addGridClass = className ? ` ${className}` : '';
 
-  return <div className={`grid${addGridClass}`}>{props.children}</div>;
+  return <div className={`grid${addGridClass}`}>{children}</div>;
 };

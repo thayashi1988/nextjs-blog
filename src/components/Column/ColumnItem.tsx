@@ -6,9 +6,8 @@ type PROPS = {
 };
 
 export const ColumnItem: React.VFC<PROPS> = (props) => {
-  const addColumnClass = props.class ? ` ${props.class}` : '';
+  const { class: className, children } = props;
+  const addColumnClass = className ? ` ${className}` : '';
 
-  return (
-    <div className={`w-full px-2 pt-2${addColumnClass}`}>{props.children}</div>
-  );
+  return <div className={`w-full px-2 pt-2${addColumnClass}`}>{children}</div>;
 };
