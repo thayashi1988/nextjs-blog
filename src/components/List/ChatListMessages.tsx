@@ -1,7 +1,5 @@
-import type { VFC } from 'react';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, memo } from 'react';
 import { GravatarPath } from '@/components/Img/Gravatar';
-import { makeStyles } from '@material-ui/core/styles';
 import {
   ListItem,
   ListItemAvatar,
@@ -10,25 +8,14 @@ import {
   Typography,
 } from '@material-ui/core';
 
-//material-uiのstyle
-const useStyles = makeStyles({
-  inline: {
-    display: 'inline',
-  },
-});
-
 type PROPS = {
   isLastItem: boolean;
   name: string;
   text: string;
 };
 
-export const ChatListMessages: React.VFC<PROPS> = ({
-  isLastItem,
-  name,
-  text,
-}) => {
-  const classes = useStyles();
+export const ChatListMessages: React.VFC<PROPS> = memo((props) => {
+  const { isLastItem, name, text } = props;
   const ref = useRef(null);
   const avatarPath = GravatarPath(name);
 
@@ -49,7 +36,7 @@ export const ChatListMessages: React.VFC<PROPS> = ({
           <Typography
             component="span"
             variant="body2"
-            className={classes.inline}
+            className="inline"
             color="textPrimary">
             {text}
           </Typography>
@@ -57,4 +44,4 @@ export const ChatListMessages: React.VFC<PROPS> = ({
       />
     </ListItem>
   );
-};
+});

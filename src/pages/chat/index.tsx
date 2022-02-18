@@ -2,68 +2,16 @@ import React, { useState, useEffect, useCallback, memo } from 'react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import { makeStyles } from '@material-ui/core/styles';
-import { auth } from '../../../firebase';
 import { BtnSuccess } from '@/components/Button/BtnSuccess';
-
-// const Copyright = React.memo(() => {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="center">
-//       {'Copyright © '}
-//       <NextLink href="/">チャットアプリ</NextLink> {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// });
-// Copyright.displayName = 'Copyright';
-
-//material-uiのstyle
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
 
 const Index: NextPage = memo(() => {
   console.log('chat レンダリング');
 
-  // ルーター
   const router = useRouter();
-
-  // materialUiのcss？
-  const classes = useStyles();
-
-  // ユーザーネーム
-  const [name, setName] = useState('');
-
-  // ボタン活性化
   const [disabled, setdisabled] = useState(true);
-
-  // 入力テキスト
   const [string, setString] = useState('');
-
-  // ログイン情報
-  // const [user, setUser] = useState(null);
 
   //ボタン活性化
   useEffect(() => {
@@ -72,44 +20,29 @@ const Index: NextPage = memo(() => {
       setdisabled(disabledBooelan);
     };
     console.log('useEffect:');
-    // const authProcess = auth.onAuthStateChanged((user: any) => {
-    //   setUser(user);
-    // });
     return () => disabled();
   }, []);
-  // console.log('user:', user);
 
   //入力テキスト取得
   const inputFunc = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    // setString((prev) => prev + e.target.value);
     setString(e.target.value);
     e.target.value.length !== 0 ? setdisabled(false) : setdisabled(true);
   };
-  // console.log('string:', string);
 
   //キーダウン取得
   const keydownFunc = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     const pressdKey = e.key;
-    setName(string);
-    console.log('pressdKey:', pressdKey);
 
     if (pressdKey === 'Enter') {
-      setName(string);
       e.preventDefault();
     }
   };
 
   //日本語入力処理
-  const compositionFunc = useCallback((): void => {
-    // console.log('name:', name);
-  }, []);
+  const compositionFunc = useCallback((): void => {}, []);
 
   //ボタンクリックアクション
   const clickFunc = (): void => {
-    setName(string);
-    console.log('clickFunc string:', string);
-    console.log('clickFunc name:', name);
-    console.log('clickFunc disabled:', disabled);
     router.push({
       pathname: '/chat/room',
       query: { userName: string }, //入力したユーザーネームを渡す
@@ -121,50 +54,32 @@ const Index: NextPage = memo(() => {
       <Head>
         <title>チャットアプリ | Next.jsアプリ</title>
       </Head>
-      <Container component="main" maxWidth="xs">
-        {/* <CssBaseline /> */}
-        {/* <div className={classes.paper}> */}
-        <div className="flex flex-col items-center">
-          <Typography component="h1" variant="h5">
-            チャットアプリへようこそ
-          </Typography>
-          {/* <form className={classes.form} noValidate> */}
-          {/* <form className="w-full" noValidate> */}
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="name"
-            label="お名前を入力してください"
-            name="name"
-            autoFocus
-            onChange={inputFunc}
-            onKeyDown={keydownFunc}
-            onCompositionStart={compositionFunc}
-          />
-          <BtnSuccess
-            link={false}
-            click={clickFunc}
-            class="sm:!max-w-full"
-            margin="w-full"
-            disabled={disabled}>
-            はじめる
-          </BtnSuccess>
-          {/* <Button
-              type="button"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              disabled={disabled}
-              onClick={clickFunc}>
-              はじめる
-            </Button> */}
-          {/* </form> */}
-        </div>
-        {/* <Box mt={2}><Copyright /></Box> */}
-      </Container>
+      <div className="flex flex-col items-center w-full sm:max-w-sm sm:mx-auto">
+        <Typography component="h1" variant="h5">
+          チャットアプリへようこそ
+        </Typography>
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="name"
+          label="お名前を入力してください"
+          name="name"
+          autoFocus
+          onChange={inputFunc}
+          onKeyDown={keydownFunc}
+          onCompositionStart={compositionFunc}
+        />
+        <BtnSuccess
+          link={false}
+          click={clickFunc}
+          class="sm:!max-w-full"
+          margin="w-full"
+          disabled={disabled}>
+          はじめる
+        </BtnSuccess>
+      </div>
     </div>
   );
 });

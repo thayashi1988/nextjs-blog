@@ -1,6 +1,5 @@
 import React, { useState, useEffect, memo } from 'react';
 import { ChatListMessages } from '@/components/List/ChatListMessages';
-import { makeStyles } from '@material-ui/core/styles';
 import { List } from '@material-ui/core/';
 import { messagesRef } from '../../../firebase';
 
@@ -10,18 +9,8 @@ type MESSAGEPROPS = {
   text: string;
 }[];
 
-//material-uiのstyle
-const useStyles = makeStyles({
-  root: {
-    gridRow: 1,
-    overflow: 'auto',
-    width: '100%',
-  },
-});
-
 export const ChatList: React.VFC = memo(() => {
   const [messages, setMessages] = useState<MESSAGEPROPS>([]);
-  const classes = useStyles();
 
   //firebaseからのデータ取得
   useEffect(() => {
@@ -40,7 +29,6 @@ export const ChatList: React.VFC = memo(() => {
             const [key, datas]: any = entry;
             return { key: key, ...datas };
           });
-          // console.log('newMessages:', newMessages);
           setMessages(newMessages);
         });
     };
@@ -51,7 +39,6 @@ export const ChatList: React.VFC = memo(() => {
   const messagesLen = messages.length;
 
   return (
-    // <List className={classes.root}>
     <List>
       {messages.map(({ key, name, text }, index) => {
         const isLastItem = messagesLen === index + 1;

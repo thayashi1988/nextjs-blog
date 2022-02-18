@@ -1,8 +1,8 @@
-import type { VFC } from 'react';
+import React from 'react';
 import crypto from 'crypto';
 
-export const GravatarPath: any = (string: string) => {
-  const lowerCaseString = string.trim().toLowerCase();
+export const GravatarPath = (path: string) => {
+  const lowerCaseString = path.trim().toLowerCase();
   const md5 = crypto.createHash('md5');
   const digest = md5.update(lowerCaseString, 'binary').digest('hex');
   return `https://www.gravatar.com/avatar/${digest}/?d=robohash`;

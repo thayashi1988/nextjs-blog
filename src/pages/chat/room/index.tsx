@@ -5,34 +5,21 @@ import Head from 'next/head';
 import { Btn } from 'src/components/Button/Btn';
 import { ChatList } from 'src/components/List/ChatList';
 import { ChatListInput } from 'src/components/List/ChatListInput';
-import { makeStyles } from '@material-ui/core/styles';
-
-//material-uiのstyle
-// const useStyles = makeStyles({
-//   root: {
-//     display: 'grid',
-//     height: '90vh',
-//     gridTemplateRows: '1fr auto',
-//   },
-// });
 
 const Index: NextPage = () => {
   const router = useRouter();
   const name = router.query.userName;
-  // const name = 'router.query.userName';
-  // if (name === '') {
-  //   router.push('/signin');
-  // }
+  if (name === '') {
+    router.push('/chat');
+  }
 
   console.log('room レンダリング', name);
-  // const classes = useStyles();
 
   return (
     <div>
       <Head>
         <title>ルーム | チャットアプリ | Next.jsアプリ</title>
       </Head>
-      {/* <div className={classes.root}> */}
       <div>
         <ChatList />
         <ChatListInput
