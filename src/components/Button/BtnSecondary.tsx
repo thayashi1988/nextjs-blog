@@ -6,20 +6,22 @@ type PROPS = {
   href?: string;
   class?: string;
   margin?: string;
+  disabled?: boolean;
   children: React.ReactNode;
   click?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 export const BtnSecondary: React.VFC<PROPS> = memo((props) => {
-  const addMarginClass = props.margin ? ` ${props.margin}` : '';
+  const { margin, link, href, click, disabled, children } = props;
+  const addMarginClass = margin ? ` ${margin}` : '';
   const addBtnClass = props.class ? ` ${props.class}` : '';
-  if (props.link) {
+  if (link) {
     return (
       <div className={`mb-5${addMarginClass}`}>
-        <Link href={props.href}>
+        <Link href={href}>
           <a
             className={`w-full max-w-full sm:max-w-xs outline-none inline-block bg-gray-500 md:hover:bg-gray-600 hover:no-underline md:text-base text-sm text-white font-bold py-2 px-4 rounded shadow-md focus:ring-2 focus:ring-black${addBtnClass}`}>
-            {props.children}
+            {children}
           </a>
         </Link>
       </div>
@@ -29,8 +31,9 @@ export const BtnSecondary: React.VFC<PROPS> = memo((props) => {
       <div className={`mb-5${addMarginClass}`}>
         <button
           className={`w-full max-w-full sm:max-w-xs outline-none bg-gray-500 md:hover:bg-gray-600 hover:no-underline md:text-base text-sm text-white font-bold py-2 px-4 rounded shadow-md focus:ring-2 focus:ring-black${addBtnClass}`}
-          onClick={props.click}>
-          {props.children}
+          onClick={click}
+          disabled={disabled}>
+          {children}
         </button>
       </div>
     );
