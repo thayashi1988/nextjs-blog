@@ -13,9 +13,18 @@ type PROPS = {
 };
 
 export const BtnLogin: React.VFC<PROPS> = memo((props) => {
-  const { margin, link, href, click, clickDiv, disabled, children } = props;
+  const {
+    margin,
+    link,
+    href,
+    click,
+    clickDiv,
+    disabled,
+    children,
+    class: className,
+  } = props;
   const addMarginClass = margin ? `${margin}` : '';
-  const addBtnClass = props.class ? ` ${props.class}` : '';
+  const addBtnClass = className ? ` ${className}` : '';
   if (link) {
     return (
       <div className={addMarginClass} onClick={clickDiv}>

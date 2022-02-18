@@ -12,9 +12,17 @@ type PROPS = {
 };
 
 export const BtnSuccess: React.VFC<PROPS> = memo((props) => {
-  const { margin, link, href, click, disabled, children } = props;
+  const {
+    margin,
+    link,
+    href,
+    click,
+    disabled,
+    children,
+    class: className,
+  } = props;
   const addMarginClass = margin ? ` ${margin}` : '';
-  const addBtnClass = props.class ? ` ${props.class}` : '';
+  const addBtnClass = className ? ` ${className}` : '';
   if (link) {
     return (
       <div className={`mb-5${addMarginClass}`}>
