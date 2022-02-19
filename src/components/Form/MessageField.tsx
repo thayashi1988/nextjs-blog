@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { TextField } from '@material-ui/core';
 import { pushMessage } from '../../../firebase';
 
@@ -9,12 +9,9 @@ type PROPS = {
   inputText: string;
 };
 
-export const MessageField: React.VFC<PROPS> = ({
-  inputEl,
-  userName,
-  setInputText,
-  inputText,
-}) => {
+export const MessageField: React.VFC<PROPS> = memo((props) => {
+  console.log('メッセージフィールドのレンダリング:');
+  const { inputEl, userName, setInputText, inputText } = props;
   const [isComposed, setIsComposed] = useState(false);
 
   //入力テキストを取得
@@ -50,4 +47,4 @@ export const MessageField: React.VFC<PROPS> = ({
       value={inputText}
     />
   );
-};
+});
