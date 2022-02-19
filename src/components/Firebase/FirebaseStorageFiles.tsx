@@ -16,7 +16,7 @@ type PROPS = {
 };
 
 export const FirebaseStorageFiles: React.VFC<PROPS> = memo((props) => {
-  console.log('ファイルコンポーネントのレンダリング');
+  // console.log('ファイルコンポーネントのレンダリング');
   const { datas, path, loading, createPath, children } = props;
   if (loading) {
     return <LoadingText />;
