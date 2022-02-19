@@ -1,5 +1,6 @@
 import React, { useContext, memo } from 'react';
 import { NextPage } from 'next';
+import Head from 'next/head';
 import { Heading1 } from '@/components/Heading/Heading1';
 import { Heading2 } from '@/components/Heading/Heading2';
 import { Text } from '@/components/Text/Text';
@@ -21,6 +22,9 @@ const Index: NextPage = memo(() => {
 
   return (
     <>
+      <Head>
+        <title>useContext・useCallback・memo | Next.jsアプリ</title>
+      </Head>
       <Heading1>useContext、useMemo、useCallback、カスタムフック</Heading1>
       <Heading2>useContext</Heading2>
       {isAdmin ? <span>管理者です。</span> : <span>一般ユーザです。</span>}
