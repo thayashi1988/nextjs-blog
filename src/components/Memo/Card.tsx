@@ -1,21 +1,13 @@
 import React, { memo } from 'react';
 import { CardBtn } from '@/components/Memo/CardBtn';
 
-const style = {
-  width: '300px',
-  height: '200px',
-  borderRadius: '8px',
-  backgroundColor: '#e9dbd0',
-  display: 'flex',
-  FlexDirection: 'column',
-  justifyContnet: 'center',
-  alignItems: 'center',
-  margin: '8px',
+type PROPS = {
+  isAdmin?: Boolean;
 };
 
-export const Card: React.VFC = memo(() => {
+export const Card: React.VFC<PROPS> = memo(() => {
   return (
-    <div style={style}>
+    <div className="w-[300px] h-[200px] rounded-md bg-cyan-500 flex flex-col justify-center items-center mb-4">
       <p>山田</p>
       <CardBtn />
     </div>

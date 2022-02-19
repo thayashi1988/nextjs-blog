@@ -10,19 +10,14 @@ type PROPS = {
   clickEvent?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const style = {
-  height: '200px',
-  backgroundColor: '#666',
-  padding: '8px',
-};
-
 export const Child1: React.VFC<PROPS> = memo((props) => {
+  const { clickEvent } = props;
   console.log('Child1 レンダリング:');
 
   return (
-    <div style={style}>
+    <div className="h-[200px] bg-gray-400 p-4">
       <p>Child1 レンダリング確認</p>
-      <BtnSuccess link={false} click={props.clickEvent}>
+      <BtnSuccess link={false} click={clickEvent}>
         リセット
       </BtnSuccess>
       <Child2 />

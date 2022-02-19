@@ -1,16 +1,10 @@
 import React, { memo } from 'react';
 
-const style = {
-  height: '200px',
-  backgroundColor: 'green',
-  padding: '8px',
-};
-
 export const Child4: React.VFC = memo(() => {
   console.log('Child4 レンダリング:');
 
   return (
-    <div style={style}>
+    <div className="h-[200px] bg-green-400 p-4">
       <p>Child4 レンダリング確認</p>
     </div>
   );
