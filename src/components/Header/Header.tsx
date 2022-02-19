@@ -34,7 +34,7 @@ export const Header: React.VFC<PROPS> = () => {
     });
 
     // ログインできたか確認処理
-    console.log('currentPath:', currentPath);
+    // console.log('currentPath:', currentPath);
     if (isLogin !== null) {
       const userUid = isLogin.uid;
       const userDisplayName = isLogin.displayName;

@@ -16,7 +16,7 @@ export const AdminFlagContext = createContext<CONTEXTPROPS>({});
 export const AdminFlagProvoder = (props: PROPS) => {
   const { children } = props;
   const [isAdmin, SetIsAdmin] = useState(false);
-  console.log('isAdmin:', isAdmin);
+  // console.log('AdminFlagProvoder isAdmin:', isAdmin);
 
   // const sampleObj = {
   //   sampleValue: 'sampleValue',

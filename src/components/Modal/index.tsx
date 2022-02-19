@@ -7,6 +7,8 @@ type PROPS = {
 };
 
 export const Modal: React.VFC<PROPS> = memo((props) => {
+  console.log('Modalコンポーネントのレンダリング');
+
   const { id, children } = props;
   const ref = useRef();
   const [mounted, setMounted] = useState(false);

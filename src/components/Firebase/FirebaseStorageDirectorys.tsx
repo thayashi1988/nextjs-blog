@@ -10,7 +10,7 @@ type PROPS = {
 };
 
 export const FirebaseStorageDirectorys: React.VFC<PROPS> = memo((props) => {
-  // console.log('ディレクトリコンポーネントのレンダリング');
+  console.log('ディレクトリコンポーネントのレンダリング');
 
   const { datas, loading, click } = props;
   if (loading) {
