@@ -11,7 +11,7 @@ import { Heading2 } from '@/components/Heading/Heading2';
 import { Heading3 } from '@/components/Heading/Heading3';
 import { FirebaseStorageFiles } from '@/components/Firebase/FirebaseStorageFiles';
 import { FirebaseStorageDirectorys } from '@/components/Firebase/FirebaseStorageDirectorys';
-import { useMicromodal } from '@/components/Modal/';
+import { useMicromodal } from '@/components/Hooks/useMicromodal';
 import { TextAlert } from '@/components/Text/TextAlert';
 import { Grid } from '@/components/Grid/Grid';
 import { GridItem } from '@/components/Grid/GridItem';
@@ -25,7 +25,7 @@ const fileMetadata = {
 let underItemslUrls = [];
 
 const Index: NextPage = () => {
-  console.log('インデックスコンポーネントのレンダリング');
+  // console.log('インデックスコンポーネントのレンダリング');
 
   const { Modal, open, close } = useMicromodal('sample-modal');
   const [uploadedUrl, setUploadedUrl] = useState<string>('');

@@ -1,26 +1,34 @@
-import React, { useCallback } from 'react';
-import { useHook } from '@/components/Hooks/modal.hook';
-import { Modal as ModalComponent } from '@/components/Modal/modal.view';
+import React, { useRef, useState, useEffect, memo } from 'react';
+import { createPortal } from 'react-dom';
 
-export type UseMicromodal = (id: string) => {
-  Modal: React.VFC<{ children: React.ReactNode; id: string }>;
-  open: () => void;
-  close: () => void;
+type PROPS = {
+  id: string;
+  children: React.ReactNode;
 };
 
-export const useMicromodal: UseMicromodal = (id: string) => {
-  const { open, close } = useHook(id);
+export const Modal: React.VFC<PROPS> = memo((props) => {
+  const { id, children } = props;
+  const ref = useRef();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    let unmounted = false;
+    ref.current = document.querySelector('#__next');
+    setMounted(true);
+    return () => {
+      unmounted = true;
+    };
+  }, []);
 
-  const Modal = useCallback(
-    ({ children }) => {
-      return <ModalComponent id={id}>{children}</ModalComponent>;
-    },
-    [id]
-  );
-
-  return {
-    Modal,
-    open,
-    close,
-  };
-};
+  return mounted
+    ? createPortal(
+        <div id={id} aria-hidden="true" className="wrap micromodal-slide">
+          <div className="overlay" tabIndex={-1} data-micromodal-close>
+            <div role="dialog" className="dialog" aria-modal="true">
+              {children}
+            </div>
+          </div>
+        </div>,
+        document.body
+      )
+    : null;
+});
