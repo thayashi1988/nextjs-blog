@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Text } from '@/components/Text/Text';
@@ -25,6 +25,8 @@ const fileMetadata = {
 let underItemslUrls = [];
 
 const Index: NextPage = () => {
+  console.log('インデックスコンポーネントのレンダリング');
+
   const { Modal, open, close } = useMicromodal('sample-modal');
   const [uploadedUrl, setUploadedUrl] = useState<string>('');
   const [deleteFileNameStr, setDeleteFileNameStr] = useState<string>('');
@@ -63,10 +65,9 @@ const Index: NextPage = () => {
     return () => {
       unmounted = true;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleFileUp = () => {
+  const handleFileUp = useCallback(() => {
     const file =
       document.querySelector<HTMLInputElement>('input[type="file"]').files[0];
     if (!file) {
@@ -120,9 +121,9 @@ const Index: NextPage = () => {
         });
       }
     );
-  };
+  }, []);
 
-  const handleDirBackToTop = () => {
+  const handleDirBackToTop = useCallback(() => {
     setStorageDatas([]);
     setStorageDirs([]);
     setIsLoading(true);
@@ -147,7 +148,7 @@ const Index: NextPage = () => {
         alert('handleDirBackToTop エラーが発生しました。');
         console.log('handleDirBackToTop error:', error);
       });
-  };
+  }, []);
 
   const handleDirSearch = (e: any) => {
     setStorageDatas([]);

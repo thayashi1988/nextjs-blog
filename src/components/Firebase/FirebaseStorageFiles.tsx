@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { BtnDanger } from '@/components/Button/BtnDanger';
 import { Text } from '@/components/Text/Text';
 import { TextAlert } from '@/components/Text/TextAlert';
@@ -15,24 +15,26 @@ type PROPS = {
   children?: React.ReactNode;
 };
 
-export const FirebaseStorageFiles: React.VFC<PROPS> = (props) => {
-  if (props.loading) {
+export const FirebaseStorageFiles: React.VFC<PROPS> = memo((props) => {
+  console.log('ファイルコンポーネントのレンダリング');
+  const { datas, path, loading, createPath, children } = props;
+  if (loading) {
     return <LoadingText />;
   }
-  if (props.datas.length === 0) {
+  if (datas.length === 0) {
     return <TextAlert class="!mb-5">配下にファイルはありません。</TextAlert>;
   }
   return (
     <Grid class="grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-5">
-      {props.datas.map((data, index) => {
+      {datas.map((data, index) => {
         return (
           <GridItem
             key={data}
             class="border border-gray-100 shadow-md rounded flex flex-col">
             <NextImg
               src={
-                props.path[index]
-                  ? props.path[index]
+                path[index]
+                  ? path[index]
                   : 'https://via.placeholder.com/200/666666/FFFFFF?text=now+loading...'
               }
               alt={data}
@@ -43,7 +45,7 @@ export const FirebaseStorageFiles: React.VFC<PROPS> = (props) => {
             <BtnDanger
               link={false}
               margin="!mb-2 mt-auto mx-2"
-              click={() => props.createPath(data)}>
+              click={() => createPath(data)}>
               削除
             </BtnDanger>
           </GridItem>
@@ -51,4 +53,4 @@ export const FirebaseStorageFiles: React.VFC<PROPS> = (props) => {
       })}
     </Grid>
   );
-};
+});
