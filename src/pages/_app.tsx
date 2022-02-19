@@ -1,5 +1,6 @@
 import { AppProps } from 'next/app';
 import { ThemeProvider } from 'next-themes'; // ダークモードのプラグイン
+import { memo } from 'react';
 import { Layout } from '@/components/Layout/layout';
 import '@/styles/global.css';
 import 'tailwindcss/tailwind.css';
@@ -17,4 +18,4 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
   );
 };
 
-export default App;
+export default memo(App);

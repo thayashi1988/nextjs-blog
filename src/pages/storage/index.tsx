@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, memo } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Text } from '@/components/Text/Text';
@@ -25,7 +25,7 @@ const fileMetadata = {
 let underItemslUrls = [];
 
 const Index: NextPage = () => {
-  // console.log('インデックスコンポーネントのレンダリング');
+  console.log('storageインデックのレンダリング');
 
   const { Modal, open, close } = useMicromodal('sample-modal');
   const [uploadedUrl, setUploadedUrl] = useState<string>('');
@@ -178,10 +178,10 @@ const Index: NextPage = () => {
         setStorageDirs([...searchUnderDirs]);
         setStorageDatas([...searchUnderItems]);
         setIsLoading(storageDatas.length === 0 && storageDirs.length === 0);
-        console.log('handleDirSearchのファイル・ディレクトリ取得のthen');
+        // console.log('handleDirSearchのファイル・ディレクトリ取得のthen');
       })
       .then(() => {
-        console.log('ここはそのthenをさらにthenでつないだ場所');
+        // console.log('ここはそのthenをさらにthenでつないだ場所');
         getUrlOnebyOne(clickedDir, searchUnderItems);
       })
       .catch((error) => {
@@ -329,4 +329,4 @@ const Index: NextPage = () => {
   );
 };
 
-export default Index;
+export default memo(Index);
