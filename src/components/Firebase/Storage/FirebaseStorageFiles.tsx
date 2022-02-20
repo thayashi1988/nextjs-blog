@@ -30,16 +30,17 @@ export const FirebaseStorageFiles: React.VFC<PROPS> = memo((props) => {
           <GridItem
             key={data}
             class="border border-gray-100 shadow-md rounded flex flex-col">
-            <NextImg
-              src={
-                path[index]
-                  ? path[index]
-                  : 'https://via.placeholder.com/200/666666/FFFFFF?text=now+loading...'
-              }
-              alt={data}
-              width="300"
-              height="300"
-            />
+            {path[index] ? (
+              <NextImg src={path[index]} alt={data} width="300" height="300" />
+            ) : (
+              <div className="flex justify-center items-center relative mt-2 h-40">
+                <div className="h-10 w-10 border-4 border-gray-500 rounded-full opacity-25 absolute"></div>
+                <span
+                  className="animate-spin h-10 w-10 border-4 border-gray-500 rounded-full"
+                  style={{ borderTopColor: 'transparent' }}></span>
+              </div>
+            )}
+
             <Text class="p-2 !mb-0 break-all">{data}</Text>
             <BtnDanger
               link={false}
