@@ -19,24 +19,19 @@ type PROPS = {
   setProgressBar?: React.Dispatch<React.SetStateAction<number>>;
   isLoading?: boolean;
   setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
-  clickDir?: string;
-  setClickDir?: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const useStorageState = (): PROPS => {
-  const [uploadedUrl, setUploadedUrl] = useState<string>('');
-  const [deleteFileNameStr, setDeleteFileNameStr] = useState<string>('');
-  const [deleteFilePathStr, setDeleteFilePathStr] = useState<string>('');
-  const [storageDatas, setStorageDatas] = useState<string[]>([]);
-  const [storageDirs, setStorageDirs] = useState<string[]>([]);
-  const [storagelUrls, setStoragelUrls] = useState<string[]>([]);
-  const [oldDir, setOldDir] = useState<string>('');
-  const [clickDir, setClickDir] = useState<string>('');
-  const [progressBar, setProgressBar] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  // console.log('useStorageState storageDatas:', storageDatas);
-  // console.log('useStorageState storageDirs:', storageDirs);
-  // console.log('useStorageState storagelUrls:', storagelUrls);
+  const [uploadedUrl, setUploadedUrl] = useState('');
+  const [deleteFileNameStr, setDeleteFileNameStr] = useState('');
+  const [deleteFilePathStr, setDeleteFilePathStr] = useState('');
+  const [storageDatas, setStorageDatas] = useState([]);
+  const [storageDirs, setStorageDirs] = useState([]);
+  const [storagelUrls, setStoragelUrls] = useState([]);
+  const [oldDir, setOldDir] = useState('');
+  const [progressBar, setProgressBar] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
   return {
     uploadedUrl,
     setUploadedUrl,
@@ -56,7 +51,5 @@ export const useStorageState = (): PROPS => {
     setOldDir,
     isLoading,
     setIsLoading,
-    clickDir,
-    setClickDir,
   };
 };

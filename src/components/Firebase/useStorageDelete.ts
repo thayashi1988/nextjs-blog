@@ -1,47 +1,31 @@
 import { useCallback } from 'react';
 import { storageRef } from '../../../firebase';
-import { useStorageState } from '@/components/Firebase/useStorageState';
 import { useMicromodal } from '@/components/Hooks/useMicromodal';
 
-// type PROPS = {
-//   underItemslUrls?: any;
-// };
-
 export const useStorageDelete = (
-  deleteFilePathStr,
-  setDeleteFilePathStr,
-  storageDatas,
-  setStorageDatas,
-  deleteFileNameStr,
-  setDeleteFileNameStr,
-  underItemslUrls
+  deleteFilePathStr: string,
+  storageDatas: string[],
+  setStorageDatas: React.Dispatch<React.SetStateAction<string[]>>,
+  setStoragelUrls: React.Dispatch<React.SetStateAction<string[]>>,
+  deleteFileNameStr: string,
+  currentStoragelUrls: string[]
 ) => {
   const { close } = useMicromodal('sample-modal');
-  // const {
-  //   deleteFilePathStr,
-  //   setDeleteFilePathStr,
-  //   storageDatas,
-  //   setStorageDatas,
-  //   deleteFileNameStr,
-  //   setDeleteFileNameStr,
-  // } = useStorageState();
-
-  // let { underItemslUrls } = props;
-  // let underItemslUrls = [];
 
   const handleFileDelete = useCallback(() => {
-    console.log('useStorageDelete deleteFilePathStr:', deleteFilePathStr);
-    console.log('useStorageDelete underItemslUrls:', underItemslUrls);
     const deleteRef = storageRef.child(deleteFilePathStr);
-    const deletedUnderItemslUrls = underItemslUrls.filter((prev: string) => {
-      return prev.indexOf(deleteFileNameStr) === -1;
-    });
+    const deletedUnderItemslUrls = currentStoragelUrls.filter(
+      (prev: string) => {
+        return prev.indexOf(deleteFileNameStr) === -1;
+      }
+    );
     const deletedStorageDatas = storageDatas.filter((prev: string) => {
       return prev.indexOf(deleteFileNameStr) === -1;
     });
-    underItemslUrls = [...deletedUnderItemslUrls];
+    currentStoragelUrls = [...deletedUnderItemslUrls];
     setStorageDatas([...deletedStorageDatas]);
-    console.log('最後 underItemslUrls:', underItemslUrls);
+    setStoragelUrls([...deletedUnderItemslUrls]);
+
     deleteRef
       .delete()
       .then(() => {
@@ -52,14 +36,8 @@ export const useStorageDelete = (
         alert('handleDelete エラーが発生しました。');
         console.log('handleDelete error:', error);
       });
-  }, [deleteFilePathStr, underItemslUrls]);
+  }, [deleteFilePathStr, currentStoragelUrls]);
   return {
-    // deleteFilePathStr,
-    // setDeleteFilePathStr,
-    // storageDatas,
-    // setStorageDatas,
-    // deleteFileNameStr,
-    // setDeleteFileNameStr,
     handleFileDelete,
   };
 };

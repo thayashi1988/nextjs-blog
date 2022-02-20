@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, memo } from 'react';
+import React, { useEffect, memo } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Text } from '@/components/Text/Text';
@@ -15,26 +15,17 @@ import { useMicromodal } from '@/components/Hooks/useMicromodal';
 import { TextAlert } from '@/components/Text/TextAlert';
 import { Grid } from '@/components/Grid/Grid';
 import { GridItem } from '@/components/Grid/GridItem';
-import { FBTest, storageRef } from '../../../firebase';
+import { storageRef } from '../../../firebase';
 import { useStorageUp } from '@/components/Firebase/useStorageUp';
 import { useStorageSearch } from '@/components/Firebase/useStorageSearch';
 import { useStorageDelete } from '@/components/Firebase/useStorageDelete';
 import { useFirebaseBackToRoot } from '@/components/Firebase/useFirebaseBackToRoot';
 import { useStorageState } from '@/components/Firebase/useStorageState';
 
-// const fileMetadata = {
-//   contentType: 'image/*',
-// };
-
-// FirebaseStorageFilesに渡すダウンロードURL
-// let underItemslUrls: any = [];
-
 const Index: NextPage = () => {
-  let underItemslUrls = [];
-  let aaa = '';
-  let bbb = '';
-
+  // let underItemslUrls = [];
   console.log('storageインデックのレンダリング');
+
   const {
     uploadedUrl,
     setUploadedUrl,
@@ -55,101 +46,54 @@ const Index: NextPage = () => {
     isLoading,
     setIsLoading,
   } = useStorageState();
-  // const { progressBar, uploadedUrl, handleFileUp } = useStorageUp();
-  const { handleFileUp } = useStorageUp(
-    uploadedUrl,
-    setUploadedUrl,
-    progressBar,
-    setProgressBar
-  );
+
+  const { handleFileUp } = useStorageUp(setUploadedUrl, setProgressBar);
+
   const {
-    underItemslUrls: items,
-    storagelUrls: itemUrls,
-    deleteFilePathStr: deleteItemPath,
-    deleteFileNameStr: deleteItemName,
+    storagelUrls: currentStoragelUrls,
     handleCreateFilePath,
     handleDirSearch,
   } = useStorageSearch(
-    storageDatas,
     setStorageDatas,
-    storageDirs,
     setStorageDirs,
     storagelUrls,
     setStoragelUrls,
     oldDir,
     setOldDir,
-    isLoading,
     setIsLoading,
-    deleteFilePathStr,
     setDeleteFileNameStr,
-    deleteFileNameStr,
-    setDeleteFilePathStr,
-    underItemslUrls
+    setDeleteFilePathStr
   );
-  // const {
-  //   underItemslUrls,
-  //   storageDatas,
-  //   setStorageDatas,
-  //   storageDirs,
-  //   setStorageDirs,
-  //   storagelUrls,
-  //   setStoragelUrls,
-  //   oldDir,
-  //   setOldDir,
-  //   isLoading,
-  //   setIsLoading,
-  //   handleDirSearch,
-  // } = useStorageSearch();
+
   const { handleDirBackToTop } = useFirebaseBackToRoot(
     storageDatas,
     setStorageDatas,
     storageDirs,
     setStorageDirs,
-    oldDir,
     setOldDir,
     isLoading,
     setIsLoading
   );
-  // const { handleDirBackToTop } = useFirebaseBackToRoot();
+
   const { handleFileDelete } = useStorageDelete(
     deleteFilePathStr,
-    setDeleteFilePathStr,
     storageDatas,
     setStorageDatas,
+    setStoragelUrls,
     deleteFileNameStr,
-    setDeleteFileNameStr,
-    itemUrls
+    currentStoragelUrls
   );
-  // const {
-  //   //   deleteFilePathStr,
-  //   //   setDeleteFilePathStr,
-  //   //   // storageDatas,
-  //   //   // setStorageDatas,
-  //   //   deleteFileNameStr,
-  //   //   setDeleteFileNameStr,
-  //   handleFileDelete,
-  // } = useStorageDelete();
-  // console.log('Index storageDirs:', storageDirs);
-  console.log('Index deleteFilePathStr:', deleteFilePathStr);
+
   console.log('Index storagelUrls:', storagelUrls);
+  console.log('Index currentStoragelUrls:', currentStoragelUrls);
+  console.log('Index deleteFilePathStr:', deleteFilePathStr);
 
   const { Modal, close } = useMicromodal('sample-modal');
-  // const [uploadedUrl, setUploadedUrl] = useState<string>('');
-  // const [deleteFileNameStr, setDeleteFileNameStr] = useState<string>('');
-  // const [deleteFilePathStr, setDeleteFilePathStr] = useState<string>('');
-  // const [storageDatas, setStorageDatas] = useState<string[]>([]);
-  // const [storageDirs, setStorageDirs] = useState<string[]>([]);
-  // const [storagelUrls, setStoragelUrls] = useState<string[]>([]);
-  // const [oldDir, setOldDir] = useState<string>('');
-  // const [progressBar, setProgressBar] = useState<number>(0);
-  // const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  const imgRootRef = storageRef;
-  const underItems = [];
-  const underDirs = [];
-  // let clickedDir = '';
 
   useEffect(() => {
+    const imgRootRef = storageRef;
+    const underItems = [];
+    const underDirs = [];
     let unmounted = false;
     imgRootRef
       .listAll()
@@ -172,173 +116,6 @@ const Index: NextPage = () => {
       unmounted = true;
     };
   }, []);
-
-  // const handleFileUp = useCallback(() => {
-  //   const file =
-  //     document.querySelector<HTMLInputElement>('input[type="file"]').files[0];
-  //   if (!file) {
-  //     alert('アップロードファイルを選択してください。');
-  //     return;
-  //   }
-  //   setProgressBar(1);
-  //   const uploadTask = storageRef
-  //     .child('images/' + file.name)
-  //     .put(file, fileMetadata);
-
-  //   uploadTask.on(
-  //     'state_changed',
-  //     (snapshot) => {
-  //       const progress = Math.round(
-  //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-  //       );
-  //       setProgressBar(progress);
-  //       switch (snapshot.state) {
-  //         case FBTest.storage.TaskState.PAUSED: // or 'paused'
-  //           break;
-  //         case FBTest.storage.TaskState.RUNNING: // or 'running'
-  //           break;
-  //       }
-  //     },
-  //     (error) => {
-  //       switch (error.code) {
-  //         case 'storage/unauthorized':
-  //           setProgressBar(0);
-  //           alert('エラーが発生しました。 unauthorized');
-  //           break;
-  //         case 'storage/canceled':
-  //           setProgressBar(0);
-  //           alert('エラーが発生しました。canceled');
-  //           break;
-  //         case 'storage/unknown':
-  //           setProgressBar(0);
-  //           alert('エラーが発生しました。unknown');
-  //           break;
-  //       }
-  //     },
-  //     () => {
-  //       uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-  //         setUploadedUrl(downloadURL);
-  //         console.log('File available at', downloadURL);
-  //         setProgressBar(100);
-  //         alert('アップロードが完了しました。');
-  //         setTimeout(() => {
-  //           setProgressBar(0);
-  //         }, 1000);
-  //       });
-  //     }
-  //   );
-  // }, []);
-
-  // const handleDirBackToTop = useCallback(() => {
-  //   setStorageDatas([]);
-  //   setStorageDirs([]);
-  //   setIsLoading(true);
-  //   setOldDir('');
-  //   const backToTopItems = [];
-  //   const backToTopDirs = [];
-
-  //   imgRootRef
-  //     .listAll()
-  //     .then((res) => {
-  //       res.prefixes.forEach((folderRef) => {
-  //         backToTopDirs.push(folderRef.name);
-  //         res.items.forEach((itemRef) => {
-  //           backToTopItems.push(itemRef.name);
-  //         });
-  //       });
-  //       setStorageDirs([...backToTopDirs]);
-  //       setStorageDatas([...backToTopItems]);
-  //       setIsLoading(backToTopItems.length === 0 && backToTopDirs.length === 0);
-  //     })
-  //     .catch((error) => {
-  //       alert('handleDirBackToTop エラーが発生しました。');
-  //       console.log('handleDirBackToTop error:', error);
-  //     });
-  // }, []);
-
-  // const handleDirSearch = (e: any) => {
-  //   setStorageDatas([]);
-  //   setStorageDirs([]);
-  //   setStoragelUrls([]);
-  //   setIsLoading(true);
-
-  //   clickedDir = e.target.value;
-  //   if (/\//.test(oldDir)) {
-  //     setOldDir(`${clickedDir}`);
-  //   } else {
-  //     setOldDir((prev) => `${prev}/${clickedDir}`);
-  //   }
-  //   const dirRef = storageRef.child(`${clickedDir}`);
-  //   const searchUnderItems = [];
-  //   const searchUnderDirs = [];
-  //   underItemslUrls = [];
-  //   dirRef
-  //     .listAll()
-  //     .then((res) => {
-  //       res.prefixes.forEach((folderRef) => {
-  //         searchUnderDirs.push(`${clickedDir}/${folderRef.name}`);
-  //       });
-  //       res.items.forEach((itemRef) => {
-  //         searchUnderItems.push(`${itemRef.name}`);
-  //       });
-  //       setStorageDirs([...searchUnderDirs]);
-  //       setStorageDatas([...searchUnderItems]);
-  //       setIsLoading(storageDatas.length === 0 && storageDirs.length === 0);
-  //       // console.log('handleDirSearchのファイル・ディレクトリ取得のthen');
-  //     })
-  //     .then(() => {
-  //       // console.log('ここはそのthenをさらにthenでつないだ場所');
-  //       getUrlOnebyOne(clickedDir, searchUnderItems);
-  //     })
-  //     .catch((error) => {
-  //       alert('handleDirSearch エラーが発生しました。');
-  //       console.log('handleDirSearch error:', error);
-  //     });
-  // };
-
-  // const getUrlOnebyOne = async (
-  //   directory: string,
-  //   fileNames: string[]
-  // ): Promise<void> => {
-  //   for (let i = 0; i < fileNames.length; i++) {
-  //     const imgRef = storageRef.child(`${directory}/${fileNames[i]}`);
-  //     const imgUrl = imgRef.getDownloadURL();
-  //     await imgUrl.then((url) => {
-  //       underItemslUrls.push(url);
-  //     });
-  //   }
-  //   setStoragelUrls([...underItemslUrls]);
-  // };
-
-  // const handleCreateFilePath = (data: string): void => {
-  //   open();
-  //   // setDeleteFileNameStr(data);
-  //   // setDeleteFilePathStr(`${oldDir}/${data}`);
-  // };
-
-  // const handleFileDelete = () => {
-  //   console.log('deleteFilePathStr:', deleteFilePathStr);
-  //   const deleteRef = storageRef.child(deleteFilePathStr);
-  //   const deletedUnderItemslUrls = underItemslUrls.filter((prev) => {
-  //     return prev.indexOf(deleteFileNameStr) === -1;
-  //   });
-  //   const deletedStorageDatas = storageDatas.filter((prev) => {
-  //     return prev.indexOf(deleteFileNameStr) === -1;
-  //   });
-  //   underItemslUrls = [...deletedUnderItemslUrls];
-  //   setStorageDatas([...deletedStorageDatas]);
-  //   console.log('最後 underItemslUrls:', underItemslUrls);
-  //   deleteRef
-  //     .delete()
-  //     .then(() => {
-  //       alert('削除が完了しました。');
-  //       close();
-  //     })
-  //     .catch((error) => {
-  //       alert('handleDelete エラーが発生しました。');
-  //       console.log('handleDelete error:', error);
-  //     });
-  // };
 
   return (
     <>

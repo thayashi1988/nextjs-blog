@@ -1,28 +1,15 @@
 import { useCallback } from 'react';
 import { storageRef } from '../../../firebase';
-import { useStorageState } from '@/components/Firebase/useStorageState';
 
 export const useFirebaseBackToRoot = (
-  storageDatas,
-  setStorageDatas,
-  storageDirs,
-  setStorageDirs,
-  oldDir,
-  setOldDir,
-  isLoading,
-  setIsLoading
+  storageDatas: string[],
+  setStorageDatas: React.Dispatch<React.SetStateAction<string[]>>,
+  storageDirs: string[],
+  setStorageDirs: React.Dispatch<React.SetStateAction<string[]>>,
+  setOldDir: React.Dispatch<React.SetStateAction<string>>,
+  isLoading: boolean,
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
-  // const {
-  //   storageDatas,
-  //   setStorageDatas,
-  //   storageDirs,
-  //   setStorageDirs,
-  //   oldDir,
-  //   setOldDir,
-  //   isLoading,
-  //   setIsLoading,
-  // } = useStorageState();
-
   const handleDirBackToTop = useCallback(() => {
     setStorageDatas([]);
     setStorageDirs([]);
@@ -43,8 +30,6 @@ export const useFirebaseBackToRoot = (
         setStorageDirs([...backToTopDirs]);
         setStorageDatas([...backToTopItems]);
         setIsLoading(backToTopItems.length === 0 && backToTopDirs.length === 0);
-        // console.log('useFirebaseBackToRoot storageDirs:', storageDirs);
-        // console.log('useFirebaseBackToRoot storageDatas:', storageDatas);
       })
       .catch((error) => {
         alert('handleDirBackToTop エラーが発生しました。');
@@ -53,14 +38,6 @@ export const useFirebaseBackToRoot = (
   }, [storageDatas, storageDirs, isLoading]);
 
   return {
-    // storageDatas,
-    // setStorageDatas,
-    // storageDirs,
-    // setStorageDirs,
-    // oldDir,
-    // setOldDir,
-    // isLoading,
-    // setIsLoading,
     handleDirBackToTop,
   };
 };

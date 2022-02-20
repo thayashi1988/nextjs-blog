@@ -1,20 +1,14 @@
 import { useCallback } from 'react';
 import { FBTest, storageRef } from '../../../firebase';
-import { useStorageState } from '@/components/Firebase/useStorageState';
 
 const fileMetadata = {
   contentType: 'image/*',
 };
 
 export const useStorageUp = (
-  uploadedUrl,
-  setUploadedUrl,
-  progressBar,
-  setProgressBar
+  setUploadedUrl: React.Dispatch<React.SetStateAction<string>>,
+  setProgressBar: React.Dispatch<React.SetStateAction<number>>
 ) => {
-  // const { uploadedUrl, setUploadedUrl, progressBar, setProgressBar } =
-  //   useStorageState();
-
   const handleFileUp = useCallback(() => {
     const file =
       document.querySelector<HTMLInputElement>('input[type="file"]').files[0];
@@ -71,8 +65,6 @@ export const useStorageUp = (
     );
   }, []);
   return {
-    // progressBar,
-    // uploadedUrl,
     handleFileUp,
   };
 };
