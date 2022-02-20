@@ -7,7 +7,7 @@ type PROPS = {
 };
 
 export const Modal: React.VFC<PROPS> = memo((props) => {
-  console.log('Modalコンポーネントのレンダリング');
+  // console.log('Modalコンポーネントのレンダリング');
 
   const { id, children } = props;
   const ref = useRef();
