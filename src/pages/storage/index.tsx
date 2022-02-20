@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from 'react';
+import React, { memo } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Text } from '@/components/Text/Text';
@@ -15,16 +15,16 @@ import { useMicromodal } from '@/components/Hooks/useMicromodal';
 import { TextAlert } from '@/components/Text/TextAlert';
 import { Grid } from '@/components/Grid/Grid';
 import { GridItem } from '@/components/Grid/GridItem';
-import { storageRef } from '../../../firebase';
 import { useStorageUp } from '@/components/Firebase/useStorageUp';
 import { useStorageSearch } from '@/components/Firebase/useStorageSearch';
 import { useStorageDelete } from '@/components/Firebase/useStorageDelete';
-import { useFirebaseBackToRoot } from '@/components/Firebase/useFirebaseBackToRoot';
+import { useStorageBackToRoot } from '@/components/Firebase/useStorageBackToRoot';
 import { useStorageState } from '@/components/Firebase/useStorageState';
+import { useStorageEffect } from '@/components/Firebase/useStorageEffect';
 
 const Index: NextPage = () => {
-  // let underItemslUrls = [];
   console.log('storageインデックのレンダリング');
+  const { Modal, close } = useMicromodal('sample-modal');
 
   const {
     uploadedUrl,
@@ -65,7 +65,7 @@ const Index: NextPage = () => {
     setDeleteFilePathStr
   );
 
-  const { handleDirBackToTop } = useFirebaseBackToRoot(
+  const { handleDirBackToTop } = useStorageBackToRoot(
     storageDatas,
     setStorageDatas,
     storageDirs,
@@ -84,38 +84,11 @@ const Index: NextPage = () => {
     currentStoragelUrls
   );
 
-  console.log('Index storagelUrls:', storagelUrls);
-  console.log('Index currentStoragelUrls:', currentStoragelUrls);
+  useStorageEffect(setStorageDirs, setStorageDatas, setIsLoading);
+
+  // console.log('Index storagelUrls:', storagelUrls);
+  // console.log('Index currentStoragelUrls:', currentStoragelUrls);
   console.log('Index deleteFilePathStr:', deleteFilePathStr);
-
-  const { Modal, close } = useMicromodal('sample-modal');
-
-  useEffect(() => {
-    const imgRootRef = storageRef;
-    const underItems = [];
-    const underDirs = [];
-    let unmounted = false;
-    imgRootRef
-      .listAll()
-      .then((res) => {
-        res.prefixes.forEach((folderRef) => {
-          underDirs.push(folderRef.name);
-          res.items.forEach((itemRef) => {
-            underItems.push(itemRef.name);
-          });
-        });
-        setStorageDirs([...underDirs]);
-        setStorageDatas([...underItems]);
-        setIsLoading(underItems.length === 0 && underDirs.length === 0);
-      })
-      .catch((error) => {
-        alert('useEffect エラーが発生しました。');
-        console.log('useEffect error:', error);
-      });
-    return () => {
-      unmounted = true;
-    };
-  }, []);
 
   return (
     <>
