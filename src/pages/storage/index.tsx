@@ -8,77 +8,27 @@ import { Heading2 } from '@/components/Heading/Heading2';
 import { Heading3 } from '@/components/Heading/Heading3';
 import { FirebaseStorageFiles } from '@/components/Firebase/FirebaseStorageFiles';
 import { FirebaseStorageDirectorys } from '@/components/Firebase/FirebaseStorageDirectorys';
-import { useStorageUp } from '@/components/Firebase/useStorageUp';
-import { useStorageSearch } from '@/components/Firebase/useStorageSearch';
-import { useStorageDelete } from '@/components/Firebase/useStorageDelete';
-import { useStorageBackToRoot } from '@/components/Firebase/useStorageBackToRoot';
-import { useStorageState } from '@/components/Firebase/useStorageState';
-import { useStorageEffect } from '@/components/Firebase/useStorageEffect';
 import { FirebaseStorageUpload } from '@/components/Firebase/FirebaseStorageUpload';
 import { FirebaseStorageModal } from '@/components/Firebase/FirebaseStorageModal';
+import { useStorageState } from '@/components/Firebase/useStorageState';
+import { useStorageEffect } from '@/components/Firebase/useStorageEffect';
+import { useStorageUp } from '@/components/Firebase/useStorageUp';
+import { useStorageSearch } from '@/components/Firebase/useStorageSearch';
+import { useStorageBackToRoot } from '@/components/Firebase/useStorageBackToRoot';
+import { useStorageDelete } from '@/components/Firebase/useStorageDelete';
 
 const Index: NextPage = () => {
   // console.log('storageインデックのレンダリング');
-
-  const {
-    uploadedUrl,
-    setUploadedUrl,
-    progressBar,
-    setProgressBar,
-    deleteFileNameStr,
-    setDeleteFileNameStr,
-    deleteFilePathStr,
-    setDeleteFilePathStr,
-    storageDatas,
-    setStorageDatas,
-    storageDirs,
-    setStorageDirs,
-    storagelUrls,
-    setStoragelUrls,
-    oldDir,
-    setOldDir,
-    isLoading,
-    setIsLoading,
-  } = useStorageState();
-
-  const { handleFileUp } = useStorageUp(setUploadedUrl, setProgressBar);
-
+  const { ...STATES } = useStorageState();
+  const { handleFileUp } = useStorageUp(STATES);
   const {
     storagelUrls: currentStoragelUrls,
     handleCreateFilePath,
     handleDirSearch,
-  } = useStorageSearch(
-    setStorageDatas,
-    setStorageDirs,
-    storagelUrls,
-    setStoragelUrls,
-    oldDir,
-    setOldDir,
-    setIsLoading,
-    setDeleteFileNameStr,
-    setDeleteFilePathStr
-  );
-
-  const { handleDirBackToTop } = useStorageBackToRoot(
-    storageDatas,
-    setStorageDatas,
-    storageDirs,
-    setStorageDirs,
-    setOldDir,
-    isLoading,
-    setIsLoading
-  );
-
-  const { handleFileDelete } = useStorageDelete(
-    deleteFilePathStr,
-    storageDatas,
-    setStorageDatas,
-    setStoragelUrls,
-    deleteFileNameStr,
-    currentStoragelUrls
-  );
-
-  useStorageEffect(setStorageDirs, setStorageDatas, setIsLoading);
+  } = useStorageSearch(STATES);
+  const { handleDirBackToTop } = useStorageBackToRoot(STATES);
+  const { handleFileDelete } = useStorageDelete(STATES);
+  useStorageEffect(STATES);
 
   // console.log('Index storagelUrls:', storagelUrls);
   // console.log('Index currentStoragelUrls:', currentStoragelUrls);
@@ -101,26 +51,26 @@ const Index: NextPage = () => {
       </Text>
       <FirebaseStorageUpload
         handleFileUp={handleFileUp}
-        progressBar={progressBar}
-        uploadedUrl={uploadedUrl}
+        progressBar={STATES.progressBar}
+        uploadedUrl={STATES.uploadedUrl}
       />
       <Heading2 margin="sm:!mb-6">Storage表示</Heading2>
       <Heading3 margin="!mb-1">現在のディレクトリ</Heading3>
       <Text class="break-all !mb-5">
         https://firebasestorage.googleapis.com/v0/b/udemy-todo-f0672.appspot.com/o/
-        <span className="text-cyan-500">{oldDir}</span>
+        <span className="text-cyan-500">{STATES.oldDir}</span>
       </Text>
       <Heading3 margin="!mb-2 sm:!mb-2">配下にあるファイル</Heading3>
       <FirebaseStorageFiles
-        path={storagelUrls}
-        datas={storageDatas}
-        loading={isLoading}
+        path={STATES.storagelUrls}
+        datas={STATES.storageDatas}
+        loading={STATES.isLoading}
         createPath={handleCreateFilePath}
       />
       <Heading3 margin="!mb-2 sm:!mb-2 mt-5">配下にあるディレクトリ</Heading3>
       <FirebaseStorageDirectorys
-        datas={storageDirs}
-        loading={isLoading}
+        datas={STATES.storageDirs}
+        loading={STATES.isLoading}
         click={handleDirSearch}
       />
       <Btn
