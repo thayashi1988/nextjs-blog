@@ -1,27 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import type { ALLSTATES } from '@/components/Firebase/types';
 
-type PROPS = {
-  uploadedUrl?: string;
-  setUploadedUrl?: React.Dispatch<React.SetStateAction<string>>;
-  deleteFileNameStr?: string;
-  setDeleteFileNameStr?: React.Dispatch<React.SetStateAction<string>>;
-  deleteFilePathStr?: string;
-  setDeleteFilePathStr?: React.Dispatch<React.SetStateAction<string>>;
-  storageDatas?: string[];
-  setStorageDatas?: React.Dispatch<React.SetStateAction<string[]>>;
-  storageDirs?: string[];
-  setStorageDirs?: React.Dispatch<React.SetStateAction<string[]>>;
-  storagelUrls?: string[];
-  setStoragelUrls?: React.Dispatch<React.SetStateAction<string[]>>;
-  oldDir?: string;
-  setOldDir?: React.Dispatch<React.SetStateAction<string>>;
-  progressBar?: number;
-  setProgressBar?: React.Dispatch<React.SetStateAction<number>>;
-  isLoading?: boolean;
-  setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export const useStorageState = (): PROPS => {
+export const useStorageState = (): ALLSTATES => {
   const [uploadedUrl, setUploadedUrl] = useState('');
   const [deleteFileNameStr, setDeleteFileNameStr] = useState('');
   const [deleteFilePathStr, setDeleteFilePathStr] = useState('');

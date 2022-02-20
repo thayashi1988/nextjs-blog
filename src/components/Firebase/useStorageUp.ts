@@ -1,16 +1,12 @@
 import { useCallback } from 'react';
+import type { USEUPLOADSTATES } from '@/components/Firebase/types';
 import { FBTest, storageRef } from '../../../firebase';
-
-type ARG = {
-  setUploadedUrl?: React.Dispatch<React.SetStateAction<string>>;
-  setProgressBar?: React.Dispatch<React.SetStateAction<number>>;
-};
 
 const fileMetadata = {
   contentType: 'image/*',
 };
 
-export const useStorageUp = (props: ARG) => {
+export const useStorageUp = (props: USEUPLOADSTATES) => {
   const { setUploadedUrl, setProgressBar } = props;
 
   const handleFileUp = useCallback(() => {

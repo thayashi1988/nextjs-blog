@@ -1,25 +1,14 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
+import type { USESEARCHSTATES } from '@/components/Firebase/types';
 import { storageRef } from '../../../firebase';
 import { useMicromodal } from '@/components/Hooks/useMicromodal';
 
-type ARG = {
-  setStorageDatas?: React.Dispatch<React.SetStateAction<string[]>>;
-  setStorageDirs?: React.Dispatch<React.SetStateAction<string[]>>;
-  storagelUrls?: string[];
-  setStoragelUrls?: React.Dispatch<React.SetStateAction<string[]>>;
-  oldDir?: string;
-  setOldDir?: React.Dispatch<React.SetStateAction<string>>;
-  setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
-  setDeleteFileNameStr?: React.Dispatch<React.SetStateAction<string>>;
-  setDeleteFilePathStr?: React.Dispatch<React.SetStateAction<string>>;
-};
-
-export const useStorageSearch = (props: ARG) => {
+export const useStorageSearch = (props: USESEARCHSTATES) => {
   const { open } = useMicromodal('sample-modal');
   const {
     setStorageDatas,
     setStorageDirs,
-    storagelUrls,
+    // storagelUrls,
     setStoragelUrls,
     oldDir,
     setOldDir,
@@ -90,7 +79,6 @@ export const useStorageSearch = (props: ARG) => {
   };
 
   return {
-    storagelUrls,
     handleCreateFilePath,
     handleDirSearch,
   };

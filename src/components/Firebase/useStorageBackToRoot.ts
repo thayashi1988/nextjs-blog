@@ -1,17 +1,8 @@
 import { useCallback } from 'react';
+import type { USEBACKTOROOTSTATES } from '@/components/Firebase/types';
 import { storageRef } from '../../../firebase';
 
-type ARG = {
-  storageDatas?: string[];
-  setStorageDatas?: React.Dispatch<React.SetStateAction<string[]>>;
-  storageDirs?: string[];
-  setStorageDirs?: React.Dispatch<React.SetStateAction<string[]>>;
-  setOldDir?: React.Dispatch<React.SetStateAction<string>>;
-  isLoading?: boolean;
-  setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export const useStorageBackToRoot = (props: ARG) => {
+export const useStorageBackToRoot = (props: USEBACKTOROOTSTATES) => {
   const {
     storageDatas,
     setStorageDatas,

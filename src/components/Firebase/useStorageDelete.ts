@@ -1,17 +1,9 @@
 import { useCallback } from 'react';
+import type { USEDELETESTATES } from '@/components/Firebase/types';
 import { storageRef } from '../../../firebase';
 import { useMicromodal } from '@/components/Hooks/useMicromodal';
 
-type ARG = {
-  deleteFilePathStr?: string;
-  storageDatas?: string[];
-  setStorageDatas?: React.Dispatch<React.SetStateAction<string[]>>;
-  storagelUrls?: string[];
-  setStoragelUrls?: React.Dispatch<React.SetStateAction<string[]>>;
-  deleteFileNameStr?: string;
-};
-
-export const useStorageDelete = (props: ARG) => {
+export const useStorageDelete = (props: USEDELETESTATES) => {
   const { close } = useMicromodal('sample-modal');
   const {
     deleteFilePathStr,
