@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { storageRef } from '../../../firebase';
 
-export const useFirebaseBackToRoot = (
+export const useStorageBackToRoot = (
   storageDatas: string[],
   setStorageDatas: React.Dispatch<React.SetStateAction<string[]>>,
   storageDirs: string[],
