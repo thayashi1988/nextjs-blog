@@ -21,11 +21,7 @@ const Index: NextPage = () => {
   // console.log('storageインデックのレンダリング');
   const { ...STATES } = useStorageState();
   const { handleFileUp } = useStorageUp(STATES);
-  const {
-    storagelUrls: currentStoragelUrls,
-    handleCreateFilePath,
-    handleDirSearch,
-  } = useStorageSearch(STATES);
+  const { handleCreateFilePath, handleDirSearch } = useStorageSearch(STATES);
   const { handleDirBackToTop } = useStorageBackToRoot(STATES);
   const { handleFileDelete } = useStorageDelete(STATES);
   useStorageEffect(STATES);
