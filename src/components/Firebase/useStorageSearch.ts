@@ -2,18 +2,31 @@ import React, { useCallback } from 'react';
 import { storageRef } from '../../../firebase';
 import { useMicromodal } from '@/components/Hooks/useMicromodal';
 
-export const useStorageSearch = (
-  setStorageDatas: React.Dispatch<React.SetStateAction<string[]>>,
-  setStorageDirs: React.Dispatch<React.SetStateAction<string[]>>,
-  storagelUrls: string[],
-  setStoragelUrls: React.Dispatch<React.SetStateAction<string[]>>,
-  oldDir: string,
-  setOldDir: React.Dispatch<React.SetStateAction<string>>,
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
-  setDeleteFileNameStr: React.Dispatch<React.SetStateAction<string>>,
-  setDeleteFilePathStr: React.Dispatch<React.SetStateAction<string>>
-) => {
+type ARG = {
+  setStorageDatas?: React.Dispatch<React.SetStateAction<string[]>>;
+  setStorageDirs?: React.Dispatch<React.SetStateAction<string[]>>;
+  storagelUrls?: string[];
+  setStoragelUrls?: React.Dispatch<React.SetStateAction<string[]>>;
+  oldDir?: string;
+  setOldDir?: React.Dispatch<React.SetStateAction<string>>;
+  setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+  setDeleteFileNameStr?: React.Dispatch<React.SetStateAction<string>>;
+  setDeleteFilePathStr?: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export const useStorageSearch = (props: ARG) => {
   const { open } = useMicromodal('sample-modal');
+  const {
+    setStorageDatas,
+    setStorageDirs,
+    storagelUrls,
+    setStoragelUrls,
+    oldDir,
+    setOldDir,
+    setIsLoading,
+    setDeleteFileNameStr,
+    setDeleteFilePathStr,
+  } = props;
 
   const underItemslUrls = [];
   let clickedDir = '';

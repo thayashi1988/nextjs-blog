@@ -1,12 +1,15 @@
 import { useEffect } from 'react';
 import { storageRef } from '../../../firebase';
 
-export const useStorageEffect = (
-  setStorageDirs: React.Dispatch<React.SetStateAction<string[]>>,
-  setStorageDatas: React.Dispatch<React.SetStateAction<string[]>>,
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
-) => {
+type ARG = {
+  setStorageDirs?: React.Dispatch<React.SetStateAction<string[]>>;
+  setStorageDatas?: React.Dispatch<React.SetStateAction<string[]>>;
+  setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const useStorageEffect = (props: ARG) => {
   useEffect(() => {
+    const { setStorageDirs, setStorageDatas, setIsLoading } = props;
     const underItems = [];
     const underDirs = [];
     let unmounted = false;

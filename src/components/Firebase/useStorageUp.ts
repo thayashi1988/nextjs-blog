@@ -1,14 +1,18 @@
 import { useCallback } from 'react';
 import { FBTest, storageRef } from '../../../firebase';
 
+type ARG = {
+  setUploadedUrl?: React.Dispatch<React.SetStateAction<string>>;
+  setProgressBar?: React.Dispatch<React.SetStateAction<number>>;
+};
+
 const fileMetadata = {
   contentType: 'image/*',
 };
 
-export const useStorageUp = (
-  setUploadedUrl: React.Dispatch<React.SetStateAction<string>>,
-  setProgressBar: React.Dispatch<React.SetStateAction<number>>
-) => {
+export const useStorageUp = (props: ARG) => {
+  const { setUploadedUrl, setProgressBar } = props;
+
   const handleFileUp = useCallback(() => {
     const file =
       document.querySelector<HTMLInputElement>('input[type="file"]').files[0];
