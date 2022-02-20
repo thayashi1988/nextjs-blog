@@ -12,12 +12,11 @@ type PROPS = {
   path: string[];
   loading: Boolean;
   createPath(data: string): React.MouseEventHandler<HTMLButtonElement> | any;
-  children?: React.ReactNode;
 };
 
 export const FirebaseStorageFiles: React.VFC<PROPS> = memo((props) => {
   // console.log('ファイルコンポーネントのレンダリング');
-  const { datas, path, loading, createPath, children } = props;
+  const { datas, path, loading, createPath } = props;
   if (loading) {
     return <LoadingText />;
   }

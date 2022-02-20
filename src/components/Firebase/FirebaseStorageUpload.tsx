@@ -4,9 +4,9 @@ import { Btn } from '@/components/Button/Btn';
 import { NextImg } from '@/components/Img/Img';
 
 type PROPS = {
-  handleFileUp: React.MouseEventHandler<HTMLButtonElement>;
   progressBar: number;
   uploadedUrl: string;
+  handleFileUp: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 export const FirebaseStorageUpload: React.VFC<PROPS> = memo((props) => {
