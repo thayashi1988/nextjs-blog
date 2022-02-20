@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { ALLSTATES } from '@/components/Firebase/types';
+import type { ALLSTATES } from '@/components/Firebase/Storage/Hooks/types';
 
 export const useStorageState = (): ALLSTATES => {
   const [uploadedUrl, setUploadedUrl] = useState('');

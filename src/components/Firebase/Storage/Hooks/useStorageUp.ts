@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
-import type { USEUPLOADSTATES } from '@/components/Firebase/types';
-import { FBTest, storageRef } from '../../../firebase';
+import type { USEUPLOADSTATES } from '@/components/Firebase/Storage/Hooks/types';
+import { FBTest, storageRef } from '../../../../../firebase';
 
 const fileMetadata = {
   contentType: 'image/*',

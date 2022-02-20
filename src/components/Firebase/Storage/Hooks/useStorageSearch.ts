@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
-import type { USESEARCHSTATES } from '@/components/Firebase/types';
-import { storageRef } from '../../../firebase';
+import type { USESEARCHSTATES } from '@/components/Firebase/Storage/Hooks/types';
+import { storageRef } from '../../../../../firebase';
 import { useMicromodal } from '@/components/Hooks/useMicromodal';
 
 export const useStorageSearch = (props: USESEARCHSTATES) => {

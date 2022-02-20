@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import type { USEEFFECTSTATES } from '@/components/Firebase/types';
-import { storageRef } from '../../../firebase';
+import type { USEEFFECTSTATES } from '@/components/Firebase/Storage/Hooks/types';
+import { storageRef } from '../../../../../firebase';
 
 export const useStorageEffect = (props: USEEFFECTSTATES) => {
   const { setStorageDirs, setStorageDatas, setIsLoading } = props;
