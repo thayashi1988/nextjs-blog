@@ -6,16 +6,16 @@ import { Btn } from '@/components/Button/Btn';
 import { Heading1 } from '@/components/Heading/Heading1';
 import { Heading2 } from '@/components/Heading/Heading2';
 import { Heading3 } from '@/components/Heading/Heading3';
-import { FirebaseStorageFiles } from '@/components/Firebase/FirebaseStorageFiles';
-import { FirebaseStorageDirectorys } from '@/components/Firebase/FirebaseStorageDirectorys';
-import { FirebaseStorageUpload } from '@/components/Firebase/FirebaseStorageUpload';
-import { FirebaseStorageModal } from '@/components/Firebase/FirebaseStorageModal';
-import { useStorageState } from '@/components/Firebase/useStorageState';
-import { useStorageEffect } from '@/components/Firebase/useStorageEffect';
-import { useStorageUp } from '@/components/Firebase/useStorageUp';
-import { useStorageSearch } from '@/components/Firebase/useStorageSearch';
-import { useStorageBackToRoot } from '@/components/Firebase/useStorageBackToRoot';
-import { useStorageDelete } from '@/components/Firebase/useStorageDelete';
+import { FirebaseStorageFiles } from '@/components/Firebase/Storage/FirebaseStorageFiles';
+import { FirebaseStorageDirectorys } from '@/components/Firebase/Storage/FirebaseStorageDirectorys';
+import { FirebaseStorageUpload } from '@/components/Firebase/Storage/FirebaseStorageUpload';
+import { FirebaseStorageModal } from '@/components/Firebase/Storage/FirebaseStorageModal';
+import { useStorageState } from '@/components/Firebase/Storage/Hooks/useStorageState';
+import { useStorageEffect } from '@/components/Firebase/Storage/Hooks/useStorageEffect';
+import { useStorageUp } from '@/components/Firebase/Storage/Hooks/useStorageUp';
+import { useStorageSearch } from '@/components/Firebase/Storage/Hooks/useStorageSearch';
+import { useStorageBackToRoot } from '@/components/Firebase/Storage/Hooks/useStorageBackToRoot';
+import { useStorageDelete } from '@/components/Firebase/Storage/Hooks/useStorageDelete';
 
 const Index: NextPage = () => {
   // console.log('storageインデックのレンダリング');
