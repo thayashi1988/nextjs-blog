@@ -58,7 +58,7 @@ const Index: NextPage = () => {
       </Text>
       <Heading3 margin="!mb-2 sm:!mb-2">配下にあるファイル</Heading3>
       <FirebaseStorageFiles
-        path={STATES.storagelUrls}
+        path={STATES.storageUrls}
         datas={STATES.storageDatas}
         loading={STATES.isLoading}
         createPath={handleCreateFilePath}
