@@ -29,7 +29,7 @@ const Index: NextPage = () => {
   // console.log('Index storagelUrls:', storagelUrls);
   // console.log('Index currentStoragelUrls:', currentStoragelUrls);
   // console.log('Index deleteFilePathStr:', deleteFilePathStr);
-
+  console.log('STATES.oldDir:', STATES.oldDir);
   return (
     <>
       <Head>
@@ -56,24 +56,33 @@ const Index: NextPage = () => {
         https://firebasestorage.googleapis.com/v0/b/udemy-todo-f0672.appspot.com/o/
         <span className="text-cyan-500">{STATES.oldDir}</span>
       </Text>
-      <Heading3 margin="!mb-2 sm:!mb-2">配下にあるファイル</Heading3>
-      <FirebaseStorageFiles
-        path={STATES.storageUrls}
-        datas={STATES.storageDatas}
-        loading={STATES.isLoading}
-        createPath={handleCreateFilePath}
-      />
-      <Heading3 margin="!mb-2 sm:!mb-2 mt-5">配下にあるディレクトリ</Heading3>
+      {STATES.oldDir !== '' ? (
+        <>
+          <Heading3 margin="!mb-2 sm:!mb-2">
+            {STATES.oldDir}配下にあるファイル
+          </Heading3>
+          <FirebaseStorageFiles
+            path={STATES.storageUrls}
+            datas={STATES.storageDatas}
+            loading={STATES.isLoading}
+            createPath={handleCreateFilePath}
+          />
+        </>
+      ) : null}
+      <Heading3 margin="!mb-2 sm:!mb-2 mt-5">
+        {STATES.oldDir}配下にあるディレクトリ
+      </Heading3>
       <FirebaseStorageDirectorys
         datas={STATES.storageDirs}
         loading={STATES.isLoading}
         click={handleDirSearch}
       />
       <Btn
+        disabled={STATES.oldDir === ''}
         link={false}
         margin="mt-5 sm:mt-5 text-center"
         click={handleDirBackToTop}>
-        storageTOPに戻る
+        storageのrootに戻る
       </Btn>
       <FirebaseStorageModal handleFileDelete={handleFileDelete} />
     </>
