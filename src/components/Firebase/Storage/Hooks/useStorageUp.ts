@@ -12,6 +12,7 @@ export const useStorageUp = (props: STATESPROPS) => {
     storageDatas,
     setStorageDatas,
     storageUrls,
+    oldDir,
     setStorageUrls,
     setProgressBar,
   } = props;
@@ -23,9 +24,14 @@ export const useStorageUp = (props: STATESPROPS) => {
       alert('アップロードファイルを選択してください。');
       return;
     }
+    if (oldDir === '') {
+      alert('rootディレクトリに画像はアップロードできません。');
+      return;
+    }
+
     setProgressBar(1);
     const uploadTask = storageRef
-      .child('images/' + file.name)
+      .child(`${oldDir}/${file.name}`)
       .put(file, fileMetadata);
 
     uploadTask.on(
