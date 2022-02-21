@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
-import type { USEBACKTOROOTSTATES } from '@/components/Firebase/Storage/Hooks/types';
+import type { STATESPROPS } from '@/components/Firebase/Storage/Hooks/types';
 import { storageRef } from '../../../../../firebase';
 
-export const useStorageBackToRoot = (props: USEBACKTOROOTSTATES) => {
+export const useStorageBackToRoot = (props: STATESPROPS) => {
   const {
     // storageDatas,
     setStorageDatas,

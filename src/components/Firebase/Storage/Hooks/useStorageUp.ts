@@ -1,12 +1,12 @@
 import { useCallback } from 'react';
-import type { USEUPLOADSTATES } from '@/components/Firebase/Storage/Hooks/types';
+import type { STATESPROPS } from '@/components/Firebase/Storage/Hooks/types';
 import { FBTest, storageRef } from '../../../../../firebase';
 
 const fileMetadata = {
   contentType: 'image/*',
 };
 
-export const useStorageUp = (props: USEUPLOADSTATES) => {
+export const useStorageUp = (props: STATESPROPS) => {
   const {
     setUploadedUrl,
     storageDatas,
