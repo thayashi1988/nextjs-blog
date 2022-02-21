@@ -8,8 +8,7 @@ export const useStorageSearch = (props: USESEARCHSTATES) => {
   const {
     setStorageDatas,
     setStorageDirs,
-    // storagelUrls,
-    setStoragelUrls,
+    setStorageUrls,
     oldDir,
     setOldDir,
     setIsLoading,
@@ -17,13 +16,13 @@ export const useStorageSearch = (props: USESEARCHSTATES) => {
     setDeleteFilePathStr,
   } = props;
 
-  const underItemslUrls = [];
+  const underItemsUrls = [];
   let clickedDir = '';
 
   const handleDirSearch = useCallback((e: any) => {
     setStorageDatas([]);
     setStorageDirs([]);
-    setStoragelUrls([]);
+    setStorageUrls([]);
     setIsLoading(true);
 
     clickedDir = e.target.value;
@@ -32,7 +31,7 @@ export const useStorageSearch = (props: USESEARCHSTATES) => {
     const dirRef = storageRef.child(`${clickedDir}`);
     const searchUnderItems = [];
     const searchUnderDirs = [];
-    underItemslUrls.length = 0;
+    underItemsUrls.length = 0;
     dirRef
       .listAll()
       .then((res) => {
@@ -66,10 +65,10 @@ export const useStorageSearch = (props: USESEARCHSTATES) => {
       const imgRef = storageRef.child(`${directory}/${fileNames[i]}`);
       const imgUrl = imgRef.getDownloadURL();
       await imgUrl.then((url: string) => {
-        underItemslUrls.push(url);
+        underItemsUrls.push(url);
       });
     }
-    setStoragelUrls([...underItemslUrls]);
+    setStorageUrls([...underItemsUrls]);
   };
 
   const handleCreateFilePath = (data: string): void => {

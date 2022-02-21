@@ -7,7 +7,7 @@ export const useStorageState = (): ALLSTATES => {
   const [deleteFilePathStr, setDeleteFilePathStr] = useState('');
   const [storageDatas, setStorageDatas] = useState([]);
   const [storageDirs, setStorageDirs] = useState([]);
-  const [storagelUrls, setStoragelUrls] = useState([]);
+  const [storageUrls, setStorageUrls] = useState([]);
   const [oldDir, setOldDir] = useState('');
   const [progressBar, setProgressBar] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -25,8 +25,8 @@ export const useStorageState = (): ALLSTATES => {
     setStorageDatas,
     storageDirs,
     setStorageDirs,
-    storagelUrls,
-    setStoragelUrls,
+    storageUrls,
+    setStorageUrls,
     oldDir,
     setOldDir,
     isLoading,

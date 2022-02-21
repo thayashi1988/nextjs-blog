@@ -9,21 +9,21 @@ export const useStorageDelete = (props: USEDELETESTATES) => {
     deleteFilePathStr,
     storageDatas,
     setStorageDatas,
-    storagelUrls,
-    setStoragelUrls,
+    storageUrls,
+    setStorageUrls,
     deleteFileNameStr,
   } = props;
 
   const handleFileDelete = useCallback(() => {
     const deleteRef = storageRef.child(deleteFilePathStr);
-    const deletedUnderItemslUrls = storagelUrls.filter((prev: string) => {
+    const deletedUnderItemslUrls = storageUrls.filter((prev: string) => {
       return prev.indexOf(deleteFileNameStr) === -1;
     });
     const deletedStorageDatas = storageDatas.filter((prev: string) => {
       return prev.indexOf(deleteFileNameStr) === -1;
     });
     setStorageDatas([...deletedStorageDatas]);
-    setStoragelUrls([...deletedUnderItemslUrls]);
+    setStorageUrls([...deletedUnderItemslUrls]);
 
     deleteRef
       .delete()
@@ -35,7 +35,7 @@ export const useStorageDelete = (props: USEDELETESTATES) => {
         alert('handleDelete エラーが発生しました。');
         console.log('handleDelete error:', error);
       });
-  }, [deleteFilePathStr, storagelUrls]);
+  }, [deleteFilePathStr]);
   return {
     handleFileDelete,
   };

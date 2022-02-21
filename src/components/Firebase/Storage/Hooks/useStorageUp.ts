@@ -7,7 +7,14 @@ const fileMetadata = {
 };
 
 export const useStorageUp = (props: USEUPLOADSTATES) => {
-  const { setUploadedUrl, setProgressBar } = props;
+  const {
+    setUploadedUrl,
+    storageDatas,
+    setStorageDatas,
+    storageUrls,
+    setStorageUrls,
+    setProgressBar,
+  } = props;
 
   const handleFileUp = useCallback(() => {
     const file =
@@ -57,13 +64,15 @@ export const useStorageUp = (props: USEUPLOADSTATES) => {
           console.log('File available at', downloadURL);
           setProgressBar(100);
           alert('アップロードが完了しました。');
+          setStorageDatas([...storageDatas, file.name]);
+          setStorageUrls([...storageUrls, downloadURL]);
           setTimeout(() => {
             setProgressBar(0);
           }, 1000);
         });
       }
     );
-  }, []);
+  }, [storageDatas, storageUrls]);
   return {
     handleFileUp,
   };

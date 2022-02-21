@@ -4,12 +4,12 @@ import { storageRef } from '../../../../../firebase';
 
 export const useStorageBackToRoot = (props: USEBACKTOROOTSTATES) => {
   const {
-    storageDatas,
+    // storageDatas,
     setStorageDatas,
-    storageDirs,
+    // storageDirs,
     setStorageDirs,
     setOldDir,
-    isLoading,
+    // isLoading,
     setIsLoading,
   } = props;
 
@@ -38,7 +38,8 @@ export const useStorageBackToRoot = (props: USEBACKTOROOTSTATES) => {
         alert('handleDirBackToTop エラーが発生しました。');
         console.log('handleDirBackToTop error:', error);
       });
-  }, [storageDatas, storageDirs, isLoading]);
+  }, []);
+  // }, [storageDatas, storageDirs, isLoading]);
 
   return {
     handleDirBackToTop,
