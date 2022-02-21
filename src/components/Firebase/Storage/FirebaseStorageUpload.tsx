@@ -33,21 +33,25 @@ export const FirebaseStorageUpload: React.VFC<PROPS> = memo((props) => {
             style={{ width: `${progressBar}%` }}></span>
         </Text>
       ) : null}
-      <div className="text-center shadow-lg border border-gray-300 mb-10 max-w-md mx-auto min-h-[200px] p-2">
+      <div className="text-center shadow-lg border border-gray-100 mb-10 max-w-md mx-auto min-h-[200px] p-2 rounded-md">
         <Text>ここにアップロード画像が表示されます。</Text>
-        {uploadedUrl ? (
-          <NextImg
-            src={
-              uploadedUrl
-                ? uploadedUrl
-                : 'https://via.placeholder.com/200/666666/FFFFFF?text=now+loading...'
-            }
-            alt=""
-            width="200"
-            height="200"
-            class="mb-8"
-          />
-        ) : null}
+        {
+          uploadedUrl ? (
+            <NextImg
+              src={uploadedUrl}
+              alt=""
+              width="200"
+              height="200"
+              class="mb-8"
+            />
+          ) : null
+          // <div className="flex justify-center items-center relative mt-2 h-40">
+          //   <div className="h-10 w-10 border-4 border-gray-500 rounded-full opacity-25 absolute"></div>
+          //   <span
+          //     className="animate-spin h-10 w-10 border-4 border-gray-500 rounded-full"
+          //     style={{ borderTopColor: 'transparent' }}></span>
+          // </div>
+        }
       </div>
     </>
   );
