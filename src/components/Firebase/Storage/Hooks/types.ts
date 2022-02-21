@@ -1,5 +1,26 @@
 import React from 'react';
 
+type STATESPROPS = {
+  uploadedUrl?: string;
+  setUploadedUrl?: React.Dispatch<React.SetStateAction<string>>;
+  deleteFileNameStr?: string;
+  setDeleteFileNameStr?: React.Dispatch<React.SetStateAction<string>>;
+  deleteFilePathStr?: string;
+  setDeleteFilePathStr?: React.Dispatch<React.SetStateAction<string>>;
+  storageDatas?: string[];
+  setStorageDatas?: React.Dispatch<React.SetStateAction<string[]>>;
+  storageDirs?: string[];
+  setStorageDirs?: React.Dispatch<React.SetStateAction<string[]>>;
+  storageUrls?: string[];
+  setStorageUrls?: React.Dispatch<React.SetStateAction<string[]>>;
+  oldDir?: string;
+  setOldDir?: React.Dispatch<React.SetStateAction<string>>;
+  progressBar?: number;
+  setProgressBar?: React.Dispatch<React.SetStateAction<number>>;
+  isLoading?: boolean;
+  setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 type ALLSTATES = {
   uploadedUrl?: string;
   setUploadedUrl?: React.Dispatch<React.SetStateAction<string>>;
@@ -11,8 +32,8 @@ type ALLSTATES = {
   setStorageDatas?: React.Dispatch<React.SetStateAction<string[]>>;
   storageDirs?: string[];
   setStorageDirs?: React.Dispatch<React.SetStateAction<string[]>>;
-  storagelUrls?: string[];
-  setStoragelUrls?: React.Dispatch<React.SetStateAction<string[]>>;
+  storageUrls?: string[];
+  setStorageUrls?: React.Dispatch<React.SetStateAction<string[]>>;
   oldDir?: string;
   setOldDir?: React.Dispatch<React.SetStateAction<string>>;
   progressBar?: number;
@@ -36,8 +57,8 @@ type USEDELETESTATES = {
   deleteFilePathStr?: string;
   storageDatas?: string[];
   setStorageDatas?: React.Dispatch<React.SetStateAction<string[]>>;
-  storagelUrls?: string[];
-  setStoragelUrls?: React.Dispatch<React.SetStateAction<string[]>>;
+  storageUrls?: string[];
+  setStorageUrls?: React.Dispatch<React.SetStateAction<string[]>>;
   deleteFileNameStr?: string;
 };
 
@@ -54,8 +75,8 @@ type USEBACKTOROOTSTATES = {
 type USESEARCHSTATES = {
   setStorageDatas?: React.Dispatch<React.SetStateAction<string[]>>;
   setStorageDirs?: React.Dispatch<React.SetStateAction<string[]>>;
-  storagelUrls?: string[];
-  setStoragelUrls?: React.Dispatch<React.SetStateAction<string[]>>;
+  storageUrls?: string[];
+  setStorageUrls?: React.Dispatch<React.SetStateAction<string[]>>;
   oldDir?: string;
   setOldDir?: React.Dispatch<React.SetStateAction<string>>;
   setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -67,6 +88,7 @@ type USESEARCHSTATES = {
  * @package
  */
 export type {
+  STATESPROPS,
   ALLSTATES,
   USEUPLOADSTATES,
   USEEFFECTSTATES,
