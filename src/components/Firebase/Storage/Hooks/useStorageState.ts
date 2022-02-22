@@ -3,6 +3,7 @@ import type { STATESPROPS } from '@/components/Firebase/Storage/Hooks/types';
 
 export const useStorageState = (): STATESPROPS => {
   const [uploadedUrl, setUploadedUrl] = useState('');
+  const [makeDir, setMakeDir] = useState('');
   const [deleteFileNameStr, setDeleteFileNameStr] = useState('');
   const [deleteFilePathStr, setDeleteFilePathStr] = useState('');
   const [storageDatas, setStorageDatas] = useState([]);
@@ -15,6 +16,8 @@ export const useStorageState = (): STATESPROPS => {
   return {
     uploadedUrl,
     setUploadedUrl,
+    makeDir,
+    setMakeDir,
     progressBar,
     setProgressBar,
     deleteFileNameStr,
