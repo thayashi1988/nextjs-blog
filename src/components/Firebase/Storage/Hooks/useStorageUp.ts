@@ -9,6 +9,8 @@ const fileMetadata = {
 export const useStorageUp = (props: STATESPROPS) => {
   const {
     setUploadedUrl,
+    makeDir,
+    setMakeDir,
     storageDatas,
     setStorageDatas,
     storageUrls,
@@ -17,9 +19,20 @@ export const useStorageUp = (props: STATESPROPS) => {
     setProgressBar,
   } = props;
 
+  const handleMakeDir = useCallback((e) => {
+    setMakeDir(e.target.value);
+    console.log('handleMakeDir e.target.value:', e.target.value);
+  }, []);
+
   const handleFileUp = useCallback(() => {
-    const file =
-      document.querySelector<HTMLInputElement>('input[type="file"]').files[0];
+    let makeDirName = '';
+    let fileUpDir = '';
+    const text = document.querySelector<HTMLInputElement>(
+      'input.next-input-text'
+    );
+    const file = document.querySelector<HTMLInputElement>(
+      'input.next-input-file'
+    ).files[0];
     if (!file) {
       alert('アップロードファイルを選択してください。');
       return;
@@ -28,11 +41,15 @@ export const useStorageUp = (props: STATESPROPS) => {
       alert('rootディレクトリに画像はアップロードできません。');
       return;
     }
+    if (makeDir !== '') {
+      makeDirName = makeDir;
+      fileUpDir = `${oldDir}/${makeDirName}/${file.name}`;
+    } else {
+      fileUpDir = `${oldDir}/${file.name}`;
+    }
 
     setProgressBar(1);
-    const uploadTask = storageRef
-      .child(`${oldDir}/${file.name}`)
-      .put(file, fileMetadata);
+    const uploadTask = storageRef.child(fileUpDir).put(file, fileMetadata);
 
     uploadTask.on(
       'state_changed',
@@ -70,16 +87,22 @@ export const useStorageUp = (props: STATESPROPS) => {
           console.log('File available at', downloadURL);
           setProgressBar(100);
           alert('アップロードが完了しました。');
-          setStorageDatas([...storageDatas, file.name]);
-          setStorageUrls([...storageUrls, downloadURL]);
+          if (makeDir === '') {
+            setStorageDatas([...storageDatas, file.name]);
+            setStorageUrls([...storageUrls, downloadURL]);
+          }
           setTimeout(() => {
             setProgressBar(0);
           }, 1000);
+          setMakeDir('');
+          text.value = '';
         });
       }
     );
-  }, [storageDatas, storageUrls]);
+  }, [storageDatas, storageUrls, makeDir]);
+
   return {
     handleFileUp,
+    handleMakeDir,
   };
 };
