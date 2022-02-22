@@ -6,17 +6,29 @@ import { NextImg } from '@/components/Img/Img';
 type PROPS = {
   progressBar: number;
   uploadedUrl: string;
+  handleMakeDir: React.ChangeEventHandler<HTMLInputElement>;
   handleFileUp: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 export const FirebaseStorageUpload: React.VFC<PROPS> = memo((props) => {
-  const { handleFileUp, progressBar, uploadedUrl } = props;
+  const { handleFileUp, handleMakeDir, progressBar, uploadedUrl } = props;
   return (
     <>
       <div className="flex flex-col items-center justify-center mb-4 sm:mb-8">
-        <label htmlFor="" className="block w-full max-w-[320px]">
-          <input type="file" className="w-full" />
-        </label>
+        <div className="flex flex-col sm:flex-row items-center">
+          <label htmlFor="" className="block w-full text-sm">
+            <input type="file" className="next-input-file w-full" />
+          </label>
+          <label htmlFor="" className="block w-full text-sm mt-4 sm:mt-0">
+            ファイルアップするディレクトリを作成する
+            {/* https://firebasestorage.googleapis.com/v0/b/udemy-todo-f0672.appspot.com/o/ */}
+            <input
+              type="text"
+              onChange={handleMakeDir}
+              className="next-input-text w-full border border-gray-500 rounded-md p-2"
+            />
+          </label>
+        </div>
         <Btn
           link={false}
           class="mt-3"
