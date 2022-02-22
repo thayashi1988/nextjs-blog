@@ -3,6 +3,8 @@ import React from 'react';
 type STATESPROPS = {
   uploadedUrl?: string;
   setUploadedUrl?: React.Dispatch<React.SetStateAction<string>>;
+  makeDir?: string;
+  setMakeDir?: React.Dispatch<React.SetStateAction<string>>;
   deleteFileNameStr?: string;
   setDeleteFileNameStr?: React.Dispatch<React.SetStateAction<string>>;
   deleteFilePathStr?: string;
