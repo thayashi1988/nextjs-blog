@@ -20,7 +20,7 @@ import { useStorageDelete } from '@/components/Firebase/Storage/Hooks/useStorage
 const Index: NextPage = () => {
   // console.log('storageインデックのレンダリング');
   const { ...STATES } = useStorageState();
-  const { handleFileUp } = useStorageUp(STATES);
+  const { handleFileUp, handleMakeDir } = useStorageUp(STATES);
   const { handleCreateFilePath, handleDirSearch } = useStorageSearch(STATES);
   const { handleDirBackToTop } = useStorageBackToRoot(STATES);
   const { handleFileDelete } = useStorageDelete(STATES);
@@ -29,7 +29,7 @@ const Index: NextPage = () => {
   // console.log('Index storagelUrls:', storagelUrls);
   // console.log('Index currentStoragelUrls:', currentStoragelUrls);
   // console.log('Index deleteFilePathStr:', deleteFilePathStr);
-  console.log('STATES.oldDir:', STATES.oldDir);
+  // console.log('STATES.oldDir:', STATES.oldDir);
   return (
     <>
       <Head>
@@ -45,17 +45,18 @@ const Index: NextPage = () => {
         Cloud Storage for
         Firebaseに格納したファイルを確認できるように処理をしています。
       </Text>
-      <FirebaseStorageUpload
-        handleFileUp={handleFileUp}
-        progressBar={STATES.progressBar}
-        uploadedUrl={STATES.uploadedUrl}
-      />
-      <Heading2 margin="sm:!mb-6">Storage表示</Heading2>
       <Heading3 margin="!mb-1">現在のディレクトリ</Heading3>
       <Text class="break-all !mb-5">
         https://firebasestorage.googleapis.com/v0/b/udemy-todo-f0672.appspot.com/o/
         <span className="text-cyan-500">{STATES.oldDir}</span>
       </Text>
+      <FirebaseStorageUpload
+        handleMakeDir={handleMakeDir}
+        handleFileUp={handleFileUp}
+        progressBar={STATES.progressBar}
+        uploadedUrl={STATES.uploadedUrl}
+      />
+      <Heading2 margin="sm:!mb-6">Storage表示</Heading2>
       {STATES.oldDir !== '' ? (
         <>
           <Heading3 margin="!mb-2 sm:!mb-2">
