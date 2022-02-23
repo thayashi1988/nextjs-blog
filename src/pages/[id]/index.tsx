@@ -58,6 +58,10 @@ const LINKITEMS: LINKS = [
     href: '/hooks/memo',
     linkTxt: 'UseMemo',
   },
+  {
+    href: '/gql',
+    linkTxt: 'GraphQL',
+  },
 ];
 
 const Index: NextPage = () => {
