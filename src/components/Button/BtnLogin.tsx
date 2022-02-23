@@ -30,7 +30,7 @@ export const BtnLogin: React.VFC<PROPS> = memo((props) => {
       <div className={addMarginClass} onClick={clickDiv}>
         <Link href={href}>
           <a
-            className={`w-full max-w-full sm:max-w-xs outline-none inline-block focus:ring-2 focus:ring-black${addBtnClass}`}>
+            className={`w-full max-w-full sm:max-w-xs outline-none inline-block focus-visible:ring-2 focus-visible:ring-black${addBtnClass}`}>
             {children}
           </a>
         </Link>
@@ -40,7 +40,7 @@ export const BtnLogin: React.VFC<PROPS> = memo((props) => {
     return (
       <div className={addMarginClass} onClick={clickDiv}>
         <button
-          className={`w-full max-w-full sm:max-w-xs outline-none focus:ring-2 focus:ring-black${addBtnClass}`}
+          className={`w-full max-w-full sm:max-w-xs outline-none focus-visible:ring-2 focus-visible:ring-black${addBtnClass}`}
           onClick={click}
           disabled={disabled}>
           {children}
