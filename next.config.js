@@ -14,6 +14,7 @@ module.exports = {
       'images.microcms-assets.io',
       'via.placeholder.com',
       'firebasestorage.googleapis.com',
+      'img.pokemondb.net',
     ],
   },
   webpack: (config) => {
