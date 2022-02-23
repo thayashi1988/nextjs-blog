@@ -5,16 +5,20 @@ import { Layout } from '@/components/Layout/layout';
 import '@/styles/global.css';
 import 'tailwindcss/tailwind.css';
 import { AdminFlagProvoder } from '@/components/Providers/AdminFlagProvoder';
+import { ApolloProvider } from '@apollo/client';
+import { apolloClient } from '../apollo/client';
 
 const App = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
-    <AdminFlagProvoder>
-      <ThemeProvider attribute="class">
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ThemeProvider>
-    </AdminFlagProvoder>
+    <ApolloProvider client={apolloClient}>
+      <AdminFlagProvoder>
+        <ThemeProvider attribute="class">
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
+      </AdminFlagProvoder>
+    </ApolloProvider>
   );
 };
 
