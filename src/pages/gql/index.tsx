@@ -34,7 +34,7 @@ const Index: NextPage = () => {
                     class="rounded-md shadow-md p-2 border border-gray-200">
                     <Text>No: {poke?.number}</Text>
                     <Text>
-                      Name:{' '}
+                      Name: <br />
                       <NextLink href={`/gql/${poke?.name.toLowerCase()}`}>
                         {poke?.name}
                       </NextLink>
