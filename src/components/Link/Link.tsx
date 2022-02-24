@@ -16,7 +16,7 @@ export const NextLink: React.VFC<PROPS> = (props) => {
 
   if (target) {
     return (
-      <div className={`mb-3${addMarginClass}`}>
+      <span className={`inline-block mb-3${addMarginClass}`}>
         <Link href={href}>
           <a
             className={`text-sm text-blue-600 underline inline-block md:hover:text-blue-400 m-link-icon${addLinkClass}`}
@@ -24,18 +24,18 @@ export const NextLink: React.VFC<PROPS> = (props) => {
             {children}
           </a>
         </Link>
-      </div>
+      </span>
     );
   } else {
     return (
-      <div className={`mb-3${addMarginClass}`}>
+      <span className={`inline-block mb-3${addMarginClass}`}>
         <Link href={href}>
           <a
             className={`text-sm text-blue-600 underline inline-block md:hover:text-blue-400${addLinkClass}`}>
             {children}
           </a>
         </Link>
-      </div>
+      </span>
     );
   }
 };
