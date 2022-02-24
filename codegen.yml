@@ -1,0 +1,13 @@
+overwrite: true
+schema: 'https://graphql-pokemon2.vercel.app' # GraphiQLを指定
+documents: './src/apollo/queries.ts'
+generates:
+  ./src/apollo/@types/types.d.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+  ./schema.json:
+    plugins:
+      - 'introspection'
+      - schema-ast
